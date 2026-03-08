@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Bryan.AI — Conversational Assistant</title>
+    <meta name="description"
+        content="An AI-powered conversational assistant showcase by Bryan Marquez. Ask questions, get intelligent responses in real time.">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Ambient Background Canvas -->
+    <canvas id="ambient-canvas"></canvas>
+
+    <div class="app-shell">
+        <!-- Header -->
+        <header class="chat-header glass">
+            <div class="header-left">
+                <div class="avatar-orb" id="avatar-orb">
+                    <div class="orb-ring"></div>
+                    <div class="orb-core">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M12 2a4 4 0 0 0-4 4v2a4 4 0 0 0 8 0V6a4 4 0 0 0-4-4z" />
+                            <path d="M9 14h6" />
+                            <circle cx="9" cy="10" r="1" fill="currentColor" stroke="none" />
+                            <circle cx="15" cy="10" r="1" fill="currentColor" stroke="none" />
+                            <path d="M5 20v-1a7 7 0 0 1 14 0v1" />
+                        </svg>
+                    </div>
+                </div>
+                <div class="header-info">
+                    <h1>Bryan<span class="accent">.AI</span></h1>
+                    <div class="status-line">
+                        <span class="status-dot"></span>
+                        <span id="status-text">Online — Ready</span>
+                    </div>
+                </div>
+            </div>
+            <div class="header-actions">
+                <button class="icon-btn" id="voice-toggle" title="Toggle Voice">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                        <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                    </svg>
+                </button>
+                <button class="icon-btn" id="clear-chat" title="Clear Chat">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <polyline points="3 6 5 6 21 6"></polyline>
+                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                    </svg>
+                </button>
+            </div>
+        </header>
+
+        <!-- Messages Area -->
+        <main class="chat-messages" id="chat-messages">
+            <!-- Messages are injected here by script.js -->
+
+            <!-- Typing Indicator (hidden by default) -->
+            <div class="typing-bubble" id="typing-indicator">
+                <div class="typing-dots">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </main>
+
+        <!-- Quick Replies Bar -->
+        <div class="quick-replies-bar" id="quick-replies-bar">
+            <button class="chip" data-prompt="Tell me about Bryan's experience">💼 Experience</button>
+            <button class="chip" data-prompt="What is Bryan's tech stack?">⚙️ Tech Stack</button>
+            <button class="chip" data-prompt="What are Bryan's AI skills?">🤖 AI Skills</button>
+            <button class="chip" data-prompt="Tell me a fun fact about Bryan">✨ Fun Fact</button>
+            <button class="chip" data-prompt="How can I contact Bryan?">📬 Contact</button>
+        </div>
+
+        <!-- Input Area -->
+        <footer class="chat-input-bar glass">
+            <div class="input-row">
+                <input type="text" id="message-input" placeholder="Ask me anything about Bryan..." autocomplete="off" />
+                <button class="send-btn" id="send-btn" title="Send Message">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <line x1="22" y1="2" x2="11" y2="13"></line>
+                        <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                    </svg>
+                </button>
+            </div>
+            <p class="disclaimer">Powered by Gemini AI · Responses may not always be accurate</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

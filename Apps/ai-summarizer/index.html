@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Text Summarizer — Bryan.AI</title>
+    <meta name="description"
+        content="AI-powered text summarizer that extracts key points, generates summaries, and translates content.">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <canvas id="particle-canvas"></canvas>
+
+    <header class="app-header glass">
+        <a href="../../index.html" class="back-link">← Portfolio</a>
+        <h1 class="logo">Bryan<span class="accent">.AI</span> <span class="app-label">Summarizer</span></h1>
+    </header>
+
+    <main class="app-main">
+        <section class="hero-section">
+            <h2 class="section-title">AI Text <span class="accent">Summarizer</span></h2>
+            <p class="section-desc">Paste any text and let AI extract key points, generate concise summaries, and
+                translate between English & Spanish.</p>
+        </section>
+
+        <div class="summarizer-container glass">
+            <div class="input-panel">
+                <div class="panel-header">
+                    <h3>📝 Input Text</h3>
+                    <span class="char-count" id="char-count">0 characters</span>
+                </div>
+                <textarea id="input-text" placeholder="Paste or type your text here..." rows="10"></textarea>
+                <div class="action-bar">
+                    <div class="mode-selector">
+                        <button class="mode-btn active" data-mode="summarize" id="btn-summarize">📋 Summarize</button>
+                        <button class="mode-btn" data-mode="keypoints" id="btn-keypoints">🎯 Key Points</button>
+                        <button class="mode-btn" data-mode="translate" id="btn-translate">🌐 Translate</button>
+                    </div>
+                    <div class="action-buttons">
+                        <button class="clear-btn" id="clear-btn">Clear</button>
+                        <button class="submit-btn glow" id="submit-btn">✨ Analyze</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="output-panel">
+                <div class="panel-header">
+                    <h3>🤖 AI Result</h3>
+                    <button class="copy-btn" id="copy-btn" title="Copy to clipboard">📋 Copy</button>
+                </div>
+                <div class="output-content" id="output-content">
+                    <div class="placeholder-msg">
+                        <span class="placeholder-icon">✨</span>
+                        <p>Your AI-generated result will appear here</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="loading-overlay hidden" id="loading">
+            <div class="loading-spinner"></div>
+            <p>AI is analyzing your text...</p>
+        </div>
+    </main>
+
+    <footer class="app-footer">
+        <p>Powered by Gemini AI · Responses may not always be accurate</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

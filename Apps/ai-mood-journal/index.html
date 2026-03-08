@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Mood Journal — Bryan.AI</title>
+    <meta name="description"
+        content="AI-powered mood journal that analyzes sentiment and tracks emotional trends over time.">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <canvas id="particle-canvas"></canvas>
+
+    <header class="app-header glass">
+        <a href="../../index.html" class="back-link">← Portfolio</a>
+        <h1 class="logo">Bryan<span class="accent">.AI</span> <span class="app-label">Journal</span></h1>
+    </header>
+
+    <main class="app-main">
+        <h2 class="section-title">AI Mood <span class="accent">Journal</span></h2>
+        <p class="section-desc">Write your thoughts and let AI analyze your mood. Track emotional trends over time.</p>
+
+        <div class="journal-layout">
+            <!-- Entry Panel -->
+            <div class="entry-panel glass">
+                <div class="panel-header">
+                    <h3>✍️ New Entry</h3>
+                    <span class="date-display" id="date-display"></span>
+                </div>
+                <textarea id="journal-input" placeholder="How are you feeling today? Write your thoughts..."
+                    rows="6"></textarea>
+                <div class="entry-actions">
+                    <div class="mood-picker">
+                        <span class="mood-label">Quick mood:</span>
+                        <button class="mood-emoji" data-mood="great" title="Great">😄</button>
+                        <button class="mood-emoji" data-mood="good" title="Good">🙂</button>
+                        <button class="mood-emoji" data-mood="neutral" title="Neutral">😐</button>
+                        <button class="mood-emoji" data-mood="sad" title="Sad">😔</button>
+                        <button class="mood-emoji" data-mood="stressed" title="Stressed">😰</button>
+                    </div>
+                    <button class="save-btn glow" id="save-btn">✨ Save & Analyze</button>
+                </div>
+
+                <!-- AI Analysis -->
+                <div class="ai-analysis hidden" id="ai-analysis">
+                    <div class="analysis-header">
+                        <h4>🤖 AI Mood Analysis</h4>
+                    </div>
+                    <div class="analysis-content" id="analysis-content"></div>
+                </div>
+            </div>
+
+            <!-- History & Trends -->
+            <div class="history-panel glass">
+                <div class="panel-header">
+                    <h3>📊 Mood Trends</h3>
+                    <button class="clear-history-btn" id="clear-history-btn" title="Clear all entries">🗑️</button>
+                </div>
+
+                <!-- Mood Chart -->
+                <div class="mood-chart" id="mood-chart">
+                    <div class="chart-row" id="chart-row"></div>
+                    <div class="chart-labels">
+                        <span>7 days ago</span>
+                        <span>Today</span>
+                    </div>
+                </div>
+
+                <!-- Stats -->
+                <div class="mood-stats" id="mood-stats">
+                    <div class="stat-item">
+                        <span class="stat-value" id="total-entries">0</span>
+                        <span class="stat-label">Entries</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value" id="avg-mood">—</span>
+                        <span class="stat-label">Avg Mood</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value" id="streak-count">0</span>
+                        <span class="stat-label">Day Streak</span>
+                    </div>
+                </div>
+
+                <!-- Past Entries -->
+                <div class="entries-list" id="entries-list">
+                    <p class="empty-msg">No entries yet. Start writing!</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="loading-overlay hidden" id="loading">
+            <div class="loading-spinner"></div>
+            <p>AI is analyzing your mood...</p>
+        </div>
+    </main>
+
+    <footer class="app-footer">
+        <p>Powered by Gemini AI · Your entries are stored locally on your device</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bryan's Professional AI Portfolio</title>
+    <meta name="description"
+        content="Portfolio of an AI Engineer specializing in machine learning, neural networks, and scalable solutions.">
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+    <link rel="shortcut icon" type="image/png" href="assets/favicon.png">
+    <link rel="apple-touch-icon" href="assets/favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css?v=17">
+</head>
+
+<body>
+    <canvas id="neural-canvas"></canvas>
+
+    <nav class="navbar glass">
+        <div class="logo-container">
+            <a href="#" class="logo">Bryan.ai<span class="cursor">_</span></a>
+            <button id="music-toggle-btn" class="music-btn" title="Play Background Music">
+                <!-- SVG Icon for Play/Pause will be managed by JS or CSS later, defaulting to play shape or music note -->
+                <svg id="music-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M9 18V5L21 3V16" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                    <path
+                        d="M6 21C7.65685 21 9 19.6569 9 18C9 16.3431 7.65685 15 6 15C4.34315 15 3 16.3431 3 18C3 19.6569 4.34315 21 6 21Z"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    <path
+                        d="M18 19C19.6569 19 21 17.6569 21 16C21 14.3431 19.6569 13 18 13C16.3431 13 15 14.3431 15 16C15 17.6569 16.3431 19 18 19Z"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+            </button>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#about" data-i18n="navAbout">About</a></li>
+            <li><a href="#skills" data-i18n="navSkills">Skills</a></li>
+            <li><a href="#experience" data-i18n="navExperience">Experience</a></li>
+            <li><a href="#projects" data-i18n="navProjects">Projects</a></li>
+            <li><a href="#" id="nav-changelog-link" data-i18n="navChangelog">Changelog</a></li>
+            <li><a href="#contact" data-i18n="navContact">Contact</a></li>
+        </ul>
+        <div class="lang-toggle" id="portfolio-lang-toggle">
+            <button class="lang-btn active" id="portfolio-lang-en">English</button>
+            <button class="lang-btn" id="portfolio-lang-es">Español</button>
+        </div>
+    </nav>
+
+    <!-- Mobile Bottom Navigation -->
+    <nav class="mobile-bottom-nav glass">
+        <a href="#about" class="nav-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+            <span data-i18n="navAbout">About</span>
+        </a>
+        <a href="#skills" class="nav-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <polyline points="16 18 22 12 16 6"></polyline>
+                <polyline points="8 6 2 12 8 18"></polyline>
+            </svg>
+            <span data-i18n="navSkills">Skills</span>
+        </a>
+        <a href="#experience" class="nav-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+            </svg>
+            <span data-i18n="navExperience">Experience</span>
+        </a>
+        <a href="#projects" class="nav-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <rect x="3" y="3" width="7" height="7"></rect>
+                <rect x="14" y="3" width="7" height="7"></rect>
+                <rect x="14" y="14" width="7" height="7"></rect>
+                <rect x="3" y="14" width="7" height="7"></rect>
+            </svg>
+            <span data-i18n="navProjects">Projects</span>
+        </a>
+        <a href="#" class="nav-item" onclick="document.getElementById('changelog-viewer').classList.remove('hidden')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <polyline points="4 17 10 11 4 5"></polyline>
+                <line x1="12" y1="19" x2="20" y2="19"></line>
+            </svg>
+            <span data-i18n="navChangelog">Changelog</span>
+        </a>
+        <a href="#contact" class="nav-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+            </svg>
+            <span data-i18n="navContact">Contact</span>
+        </a>
+    </nav>
+
+    <!-- Hidden YouTube iframe for background music -->
+    <div style="position: absolute; width: 0; height: 0; overflow: hidden;" id="youtube-player-container">
+        <!-- The YouTube Iframe API injects the iframe here -->
+    </div>
+
+    <main>
+        <section id="hero" class="hero fade-in">
+            <div class="hero-content">
+                <h2 class="subtitle" data-i18n="heroSubtitle">System Online: Wait for input...</h2>
+                <h1 class="glitch-text" data-text="Initializing AI Developer Portfolio v1.0">
+                    <span id="typewriter"></span><span class="blink">_</span>
+                </h1>
+                <p class="hero-desc" data-i18n="heroDesc">Hello World! I'm Bryan, a Software Engineer building modern,
+                    aesthetically refined software solutions powered by AI. I focus on transforming complex ideas into
+                    scalable, intelligent products with real-world impact.</p>
+                <div class="cta-buttons">
+                    <button class="btn secondary-btn ghost changelog-cta-btn" id="hero-changelog-btn"
+                        onclick="document.getElementById('changelog-viewer').classList.remove('hidden')"
+                        data-i18n="ctaChangelog">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16"
+                            height="16" style="vertical-align: -2px; margin-right: 4px;">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                            <polyline points="14 2 14 8 20 8"></polyline>
+                            <line x1="16" y1="13" x2="8" y2="13"></line>
+                            <line x1="16" y1="17" x2="8" y2="17"></line>
+                        </svg>
+                        Changelog
+                    </button>
+                    <a href="#projects" class="btn primary-btn glow" data-i18n="ctaView">View Systems</a>
+                    <a href="#contact" class="btn secondary-btn ghost" data-i18n="ctaContact">Initialize Contact</a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="hologram-ring">
+                    <div class="ring outer"></div>
+                    <div class="ring inner"></div>
+                    <div class="core"></div>
+                </div>
+            </div>
+        </section>
+
+
+
+        <section id="about" class="about section-padding fade-in">
+            <h2 class="section-title" data-i18n="aboutTitle">Core Directives <span class="accent">// About</span></h2>
+            <div class="about-grid">
+                <div class="about-text glass card">
+                    <p data-i18n="aboutP1">My career as a Software Engineer is built on over 12 years of experience
+                        managing complex databases and automating critical workflows. After leading technical teams and
+                        driving operational success as a Technical Lead, I relocated to the United States to leverage my
+                        expertise in a new, high-growth environment. I've actively validated my journey by securing my
+                        official US High School Diploma and certifications, ensuring a seamless integration into the
+                        domestic tech market.
+                    </p>
+                    <p data-i18n="aboutP2">Today, I specialize in Artificial Intelligence and <strong>intelligent
+                            systems development</strong>, leveraging a versatile stack that includes <strong>Python,
+                            PHP, SQL, JavaScript, HTML/CSS, and WordPress</strong> to build robust digital
+                        architectures. By integrating <strong>Generative AI and LLMs</strong> with my engineering
+                        foundation, I create smart, automated systems that are both efficient and accessible. My goal is
+                        to transform complex challenges into intelligent solutions with real-world impact.</p>
+                </div>
+                <div class="about-stats glass card">
+                    <div class="stat">
+                        <span class="stat-num">+12</span>
+                        <span class="stat-label" data-i18n="statYears">Years Experience</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-num"
+                            style="white-space: nowrap; font-size: clamp(1.5rem, 2vw, 2.5rem);">EN(US) / ES(LA)</span>
+                        <span class="stat-label" data-i18n="statLanguages">Fluent Languages</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-num">+20</span>
+                        <span class="stat-label" data-i18n="statProjects">Projects Implemented</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills" class="skills section-padding fade-in">
+            <h2 class="section-title" data-i18n="skillsTitle">Engineering Matrix <span class="accent">// Skills</span>
+            </h2>
+            <div class="skills-container">
+                <div class="skill-category glass card">
+                    <h3><span class="icon">⚙️</span> <span data-i18n="skillCat1">Languages & Systems</span></h3>
+                    <ul class="skill-list">
+                        <li>HTML / CSS / JS / Python</li>
+                        <li>WordPress / CMS / SaaS</li>
+                        <li data-i18n="skillCat1Item3">SQL & Database Admin</li>
+                        <li data-i18n="skillCat1Item4">System Administration</li>
+                    </ul>
+                </div>
+                <div class="skill-category glass card">
+                    <h3><span class="icon">🧠</span> <span data-i18n="skillCat2">AI & Automation</span></h3>
+                    <ul class="skill-list">
+                        <li data-i18n="skillCat2Item1">Generative AI (LLMs)</li>
+                        <li data-i18n="skillCat2Item2">AI Engineering</li>
+                        <li data-i18n="skillCat2Item3">Prompt Engineering</li>
+                        <li data-i18n="skillCat2Item4">AI Agent Process Automation</li>
+                    </ul>
+                </div>
+                <div class="skill-category glass card">
+                    <h3><span class="icon">🌐</span> <span data-i18n="skillCat3">Leadership & Skills</span></h3>
+                    <ul class="skill-list">
+                        <li data-i18n="skillCat3Item1">Project Management</li>
+                        <li data-i18n="skillCat3Item2">Team Leadership</li>
+                        <li data-i18n="skillCat3Item3">Strategic Problem Solving</li>
+                        <li data-i18n="skillCat3Item4">Cross-Cultural Comm (EN/ES)</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="experience" class="timeline section-padding fade-in">
+            <h2 class="section-title" data-i18n="expTitle">Execution Timeline <span class="accent">// Experience</span>
+            </h2>
+            <div class="timeline-container">
+                <div class="timeline-item glass card">
+                    <img src="assets/walmart-logo.png" alt="Walmart"
+                        style="float: right; width: 100px; height: auto; opacity: 0.85; filter: drop-shadow(0 0 10px var(--glow-cyan)); margin-left: 1rem; margin-bottom: 1rem; pointer-events: none;">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date" data-i18n="expDate1">2024 - 2025</div>
+                    <div class="timeline-content">
+                        <h3 data-i18n="expRole1">Customer Service & POS Associate</h3>
+                        <p class="company">Walmart</p>
+                        <p data-i18n="expDesc1">First professional experience in the US. Operated and troubleshot
+                            high-volume Point of Sale (POS) hardware and software. Ensured continuous, accurate
+                            daily
+                            transactions and delivered bilingual customer support in a fast-paced environment.</p>
+                    </div>
+                </div>
+                <div class="timeline-item glass card">
+                    <img src="assets/bombas-logo.png" alt="Ingeniería de Bombas"
+                        style="float: right; width: 70px; height: auto; opacity: 0.85; filter: drop-shadow(0 0 10px var(--glow-cyan)); margin-left: 1rem; margin-bottom: 1rem; margin-top: -10px; pointer-events: none;">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date" data-i18n="expDate2">2015 - 2022</div>
+                    <div class="timeline-content">
+                        <h3 data-i18n="expRole2">Technical Lead & IT Manager</h3>
+                        <p class="company">Ingeniería de Bombas</p>
+                        <p data-i18n="expDesc2">Led the development and maintenance of core web applications and
+                            databases. Automated workflows via custom scripts and successfully achieved >90% of business
+                            goals while navigating a severe national and industry crisis.</p>
+                    </div>
+                </div>
+                <div class="timeline-item glass card">
+                    <img src="assets/miranda-park-logo.png" alt="Parque Francisco de Miranda"
+                        style="float: right; width: 100px; height: auto; opacity: 0.85; filter: drop-shadow(0 0 10px var(--glow-purple)); border-radius: 50%; margin-left: 1rem; margin-bottom: 1rem; pointer-events: none;">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date" data-i18n="expDate3">2018 - 2019</div>
+                    <div class="timeline-content">
+                        <h3 data-i18n="expRole3">Web Developer</h3>
+                        <p class="company">Parque Francisco de Miranda</p>
+                        <p data-i18n="expDesc3">Collaborated within an agile team to engineer a comprehensive
+                            website
+                            guiding visitors through the park's local flora and fauna. Programmed responsive and
+                            interactive interfaces utilizing WordPress, HTML, CSS, JavaScript, and MySQL.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="projects section-padding fade-in">
+            <h2 class="section-title" data-i18n="projTitle">Compiled Outputs <span class="accent">// Projects</span>
+            </h2>
+            <div class="carousel-container">
+                <button class="carousel-btn prev-btn" aria-label="Previous Project">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <polyline points="15 18 9 12 15 6"></polyline>
+                    </svg>
+                </button>
+                <div class="project-grid" id="project-carousel">
+                    <!-- Project 1 -->
+                    <div class="project-card glass" id="proj1-link" style="cursor: pointer;">
+                        <div class="project-img placeholder-img">
+                            <div class="project-image-custom"
+                                style="background: url('assets/project1-img.jpg') center/cover; width: 100%; height: 100%;">
+                            </div>
+                        </div>
+                        <div class="project-info">
+                            <h3 data-i18n="proj1Title">Product Designer Showcase</h3>
+                            <p data-i18n="proj1Desc">A curated showcase of modern portfolio layouts designed
+                                specifically for product designers, highlighting UX thinking, case studies, and visual
+                                storytelling.</p>
+                            <div class="tech-stack">
+                                <span class="tag">HTML/CSS</span>
+                                <span class="tag">GenAI</span>
+                                <span class="tag">Templates</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Project 2 -->
+                    <div class="project-card glass" id="proj2-link" style="cursor: pointer;">
+                        <div class="project-img placeholder-img">
+                            <div class="project-image-custom"
+                                style="background: url('assets/interactive-games-img-latest.jpg') no-repeat center/cover; width: 100%; height: 100%; background-color: #000;">
+                            </div>
+                        </div>
+                        <div class="project-info">
+                            <h3 data-i18n="proj2Title">Interactive Games</h3>
+                            <p data-i18n="proj2Desc">A series of interactive game development projects exploring
+                                mechanics, system design, and real-time gameplay experiences.</p>
+                            <div class="tech-stack">
+                                <span class="tag">JavaScript</span>
+                                <span class="tag">HTML5 Canvas</span>
+                                <span class="tag">Game Dev</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Project 3 -->
+                    <div class="project-card glass" id="proj3-link" style="cursor: pointer;">
+                        <div class="project-img placeholder-img">
+                            <div class="project-image-custom"
+                                style="background: url('assets/apps-showcase-img.jpg') no-repeat center/cover; width: 100%; height: 100%; background-color: #000;">
+                            </div>
+                        </div>
+                        <div class="project-info">
+                            <h3 data-i18n="proj3Title">Apps Showcase</h3>
+                            <p data-i18n="proj3Desc">A collection of mobile-first modular web applications exploring
+                                complex UI patterns and logic.</p>
+                            <div class="tech-stack">
+                                <span class="tag">JavaScript</span>
+                                <span class="tag">HTML/CSS</span>
+                                <span class="tag">UX/UI</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Project 4 -->
+                    <div class="project-card glass" id="proj4-link" style="cursor: pointer;">
+                        <div class="project-img placeholder-img">
+                            <div class="project-image-custom"
+                                style="background: url('assets/ai-powered-apps-img.jpg') no-repeat center/cover; width: 100%; height: 100%; background-color: #000;">
+                            </div>
+                        </div>
+                        <div class="project-info">
+                            <h3 data-i18n="proj4Title">AI-Powered Applications</h3>
+                            <p data-i18n="proj4Desc">A collection of intelligent applications that integrate artificial
+                                intelligence to enhance user interaction, automate tasks, and deliver smarter
+                                digital experiences.</p>
+                            <div class="tech-stack">
+                                <span class="tag">Gemini AI</span>
+                                <span class="tag">JavaScript</span>
+                                <span class="tag">REST API</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-btn next-btn" aria-label="Next Project">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                </button>
+            </div>
+        </section>
+
+        <section id="contact" class="contact section-padding fade-in">
+            <h2 class="section-title" data-i18n="contactTitle">Open Port <span class="accent">// Contact</span></h2>
+            <div class="contact-wrapper glass card">
+                <p data-i18n="contactDesc">Interested in building intelligent systems<br>or solving complex tech
+                    challenges?<br><br>Send a signal my way and let's start the conversation &mdash; response time:
+                    within 24 hours.</p>
+                <form class="contact-form" id="contact-form">
+                    <div class="input-group">
+                        <input type="text" id="name" required placeholder=" ">
+                        <label for="name" data-i18n="labelName">Your Name</label>
+                    </div>
+                    <div class="input-group">
+                        <input type="email" id="email" required placeholder=" ">
+                        <label for="email" data-i18n="labelEmail">Your Email</label>
+                    </div>
+                    <div class="input-group">
+                        <textarea id="message" rows="5" required placeholder=" "></textarea>
+                        <label for="message" data-i18n="labelMessage">Message Payload</label>
+                    </div>
+                    <button type="submit" id="submit-btn" class="btn primary-btn glow"
+                        data-i18n="contactSubmit">Transmit Data</button>
+                    <div id="contact-status"
+                        style="margin-top: 15px; font-weight: bold; color: var(--accent-cyan); display: none; text-align: center;">
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- Template Viewer Overlay -->
+    <div id="template-viewer" class="template-viewer-overlay hidden">
+        <div class="viewer-content glass">
+            <div class="viewer-header">
+                <h3 id="viewer-title" data-i18n="viewerTitle">Template Gallery</h3>
+                <button id="close-viewer-btn" class="icon-btn" aria-label="Close Viewer">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+
+            <div id="template-gallery" class="template-gallery">
+                <!-- Template cards injected here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Game Viewer Overlay -->
+    <div id="game-viewer" class="template-viewer-overlay hidden">
+        <div class="viewer-content glass">
+            <div class="viewer-header">
+                <h3 id="game-viewer-title" data-i18n="gameViewerTitle">Interactive Games Gallery</h3>
+                <button id="close-game-viewer-btn" class="icon-btn" aria-label="Close Viewer">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+
+            <div id="game-gallery" class="template-gallery">
+                <!-- Game cards injected here via JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Apps Viewer Overlay -->
+    <div id="app-viewer" class="template-viewer-overlay hidden">
+        <div class="viewer-content glass">
+            <div class="viewer-header">
+                <h3 id="app-viewer-title" data-i18n="appViewerTitle">Applications Gallery</h3>
+                <button id="close-app-viewer-btn" class="icon-btn" aria-label="Close Viewer">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+
+            <div id="app-gallery" class="template-gallery">
+                <!-- App cards injected here via JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- AI Apps Viewer Overlay -->
+    <div id="ai-app-viewer" class="template-viewer-overlay hidden">
+        <div class="viewer-content glass">
+            <div class="viewer-header">
+                <h3 id="ai-app-viewer-title" data-i18n="aiAppViewerTitle">AI-Powered Applications</h3>
+                <button id="close-ai-app-viewer-btn" class="icon-btn" aria-label="Close Viewer">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+
+            <div id="ai-app-gallery" class="template-gallery">
+                <!-- AI App cards injected here via JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Changelog Viewer Overlay -->
+    <div id="changelog-viewer" class="template-viewer-overlay hidden">
+        <div class="viewer-content glass changelog-viewer-content">
+            <div class="changelog-terminal-bar">
+                <span class="terminal-dot red"></span>
+                <span class="terminal-dot yellow"></span>
+                <span class="terminal-dot green"></span>
+                <span class="terminal-title">portfolio.changelog — Bryan.ai v1.0</span>
+                <button id="close-changelog-btn" class="icon-btn changelog-close-btn" aria-label="Close Changelog">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+            <div class="changelog-version-tab">
+                <span class="cl-tab-label">v1.0</span>
+                <span class="cl-tab-separator">|</span>
+                <span class="cl-tab-status">Latest Stable Release</span>
+            </div>
+            <div class="changelog-entries" id="changelog-entries">
+
+                <div class="cl-entry">
+                    <button class="cl-header" onclick="toggleChangelog(this)">
+                        <span class="cl-version">v1.0</span>
+                        <span class="cl-date">2026-03-07</span>
+                        <span class="cl-badge latest">LATEST</span>
+                        <svg class="cl-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </button>
+                    <div class="cl-body open">
+                        <div class="cl-group">
+                            <span class="cl-tag added">Added</span>
+                            <ul>
+                                <li>Added navigation buttons on the bottom when using smartphone portrait view</li>
+                                <li>Added the ability to view the changelog directly from within the portfolio
+                                    experience.</li>
+                                <li>Added a favicon with a Neon B</li>
+                                <li>Finalized AI Apps Gallery, chatbot integration, bilingual system, carousel,
+                                    changelog viewer, and embedded viewers.</li>
+                                <li>Completed stable presentation of interactive projects, games, templates, and apps.
+                                </li>
+                                <li>Finalizing for Official public release of the AI-Powered Developer Portfolio.</li>
+                            </ul>
+                        </div>
+                        <div class="cl-group">
+                            <span class="cl-tag changed">Changed</span>
+                            <ul>
+                                <li>Finalized the portfolio design language, visual hierarchy, and deployment-ready
+                                    structure.</li>
+                            </ul>
+                        </div>
+                        <div class="cl-group">
+                            <span class="cl-tag fixed">Fixed</span>
+                            <ul>
+                                <li>Addressed display and formatting bugs with the portrait smartphone view experience
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cl-entry">
+                    <button class="cl-header" onclick="toggleChangelog(this)">
+                        <span class="cl-version">v0.9</span>
+                        <span class="cl-date">2026-03-07</span>
+                        <svg class="cl-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </button>
+                    <div class="cl-body">
+                        <div class="cl-group">
+                            <span class="cl-tag changed">Changed</span>
+                            <ul>
+                                <li>Performed final interface polish and visual consistency pass.</li>
+                                <li>Optimized frontend structure and removed unused CSS classes.</li>
+                                <li>Improved navigation accessibility and mobile readability.</li>
+                                <li>Eliminated stray console logs across frontend and embedded apps.</li>
+                            </ul>
+                        </div>
+                        <div class="cl-group">
+                            <span class="cl-tag fixed">Fixed</span>
+                            <ul>
+                                <li>Addressed display and formatting bugs in the integrated
+                                    <code>Chronos Elegance</code> watch app.
+                                </li>
+                                <li>Fixed layout overflow issues to ensure cleaner rendering across devices.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cl-entry">
+                    <button class="cl-header" onclick="toggleChangelog(this)">
+                        <span class="cl-version">v0.8</span>
+                        <span class="cl-date">2026-03-06</span>
+                        <svg class="cl-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </button>
+                    <div class="cl-body">
+                        <div class="cl-group">
+                            <span class="cl-tag added">Added</span>
+                            <ul>
+                                <li>Added a custom background audio toggle powered by the YouTube Iframe API.</li>
+                                <li>Implemented a responsive project carousel for the portfolio showcase.</li>
+                                <li>Expanded bilingual synchronization across portfolio sections and AI chat.</li>
+                            </ul>
+                        </div>
+                        <div class="cl-group">
+                            <span class="cl-tag changed">Changed</span>
+                            <ul>
+                                <li>Refined glassmorphism, neon glow effects, and responsive styling across all
+                                    viewports.</li>
+                                <li>Updated project imagery with custom high-quality assets.</li>
+                            </ul>
+                        </div>
+                        <div class="cl-group">
+                            <span class="cl-tag fixed">Fixed</span>
+                            <ul>
+                                <li>Resolved language synchronization issues between the chat widget and portfolio
+                                    toggles.</li>
+                                <li>Fixed responsive stacking issues affecting smaller screens.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cl-entry">
+                    <button class="cl-header" onclick="toggleChangelog(this)">
+                        <span class="cl-version">v0.7</span>
+                        <span class="cl-date">2026-03-05</span>
+                        <svg class="cl-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </button>
+                    <div class="cl-body">
+                        <div class="cl-group">
+                            <span class="cl-tag added">Added</span>
+                            <ul>
+                                <li>Integrated an AI chatbot powered by Gemini with multi-turn context support.</li>
+                                <li>Added text-to-speech functionality to the AI assistant.</li>
+                                <li>Connected the chatbot to a FastAPI backend through <code>main.py</code>.</li>
+                            </ul>
+                        </div>
+                        <div class="cl-group">
+                            <span class="cl-tag changed">Changed</span>
+                            <ul>
+                                <li>Updated the hero section to reflect the "AI-Powered Developer Portfolio" identity.
+                                </li>
+                                <li>Improved interactive flow between the portfolio and embedded AI systems.</li>
+                            </ul>
+                        </div>
+                        <div class="cl-group">
+                            <span class="cl-tag fixed">Fixed</span>
+                            <ul>
+                                <li>Resolved backend cleanup issues including duplicate imports and unused structures.
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cl-entry">
+                    <button class="cl-header" onclick="toggleChangelog(this)">
+                        <span class="cl-version">v0.6</span>
+                        <span class="cl-date">2026-03-04</span>
+                        <svg class="cl-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </button>
+                    <div class="cl-body">
+                        <div class="cl-group">
+                            <span class="cl-tag added">Added</span>
+                            <ul>
+                                <li>Integrated AI-powered applications including AI Text Summarizer, AI Quiz Generator,
+                                    and AI Mood Journal.</li>
+                                <li>Expanded project presentation with more interactive and embedded experiences.</li>
+                                <li>Added native in-portfolio app and template viewing functionality.</li>
+                            </ul>
+                        </div>
+                        <div class="cl-group">
+                            <span class="cl-tag changed">Changed</span>
+                            <ul>
+                                <li>Improved project cards and gallery presentation for better readability and
+                                    interaction.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cl-entry">
+                    <button class="cl-header" onclick="toggleChangelog(this)">
+                        <span class="cl-version">v0.5</span>
+                        <span class="cl-date">2026-03-03</span>
+                        <svg class="cl-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </button>
+                    <div class="cl-body">
+                        <div class="cl-group">
+                            <span class="cl-tag added">Added</span>
+                            <ul>
+                                <li>Added new "Compiled Outputs // Projects" section.</li>
+                                <li>Added new "Interactive Games" section with dedicated project previews.</li>
+                                <li>Introduced overlay viewers for portfolio content and template previews.</li>
+                            </ul>
+                        </div>
+                        <div class="cl-group">
+                            <span class="cl-tag changed">Changed</span>
+                            <ul>
+                                <li>Improved overall content organization and section hierarchy.</li>
+                                <li>Replaced temporary placeholders with more polished visual assets.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cl-entry">
+                    <button class="cl-header" onclick="toggleChangelog(this)">
+                        <span class="cl-version">v0.4</span>
+                        <span class="cl-date">2026-03-02</span>
+                        <svg class="cl-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </button>
+                    <div class="cl-body">
+                        <div class="cl-group">
+                            <span class="cl-tag added">Added</span>
+                            <ul>
+                                <li>Added bilingual support foundation for English and Spanish content.</li>
+                                <li>Introduced dynamic section labeling and synchronized UI text behavior.</li>
+                                <li>Expanded portfolio structure with clearer developer-focused sections.</li>
+                            </ul>
+                        </div>
+                        <div class="cl-group">
+                            <span class="cl-tag fixed">Fixed</span>
+                            <ul>
+                                <li>Resolved early layout inconsistencies between desktop and mobile views.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cl-entry">
+                    <button class="cl-header" onclick="toggleChangelog(this)">
+                        <span class="cl-version">v0.3</span>
+                        <span class="cl-date">2026-03-01</span>
+                        <svg class="cl-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </button>
+                    <div class="cl-body">
+                        <div class="cl-group">
+                            <span class="cl-tag added">Added</span>
+                            <ul>
+                                <li>Introduced the typewriter-style hero initialization effect.</li>
+                                <li>Added the first version of project showcase cards.</li>
+                                <li>Implemented smooth scrolling and navigation interactions.</li>
+                            </ul>
+                        </div>
+                        <div class="cl-group">
+                            <span class="cl-tag changed">Changed</span>
+                            <ul>
+                                <li>Refined hero messaging to strengthen the futuristic portfolio identity.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cl-entry">
+                    <button class="cl-header" onclick="toggleChangelog(this)">
+                        <span class="cl-version">v0.2</span>
+                        <span class="cl-date">2026-02-28</span>
+                        <svg class="cl-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </button>
+                    <div class="cl-body">
+                        <div class="cl-group">
+                            <span class="cl-tag added">Added</span>
+                            <ul>
+                                <li>Built the initial landing page layout.</li>
+                                <li>Added foundational HTML, CSS, and JavaScript structure.</li>
+                                <li>Introduced the first responsive design system.</li>
+                            </ul>
+                        </div>
+                        <div class="cl-group">
+                            <span class="cl-tag changed">Changed</span>
+                            <ul>
+                                <li>Improved spacing, typography, and content flow across main sections.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cl-entry">
+                    <button class="cl-header" onclick="toggleChangelog(this)">
+                        <span class="cl-version">v0.1</span>
+                        <span class="cl-date">2026-02-27</span>
+                        <span class="cl-badge init">INIT</span>
+                        <svg class="cl-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </button>
+                    <div class="cl-body">
+                        <div class="cl-group">
+                            <span class="cl-tag added">Added</span>
+                            <ul>
+                                <li>Initial portfolio concept and base structure created.</li>
+                                <li>Established core sections for hero, about, projects, and contact.</li>
+                                <li>Applied the first visual direction for an AI-inspired developer portfolio.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="changelog-footer">
+                <span class="cl-prompt">&gt;&nbsp;</span>
+                <span class="cl-prompt-text">Initialized port... System ready for deployment.</span>
+                <span class="blink">_</span>
+            </div>
+        </div>
+    </div>
+
+    <footer class="glass-footer">
+        <p data-i18n="footer">&copy; <span id="year"></span> Bryan Marquez &mdash; Software Engineer &middot; All
+            rights reserved.</p>
+
+    </footer>
+
+    <!-- Chat Widget Integration (injected directly to avoid iframe click-blocking) -->
+    <script>
+        fetch('chat-widget.html?v=2')
+            .then(r => r.text())
+            .then(html => {
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(html, 'text/html');
+                // Inject styles
+                doc.querySelectorAll('style').forEach(s => document.head.appendChild(s.cloneNode(true)));
+                // Inject body elements (skip scripts)
+                doc.body.querySelectorAll(':scope > *:not(script)').forEach(el => document.body.appendChild(el.cloneNode(true)));
+                // Inject and execute scripts
+                doc.querySelectorAll('body > script').forEach(s => {
+                    const ns = document.createElement('script');
+                    ns.textContent = s.textContent;
+                    document.body.appendChild(ns);
+                });
+            });
+    </script>
+
+    <script src="script.js?v=16"></script>
+</body>
+
+</html>

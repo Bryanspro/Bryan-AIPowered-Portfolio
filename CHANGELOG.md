@@ -1,0 +1,111 @@
+# Changelog
+
+Thank you in your interest in my portfolio
+All notable changes to this project will be documented in this file.
+
+## [v0.1] - 2026-02-27
+### Added
+- Initial portfolio concept and base structure created.
+- Established core sections for hero, about, projects, and contact.
+- Applied the first visual direction for an AI-inspired developer portfolio.
+
+## [v0.2] - 2026-02-28
+### Added
+- Built the initial landing page layout.
+- Added foundational HTML, CSS, and JavaScript structure.
+- Introduced the first responsive design system.
+
+### Changed
+- Improved spacing, typography, and content flow across main sections.
+
+## [v0.3] - 2026-03-01
+### Added
+- Introduced the typewriter-style hero initialization effect.
+- Added the first version of project showcase cards.
+- Implemented smooth scrolling and navigation interactions.
+
+### Changed
+- Refined hero messaging to strengthen the futuristic portfolio identity.
+
+## [v0.4] - 2026-03-02
+### Added
+- Added bilingual support foundation for English and Spanish content.
+- Introduced dynamic section labeling and synchronized UI text behavior.
+- Expanded portfolio structure with clearer developer-focused sections.
+
+### Fixed
+- Resolved early layout inconsistencies between desktop and mobile views.
+
+## [v0.5] - 2026-03-03
+### Added
+- Added new "Compiled Outputs // Projects" section.
+- Added new "Interactive Games" section with dedicated project previews.
+- Introduced overlay viewers for portfolio content and template previews.
+
+### Changed
+- Improved overall content organization and section hierarchy.
+- Replaced temporary placeholders with more polished visual assets.
+
+## [v0.6] - 2026-03-04
+### Added
+- Integrated AI-powered applications including AI Text Summarizer, AI Quiz Generator, and AI Mood Journal.
+- Expanded project presentation with more interactive and embedded experiences.
+- Added native in-portfolio app and template viewing functionality.
+
+### Changed
+- Improved project cards and gallery presentation for better readability and interaction.
+
+## [v0.7] - 2026-03-05
+### Added
+- Integrated an AI chatbot powered by Gemini with multi-turn context support.
+- Added text-to-speech functionality to the AI assistant.
+- Connected the chatbot to a FastAPI backend through `main.py`.
+
+### Changed
+- Updated the hero section to reflect the "AI-Powered Developer Portfolio" identity.
+- Improved interactive flow between the portfolio and embedded AI systems.
+
+### Fixed
+- Resolved backend cleanup issues including duplicate imports and unused structures.
+
+## [v0.8] - 2026-03-06
+### Added
+- Added a custom background audio toggle powered by the YouTube Iframe API.
+- Implemented a responsive project carousel for the portfolio showcase.
+- Expanded bilingual synchronization across portfolio sections and AI chat.
+
+### Changed
+- Refined glassmorphism, neon glow effects, and responsive styling across all viewports.
+- Updated project imagery with custom high-quality assets.
+
+### Fixed
+- Resolved language synchronization issues between the chat widget and portfolio toggles.
+- Fixed responsive stacking issues affecting smaller screens.
+
+## [v0.9] - 2026-03-07
+### Changed
+- Performed final interface polish and visual consistency pass.
+- Optimized frontend structure and removed unused CSS classes.
+- Improved navigation accessibility and mobile readability.
+- Eliminated stray console logs across frontend and embedded apps.
+
+### Fixed
+- Addressed display and formatting bugs in the integrated `Chronos Elegance` watch app.
+- Fixed layout overflow issues to ensure cleaner rendering across devices.
+
+## [v1.0] - 2026-03-07
+### Added
+- Added navigation buttons on the bottom when using smartphone portrait view
+- Added the ability to view the changelog directly from within the portfolio experience.
+- Added a favicon with a Neon B
+- Finalized AI Apps Gallery, chatbot integration, bilingual system, carousel, changelog viewer, and embedded viewers.
+- Completed stable presentation of interactive projects, games, templates, and apps.
+- Finalizing for Official public release of the AI-Powered Developer Portfolio.
+
+### Changed
+- Finalized the portfolio design language, visual hierarchy, and deployment-ready structure.
+
+### Fixed
+- Addressed display and formatting bugs with the portrait smartphone view experience
+
+*Initialized port... System ready for deployment.*

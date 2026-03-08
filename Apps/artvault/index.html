@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ArtVault - Digital Museum</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Lato:wght@300;400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Top Navigation -->
+        <nav class="top-nav">
+            <h1 class="logo">ArtVault.</h1>
+            <div class="nav-actions">
+                <button class="icon-btn" id="fav-nav-btn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path
+                            d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+                        </path>
+                    </svg>
+                </button>
+            </div>
+        </nav>
+
+        <main class="content-area">
+
+            <!-- View: Gallery (Home) -->
+            <section id="view-gallery" class="view active">
+                <div class="search-container">
+                    <input type="text" id="search-input" placeholder="Search artwork, artist, or movement...">
+                </div>
+
+                <div class="filters-scroll">
+                    <button class="filter-btn active" data-filter="all">All Works</button>
+                    <button class="filter-btn" data-filter="Post-Impressionism">Post-Impressionism</button>
+                    <button class="filter-btn" data-filter="Renaissance">Renaissance</button>
+                    <button class="filter-btn" data-filter="Surrealism">Surrealism</button>
+                    <button class="filter-btn" data-filter="Ukiyo-e">Ukiyo-e</button>
+                    <button class="filter-btn" data-filter="Cubism">Cubism</button>
+                    <button class="filter-btn" data-filter="Dutch Baroque">Baroque</button>
+                </div>
+
+                <div class="masonry-grid" id="gallery-grid">
+                    <!-- Artwork cards injected via JS -->
+                </div>
+            </section>
+
+            <!-- View: Favorites -->
+            <section id="view-favorites" class="view">
+                <header class="section-header">
+                    <h2>Your Collection</h2>
+                    <p class="subtitle">Curated favorite masterworks.</p>
+                </header>
+                <div class="masonry-grid" id="favorites-grid">
+                    <!-- Favorite cards injected via JS -->
+                </div>
+            </section>
+
+        </main>
+
+        <!-- Artwork Detail Modal (Full Screen) -->
+        <div id="artwork-detail" class="detail-overlay hidden">
+            <button class="close-btn" id="close-detail">×</button>
+            <div class="detail-img-container">
+                <div id="detail-img-placeholder" class="img-placeholder"></div>
+            </div>
+
+            <div class="detail-content">
+                <div class="detail-header">
+                    <div class="title-group">
+                        <h2 id="detail-title">Artwork Title</h2>
+                        <button class="icon-btn fav-toggle" id="detail-fav-btn">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path
+                                    d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+                                </path>
+                            </svg>
+                        </button>
+                    </div>
+                    <p class="artist-name" id="detail-artist" onclick="openArtistProfile()">Artist Name</p>
+                    <div class="meta-tags">
+                        <span id="detail-year">Year</span>
+                        <span id="detail-movement">Movement</span>
+                    </div>
+                </div>
+
+                <div class="detail-section">
+                    <h3>Overview</h3>
+                    <p id="detail-desc">Brief description...</p>
+                </div>
+
+                <div class="detail-section">
+                    <h3>Historical Context</h3>
+                    <p id="detail-history">Full history...</p>
+                </div>
+
+                <div class="detail-section">
+                    <h3>Why It Matters</h3>
+                    <p id="detail-significance" class="quote-style">Significance...</p>
+                </div>
+
+                <div class="technical-details">
+                    <div class="tech-item"><strong>Medium:</strong> <span id="detail-medium">Medium</span></div>
+                    <div class="tech-item"><strong>Dimensions:</strong> <span id="detail-dims">Dimensions</span></div>
+                    <div class="tech-item"><strong>Location:</strong> <span id="detail-location">Location</span></div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Artist Profile Modal (Half Screen Bottom Sheet) -->
+        <div id="artist-profile" class="bottom-sheet hidden">
+            <div class="sheet-content">
+                <div class="drag-handle"></div>
+                <h2 id="artist-name-title"
+                    style="font-family:'Playfair Display', serif; font-size: 2rem; margin-bottom: 5px;">Artist Name</h2>
+                <p id="artist-lifespan" class="subtitle" style="margin-bottom: 20px;">Lifespan</p>
+
+                <p id="artist-bio" style="line-height: 1.6; margin-bottom: 25px; font-size: 1.05rem;">Biography goes
+                    here...</p>
+
+                <h3 style="font-family:'Playfair Display', serif; margin-bottom: 15px;">Timeline</h3>
+                <ul class="timeline" id="artist-timeline">
+                    <!-- Timeline items injected -->
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

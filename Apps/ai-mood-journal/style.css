@@ -1,0 +1,499 @@
+/* ─── AI Mood Journal — Dark Glassmorphism Theme ─── */
+:root {
+    --bg-deep: #0a0a0f;
+    --bg-card: rgba(15, 15, 25, 0.85);
+    --glass-border: rgba(0, 240, 255, 0.12);
+    --accent-cyan: #00f0ff;
+    --accent-purple: #bd00ff;
+    --text-primary: #e0e0e0;
+    --text-muted: #8a8a9a;
+    --glow-cyan: rgba(0, 240, 255, 0.3);
+    --glow-purple: rgba(189, 0, 255, 0.3);
+    --mood-great: #00e676;
+    --mood-good: #69f0ae;
+    --mood-neutral: #ffd740;
+    --mood-sad: #ff8a65;
+    --mood-stressed: #ff5252;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Space Grotesk', sans-serif;
+    background: var(--bg-deep);
+    color: var(--text-primary);
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+#particle-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.glass {
+    background: var(--bg-card);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 16px;
+}
+
+.accent {
+    color: var(--accent-cyan);
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* ─── Header ─── */
+.app-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+    margin: 1rem;
+    border-radius: 12px;
+}
+
+.back-link {
+    color: var(--accent-cyan);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: opacity 0.3s;
+}
+
+.back-link:hover {
+    opacity: 0.7;
+}
+
+.logo {
+    font-size: 1.3rem;
+    font-weight: 700;
+}
+
+.app-label {
+    font-size: 0.85rem;
+    font-weight: 400;
+    color: var(--text-muted);
+    margin-left: 4px;
+}
+
+/* ─── Main ─── */
+.app-main {
+    position: relative;
+    z-index: 1;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 1rem 1.5rem 3rem;
+}
+
+.section-title {
+    font-size: 2rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 0.5rem;
+}
+
+.section-desc {
+    color: var(--text-muted);
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+/* ─── Layout ─── */
+.journal-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    align-items: start;
+}
+
+/* ─── Entry Panel ─── */
+.entry-panel,
+.history-panel {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.panel-header h3 {
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.date-display {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+textarea {
+    width: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 1rem;
+    color: var(--text-primary);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.95rem;
+    resize: vertical;
+    min-height: 140px;
+    transition: border-color 0.3s;
+}
+
+textarea:focus {
+    outline: none;
+    border-color: var(--accent-cyan);
+    box-shadow: 0 0 15px var(--glow-cyan);
+}
+
+textarea::placeholder {
+    color: var(--text-muted);
+}
+
+/* ─── Mood Picker ─── */
+.entry-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.mood-picker {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.mood-label {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-right: 0.25rem;
+}
+
+.mood-emoji {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid transparent;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mood-emoji:hover {
+    transform: scale(1.2);
+    border-color: var(--accent-cyan);
+}
+
+.mood-emoji.selected {
+    transform: scale(1.25);
+    border-color: var(--accent-cyan);
+    background: rgba(0, 240, 255, 0.15);
+    box-shadow: 0 0 12px var(--glow-cyan);
+}
+
+.save-btn {
+    padding: 0.8rem;
+    background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+    border: none;
+    border-radius: 10px;
+    color: #000;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.save-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 20px var(--glow-cyan), 0 5px 20px var(--glow-purple);
+}
+
+/* ─── AI Analysis ─── */
+.ai-analysis {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(0, 240, 255, 0.1);
+    border-radius: 12px;
+    padding: 1rem;
+    animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.analysis-header h4 {
+    font-size: 0.9rem;
+    color: var(--accent-cyan);
+    margin-bottom: 0.5rem;
+}
+
+.analysis-content {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--text-primary);
+}
+
+.analysis-content strong {
+    color: var(--accent-cyan);
+}
+
+/* ─── Mood Chart ─── */
+.mood-chart {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 12px;
+    padding: 1rem;
+}
+
+.chart-row {
+    display: flex;
+    align-items: flex-end;
+    gap: 4px;
+    height: 80px;
+    margin-bottom: 0.3rem;
+}
+
+.chart-bar {
+    flex: 1;
+    border-radius: 4px 4px 0 0;
+    min-height: 8px;
+    transition: height 0.5s ease;
+    position: relative;
+    cursor: pointer;
+}
+
+.chart-bar:hover::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 105%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.9);
+    color: var(--text-primary);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    white-space: nowrap;
+}
+
+.chart-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.7rem;
+    color: var(--text-muted);
+}
+
+/* ─── Stats ─── */
+.mood-stats {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.stat-item {
+    flex: 1;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    padding: 0.8rem 0.5rem;
+}
+
+.stat-value {
+    display: block;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--accent-cyan);
+}
+
+.stat-label {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+}
+
+/* ─── Entries List ─── */
+.entries-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.empty-msg {
+    text-align: center;
+    color: var(--text-muted);
+    padding: 1.5rem;
+    font-size: 0.9rem;
+}
+
+.entry-item {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    padding: 0.8rem 1rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    transition: border-color 0.3s;
+}
+
+.entry-item:hover {
+    border-color: var(--glass-border);
+}
+
+.entry-mood {
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+
+.entry-details {
+    flex: 1;
+    min-width: 0;
+}
+
+.entry-date {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-bottom: 0.2rem;
+}
+
+.entry-preview {
+    font-size: 0.85rem;
+    line-height: 1.4;
+    color: var(--text-primary);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.entry-sentiment {
+    font-size: 0.7rem;
+    color: var(--accent-purple);
+    margin-top: 0.2rem;
+}
+
+.clear-history-btn {
+    background: none;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+    opacity: 0.5;
+    transition: opacity 0.3s;
+}
+
+.clear-history-btn:hover {
+    opacity: 1;
+}
+
+/* ─── Loading ─── */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 200;
+    gap: 1rem;
+    backdrop-filter: blur(5px);
+}
+
+.loading-spinner {
+    width: 50px;
+    height: 50px;
+    border: 3px solid rgba(255, 255, 255, 0.1);
+    border-top-color: var(--accent-cyan);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.loading-overlay p {
+    color: var(--text-muted);
+}
+
+/* ─── Footer ─── */
+.app-footer {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 1.5rem;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+}
+
+/* ─── Scrollbar ─── */
+.entries-list::-webkit-scrollbar {
+    width: 4px;
+}
+
+.entries-list::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.entries-list::-webkit-scrollbar-thumb {
+    background: rgba(0, 240, 255, 0.2);
+    border-radius: 2px;
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 768px) {
+    .journal-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .section-title {
+        font-size: 1.5rem;
+    }
+
+    .app-header {
+        padding: 0.8rem 1rem;
+        margin: 0.5rem;
+    }
+
+    .app-main {
+        padding: 1rem;
+    }
+}

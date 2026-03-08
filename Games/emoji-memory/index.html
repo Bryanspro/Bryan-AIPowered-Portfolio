@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emoji Memory Match</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #e2e8f0;
+            --accent: #4CAF50;
+            --matched: #bd00ff;
+            --bg: #030508;
+            --shadow-light: #1a1a24;
+            --shadow-dark: #000000;
+            --font: 'Fredoka', sans-serif;
+            --card-bg: rgba(255, 255, 255, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--bg);
+            font-family: var(--font);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.03);
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            padding: 40px 30px;
+            text-align: center;
+        }
+
+        .title {
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .score {
+            font-size: 1.3rem;
+            margin-bottom: 25px;
+            color: var(--primary);
+        }
+
+        .game-board {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .card {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            background-color: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 16px;
+            font-size: 2rem;
+            cursor: pointer;
+            user-select: none;
+            transition: background-color 0.3s ease, transform 0.2s ease, border-color 0.3s ease;
+        }
+
+        .card.revealed {
+            background-color: var(--accent);
+        }
+
+        .card.matched {
+            background-color: var(--matched);
+            cursor: default;
+        }
+
+        .win-message {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--accent);
+            margin-top: 15px;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="title">🧠 Emoji Memory Match</div>
+        <div class="score">Score: <span id="score">0</span></div>
+        <div class="game-board" id="gameBoard"></div>
+        <div class="win-message" id="winMessage">🎉 You matched them all! You win! 🎉</div>
+    </div>
+
+    <script>
+        const emojis = ['🍎', '🍌', '🍇', '🍒', '🍉', '🍍'];
+        const doubledEmojis = [...emojis, ...emojis].sort(() => 0.5 - Math.random());
+        const gameBoard = document.getElementById('gameBoard');
+        const scoreDisplay = document.getElementById('score');
+        const winMessage = document.getElementById('winMessage');
+
+        let score = 0;
+        let firstCard = null;
+        let lockBoard = false;
+        let matchesFound = 0;
+        const totalPairs = emojis.length;
+
+        doubledEmojis.forEach(emoji => {
+            const card = document.createElement('div');
+            card.classList.add('card');
+            card.dataset.emoji = emoji;
+            card.textContent = '';
+            card.onclick = () => revealCard(card);
+            gameBoard.appendChild(card);
+        });
+
+        function revealCard(card) {
+            if (lockBoard || card.classList.contains('revealed') || card.classList.contains('matched')) return;
+
+            card.classList.add('revealed');
+            card.textContent = card.dataset.emoji;
+
+            if (!firstCard) {
+                firstCard = card;
+            } else {
+                lockBoard = true;
+                if (firstCard.dataset.emoji === card.dataset.emoji) {
+                    firstCard.classList.add('matched');
+                    card.classList.add('matched');
+                    score++;
+                    matchesFound++;
+                    scoreDisplay.textContent = score;
+                    if (matchesFound === totalPairs) {
+                        winMessage.style.display = 'block';
+                    }
+                    resetTurn();
+                } else {
+                    setTimeout(() => {
+                        firstCard.classList.remove('revealed');
+                        card.classList.remove('revealed');
+                        firstCard.textContent = '';
+                        card.textContent = '';
+                        resetTurn();
+                    }, 800);
+                }
+            }
+        }
+
+        function resetTurn() {
+            [firstCard, lockBoard] = [null, false];
+        }
+    </script>
+</body>
+
+</html>

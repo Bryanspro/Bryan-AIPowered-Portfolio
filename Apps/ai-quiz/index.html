@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Quiz Generator — Bryan.AI</title>
+    <meta name="description"
+        content="AI-powered quiz generator that creates interactive multiple-choice questions on any topic.">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <canvas id="particle-canvas"></canvas>
+
+    <header class="app-header glass">
+        <a href="../../index.html" class="back-link">← Portfolio</a>
+        <h1 class="logo">Bryan<span class="accent">.AI</span> <span class="app-label">Quiz</span></h1>
+    </header>
+
+    <main class="app-main">
+        <!-- Setup Screen -->
+        <section id="setup-screen" class="screen">
+            <h2 class="section-title">AI Quiz <span class="accent">Generator</span></h2>
+            <p class="section-desc">Enter any topic and AI will generate interactive quiz questions to test your
+                knowledge.</p>
+
+            <div class="setup-card glass">
+                <div class="input-group">
+                    <label for="topic-input">📚 Topic</label>
+                    <input type="text" id="topic-input" placeholder="e.g. JavaScript, Space, World History..." />
+                </div>
+                <div class="input-group">
+                    <label for="difficulty-select">⚡ Difficulty</label>
+                    <div class="difficulty-btns">
+                        <button class="diff-btn active" data-diff="easy">Easy</button>
+                        <button class="diff-btn" data-diff="medium">Medium</button>
+                        <button class="diff-btn" data-diff="hard">Hard</button>
+                    </div>
+                </div>
+                <button class="start-btn glow" id="start-btn">🧠 Generate Quiz</button>
+            </div>
+        </section>
+
+        <!-- Quiz Screen -->
+        <section id="quiz-screen" class="screen hidden">
+            <div class="quiz-header">
+                <div class="quiz-info">
+                    <span class="question-counter" id="question-counter">Question 1/5</span>
+                    <span class="score-display" id="score-display">Score: 0</span>
+                </div>
+                <div class="timer-bar">
+                    <div class="timer-fill" id="timer-fill"></div>
+                </div>
+            </div>
+
+            <div class="question-card glass" id="question-card">
+                <h3 class="question-text" id="question-text"></h3>
+                <div class="options-grid" id="options-grid"></div>
+                <button class="next-btn hidden" id="next-btn">Next Question →</button>
+            </div>
+        </section>
+
+        <!-- Results Screen -->
+        <section id="results-screen" class="screen hidden">
+            <div class="results-card glass">
+                <div class="results-icon" id="results-icon">🏆</div>
+                <h2 class="results-title" id="results-title">Quiz Complete!</h2>
+                <p class="results-score" id="results-score"></p>
+                <div class="results-breakdown" id="results-breakdown"></div>
+                <div class="results-actions">
+                    <button class="retry-btn" id="retry-btn">🔄 Try Again</button>
+                    <button class="new-btn glow" id="new-btn">✨ New Topic</button>
+                </div>
+            </div>
+        </section>
+
+        <div class="loading-overlay hidden" id="loading">
+            <div class="loading-spinner"></div>
+            <p>AI is crafting your quiz...</p>
+        </div>
+    </main>
+
+    <footer class="app-footer">
+        <p>Powered by Gemini AI · Responses may not always be accurate</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
