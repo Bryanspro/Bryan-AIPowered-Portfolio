@@ -15,9 +15,8 @@ load_dotenv(env_path)
 
 # 1. Configuración de Gemini
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
-if not GEMINI_API_KEY:
-    raise ValueError("GEMINI_API_KEY not found in environment variables")
-genai.configure(api_key=GEMINI_API_KEY)
+if GEMINI_API_KEY:
+    genai.configure(api_key=GEMINI_API_KEY)
 
 # Usamos Flash porque es rapidísimo para chats
 model = genai.GenerativeModel('gemini-2.0-flash')
@@ -196,6 +195,8 @@ async def submit_contact(request: ContactRequest):
 # 7. El Endpoint de Chat
 @app.post("/api/chat")
 async def chat_with_bryan_bot(request: ChatRequest):
+    if not GEMINI_API_KEY:
+        raise HTTPException(status_code=500, detail="API key is not configured. Please add GEMINI_API_KEY to environment variables.")
     try:
         # Combinamos tu cerebro de instrucciones con la pregunta del reclutador
         prompt_completo = f"{SYSTEM_PROMPT}\n\nUser Question: {request.message}"
