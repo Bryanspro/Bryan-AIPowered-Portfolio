@@ -1,6 +1,6 @@
 # 🚀 Bryan's AI-Powered Developer Portfolio v1.0
 
-Welcome to the repository for my **AI-Powered Developer Portfolio**! This project is a modern, responsive, and deeply interactive web application showcasing over 12 years of experience in Software Engineering, bridging robust web architecture with Artificial Intelligence.
+Welcome to the repository for my **AI-Powered Developer Portfolio**! This project is a modern, responsive, and deeply interactive web application showcasing accessible and bilingual Software Engineering, bridging robust web architecture with Artificial Intelligence.
 
 ![Portfolio Preview](./assets/portfolio-preview.png)
 
