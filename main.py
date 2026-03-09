@@ -44,7 +44,10 @@ class ContactRequest(BaseModel):
     message: str
 
 # 4.5 Database Setup
-DB_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'portfolio.db')
+if os.getenv("VERCEL"):
+    DB_FILE = '/tmp/portfolio.db'
+else:
+    DB_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'portfolio.db')
 
 def init_db():
     conn = sqlite3.connect(DB_FILE)
@@ -171,7 +174,10 @@ async def submit_contact(request: ContactRequest):
             asyncio.create_task(fm.send_message(message))
 
         # Save to readable text file
-        txt_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'messages.txt')
+        if os.getenv("VERCEL"):
+            txt_file_path = '/tmp/messages.txt'
+        else:
+            txt_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'messages.txt')
         import datetime
         timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         with open(txt_file_path, "a", encoding="utf-8") as f:
