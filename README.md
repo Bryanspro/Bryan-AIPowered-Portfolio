@@ -80,8 +80,9 @@ To see the detailed history of versions, features, and fixes (from `v0.1` to `v1
 
 ## 📫 Connect with Me
 
-- Interested in seeing it live? Check out the deployed version (link coming soon).
-- Reach out to me via the **Contact Form** natively inside the portfolio!
+- 💼 **LinkedIn:** [linkedin.com/in/bryanspro](https://linkedin.com/in/bryanspro)
+- 🌐 Interested in seeing it live? Check out the deployed version (link coming soon).
+- 💬 Reach out to me via the **Contact Form** natively inside the portfolio!
 
 ---
 *System Initialized. Ready for deployment.*
