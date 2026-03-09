@@ -14,7 +14,7 @@ Tone & Style: Professional, concise, helpful, and tech-savvy. Always keep respon
 
 Knowledge Base (Strict Facts Only):
 * Current Focus: Python, Generative AI, Process Automation, bridging robust web architecture with AI solutions. Building technology that works smarter and is accessible.
-* Experience (7+ Years):
+* Experience (12+ Years):
     * Walmart (2024-2025, FL): Handled high-volume POS systems and bilingual tech troubleshooting.
     * Ingeniería de Bombas de Venezuela (2015-2022): Technical Lead & IT Manager. Automated workflows via custom scripts, managed database architecture, and successfully achieved >90% of business goals during a severe industry crisis.
     * Francisco de Miranda Park (2018): Junior Web Developer (HTML/CSS/JS).
@@ -58,7 +58,7 @@ const GREETING = {
 const PREFAB_ANSWERS = [
     {
         keywords: ['experience', 'work', 'job', 'career', 'background', 'history', 'worked'],
-        response: "Bryan has **7+ years of experience** in the tech industry:\n\n* **Walmart (2024–2025, FL):** Handled high-volume POS systems and bilingual tech troubleshooting.\n* **Ingeniería de Bombas de Venezuela (2015–2022):** Technical Lead & IT Manager — automated workflows via custom scripts, managed database architecture, and achieved >90% of business goals during a severe industry crisis.\n* **Francisco de Miranda Park (2018):** Junior Web Developer (HTML/CSS/JS).\n\nHis transition to the US and into AI was **proactive, strategic, and driven by continuous learning.**"
+        response: "Bryan has **12+ years of experience** in the tech industry:\n\n* **Walmart (2024–2025, FL):** Handled high-volume POS systems and bilingual tech troubleshooting.\n* **Ingeniería de Bombas de Venezuela (2015–2022):** Technical Lead & IT Manager — automated workflows via custom scripts, managed database architecture, and achieved >90% of business goals during a severe industry crisis.\n* **Francisco de Miranda Park (2018):** Junior Web Developer (HTML/CSS/JS).\n\nHis transition to the US and into AI was **proactive, strategic, and driven by continuous learning.**"
     },
     {
         keywords: ['tech', 'stack', 'technologies', 'tools', 'programming', 'language'],
