@@ -47,6 +47,7 @@ Open `.env` and fill in your details:
 ```properties
 GEMINI_API_KEY="your_api_key_here"
 
+# All API Key here has been changed or deleted from the Gemini Studio
 # (Optional) Email Configuration for the Contact form
 # MAIL_USERNAME="your_email@gmail.com"
 # MAIL_PASSWORD="your_app_password"
