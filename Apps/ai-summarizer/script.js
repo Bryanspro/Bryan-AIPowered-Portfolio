@@ -1,5 +1,5 @@
 // ─── AI Text Summarizer — Script ───
-const GEMINI_KEY = 'AIzaSyCEDIoVJhOzzapf4p2TD601nhapJyhvz9Q';
+const GEMINI_KEY = 'AIzaSyDXjrvW4TtT6gpUYT5Ig5ovn0M2qOyK4Uw';
 const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_KEY}`;
 
 // ─── DOM ───

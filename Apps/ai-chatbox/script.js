@@ -4,7 +4,7 @@
    ============================================ */
 
 // ─── Configuration ─────────────────────────────────
-const GEMINI_API_KEY = 'AIzaSyCEDIoVJhOzzapf4p2TD601nhapJyhvz9Q';
+const GEMINI_API_KEY = 'AIzaSyDXjrvW4TtT6gpUYT5Ig5ovn0M2qOyK4Uw';
 const GEMINI_MODEL = 'gemini-2.0-flash';
 const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${GEMINI_API_KEY}`;
 
