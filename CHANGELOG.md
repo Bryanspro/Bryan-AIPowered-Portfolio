@@ -1,6 +1,6 @@
 # Changelog
 
-Thank you in your interest in my portfolio
+Thank you in your interest in my portfolio: Bryans.tech
 All notable changes to this project will be documented in this file.
 
 ## [v0.1] - 2026-02-27
