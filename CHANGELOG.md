@@ -108,4 +108,13 @@ All notable changes to this project will be documented in this file.
 ### Fixed
 - Addressed display and formatting bugs with the portrait smartphone view experience
 
+## [v1.0.1] - 2026-03-09
+### Added
+- Officially deployed and published the portfolio.
+- Secured and connected custom domain (Bryans.tech).
+- Configured cloud hosting and backend infrastructure.
+
+### Changed
+- Updated internal branding to match the new live domain.
+
 *Initialized port... System ready for deployment.*
