@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Hero
             heroSubtitle: 'System Online: Wait for input...',
-            typewriter: 'Initializing AI Developer Portfolio v1.0',
+            typewriter: 'Initializing AI Developer Portfolio v1.1',
             heroDesc: "Hello World! I'm Bryan, a Software Engineer building modern, aesthetically refined software solutions powered by AI. I focus on transforming complex ideas into scalable, intelligent products with real-world impact.",
             ctaView: 'View Systems',
             ctaContact: 'Initialize Contact',
@@ -103,7 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Hero
             heroSubtitle: 'Sistema en línea: Esperando entrada...',
-            typewriter: 'Inicializando Portafolio de Desarrollador IA v1.0',
+            typewriter: 'Inicializando Portafolio de Desarrollador IA v1.1',
             heroDesc: '¡Hola Mundo! Soy Bryan, un Ingeniero de Software construyendo soluciones de software modernas y estéticamente refinadas impulsadas por IA. Me enfoco en transformar ideas complejas en productos escalables e inteligentes con impacto en el mundo real.',
             ctaView: 'Ver Sistemas',
             ctaContact: 'Iniciar Contacto',
