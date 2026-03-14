@@ -6,6 +6,10 @@ from pydantic import BaseModel
 from pydantic import EmailStr
 from fastapi_mail import FastMail, MessageSchema, ConnectionConfig, MessageType
 import sqlite3
+try:
+    import psycopg2
+except ImportError:
+    psycopg2 = None
 
 # Ensure .env is loaded strictly from the module path
 from dotenv import load_dotenv
@@ -43,25 +47,47 @@ class ContactRequest(BaseModel):
     message: str
 
 # 4.5 Database Setup
-if os.getenv("VERCEL"):
-    DB_FILE = '/tmp/portfolio.db'
-else:
-    DB_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'portfolio.db')
+POSTGRES_URL = os.getenv("POSTGRES_URL") or os.getenv("DATABASE_URL")
+
+if not POSTGRES_URL:
+    if os.getenv("VERCEL"):
+        DB_FILE = '/tmp/portfolio.db'
+    else:
+        DB_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'portfolio.db')
 
 def init_db():
-    conn = sqlite3.connect(DB_FILE)
-    cursor = conn.cursor()
-    cursor.execute('''
-        CREATE TABLE IF NOT EXISTS messages (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            name TEXT NOT NULL,
-            email TEXT NOT NULL,
-            message TEXT NOT NULL,
-            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-        )
-    ''')
-    conn.commit()
-    conn.close()
+    if POSTGRES_URL and psycopg2:
+        try:
+            conn = psycopg2.connect(POSTGRES_URL)
+            cursor = conn.cursor()
+            cursor.execute('''
+                CREATE TABLE IF NOT EXISTS messages (
+                    id SERIAL PRIMARY KEY,
+                    name TEXT NOT NULL,
+                    email TEXT NOT NULL,
+                    message TEXT NOT NULL,
+                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                )
+            ''')
+            conn.commit()
+            conn.close()
+            print("Successfully connected to Postgres database.")
+        except Exception as e:
+            print(f"Error initializing Postgres: {e}")
+    else:
+        conn = sqlite3.connect(DB_FILE)
+        cursor = conn.cursor()
+        cursor.execute('''
+            CREATE TABLE IF NOT EXISTS messages (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                name TEXT NOT NULL,
+                email TEXT NOT NULL,
+                message TEXT NOT NULL,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            )
+        ''')
+        conn.commit()
+        conn.close()
 
 init_db()
 
@@ -141,14 +167,25 @@ fm = FastMail(conf)
 async def submit_contact(request: ContactRequest):
     try:
         # Save to DB
-        conn = sqlite3.connect(DB_FILE)
-        cursor = conn.cursor()
-        cursor.execute(
-            "INSERT INTO messages (name, email, message) VALUES (?, ?, ?)",
-            (request.name, request.email, request.message)
-        )
-        conn.commit()
-        conn.close()
+        if POSTGRES_URL and psycopg2:
+            conn = psycopg2.connect(POSTGRES_URL)
+            cursor = conn.cursor()
+            # Postgres uses %s for placeholders
+            cursor.execute(
+                "INSERT INTO messages (name, email, message) VALUES (%s, %s, %s)",
+                (request.name, request.email, request.message)
+            )
+            conn.commit()
+            conn.close()
+        else:
+            conn = sqlite3.connect(DB_FILE)
+            cursor = conn.cursor()
+            cursor.execute(
+                "INSERT INTO messages (name, email, message) VALUES (?, ?, ?)",
+                (request.name, request.email, request.message)
+            )
+            conn.commit()
+            conn.close()
 
         # Send Email Notification
         if MAIL_USERNAME != "dummy@example.com":

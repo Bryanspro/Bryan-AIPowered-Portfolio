@@ -282,10 +282,8 @@
                             </div>
                         </div>
                         <div class="project-info">
-                            <h3 data-i18n="proj1Title">Product Designer Showcase</h3>
-                            <p data-i18n="proj1Desc">A curated showcase of modern portfolio layouts designed
-                                specifically for product designers, highlighting UX thinking, case studies, and visual
-                                storytelling.</p>
+                            <h3 data-i18n="proj1Title">Designer Templates Showcase</h3>
+                            <p data-i18n="proj1Desc">A curated showcase of portfolio templates for product designers, included to highlight the design approaches, UX presentation styles, and visual structures I can customize and adapt.</p>
                             <div class="tech-stack">
                                 <span class="tag">HTML/CSS</span>
                                 <span class="tag">GenAI</span>
@@ -492,7 +490,7 @@
                 </button>
             </div>
             <div class="changelog-version-tab">
-                <span class="cl-tab-label">v1.0.1</span>
+                <span class="cl-tab-label">v1.1</span>
                 <span class="cl-tab-separator">|</span>
                 <span class="cl-tab-status">Latest Stable Release</span>
             </div>
@@ -500,14 +498,52 @@
 
                 <div class="cl-entry">
                     <button class="cl-header" onclick="toggleChangelog(this)">
-                        <span class="cl-version">v1.0.1</span>
-                        <span class="cl-date">2026-03-09</span>
+                        <span class="cl-version">v1.1</span>
+                        <span class="cl-date">2026-03-13</span>
                         <span class="cl-badge latest">LATEST</span>
                         <svg class="cl-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <polyline points="6 9 12 15 18 9"></polyline>
                         </svg>
                     </button>
                     <div class="cl-body open">
+                        <div class="cl-group">
+                            <span class="cl-tag added">Added</span>
+                            <ul>
+                                <li>Integrated Vercel Postgres database via Neon for persistent storage of contact form submissions.</li>
+                                <li>Added support for both <code>POSTGRES_URL</code> and <code>DATABASE_URL</code> environment variables.</li>
+                                <li>Updated FastAPI backend to support PostgreSQL natively alongside the local SQLite fallback.</li>
+                                <li>Created a multi-color customizer panel for the standalone Chrono clock app allowing individual customization of exactly 8 different clock components in real-time.</li>
+                                <li>Implemented dynamically rotating prefab question prompts for the standalone AI chatbox widget.</li>
+                                <li>Added logic for the standalone AI chatbox to open as a responsive popup window instead of a fullscreen tab.</li>
+                            </ul>
+                        </div>
+                        <div class="cl-group">
+                            <span class="cl-tag changed">Changed</span>
+                            <ul>
+                                <li>Migrated away from ephemeral SQLite database in production to a permanent cloud Postgres database.</li>
+                                <li>Updated the "Designer Templates Showcase" project title and refined its description.</li>
+                                <li>Improved AI Chatbox system prompts, strongly separating "Tech Stack" logic strictly for programming and "AI Skills" strictly for AI context.</li>
+                                <li>Refined the Chrono clock app UI layout by fixing scrollbar overflow, reducing component sizes slightly, and making it fit seamlessly into the viewport.</li>
+                            </ul>
+                        </div>
+                        <div class="cl-group">
+                            <span class="cl-tag fixed">Fixed</span>
+                            <ul>
+                                <li>Corrected the portfolio's contact form triggering keywords inside the chat widgets to prevent misfiring of the "About" command.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cl-entry">
+                    <button class="cl-header" onclick="toggleChangelog(this)">
+                        <span class="cl-version">v1.0.1</span>
+                        <span class="cl-date">2026-03-09</span>
+                        <svg class="cl-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </button>
+                    <div class="cl-body">
                         <div class="cl-group">
                             <span class="cl-tag added">Added</span>
                             <ul>

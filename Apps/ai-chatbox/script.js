@@ -77,7 +77,7 @@ const PREFAB_ANSWERS = [
         response: "Here are some fun facts about Bryan:\n\n* 🤖 I built this very AI assistant you're chatting with right now — to save recruiters time!\n* 🍳 I sometimes make homemade food as gifts for my friends.\n* 💪 I survived and managed operations through severe industry crises, making me extremely resilient under pressure.\n* 🎮 Gaming actively fuels my engineering curiosity — it inspires my passion for UI/UX and physics-based mechanics."
     },
     {
-        keywords: ['contact', 'reach', 'email', 'message', 'connect', 'hire', 'linkedin'],
+        keywords: ['contact', 'reach', 'email', 'message', 'connect', 'hire', 'linkedin', 'touch', 'talk'],
         response: "You can reach Bryan through:\n\n* 📬 The **contact form** on his main portfolio page\n* 💼 Connect on **LinkedIn** for professional inquiries\n* 💬 Or keep chatting with me here — I'll do my best to answer your questions!\n\nBryan is always open to new opportunities and tech challenges. He typically replies within 24–48 hours."
     },
     {
@@ -113,7 +113,7 @@ const PREFAB_ANSWERS = [
         response: "Bryan's skills are organized into three categories:\n\n* ⚙️ **Languages & Systems:** HTML/CSS/JS, Python, WordPress/CMS/SaaS, SQL & Database Admin, System Administration\n* 🧠 **AI & Automation:** Generative AI (LLMs), AI Engineering, Prompt Engineering, AI Agent Process Automation\n* 🌐 **Leadership & Skills:** Project Management, Team Leadership, Strategic Problem Solving, Cross-Cultural Communication (EN/ES)\n\nHe has 12+ years of experience, is fully bilingual (English/Spanish), and has completed 10+ projects."
     },
     {
-        keywords: ['about', 'who', 'bryan', 'introduce', 'bio', 'himself', 'background', 'summary'],
+        keywords: ['about', 'who', 'introduce', 'bio', 'himself', 'background', 'summary'],
         response: "Bryan Marquez is a **Software Engineer** with 12+ years of experience managing complex databases and automating critical workflows. After leading technical teams as a **Technical Lead** in Venezuela, he relocated to the **United States** to leverage his expertise in a high-growth environment.\n\nToday, he specializes in **Artificial Intelligence and Evolving System Development** using Python, leveraging a versatile stack including SQL, WordPress, and HTML/CSS/JS. By integrating **Generative AI and LLMs** with his engineering foundation — backed by Outskill's Gen AI Masterminds credentials — he creates smart, automated systems that are efficient and accessible.\n\nHe's fully bilingual (EN 🇺🇸 / ES 🇪🇸) and has completed 10+ professional projects."
     },
     {
@@ -199,12 +199,56 @@ function bindEvents() {
         }
     });
 
-    // Quick reply chips
+    // Dynamic prompts for quick replies to prevent repetition
+    const rotatingPrompts = {
+        'exp': [
+            "Tell me about Bryan's work experience.",
+            "Could you detail Bryan's roles at Walmart and Ingeniería de Bombas?",
+            "What were Bryan's biggest achievements as a Technical Lead?",
+            "Summarize Bryan's 12+ years of professional experience."
+        ],
+        'tech': [
+            "What is Bryan's primary programming tech stack and software engineering experience? (Focus on programming, databases, UI/UX, and non-AI tools)",
+            "Which programming languages, frameworks, and database systems does Bryan master?",
+            "Tell me about Bryan's traditional software engineering skills and frontend/backend tech.",
+            "How does Bryan build software architecture without relying on AI tools?"
+        ],
+        'ai': [
+            "What are Bryan's specific AI skills, and everything related to his AI experience? (Focus exclusively on Generative AI, LLMs, and AI automation)",
+            "Tell me about Bryan's experience with Generative AI, Prompt Engineering, and AI tools.",
+            "What AI-specific certifications does Bryan hold from Outskill and Google?",
+            "How does Bryan use Artificial Intelligence for workflow automation and evolving system design?"
+        ],
+        'fun': [
+            "Tell me a fun fact about Bryan.",
+            "What are Bryan's hobbies outside of coding?",
+            "What games does Bryan like to play?",
+            "Share something interesting about Bryan's life in Florida."
+        ],
+        'contact': [
+            "How can I get in touch with Bryan?",
+            "What's the best way for a recruiter to reach Bryan?",
+            "Can you provide Bryan's contact or LinkedIn details?",
+            "I'd like to hire Bryan. How do I contact him?"
+        ]
+    };
+    
+    // Keep track of which prompt we are on
+    const promptIndices = { exp: 0, tech: 0, ai: 0, fun: 0, contact: 0 };
+
     quickRepliesBar.addEventListener('click', (e) => {
         const chip = e.target.closest('.chip');
         if (chip && !isWaitingForResponse) {
-            const prompt = chip.dataset.prompt;
-            messageInput.value = prompt;
+            const cat = chip.dataset.cat;
+            if (cat && rotatingPrompts[cat]) {
+                const arr = rotatingPrompts[cat];
+                const prompt = arr[promptIndices[cat] % arr.length];
+                promptIndices[cat] = (promptIndices[cat] + 1) % arr.length;
+                messageInput.value = prompt;
+            } else if (chip.dataset.prompt) {
+                // Fallback for any old chips
+                messageInput.value = chip.dataset.prompt;
+            }
             handleSend();
         }
     });

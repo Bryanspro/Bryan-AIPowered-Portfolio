@@ -79,18 +79,16 @@
                             <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
                         </svg>
                     </button>
-                    <div class="action-btn" style="position:relative; overflow:hidden;">
-                        <input type="color" id="accent-color-picker" value="#38bdf8"
-                            style="opacity:0; position:absolute; width:100%; height:100%; cursor:pointer; left:0; top:0; z-index:2;">
+                    <button class="action-btn" id="color-picker-btn">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2" style="position:relative; z-index:1;">
+                            stroke-width="2">
                             <circle cx="13.5" cy="6.5" r="2.5" />
                             <circle cx="17.5" cy="10.5" r="2.5" />
                             <circle cx="8.5" cy="7.5" r="2.5" />
                             <circle cx="6.5" cy="12.5" r="2.5" />
                             <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z" />
                         </svg>
-                    </div>
+                    </button>
                     <button class="action-btn" onclick="openView('view-calendar')">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="2">
@@ -224,6 +222,100 @@
             </section>
 
         </main>
+
+        <!-- Color Customizer Panel -->
+        <div class="color-panel-overlay" id="color-panel-overlay">
+            <div class="color-panel">
+                <div class="color-panel-header">
+                    <h3>🎨 Customize Colors</h3>
+                    <button class="color-panel-close" id="close-color-panel">✕</button>
+                </div>
+
+                <div class="color-row">
+                    <div class="color-row-label">
+                        <span>Background</span>
+                        <span>App background color</span>
+                    </div>
+                    <div class="color-swatch-wrapper">
+                        <input type="color" data-var="--bg-color" value="#0f172a">
+                    </div>
+                </div>
+
+                <div class="color-row">
+                    <div class="color-row-label">
+                        <span>Clock Face</span>
+                        <span>Analog clock dial background</span>
+                    </div>
+                    <div class="color-swatch-wrapper">
+                        <input type="color" data-var="--clock-face" value="#1e293b">
+                    </div>
+                </div>
+
+                <div class="color-row">
+                    <div class="color-row-label">
+                        <span>Hour Hand</span>
+                        <span>Short thick hand</span>
+                    </div>
+                    <div class="color-swatch-wrapper">
+                        <input type="color" data-var="--hand-hour" value="#f8fafc">
+                    </div>
+                </div>
+
+                <div class="color-row">
+                    <div class="color-row-label">
+                        <span>Minute Hand</span>
+                        <span>Long thin hand</span>
+                    </div>
+                    <div class="color-swatch-wrapper">
+                        <input type="color" data-var="--hand-minute" value="#94a3b8">
+                    </div>
+                </div>
+
+                <div class="color-row">
+                    <div class="color-row-label">
+                        <span>Second Hand</span>
+                        <span>Fast-moving accent hand</span>
+                    </div>
+                    <div class="color-swatch-wrapper">
+                        <input type="color" data-var="--hand-second" value="#38bdf8">
+                    </div>
+                </div>
+
+                <div class="color-row">
+                    <div class="color-row-label">
+                        <span>Clock Numbers</span>
+                        <span>12, 3, 6, 9 numerals</span>
+                    </div>
+                    <div class="color-swatch-wrapper">
+                        <input type="color" data-var="--clock-numbers" value="#94a3b8">
+                    </div>
+                </div>
+
+                <div class="color-row">
+                    <div class="color-row-label">
+                        <span>Digital Time</span>
+                        <span>Time display below dial</span>
+                    </div>
+                    <div class="color-swatch-wrapper">
+                        <input type="color" data-var="--digital-color" value="#f8fafc">
+                    </div>
+                </div>
+
+                <div class="color-row">
+                    <div class="color-row-label">
+                        <span>Center Dot</span>
+                        <span>Clock center pivot point</span>
+                    </div>
+                    <div class="color-swatch-wrapper">
+                        <input type="color" data-var="--center-dot-color" value="#38bdf8">
+                    </div>
+                </div>
+
+                <div class="color-panel-footer">
+                    <button class="reset-colors-btn" id="reset-colors-btn">↻ Reset to Default</button>
+                </div>
+            </div>
+        </div>
 
         <!-- Bottom Navigation Bar -->
         <nav class="bottom-nav">

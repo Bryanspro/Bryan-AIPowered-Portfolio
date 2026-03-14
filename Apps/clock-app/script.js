@@ -39,10 +39,61 @@ document.getElementById('theme-toggle').addEventListener('click', () => {
     html.setAttribute('data-theme', currentTheme === 'dark' ? 'light' : 'dark');
 });
 
-// Color Scheme Picker
-const colorPicker = document.getElementById('accent-color-picker');
-colorPicker.addEventListener('input', (e) => {
-    document.documentElement.style.setProperty('--accent', e.target.value);
+// Color Customizer Panel
+const colorPanelOverlay = document.getElementById('color-panel-overlay');
+const closeColorPanelBtn = document.getElementById('close-color-panel');
+const colorPickerBtn = document.getElementById('color-picker-btn');
+const resetColorsBtn = document.getElementById('reset-colors-btn');
+
+// Default dark theme values for reset
+const defaultColors = {
+    '--bg-color': '#0f172a',
+    '--clock-face': '#1e293b',
+    '--hand-hour': '#f8fafc',
+    '--hand-minute': '#94a3b8',
+    '--hand-second': '#38bdf8',
+    '--clock-numbers': '#94a3b8',
+    '--digital-color': '#f8fafc',
+    '--center-dot-color': '#38bdf8'
+};
+
+// Open color panel
+colorPickerBtn.addEventListener('click', () => {
+    colorPanelOverlay.classList.add('open');
+});
+
+// Close color panel
+closeColorPanelBtn.addEventListener('click', () => {
+    colorPanelOverlay.classList.remove('open');
+});
+
+// Close on overlay background click
+colorPanelOverlay.addEventListener('click', (e) => {
+    if (e.target === colorPanelOverlay) {
+        colorPanelOverlay.classList.remove('open');
+    }
+});
+
+// Wire up all color inputs inside the panel
+document.querySelectorAll('.color-panel input[type="color"]').forEach(input => {
+    input.addEventListener('input', (e) => {
+        const cssVar = e.target.dataset.var;
+        document.documentElement.style.setProperty(cssVar, e.target.value);
+    });
+});
+
+// Reset all colors to defaults
+resetColorsBtn.addEventListener('click', () => {
+    Object.entries(defaultColors).forEach(([cssVar, value]) => {
+        document.documentElement.style.setProperty(cssVar, value);
+    });
+    // Also update the swatch inputs to reflect reset
+    document.querySelectorAll('.color-panel input[type="color"]').forEach(input => {
+        const cssVar = input.dataset.var;
+        if (defaultColors[cssVar]) {
+            input.value = defaultColors[cssVar];
+        }
+    });
 });
 
 // Clock Logic

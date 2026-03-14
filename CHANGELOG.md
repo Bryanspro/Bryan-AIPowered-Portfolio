@@ -118,4 +118,22 @@ All notable changes to this project will be documented in this file.
 ### Changed
 - Updated internal branding to match the new live domain.
 
+## [v1.1] - 2026-03-13
+### Added
+- Integrated Vercel Postgres database via Neon for persistent storage of contact form submissions.
+- Added support for both `POSTGRES_URL` and `DATABASE_URL` environment variables.
+- Updated FastAPI backend to support PostgreSQL natively alongside the local SQLite fallback.
+- Created a multi-color customizer panel for the standalone Chrono clock app allowing individual customization of exactly 8 different clock components in real-time.
+- Implemented dynamically rotating prefab question prompts for the standalone AI chatbox widget.
+- Added logic for the standalone AI chatbox to open as a responsive popup window instead of a fullscreen tab.
+
+### Changed
+- Migrated away from ephemeral SQLite database in production to a permanent cloud Postgres database.
+- Updated the "Designer Templates Showcase" project title and refined its description.
+- Improved AI Chatbox system prompts, strongly separating "Tech Stack" logic strictly for programming and "AI Skills" strictly for AI context.
+- Refined the Chrono clock app UI layout by fixing scrollbar overflow, reducing component sizes slightly, and making it fit seamlessly into the viewport.
+
+### Fixed
+- Corrected the portfolio's contact form triggering keywords inside the chat widgets to prevent misfiring of the "About" command.
+
 *Initialized port... System ready for deployment.*

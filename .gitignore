@@ -1,25 +1,4 @@
-# Environment Variables
+config.js
 .env
-
-# Python caching
 __pycache__/
-*.py[cod]
-*$py.class
-
-# Virtual environments
-venv/
-env/
-.venv/
-.env/
-
-# Database
-*.db
-*.sqlite3
-
-# Logs and user data
-messages.txt
-*.log
-
-# OS generated files
-.DS_Store
-Thumbs.db
+portfolio.db

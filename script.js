@@ -61,8 +61,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Projects
             projTitle: 'Compiled Outputs <span class="accent">// Projects</span>',
-            proj1Title: 'Product Designer Showcase',
-            proj1Desc: 'A curated showcase of modern portfolio layouts designed specifically for product designers, highlighting UX thinking, case studies, and visual storytelling.',
+            proj1Title: 'Designer Templates Showcase',
+            proj1Desc: 'A curated showcase of portfolio templates for product designers, included to highlight the design approaches, UX presentation styles, and visual structures I can customize and adapt.',
             proj2Title: 'Interactive Games',
             proj2Desc: 'A series of interactive game development projects exploring mechanics, system design, and real-time gameplay experiences.',
             proj3Title: 'Apps Showcase',
@@ -147,8 +147,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Projects
             projTitle: 'Resultados Compilados <span class="accent">// Proyectos</span>',
-            proj1Title: 'Exhibición para Diseñadores de Producto',
-            proj1Desc: 'Una muestra curada de diseños de portafolios modernos diseñados específicamente para diseñadores de producto, destacando el pensamiento UX, casos de estudio y narración visual.',
+            proj1Title: 'Exhibición de Plantillas de Diseño',
+            proj1Desc: 'Una muestra curada de plantillas de portafolio para diseñadores de producto, incluida para destacar los enfoques de diseño, estilos de presentación UX y estructuras visuales que puedo personalizar y adaptar.',
             proj2Title: 'Juegos Interactivos',
             proj2Desc: 'Una serie de proyectos de desarrollo de juegos interactivos explorando mecánicas, diseño de sistemas y experiencias de juego en tiempo real.',
             proj3Title: 'Exhibición de Aplicaciones',
@@ -659,7 +659,15 @@ document.addEventListener('DOMContentLoaded', () => {
             `;
 
             card.addEventListener('click', () => {
-                window.open(app.src, '_blank');
+                if (app.id === 'ai-chatbox') {
+                    const width = 550;
+                    const height = 750;
+                    const left = (window.screen.width/2) - (width/2);
+                    const top = (window.screen.height/2) - (height/2);
+                    window.open(app.src, 'AIChatbox', `width=${width},height=${height},top=${top},left=${left},resizable=yes,scrollbars=yes,toolbar=no,menubar=no,location=no,directories=no,status=no`);
+                } else {
+                    window.open(app.src, '_blank');
+                }
             });
 
             aiAppGallery.appendChild(card);

@@ -8,6 +8,15 @@
     --danger: #ef4444;
     --glass-bg: rgba(255, 255, 255, 0.7);
     --shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+
+    /* Clock-specific customizable colors */
+    --clock-face: var(--surface-color);
+    --hand-hour: var(--text-main);
+    --hand-minute: var(--text-muted);
+    --hand-second: var(--accent);
+    --clock-numbers: var(--text-muted);
+    --digital-color: var(--text-main);
+    --center-dot-color: var(--accent);
 }
 
 [data-theme="dark"] {
@@ -50,6 +59,7 @@ body {
     flex-direction: column;
     overflow: hidden;
     box-shadow: 0 0 40px rgba(0, 0, 0, 0.1);
+    scrollbar-width: none;
 }
 
 @media (min-width: 450px) {
@@ -117,6 +127,11 @@ body {
     overflow-x: hidden;
     padding-bottom: 80px;
     /* space for bottom nav */
+    scrollbar-width: none;
+}
+
+.content-area::-webkit-scrollbar {
+    display: none;
 }
 
 .view {
@@ -131,6 +146,11 @@ body {
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     padding: 20px;
     overflow-y: auto;
+    scrollbar-width: none;
+}
+
+.view::-webkit-scrollbar {
+    display: none;
 }
 
 .view.active {
@@ -206,17 +226,17 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 .analog-clock {
-    width: 250px;
-    height: 250px;
+    width: 230px;
+    height: 230px;
     border-radius: 50%;
-    background: var(--surface-color);
+    background: var(--clock-face);
     box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.05), var(--shadow);
     position: relative;
-    margin-bottom: 40px;
+    margin-bottom: 25px;
     border: 1px solid var(--border);
 }
 
@@ -230,7 +250,7 @@ body {
     position: absolute;
     font-size: 1.5rem;
     font-weight: 500;
-    color: var(--text-muted);
+    color: var(--clock-numbers);
 }
 
 .num12 {
@@ -269,21 +289,21 @@ body {
 .hour {
     width: 6px;
     height: 60px;
-    background: var(--text-main);
+    background: var(--hand-hour);
     margin-left: -3px;
 }
 
 .minute {
     width: 4px;
     height: 90px;
-    background: var(--text-muted);
+    background: var(--hand-minute);
     margin-left: -2px;
 }
 
 .second {
     width: 2px;
     height: 100px;
-    background: var(--accent);
+    background: var(--hand-second);
     margin-left: -1px;
 }
 
@@ -294,7 +314,7 @@ body {
     width: 12px;
     height: 12px;
     border-radius: 50%;
-    background: var(--accent);
+    background: var(--center-dot-color);
     transform: translate(-50%, -50%);
 }
 
@@ -305,6 +325,7 @@ body {
     display: flex;
     align-items: baseline;
     gap: 8px;
+    color: var(--digital-color);
 }
 
 .digital-clock span:last-child {
@@ -323,7 +344,7 @@ body {
     display: flex;
     justify-content: center;
     gap: 20px;
-    margin-top: 40px;
+    margin-top: 25px;
 }
 
 .action-btn {
@@ -872,4 +893,162 @@ input:checked+.slider:before {
     font-weight: 700;
     text-align: center;
     margin-top: 10px;
+}
+
+/* ===== Color Customizer Panel ===== */
+.color-panel-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 50;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.color-panel-overlay.open {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.color-panel {
+    position: absolute;
+    bottom: 80px;
+    left: 0;
+    right: 0;
+    background: var(--surface-color);
+    border-radius: 20px 20px 0 0;
+    padding: 20px 20px 24px;
+    transform: translateY(100%);
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 51;
+    max-height: 60%;
+    overflow-y: auto;
+    scrollbar-width: none;
+    box-shadow: 0 -8px 30px rgba(0, 0, 0, 0.15);
+}
+
+.color-panel::-webkit-scrollbar {
+    display: none;
+}
+
+.color-panel-overlay.open .color-panel {
+    transform: translateY(0);
+}
+
+.color-panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+}
+
+.color-panel-header h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.color-panel-close {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--text-muted);
+    cursor: pointer;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.2s;
+}
+
+.color-panel-close:hover {
+    background: var(--border);
+    color: var(--text-main);
+}
+
+.color-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.color-row:last-child {
+    border-bottom: none;
+}
+
+.color-row-label {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.color-row-label span:first-child {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text-main);
+}
+
+.color-row-label span:last-child {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+}
+
+.color-swatch-wrapper {
+    position: relative;
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 2px solid var(--border);
+    cursor: pointer;
+    transition: border-color 0.2s, transform 0.2s;
+}
+
+.color-swatch-wrapper:hover {
+    border-color: var(--accent);
+    transform: scale(1.1);
+}
+
+.color-swatch-wrapper input[type="color"] {
+    position: absolute;
+    inset: -8px;
+    width: calc(100% + 16px);
+    height: calc(100% + 16px);
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.color-panel-footer {
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: center;
+}
+
+.reset-colors-btn {
+    background: none;
+    border: 1px dashed var(--text-muted);
+    color: var(--text-muted);
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-family: inherit;
+    font-size: 0.82rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.reset-colors-btn:hover {
+    border-color: var(--danger);
+    color: var(--danger);
 }
