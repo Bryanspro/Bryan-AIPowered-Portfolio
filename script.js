@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Hero
             heroSubtitle: 'System Online: Wait for input...',
-            typewriter: 'Initializing AI Developer Portfolio v1.1',
+            typewriter: 'Initializing AI Developer Portfolio v1.2',
             heroDesc: "Hello World! I'm Bryan, a Software Engineer building modern, aesthetically refined software solutions powered by AI. I focus on transforming complex ideas into scalable, intelligent products with real-world impact.",
             ctaView: 'View Systems',
             ctaContact: 'Initialize Contact',
@@ -103,7 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Hero
             heroSubtitle: 'Sistema en línea: Esperando entrada...',
-            typewriter: 'Inicializando Portafolio de Desarrollador IA v1.1',
+            typewriter: 'Inicializando Portafolio de Desarrollador IA v1.2',
             heroDesc: '¡Hola Mundo! Soy Bryan, un Ingeniero de Software construyendo soluciones de software modernas y estéticamente refinadas impulsadas por IA. Me enfoco en transformar ideas complejas en productos escalables e inteligentes con impacto en el mundo real.',
             ctaView: 'Ver Sistemas',
             ctaContact: 'Iniciar Contacto',
@@ -179,6 +179,24 @@ document.addEventListener('DOMContentLoaded', () => {
             viewerBackBtn: '&larr; Volver a la Selección'
         }
     };
+
+    // ========================================================
+    // DYNAMIC VERSION SYNC
+    // ========================================================
+    // Auto-update version number from changelog tab label
+    const versionLabel = document.querySelector('.cl-tab-label');
+    if (versionLabel) {
+        const latestVersion = versionLabel.textContent.trim();
+        // Update translation dictionaries
+        portfolioDict.en.typewriter = `Initializing AI Developer Portfolio ${latestVersion}`;
+        portfolioDict.es.typewriter = `Inicializando Portafolio de Desarrollador IA ${latestVersion}`;
+        
+        // Sync the static glitch effect data attribute
+        const glitchEl = document.querySelector('.glitch-text');
+        if (glitchEl) {
+            glitchEl.setAttribute('data-text', portfolioDict.en.typewriter);
+        }
+    }
 
     let currentPortfolioLang = 'en';
 
@@ -378,11 +396,24 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         prevBtn.addEventListener('click', () => {
-            carousel.scrollBy({ left: -getScrollAmount(), behavior: 'smooth' });
+            const scrollAmount = getScrollAmount();
+            if (carousel.scrollLeft <= 5) {
+                // At the start — jump to the end
+                carousel.scrollTo({ left: carousel.scrollWidth, behavior: 'smooth' });
+            } else {
+                carousel.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+            }
         });
 
         nextBtn.addEventListener('click', () => {
-            carousel.scrollBy({ left: getScrollAmount(), behavior: 'smooth' });
+            const scrollAmount = getScrollAmount();
+            const maxScroll = carousel.scrollWidth - carousel.clientWidth;
+            if (carousel.scrollLeft >= maxScroll - 5) {
+                // At the end — jump back to start
+                carousel.scrollTo({ left: 0, behavior: 'smooth' });
+            } else {
+                carousel.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+            }
         });
 
         // Auto-scroll: slowly advance every 4 seconds
@@ -400,7 +431,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 } else {
                     carousel.scrollBy({ left: getScrollAmount(), behavior: 'smooth' });
                 }
-            }, 3000);
+            }, 6000);
         }
 
         // Pause on hover, resume on leave
@@ -568,9 +599,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // ========================================================
     const appsData = [
         { id: 'chrono', name: 'Chrono Clock', desc: 'A multifunctional mobile clock with alarms, world times, stopwatches, timers, Pomodoro, and Mock Voice setup.', tags: ['JavaScript', 'HTML/CSS', 'UI/UX'], icon: '', emoji: '⏱️', src: 'Apps/clock-app/index.html' },
-        { id: 'planflow', name: 'PlanFlow', desc: 'A full-stack mobile planner app featuring local CRUD, Pomodoro integration, analytics, and responsive gestures.', tags: ['JavaScript', 'LocalStorage', 'Productivity'], icon: '', emoji: '🗓️', src: 'Apps/planflow/index.html' },
+        { id: 'planflow', name: 'PlanFlow', desc: 'A full-stack mobile planner app featuring local CRUD, Pomodoro integration, analytics, and responsive gestures.', tags: ['JavaScript', 'Storage', 'Productivity'], icon: '', emoji: '🗓️', src: 'Apps/planflow/index.html' },
         { id: 'artvault', name: 'ArtVault', desc: 'A curated gallery of 6 famous historical artworks with an elegant dark-theme museum layout and local favorites tracking.', tags: ['JavaScript', 'HTML/CSS', 'History'], icon: '', emoji: '🖼️', src: 'Apps/artvault/index.html' },
-        { id: 'booknest', name: 'BookNest', desc: 'A digital library app to track reading progress, manage book statuses, and store personal notes.', tags: ['JavaScript', 'LocalStorage', 'Books'], icon: '', emoji: '📚', src: 'Apps/booknest/index.html' },
+        { id: 'booknest', name: 'BookNest', desc: 'A digital library app to track reading progress, manage book statuses, and store personal notes.', tags: ['JavaScript', 'Storage', 'Books'], icon: '', emoji: '📚', src: 'Apps/booknest/index.html' },
         { id: 'chronos-elegance', name: 'Chronos Elegance', desc: 'A sleek, interactive modern watch face built with React, featuring elegant typography and fluid transitions.', tags: ['React', 'Tailwind', 'UI/UX'], icon: '', emoji: '⌚', src: 'Apps/chronos-elegance-(clock-test-watch)/index.html' }
     ];
 
@@ -646,10 +677,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // 10. AI Apps Viewer Logic
     // ========================================================
     const aiAppsData = [
-        { id: 'ai-chatbox', name: 'AI Chatbox', desc: 'An intelligent conversational AI assistant powered by Gemini with multi-turn context, TTS, and smart fallback answers.', tags: ['Gemini AI', 'JavaScript', 'TTS'], icon: '', emoji: '🤖', src: 'Apps/ai-chatbox/index.html' },
-        { id: 'ai-summarizer', name: 'AI Text Summarizer', desc: 'Paste text and get AI-generated summaries, key points extraction, and EN/ES translation.', tags: ['Gemini AI', 'NLP', 'JavaScript'], icon: '', emoji: '📝', src: 'Apps/ai-summarizer/index.html' },
-        { id: 'ai-quiz', name: 'AI Quiz Generator', desc: 'Enter any topic and AI generates interactive multiple-choice quizzes with scoring and timed questions.', tags: ['Gemini AI', 'JSON', 'JavaScript'], icon: '', emoji: '🧠', src: 'Apps/ai-quiz/index.html' },
-        { id: 'ai-mood-journal', name: 'AI Mood Journal', desc: 'Write journal entries and AI analyzes your mood. Track emotional trends with charts and streaks.', tags: ['Gemini AI', 'Sentiment', 'LocalStorage'], icon: '', emoji: '📓', src: 'Apps/ai-mood-journal/index.html' }
+        { id: 'ai-chatbox', name: 'AI Chatbox', desc: 'An intelligent conversational AI assistant powered by Gemini with multi-turn context, TTS, and smart fallback answers.', tags: ['GenAI', 'JavaScript', 'TTS'], icon: '', emoji: '🤖', src: 'Apps/ai-chatbox/index.html' },
+        { id: 'ai-summarizer', name: 'AI Text Summarizer', desc: 'Paste text and get AI-generated summaries, key points extraction, and EN/ES translation.', tags: ['GenAI', 'NLP', 'JavaScript'], icon: '', emoji: '📝', src: 'Apps/ai-summarizer/index.html' },
+        { id: 'ai-quiz', name: 'AI Quiz Generator', desc: 'Enter any topic and AI generates interactive multiple-choice quizzes with scoring and timed questions.', tags: ['GenAI', 'JSON', 'JavaScript'], icon: '', emoji: '🧠', src: 'Apps/ai-quiz/index.html' },
+        { id: 'ai-mood-journal', name: 'AI Mood Journal', desc: 'Write journal entries and AI analyzes your mood. Track emotional trends with charts and streaks.', tags: ['GenAI', 'Sentiment', 'Storage'], icon: '', emoji: '📓', src: 'Apps/ai-mood-journal/index.html' }
     ];
 
     const proj4Link = document.getElementById('proj4-link');

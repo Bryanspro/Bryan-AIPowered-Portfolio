@@ -99,7 +99,7 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen w-full bg-[#070707] text-white flex flex-col items-center justify-center p-6 relative overflow-hidden transition-colors duration-1000">
+    <div className="min-h-screen w-full bg-[#070707] text-white flex flex-col items-center relative transition-colors duration-1000 pt-16 pb-8 px-6">
       
       {/* Dynamic Background Glows */}
       <div 
@@ -112,7 +112,7 @@ const App: React.FC = () => {
       ></div>
 
       {/* Header */}
-      <div className="absolute top-12 left-0 right-0 flex flex-col items-center space-y-2 pointer-events-none z-30">
+      <div className="absolute top-6 left-0 right-0 flex flex-col items-center space-y-2 pointer-events-none z-30">
         <h1 className="text-3xl font-serif italic tracking-[0.3em] opacity-40">Chronos</h1>
         <div 
           className="h-px w-24 transition-all duration-1000" 
@@ -123,7 +123,7 @@ const App: React.FC = () => {
       {/* Fullscreen Toggle Button */}
       <button 
         onClick={toggleFullscreen}
-        className="absolute top-12 right-12 z-40 p-3 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 transition-all text-white/40 hover:text-white/80"
+        className="absolute top-6 right-12 z-40 p-3 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 transition-all text-white/40 hover:text-white/80"
         title={isFullscreen ? "Exit Fullscreen" : "Enter Fullscreen"}
       >
         {isFullscreen ? (
@@ -134,7 +134,7 @@ const App: React.FC = () => {
       </button>
 
       {/* Clock Display Area */}
-      <main className="flex-1 flex items-center justify-center w-full max-w-4xl relative z-10 py-12">
+      <main className="flex items-center justify-center w-full max-w-4xl relative z-10 py-4">
         <div className="transition-all duration-700 ease-in-out w-full flex justify-center">
           <div key={displayMode} className="animate-in fade-in zoom-in duration-1000 w-full flex justify-center">
             {renderClock()}
@@ -143,7 +143,7 @@ const App: React.FC = () => {
       </main>
 
       {/* Controls */}
-      <div className="mb-12 relative z-20 w-full flex justify-center px-4">
+      <div className="mb-6 relative z-20 w-full flex justify-center px-4">
         <ClockControls 
           displayMode={displayMode}
           numeralSystem={numeralSystem}
@@ -155,7 +155,7 @@ const App: React.FC = () => {
       </div>
 
       {/* Footer Branding */}
-      <footer className="absolute bottom-8 text-[9px] uppercase tracking-[0.5em] text-neutral-700 font-bold pointer-events-none">
+      <footer className="mt-4 text-[9px] uppercase tracking-[0.5em] text-neutral-700 font-bold pointer-events-none">
         Timeless Aesthetic Precision
       </footer>
     </div>

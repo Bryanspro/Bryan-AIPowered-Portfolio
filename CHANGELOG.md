@@ -146,6 +146,18 @@ All notable changes to this project will be documented in this file.
 - Improved card hover animation: cards now lift with a scale effect, cyan shimmer line appears at the card top, and a launch arrow icon fades in at the top-right corner.
 - Reduced gallery grid column minimum width for a more compact, spacious layout that shows more cards at once.
 - Refined the gallery scrollbar to a thinner, subtler style that fits the dark aesthetic.
+- Adjusted project carousel: auto-scroll interval increased to 6 seconds, implemented infinite wrap-around navigation (first-to-last/last-to-first), and optimized button size to 54px for better ergonomics.
 - Applied `min-height` and `clip-path` to gallery cards to guarantee full content visibility (title, description, tags) at all viewport sizes.
+- Rebranded all `Gemini AI` tags to `GenAI` across the portfolio: project carousel card, AI app gallery cards (AI Chatbox, AI Text Summarizer, AI Quiz Generator, AI Mood Journal), and all app footer disclaimers.
+- Renamed `LocalStorage` tags to `Storage` across gallery app cards (PlanFlow, BookNest, AI Mood Journal) for a cleaner, more concise UI label.
+- Overhauled the **Chronos Elegance** analog clock face with premium watchface cosmetics:
+  - Added 60 minute tick marks and 12 bolder hour tick marks around the bezel.
+  - Added two subtle decorative inner concentric rings for depth.
+  - Applied SVG glow filters to hour and minute hands for a luminous quality.
+  - Second hand now features a classic tail counterbalance (30px rear extension) for an haute-horlogerie feel.
+  - Enlarged and styled the center pin with a primary-color accent ring.
+  - Repositioned the date window from overlapping the "3" numeral to the 4–5 o'clock region with a solid bordered frame.
+  - Pulled hour numerals inward to sit cleanly between the tick ring and clock center.
+- Fixed the Chronos Elegance layout being clipped: removed `overflow-hidden` from the app shell, removed `flex-1` from the main clock container, and reduced clock size to `w-80/h-80` on medium screens so controls are always fully visible without scrolling.
 
 *Initialized port... System ready for deployment.*
