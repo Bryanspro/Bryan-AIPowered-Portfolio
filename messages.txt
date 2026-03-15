@@ -1,1 +1,36 @@
 
+[2026-03-14 10:50:27]
+From: Test User DB Check <dbtest@example.com>
+Message: Testing database storage - March 14, 2026
+--------------------------------------------------
+
+[2026-03-14 11:10:01]
+From: John Smith <john.smith@techcorp.com>
+Message: Hi Bryan, I'm a recruiter at TechCorp. Loved your portfolio!
+--------------------------------------------------
+
+[2026-03-14 11:10:35]
+From: John Smith <john.smith@techcorp.com>
+Message: Hi Bryan, I'm a recruiter at TechCorp. Loved your portfolio!
+--------------------------------------------------
+
+[2026-03-14 11:10:38]
+From: Maria Garcia <maria@empresa.com>
+Message: Hola Bryan! Me encanto tu portafolio. Podemos agendar una llamada?
+--------------------------------------------------
+
+[2026-03-14 11:10:40]
+From: Detailed Recruiter <hr@bigcompany.com>
+Message: Hello Bryan, I am very interested in your profile. I am very interested in your profile. I am very interested in your profile. I am very interested in your profile. I am very interested in your profile. I am very interested in your profile. I am very interested in your profile. I am very interested in your profile. I am very interested in your profile. I am very interested in your profile. I am very interested in your profile. I am very interested in your profile. I am very interested in your profile. I am very interested in your profile. I am very interested in your profile. I am very interested in your profile. I am very interested in your profile. I am very interested in your profile. I am very interested in your profile. I am very interested in your profile. Please let me know your availability.
+--------------------------------------------------
+
+[2026-03-14 11:10:43]
+From: O'Brien-McDonald Jr. <obrien@test.org>
+Message: Testing special chars: <script>alert('xss')</script> & "quotes" & 'apostrophes'
+--------------------------------------------------
+
+[2026-03-14 11:10:45]
+From: A <a@b.co>
+Message: Hi
+--------------------------------------------------
+

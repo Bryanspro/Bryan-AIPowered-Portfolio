@@ -136,4 +136,16 @@ All notable changes to this project will be documented in this file.
 ### Fixed
 - Corrected the portfolio's contact form triggering keywords inside the chat widgets to prevent misfiring of the "About" command.
 
+## [v1.2] - 2026-03-14
+### Changed
+- Overhauled the Applications Gallery, Games Gallery, and AI Apps Gallery modal UI with a premium card design system.
+- Each gallery card now features a unique category-specific gradient background per app (e.g., deep blue for Chrono Clock, forest green for PlanFlow, violet for ArtVault, amber-brown for BookNest).
+- Replaced generic flat emoji boxes with styled icon display areas using depth gradients and smooth fade overlays.
+- Upgraded the gallery modal container with a richer dark background, cyan glow border, and premium layered box shadow.
+- Restyled the viewer modal header with an uppercase title, gradient accent strip, and animated cyan underline.
+- Improved card hover animation: cards now lift with a scale effect, cyan shimmer line appears at the card top, and a launch arrow icon fades in at the top-right corner.
+- Reduced gallery grid column minimum width for a more compact, spacious layout that shows more cards at once.
+- Refined the gallery scrollbar to a thinner, subtler style that fits the dark aesthetic.
+- Applied `min-height` and `clip-path` to gallery cards to guarantee full content visibility (title, description, tags) at all viewport sizes.
+
 *Initialized port... System ready for deployment.*

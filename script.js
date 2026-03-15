@@ -501,20 +501,31 @@ document.addEventListener('DOMContentLoaded', () => {
             const card = document.createElement('div');
             card.className = 'template-card-item glass';
 
-            let visualHTML = '';
-            if (game.emoji) {
-                visualHTML = `<div style="width: 100%; height: 150px; background-color: #2d2d2d; display: flex; align-items: center; justify-content: center; font-size: 4rem; border-radius: 8px 8px 0 0;">${game.emoji}</div>`;
-            } else {
-                visualHTML = `<div style="width: 100%; height: 150px; background-color: #000; background-image: url('${game.icon}'); background-size: contain; background-position: center; background-repeat: no-repeat; border-radius: 8px 8px 0 0;"></div>`;
-            }
+            // Unique gradient per game
+            const gameGradients = {
+                'pacman': 'linear-gradient(135deg, #1a0a2e 0%, #2d1b4e 40%, #0d1a2e 100%)',
+                'emoji-match': 'linear-gradient(135deg, #0a1a0d 0%, #1a2e10 40%, #0d1a20 100%)',
+                'tetris': 'linear-gradient(135deg, #0a1a2e 0%, #102040 40%, #1a0a2e 100%)',
+                '2048': 'linear-gradient(135deg, #1a1000 0%, #2e2000 40%, #1a0a00 100%)'
+            };
+            const gradient = gameGradients[game.id] || 'linear-gradient(135deg, #0d1117 0%, #1a2332 100%)';
+
+            const iconDisplay = game.emoji
+                ? `<span class="icon-emoji">${game.emoji}</span>`
+                : `<div style="width:70px;height:70px;background-image:url('${game.icon}');background-size:contain;background-position:center;background-repeat:no-repeat;"></div>`;
 
             card.innerHTML = `
-                ${visualHTML}
-                <div class="item-info" style="padding: 15px; display: flex; flex-direction: column; align-items: flex-start; justify-content: flex-start; gap: 10px; flex-grow: 1;">
-                    <h4 style="margin: 0; font-size: 1.2rem; display: block; width: 100%; text-align: left;">${game.name}</h4>
-                    <p style="font-size: 0.85rem; line-height: 1.4; color: var(--text-muted); margin: 0; text-align: left;">${game.desc}</p>
-                    <div class="tech-stack" style="margin: 0; display: flex; flex-wrap: wrap; gap: 5px; margin-top: auto;">
-                        ${game.tags.map(t => `<span class="tag" style="font-size: 0.70rem; padding: 0.3rem 0.6rem;">${t}</span>`).join('')}
+                <div class="app-card-icon-area" style="background: ${gradient};">
+                    ${iconDisplay}
+                </div>
+                <div class="card-launch-arrow">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                </div>
+                <div class="app-card-body">
+                    <h4>${game.name}</h4>
+                    <p>${game.desc}</p>
+                    <div class="app-card-footer">
+                        ${game.tags.map(t => `<span class="tag" style="font-size: 0.68rem; padding: 0.2rem 0.5rem;">${t}</span>`).join('')}
                     </div>
                 </div>
             `;
@@ -575,20 +586,28 @@ document.addEventListener('DOMContentLoaded', () => {
             const card = document.createElement('div');
             card.className = 'template-card-item glass';
 
-            let visualHTML = '';
-            if (app.emoji) {
-                visualHTML = `<div style="width: 100%; height: 150px; background-color: #1a2332; display: flex; align-items: center; justify-content: center; font-size: 4rem; border-radius: 8px 8px 0 0;">${app.emoji}</div>`;
-            } else {
-                visualHTML = `<div style="width: 100%; height: 150px; background-color: #000; background-image: url('${app.icon}'); background-size: contain; background-position: center; background-repeat: no-repeat; border-radius: 8px 8px 0 0;"></div>`;
-            }
+            // Unique gradient per app
+            const appGradients = {
+                'chrono': 'linear-gradient(135deg, #0a1a2e 0%, #0d2040 40%, #0a182a 100%)',
+                'planflow': 'linear-gradient(135deg, #0d1a10 0%, #102818 40%, #0a1a20 100%)',
+                'artvault': 'linear-gradient(135deg, #1a0d2e 0%, #2a1040 40%, #0d0a1a 100%)',
+                'booknest': 'linear-gradient(135deg, #1a1000 0%, #2e1800 40%, #1a0808 100%)',
+                'chronos-elegance': 'linear-gradient(135deg, #0a0a1a 0%, #101028 40%, #0a1020 100%)'
+            };
+            const gradient = appGradients[app.id] || 'linear-gradient(135deg, #0d1117 0%, #1a2332 100%)';
 
             card.innerHTML = `
-                ${visualHTML}
-                <div class="item-info" style="padding: 15px; display: flex; flex-direction: column; align-items: flex-start; justify-content: flex-start; gap: 10px; flex-grow: 1;">
-                    <h4 style="margin: 0; font-size: 1.2rem; display: block; width: 100%; text-align: left;">${app.name}</h4>
-                    <p style="font-size: 0.85rem; line-height: 1.4; color: var(--text-muted); margin: 0; text-align: left;">${app.desc}</p>
-                    <div class="tech-stack" style="margin: 0; display: flex; flex-wrap: wrap; gap: 5px; margin-top: auto;">
-                        ${app.tags.map(t => `<span class="tag" style="font-size: 0.70rem; padding: 0.3rem 0.6rem;">${t}</span>`).join('')}
+                <div class="app-card-icon-area" style="background: ${gradient};">
+                    <span class="icon-emoji">${app.emoji || '📱'}</span>
+                </div>
+                <div class="card-launch-arrow">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                </div>
+                <div class="app-card-body">
+                    <h4>${app.name}</h4>
+                    <p>${app.desc}</p>
+                    <div class="app-card-footer">
+                        ${app.tags.map(t => `<span class="tag" style="font-size: 0.68rem; padding: 0.2rem 0.5rem;">${t}</span>`).join('')}
                     </div>
                 </div>
             `;
@@ -645,15 +664,27 @@ document.addEventListener('DOMContentLoaded', () => {
             const card = document.createElement('div');
             card.className = 'template-card-item glass';
 
-            let visualHTML = `<div style="width: 100%; height: 150px; background: linear-gradient(135deg, rgba(0,240,255,0.1), rgba(189,0,255,0.1)); display: flex; align-items: center; justify-content: center; font-size: 4rem; border-radius: 8px 8px 0 0;">${app.emoji}</div>`;
+            // AI gradient backgrounds
+            const aiGradients = {
+                'ai-chatbox': 'linear-gradient(135deg, #0a1a2e 0%, rgba(0,240,255,0.12) 50%, #0d0a1a 100%)',
+                'ai-summarizer': 'linear-gradient(135deg, #0d0a1a 0%, rgba(189,0,255,0.12) 50%, #0a1a2e 100%)',
+                'ai-quiz': 'linear-gradient(135deg, #0a1a0d 0%, rgba(0,240,255,0.1) 40%, rgba(189,0,255,0.08) 100%)',
+                'ai-mood-journal': 'linear-gradient(135deg, #1a0a10 0%, rgba(189,0,255,0.1) 50%, #0a0a1a 100%)'
+            };
+            const gradient = aiGradients[app.id] || 'linear-gradient(135deg, rgba(0,240,255,0.1), rgba(189,0,255,0.1))';
 
             card.innerHTML = `
-                ${visualHTML}
-                <div class="item-info" style="padding: 15px; display: flex; flex-direction: column; align-items: flex-start; justify-content: flex-start; gap: 10px; flex-grow: 1;">
-                    <h4 style="margin: 0; font-size: 1.2rem; display: block; width: 100%; text-align: left;">${app.name}</h4>
-                    <p style="font-size: 0.85rem; line-height: 1.4; color: var(--text-muted); margin: 0; text-align: left;">${app.desc}</p>
-                    <div class="tech-stack" style="margin: 0; display: flex; flex-wrap: wrap; gap: 5px; margin-top: auto;">
-                        ${app.tags.map(t => `<span class="tag" style="font-size: 0.70rem; padding: 0.3rem 0.6rem;">${t}</span>`).join('')}
+                <div class="app-card-icon-area" style="background: ${gradient};">
+                    <span class="icon-emoji">${app.emoji}</span>
+                </div>
+                <div class="card-launch-arrow">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                </div>
+                <div class="app-card-body">
+                    <h4>${app.name}</h4>
+                    <p>${app.desc}</p>
+                    <div class="app-card-footer">
+                        ${app.tags.map(t => `<span class="tag" style="font-size: 0.68rem; padding: 0.2rem 0.5rem;">${t}</span>`).join('')}
                     </div>
                 </div>
             `;
