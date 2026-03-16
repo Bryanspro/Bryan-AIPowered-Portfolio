@@ -4,22 +4,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>PlanFlow - Daily Planner</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>PlanFlow — Daily Planner</title>
+    <meta name="description" content="PlanFlow is a premium daily planner with focus timer, calendar, and task management.">
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
+    <!-- Toast Container -->
+    <div class="toast-container" id="toast-container"></div>
+
     <div class="app-container">
-        <!-- Main Application Content (Views) -->
         <main class="content-area">
 
-            <!-- Dashboard View -->
+            <!-- ═══ Dashboard View ═══ -->
             <section id="view-dashboard" class="view active">
                 <header class="view-header">
                     <div>
-                        <p class="greeting">Good Morning, Bryan</p>
-                        <h2 id="dash-date">Today is Monday</h2>
+                        <p class="greeting" id="greeting-text">Good Morning, Bryan</p>
+                        <h2 id="dash-date">Monday, March 16</h2>
                     </div>
                 </header>
 
@@ -29,57 +31,67 @@
                         <span class="stat-label">Pending Today</span>
                     </div>
                     <div class="stat-card">
-                        <span class="stat-val accent-val" id="dash-streak-count">0🔥</span>
+                        <span class="stat-val accent-val" id="dash-streak-count">0 🔥</span>
                         <span class="stat-label">Day Streak</span>
+                    </div>
+                </div>
+
+                <!-- Today's Progress -->
+                <div class="progress-section">
+                    <div class="progress-header">
+                        <span>Today's Progress</span>
+                        <span class="progress-pct" id="dash-progress-pct">0%</span>
+                    </div>
+                    <div class="progress-track">
+                        <div class="progress-fill" id="dash-progress-fill" style="width: 0%"></div>
                     </div>
                 </div>
 
                 <div class="section-title">
                     <h3>Focus Task</h3>
                 </div>
-                <!-- Suggested focus task -->
                 <div class="focus-suggestion" id="focus-suggestion">
-                    <!-- Injected by JS based on high priority today -->
-                    <p class="text-muted">No high priority tasks today!</p>
+                    <p class="text-muted" style="text-align:center; padding: 12px;">All caught up for today! 🎉</p>
                 </div>
 
                 <div class="section-title">
                     <h3>Up Next</h3>
                     <button class="text-btn" onclick="openView('view-tasks')">See All</button>
                 </div>
-                <div class="task-list" id="dash-task-list">
-                    <!-- Tasks injected by JS -->
-                </div>
+                <div class="task-list" id="dash-task-list"></div>
 
-                <!-- Floating Action Button for Adding Task -->
-                <button class="fab" id="fab-add-task-dash">+</button>
+                <button class="fab" id="fab-add-task-dash" aria-label="Add new task">+</button>
             </section>
 
-            <!-- Tasks View (List with filters/search) -->
+            <!-- ═══ Tasks View ═══ -->
             <section id="view-tasks" class="view">
                 <header class="view-header sticky">
                     <h2>Tasks</h2>
                 </header>
 
                 <div class="task-controls">
-                    <input type="text" id="task-search" placeholder="Search tasks..." class="search-input">
+                    <div class="search-wrap">
+                        <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        </svg>
+                        <input type="text" id="task-search" placeholder="Search tasks..." class="search-input" autocomplete="off">
+                    </div>
                     <div class="filter-scroll">
                         <button class="filter-chip active" data-filter="today">Today</button>
                         <button class="filter-chip" data-filter="upcoming">Upcoming</button>
                         <button class="filter-chip" data-filter="overdue">Overdue</button>
                         <button class="filter-chip" data-filter="completed">Completed</button>
+                        <button class="filter-chip" data-filter="all">All</button>
                     </div>
                 </div>
 
-                <div class="task-list" id="main-task-list">
-                    <!-- Tasks injected by JS -->
-                </div>
+                <div class="task-list" id="main-task-list"></div>
 
-                <!-- Floating Action Button for Adding Task -->
-                <button class="fab" id="fab-add-task">+</button>
+                <button class="fab" id="fab-add-task" aria-label="Add new task">+</button>
             </section>
 
-            <!-- Calendar View -->
+            <!-- ═══ Calendar View ═══ -->
             <section id="view-calendar" class="view">
                 <header class="view-header">
                     <h2>Calendar</h2>
@@ -87,9 +99,9 @@
 
                 <div class="calendar-card">
                     <div class="cal-control">
-                        <button id="cal-prev" class="icon-btn-small">‹</button>
+                        <button id="cal-prev" class="icon-btn-small" aria-label="Previous month">‹</button>
                         <h3 id="cal-month-year">Month Year</h3>
-                        <button id="cal-next" class="icon-btn-small">›</button>
+                        <button id="cal-next" class="icon-btn-small" aria-label="Next month">›</button>
                     </div>
                     <div class="cal-days-header">
                         <span>S</span><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span>
@@ -100,24 +112,22 @@
                 <div class="section-title" style="margin-top:20px;">
                     <h3 id="cal-selected-date">Selected Date</h3>
                 </div>
-                <div class="task-list" id="calendar-task-list">
-                    <!-- Tasks for selected day -->
-                </div>
+                <div class="task-list" id="calendar-task-list"></div>
             </section>
 
-            <!-- Focus Mode (Pomodoro) -->
+            <!-- ═══ Focus Mode (Pomodoro) ═══ -->
             <section id="view-focus" class="view">
                 <header class="view-header">
                     <h2>Focus Mode</h2>
                 </header>
 
                 <div class="focus-task-select" id="focus-task-select">
-                    <label>Select task to focus on:</label>
+                    <label>Select task to focus on</label>
                     <select id="pomo-task-dropdown" class="input-field"></select>
                 </div>
 
                 <div class="focus-task-select">
-                    <label>Focus Duration:</label>
+                    <label>Focus Duration</label>
                     <select id="pomo-duration-dropdown" class="input-field">
                         <option value="5">5 Minutes</option>
                         <option value="15">15 Minutes</option>
@@ -130,6 +140,12 @@
 
                 <div class="pomo-container">
                     <svg class="pomo-ring" viewBox="0 0 100 100">
+                        <defs>
+                            <linearGradient id="pomoGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" style="stop-color:#6c5ce7" />
+                                <stop offset="100%" style="stop-color:#a29bfe" />
+                            </linearGradient>
+                        </defs>
                         <circle class="ring-bg" cx="50" cy="50" r="45"></circle>
                         <circle class="ring-progress" id="pomo-progress" cx="50" cy="50" r="45"></circle>
                     </svg>
@@ -141,23 +157,47 @@
                     <button class="btn btn-outline" id="pomo-reset">Reset</button>
                     <button class="btn btn-primary btn-large" id="pomo-toggle">Start Focus</button>
                 </div>
+
+                <div class="session-counter" id="session-counter">
+                    Sessions today: <span id="session-count">0</span>
+                </div>
             </section>
 
-            <!-- Settings & Stats View -->
+            <!-- ═══ Settings & Stats View ═══ -->
             <section id="view-settings" class="view">
                 <header class="view-header">
-                    <h2>Settings & Stats</h2>
+                    <h2>Stats & Settings</h2>
                 </header>
 
                 <div class="stats-panel">
                     <div class="stat-card">
                         <span class="stat-val" id="stats-weekly">0</span>
-                        <span class="stat-label">Completed This Week</span>
+                        <span class="stat-label">This Week</span>
                     </div>
                     <div class="stat-card">
-                        <span class="stat-val accent-val" id="stats-streak">0🔥</span>
-                        <span class="stat-label">Current Streak</span>
+                        <span class="stat-val accent-val" id="stats-streak">0 🔥</span>
+                        <span class="stat-label">Streak</span>
                     </div>
+                </div>
+
+                <div class="stats-summary" id="stats-summary">
+                    <div class="stats-summary-card">
+                        <div class="stats-summary-val" id="stats-total">0</div>
+                        <div class="stats-summary-label">Total Tasks</div>
+                    </div>
+                    <div class="stats-summary-card">
+                        <div class="stats-summary-val" id="stats-completed">0</div>
+                        <div class="stats-summary-label">Completed</div>
+                    </div>
+                    <div class="stats-summary-card">
+                        <div class="stats-summary-val" id="stats-rate">0%</div>
+                        <div class="stats-summary-label">Rate</div>
+                    </div>
+                </div>
+
+                <div class="weekly-chart">
+                    <h3>Weekly Activity</h3>
+                    <div class="chart-bars" id="weekly-chart-bars"></div>
                 </div>
 
                 <div class="settings-group">
@@ -179,24 +219,24 @@
         </main>
 
         <!-- Bottom Navigation -->
-        <nav class="bottom-nav">
-            <button class="nav-item active" data-view="view-dashboard">
+        <nav class="bottom-nav" aria-label="Main navigation">
+            <button class="nav-item active" data-view="view-dashboard" aria-label="Dashboard">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <rect x="3" y="3" width="7" height="7"></rect>
-                    <rect x="14" y="3" width="7" height="7"></rect>
-                    <rect x="14" y="14" width="7" height="7"></rect>
-                    <rect x="3" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="3" width="7" height="7" rx="1"></rect>
+                    <rect x="14" y="3" width="7" height="7" rx="1"></rect>
+                    <rect x="14" y="14" width="7" height="7" rx="1"></rect>
+                    <rect x="3" y="14" width="7" height="7" rx="1"></rect>
                 </svg>
                 <span>Dash</span>
             </button>
-            <button class="nav-item" data-view="view-tasks">
+            <button class="nav-item" data-view="view-tasks" aria-label="Tasks">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <polyline points="9 11 12 14 22 4"></polyline>
                     <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
                 </svg>
                 <span>Tasks</span>
             </button>
-            <button class="nav-item" data-view="view-calendar">
+            <button class="nav-item" data-view="view-calendar" aria-label="Calendar">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
                     <line x1="16" y1="2" x2="16" y2="6"></line>
@@ -205,24 +245,18 @@
                 </svg>
                 <span>Calendar</span>
             </button>
-            <button class="nav-item" data-view="view-focus">
+            <button class="nav-item" data-view="view-focus" aria-label="Focus timer">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <circle cx="12" cy="12" r="10"></circle>
                     <polyline points="12 6 12 12 16 14"></polyline>
                 </svg>
                 <span>Focus</span>
             </button>
-            <button class="nav-item" data-view="view-settings">
+            <button class="nav-item" data-view="view-settings" aria-label="Stats and settings">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <line x1="4" y1="21" x2="4" y2="14"></line>
-                    <line x1="4" y1="10" x2="4" y2="3"></line>
-                    <line x1="12" y1="21" x2="12" y2="12"></line>
-                    <line x1="12" y1="8" x2="12" y2="3"></line>
-                    <line x1="20" y1="21" x2="20" y2="16"></line>
-                    <line x1="20" y1="12" x2="20" y2="3"></line>
-                    <line x1="1" y1="14" x2="7" y2="14"></line>
-                    <line x1="9" y1="8" x2="15" y2="8"></line>
-                    <line x1="17" y1="16" x2="23" y2="16"></line>
+                    <line x1="18" y1="20" x2="18" y2="10"></line>
+                    <line x1="12" y1="20" x2="12" y2="4"></line>
+                    <line x1="6" y1="20" x2="6" y2="14"></line>
                 </svg>
                 <span>Stats</span>
             </button>
@@ -232,12 +266,18 @@
     <!-- Add/Edit Task Modal -->
     <div class="modal-overlay" id="task-modal">
         <div class="modal-content bottom-sheet">
+            <div class="modal-handle"></div>
             <h3 id="modal-title">New Task</h3>
             <input type="hidden" id="task-id">
 
             <div class="form-group">
-                <input type="text" id="task-title" class="input-field title-input" placeholder="What do you need to do?"
-                    autocomplete="off">
+                <input type="text" id="task-title" class="input-field title-input"
+                    placeholder="What do you need to do?" autocomplete="off">
+            </div>
+
+            <div class="form-group">
+                <label>Description</label>
+                <textarea id="task-description" class="input-field" placeholder="Add notes or details..." rows="2"></textarea>
             </div>
 
             <div class="form-row">
@@ -256,13 +296,41 @@
             </div>
 
             <div class="form-group">
-                <label>Tags (Comma separated)</label>
-                <input type="text" id="task-tags" class="input-field" placeholder="e.g. Work, Health, Personal">
+                <label>Category</label>
+                <div class="category-selector" id="category-selector">
+                    <button type="button" class="category-option" data-cat="work">💼 Work</button>
+                    <button type="button" class="category-option" data-cat="health">🏃 Health</button>
+                    <button type="button" class="category-option" data-cat="learning">📚 Learn</button>
+                    <button type="button" class="category-option" data-cat="personal">🏠 Personal</button>
+                    <button type="button" class="category-option" data-cat="goals">🎯 Goals</button>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Subtasks</label>
+                <div class="subtask-list" id="modal-subtask-list"></div>
+                <div class="add-subtask-row">
+                    <input type="text" id="subtask-input" placeholder="Add a subtask..." autocomplete="off">
+                    <button type="button" id="add-subtask-btn">Add</button>
+                </div>
             </div>
 
             <div class="modal-actions">
                 <button class="btn btn-outline" id="cancel-task">Cancel</button>
                 <button class="btn btn-primary" id="save-task">Save Task</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div class="confirm-modal-overlay" id="confirm-modal">
+        <div class="confirm-modal">
+            <div class="confirm-icon" id="confirm-icon">⚠️</div>
+            <h4 id="confirm-title">Are you sure?</h4>
+            <p id="confirm-message">This action cannot be undone.</p>
+            <div class="confirm-actions">
+                <button class="btn btn-outline btn-small" id="confirm-cancel">Cancel</button>
+                <button class="btn btn-danger btn-small" id="confirm-ok">Confirm</button>
             </div>
         </div>
     </div>

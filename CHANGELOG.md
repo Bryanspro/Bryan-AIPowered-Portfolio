@@ -136,6 +136,17 @@ All notable changes to this project will be documented in this file.
 ### Fixed
 - Corrected the portfolio's contact form triggering keywords inside the chat widgets to prevent misfiring of the "About" command.
 
+## [v1.3] - 2026-03-16
+### Changed
+- Comprehensively overhauled the PlanFlow, ArtVault, and BookNest applications with premium UI/UX enhancements.
+- Re-engineered PlanFlow to feature a new frosted glassmorphism dashboard, dynamic task interactions, streak tracking, and interactive modals.
+- Transformed ArtVault into an elegant digital museum experience with real high-resolution artwork, detailed history views, and a curated masonry gallery.
+- Upgraded BookNest into a modern digital library showcasing accurate book cover images, downloadable PDFs, rich typography, and reading progress indicators.
+- Ensured consistent premium styling across all apps using custom CSS variables, refined dark mode palettes, and dynamic hover effects.
+
+### Fixed
+- Fixed URL encoding routing issue preventing the Chronos Elegance watch app from loading correctly on cloud deployments.
+
 ## [v1.2] - 2026-03-14
 ### Changed
 - Overhauled the Applications Gallery, Games Gallery, and AI Apps Gallery modal UI with a premium card design system.

@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Hero
             heroSubtitle: 'System Online: Wait for input...',
-            typewriter: 'Initializing AI Developer Portfolio v1.2',
+            typewriter: 'Initializing AI Developer Portfolio v1.3',
             heroDesc: "Hello World! I'm Bryan, a Software Engineer building modern, aesthetically refined software solutions powered by AI. I focus on transforming complex ideas into scalable, intelligent products with real-world impact.",
             ctaView: 'View Systems',
             ctaContact: 'Initialize Contact',
@@ -103,7 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Hero
             heroSubtitle: 'Sistema en línea: Esperando entrada...',
-            typewriter: 'Inicializando Portafolio de Desarrollador IA v1.2',
+            typewriter: 'Inicializando Portafolio de Desarrollador IA v1.3',
             heroDesc: '¡Hola Mundo! Soy Bryan, un Ingeniero de Software construyendo soluciones de software modernas y estéticamente refinadas impulsadas por IA. Me enfoco en transformar ideas complejas en productos escalables e inteligentes con impacto en el mundo real.',
             ctaView: 'Ver Sistemas',
             ctaContact: 'Iniciar Contacto',
@@ -602,7 +602,7 @@ document.addEventListener('DOMContentLoaded', () => {
         { id: 'planflow', name: 'PlanFlow', desc: 'A full-stack mobile planner app featuring local CRUD, Pomodoro integration, analytics, and responsive gestures.', tags: ['JavaScript', 'Storage', 'Productivity'], icon: '', emoji: '🗓️', src: 'Apps/planflow/index.html' },
         { id: 'artvault', name: 'ArtVault', desc: 'A curated gallery of 6 famous historical artworks with an elegant dark-theme museum layout and local favorites tracking.', tags: ['JavaScript', 'HTML/CSS', 'History'], icon: '', emoji: '🖼️', src: 'Apps/artvault/index.html' },
         { id: 'booknest', name: 'BookNest', desc: 'A digital library app to track reading progress, manage book statuses, and store personal notes.', tags: ['JavaScript', 'Storage', 'Books'], icon: '', emoji: '📚', src: 'Apps/booknest/index.html' },
-        { id: 'chronos-elegance', name: 'Chronos Elegance', desc: 'A sleek, interactive modern watch face built with React, featuring elegant typography and fluid transitions.', tags: ['React', 'Tailwind', 'UI/UX'], icon: '', emoji: '⌚', src: 'Apps/chronos-elegance-(clock-test-watch)/index.html' }
+        { id: 'chronos-elegance', name: 'Chronos Elegance', desc: 'A sleek, interactive modern watch face built with React, featuring elegant typography and fluid transitions.', tags: ['React', 'Tailwind', 'UI/UX'], icon: '', emoji: '⌚', src: 'Apps/chronos-elegance/index.html' }
     ];
 
     const proj3Link = document.getElementById('proj3-link');
