@@ -797,13 +797,22 @@ Conversation Rule: Always bring the conversation naturally back to how these tra
         }
 
         // Construct HTML Message wrappers
-        function buildMessageNode(senderStr, contentHtml) {
+        function buildMessageNode(senderStr, contentData) {
             const wrapper = document.createElement('div');
             wrapper.className = `message ${senderStr}`;
 
             const content = document.createElement('div');
             content.className = 'message-content';
-            content.innerHTML = contentHtml;
+
+            if (typeof contentData === 'string') {
+                if (senderStr === 'user') {
+                    content.textContent = contentData;
+                } else {
+                    content.innerHTML = contentData;
+                }
+            } else if (contentData instanceof Node) {
+                content.appendChild(contentData);
+            }
 
             const time = document.createElement('div');
             time.className = 'timestamp';
@@ -858,8 +867,8 @@ Conversation Rule: Always bring the conversation naturally back to how these tra
         };
 
         // User Message handler
-        function addUserMessage(htmlStr) {
-            const msgNode = buildMessageNode('user', htmlStr);
+        function addUserMessage(contentData) {
+            const msgNode = buildMessageNode('user', contentData);
             chatBody.appendChild(msgNode);
             scrollBottom();
         }
@@ -956,15 +965,24 @@ Conversation Rule: Always bring the conversation naturally back to how these tra
 
             const iconSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="12" y1="18" x2="12" y2="12"></line><line x1="9" y1="15" x2="15" y2="15"></line></svg>`;
 
-            const html = `
-                <div>Uploading file:</div>
-                <div class="file-attachment">
-                    ${iconSvg} 
-                    <span style="font-size:0.8rem">${file.name}</span>
-                </div>
-            `;
+            const container = document.createElement('div');
 
-            addUserMessage(html);
+            const uploadText = document.createElement('div');
+            uploadText.innerText = 'Uploading file:';
+            container.appendChild(uploadText);
+
+            const fileAttachment = document.createElement('div');
+            fileAttachment.className = 'file-attachment';
+            fileAttachment.innerHTML = iconSvg; // SVG is safe static HTML
+
+            const fileNameSpan = document.createElement('span');
+            fileNameSpan.style.fontSize = '0.8rem';
+            fileNameSpan.textContent = file.name; // Use textContent for user input
+
+            fileAttachment.appendChild(fileNameSpan);
+            container.appendChild(fileAttachment);
+
+            addUserMessage(container);
             fileInput.value = ''; // reset
 
             showTyping();
