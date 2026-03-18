@@ -837,13 +837,14 @@ Conversation Rule: Always bring the conversation naturally back to how these tra
         // Special render for contact form inside chat
         function renderContactForm() {
             const dict = Dictionary[currentLang].form;
+            const formId = 'chat-form-' + Date.now();
             const formHtml = `
-                <div class="chat-form" id="in-chat-form">
-                    <input type="text" placeholder="${dict.namePlaceholder}" required />
-                    <input type="email" placeholder="${dict.emailPlaceholder}" required />
-                    <textarea rows="3" placeholder="${dict.msgPlaceholder}" required></textarea>
-                    <button type="submit" onclick="submitChatForm(event)">${dict.submit}</button>
-                </div>
+                <form class="chat-form" id="${formId}" onsubmit="submitChatForm(event, this)">
+                    <input type="text" name="name" placeholder="${dict.namePlaceholder}" required />
+                    <input type="email" name="email" placeholder="${dict.emailPlaceholder}" required />
+                    <textarea name="message" rows="3" placeholder="${dict.msgPlaceholder}" required></textarea>
+                    <button type="submit" name="submitBtn">${dict.submit}</button>
+                </form>
             `;
             const msgNode = buildMessageNode('bot', Dictionary[currentLang].responses.formIntro + formHtml);
             chatBody.appendChild(msgNode);
@@ -851,10 +852,43 @@ Conversation Rule: Always bring the conversation naturally back to how these tra
             speakText(Dictionary[currentLang].responses.formIntro);
         }
 
-        window.submitChatForm = function (e) {
+        window.submitChatForm = async function (e, formElement) {
             e.preventDefault();
-            const form = document.getElementById('in-chat-form');
-            form.innerHTML = `<span style="color:var(--accent-cyan); font-weight:bold;">${Dictionary[currentLang].responses.formSent}</span>`;
+            
+            const nameInput = formElement.elements['name'];
+            const emailInput = formElement.elements['email'];
+            const msgInput = formElement.elements['message'];
+            const submitBtn = formElement.elements['submitBtn'];
+
+            if (!nameInput || !emailInput || !msgInput) return;
+
+            const name = nameInput.value;
+            const email = emailInput.value;
+            const message = msgInput.value;
+
+            const originalBtnText = submitBtn.innerHTML;
+            submitBtn.innerHTML = currentLang === 'es' ? 'Transmitiendo...' : 'Transmitting...';
+            submitBtn.disabled = true;
+
+            try {
+                const response = await fetch('/api/contact', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ name, email, message })
+                });
+
+                if (response.ok) {
+                    formElement.innerHTML = `<span style="color:var(--accent-cyan); font-weight:bold;">${Dictionary[currentLang].responses.formSent}</span>`;
+                } else {
+                    submitBtn.innerHTML = currentLang === 'es' ? 'Error. Reintentar' : 'Failed. Try again';
+                    submitBtn.disabled = false;
+                }
+            } catch (error) {
+                submitBtn.innerHTML = currentLang === 'es' ? 'Error de red' : 'Network error';
+                submitBtn.disabled = false;
+            }
         };
 
         // User Message handler
