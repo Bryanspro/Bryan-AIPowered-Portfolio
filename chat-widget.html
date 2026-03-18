@@ -655,9 +655,8 @@
         let isTyping = false;
         let widgetConversationHistory = [];
 
-        // --- Gemini API Config (Direct Browser Calls) ---
-        const WIDGET_GEMINI_KEY = 'AIzaSyDXjrvW4TtT6gpUYT5Ig5ovn0M2qOyK4Uw';
-        const WIDGET_GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${WIDGET_GEMINI_KEY}`;
+        // --- Gemini API Config (Secure Backend Calls) ---
+        const WIDGET_GEMINI_URL = '/api/chat';
 
         const WIDGET_SYSTEM_PROMPT = `Role: You are the official AI Resume Assistant for Bryan Marquez, a Software Engineer transitioning into AI and Python Development. Your goal is to enthusiastically and professionally answer questions from IT recruiters about Bryan's experience, skills, and background.
 Tone & Style: Professional, concise, helpful, and tech-savvy. Always keep responses under 3 paragraphs. If asked in Spanish, reply in Spanish. If asked in English, reply in English.
@@ -899,7 +898,7 @@ Conversation Rule: Always bring the conversation naturally back to how these tra
                     }
                 }, 1000);
             } else {
-                // Direct Gemini API Integration with Prefab Fallback
+                // Direct Gemini API Integration via Secure Backend with Prefab Fallback
                 try {
                     widgetConversationHistory.push({ role: 'user', parts: [{ text: inputCommand }] });
 
@@ -916,7 +915,7 @@ Conversation Rule: Always bring the conversation naturally back to how these tra
                     if (!response.ok) throw new Error(`API ${response.status}`);
 
                     const data = await response.json();
-                    const reply = data.candidates?.[0]?.content?.parts?.[0]?.text || getWidgetPrefab(inputCommand);
+                    const reply = data.reply || getWidgetPrefab(inputCommand);
                     widgetConversationHistory.push({ role: 'model', parts: [{ text: reply }] });
 
                     hideTyping();

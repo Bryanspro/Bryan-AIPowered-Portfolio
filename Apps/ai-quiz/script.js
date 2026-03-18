@@ -1,6 +1,5 @@
 // ─── AI Quiz Generator — Script ───
-const GEMINI_KEY = 'AIzaSyDXjrvW4TtT6gpUYT5Ig5ovn0M2qOyK4Uw';
-const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_KEY}`;
+const GEMINI_URL = '/api/chat';
 
 // ─── DOM ───
 const setupScreen = document.getElementById('setup-screen');
@@ -100,7 +99,7 @@ where "correct" is the 0-based index of the correct answer. Make questions engag
         if (!response.ok) throw new Error(`API ${response.status}`);
 
         const data = await response.json();
-        let text = data.candidates?.[0]?.content?.parts?.[0]?.text || '';
+        let text = data.reply || '';
         // Strip markdown code fences if present
         text = text.replace(/```json\s*/gi, '').replace(/```\s*/g, '').trim();
         questions = JSON.parse(text);
