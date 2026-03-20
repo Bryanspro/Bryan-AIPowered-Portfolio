@@ -102,9 +102,46 @@
         </a>
     </nav>
 
-    <!-- Hidden YouTube iframe for background music -->
-    <div style="position: absolute; width: 0; height: 0; overflow: hidden;" id="youtube-player-container">
-        <!-- The YouTube Iframe API injects the iframe here -->
+    <!-- Floating YouTube Player Modal for background music -->
+    <div id="music-player-modal" class="music-player-modal hidden glass card">
+        <div class="music-player-header">
+            <div class="music-player-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                    <path d="M9 18V5L21 3V16" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M6 21C7.65685 21 9 19.6569 9 18C9 16.3431 7.65685 15 6 15C4.34315 15 3 16.3431 3 18C3 19.6569 4.34315 21 6 21Z" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M18 19C19.6569 19 21 17.6569 21 16C21 14.3431 19.6569 13 18 13C16.3431 13 15 14.3431 15 16C15 17.6569 16.3431 19 18 19Z" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+                <span data-i18n="musicPlayerTitle">Bryan Neon Player</span>
+            </div>
+            <button id="close-music-player-btn" class="icon-btn" aria-label="Close Music Player" style="color: var(--text-muted); padding: 5px; cursor: pointer; background: transparent; border: none;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+        <div class="music-player-body">
+            <div id="youtube-player-container">
+                <!-- The YouTube Iframe API injects the iframe here -->
+            </div>
+        </div>
+        <div class="music-player-controls">
+            <button id="btn-prev-track" class="player-control-btn" title="Previous Track">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M19 20L9 12l10-8v16zM5 19h2V5H5v14z"></path>
+                </svg>
+            </button>
+            <button id="btn-play-pause-track" class="player-control-btn play-pause-btn" title="Play">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M8 5v14l11-7z"></path>
+                </svg>
+            </button>
+            <button id="btn-next-track" class="player-control-btn" title="Next Track">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M5 4l10 8-10 8V4zm14 15h2V5h-2v14z"></path>
+                </svg>
+            </button>
+        </div>
     </div>
 
     <main>

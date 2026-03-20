@@ -2,5 +2,8 @@
 trigger: always_on
 ---
 
-Make sure if not already to launch python server at python -m http.server 8000, before check the portfolio
-Make sure the portfolio is not cached
+Before starting the python server, you MUST run this exact PowerShell command to find and terminate any existing processes listening on port 8000 to prevent conflicts:
+`Get-NetTCPConnection -LocalPort 8000 -ErrorAction SilentlyContinue | Select-Object -ExpandProperty OwningProcess | ForEach-Object { Stop-Process -Id $_ -Force -ErrorAction SilentlyContinue }`
+
+Make sure if not already to launch python server at `python -m http.server 8000`, before checking the portfolio. Wait a moment for it to start.
+Make sure the portfolio is not cached.

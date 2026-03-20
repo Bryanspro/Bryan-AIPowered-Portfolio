@@ -90,6 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
             viewerTitle: 'Template Gallery',
             gameViewerTitle: 'Interactive Games Gallery',
             appViewerTitle: 'Applications Gallery',
+            musicPlayerTitle: 'Bryan Neon Player',
             viewerBackBtn: '&larr; Back to Selection'
         },
         es: {
@@ -176,6 +177,7 @@ document.addEventListener('DOMContentLoaded', () => {
             viewerTitle: 'Galería de Plantillas',
             gameViewerTitle: 'Galería de Juegos Interactivos',
             appViewerTitle: 'Galería de Aplicaciones',
+            musicPlayerTitle: 'Bryan Neon Player',
             viewerBackBtn: '&larr; Volver a la Selección'
         }
     };
@@ -307,23 +309,41 @@ document.addEventListener('DOMContentLoaded', () => {
     // The YouTube API will call this when it's ready. We define it globally.
     window.onYouTubeIframeAPIReady = function () {
         window.ytPlayer = new YT.Player('youtube-player-container', {
-            height: '0',
-            width: '0',
-            // Video ID from the link "9o0WLOJCHvk"
-            videoId: '9o0WLOJCHvk',
+            height: '100%',
+            width: '100%',
+            // Video ID defaults to the provided track
+            videoId: 'cggalVmXlZA',
+            // Load a specific playlist
             playerVars: {
                 'autoplay': 0,
                 'controls': 0,
-                // Loop the video
                 'loop': 1,
-                // For looping a single video, the playlist parameter must be set to the video ID
-                'playlist': '9o0WLOJCHvk'
+                // Commas separated list of video IDs
+                'playlist': 'cggalVmXlZA,9o0WLOJCHvk,QOaScWimga8'
             },
             events: {
-                'onReady': onPlayerReady
+                'onReady': onPlayerReady,
+                'onStateChange': onPlayerStateChange
             }
         });
     };
+
+    // Start player automatically after 5 seconds
+    setTimeout(() => {
+        if (!isPlaying) {
+            if (isPlayerReady && window.ytPlayer) {
+                const modal = document.getElementById('music-player-modal');
+                // Only click if it's currently hidden so we don't accidentally close an already open modal
+                if (modal && modal.classList.contains('hidden') && musicBtn) {
+                    musicBtn.click();
+                } else {
+                    window.ytPlayer.playVideo();
+                }
+            } else {
+                playPending = true;
+            }
+        }
+    }, 5000);
 
     // Load the YouTube Iframe API asynchronously
     const tag = document.createElement('script');
@@ -341,36 +361,84 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    function onPlayerStateChange(event) {
+        const playPauseBtn = document.getElementById('btn-play-pause-track');
+        if (event.data == YT.PlayerState.PLAYING) {
+            isPlaying = true;
+            document.body.classList.add('music-active');
+            if (musicBtn) musicBtn.classList.add('active-music');
+            if (playPauseBtn) playPauseBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"></path></svg>';
+        } else if (event.data == YT.PlayerState.PAUSED || event.data == YT.PlayerState.ENDED) {
+            isPlaying = false;
+            document.body.classList.remove('music-active');
+            const modal = document.getElementById('music-player-modal');
+            if (modal && modal.classList.contains('hidden') && musicBtn) {
+                musicBtn.classList.remove('active-music');
+            }
+            if (playPauseBtn) playPauseBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg>';
+        }
+    }
+
+    const musicPlayerModal = document.getElementById('music-player-modal');
+    const closeMusicPlayerBtn = document.getElementById('close-music-player-btn');
+    const playPauseBtn = document.getElementById('btn-play-pause-track');
+    const prevTrackBtn = document.getElementById('btn-prev-track');
+    const nextTrackBtn = document.getElementById('btn-next-track');
+
+    if (playPauseBtn) {
+        playPauseBtn.addEventListener('click', () => {
+            if (isPlaying) {
+                window.ytPlayer.pauseVideo();
+            } else {
+                window.ytPlayer.playVideo();
+            }
+        });
+    }
+
+    if (prevTrackBtn) {
+        prevTrackBtn.addEventListener('click', () => {
+             window.ytPlayer.previousVideo();
+        });
+    }
+
+    if (nextTrackBtn) {
+        nextTrackBtn.addEventListener('click', () => {
+             window.ytPlayer.nextVideo();
+        });
+    }
+
     if (musicBtn) {
         musicBtn.addEventListener('click', () => {
             if (!isPlayerReady || !window.ytPlayer) {
                 // Silently queue the request instead of throwing an annoying alert
                 playPending = true;
-                // Give a subtle indication if possible, or just wait
                 return;
             }
 
-            if (isPlaying) {
-                window.ytPlayer.pauseVideo();
-                isPlaying = false;
+            if (musicPlayerModal) {
+                const isHidden = musicPlayerModal.classList.contains('hidden');
+                if (isHidden) {
+                    musicPlayerModal.classList.remove('hidden');
+                    window.ytPlayer.playVideo();
+                    musicBtn.classList.add('active-music');
+                } else {
+                    musicPlayerModal.classList.add('hidden');
+                    // Do not pause the video when closing the modal, just hide UI
+                    if (!isPlaying) {
+                        musicBtn.classList.remove('active-music');
+                    }
+                }
+            }
+        });
+    }
+
+    if (closeMusicPlayerBtn) {
+        closeMusicPlayerBtn.addEventListener('click', () => {
+            if (musicPlayerModal) {
+                musicPlayerModal.classList.add('hidden');
+            }
+            if (!isPlaying && musicBtn) {
                 musicBtn.classList.remove('active-music');
-                document.body.classList.remove('music-active');
-                // Change icon back to Play shape/Default music icon
-                musicIcon.innerHTML = `
-                    <path d="M9 18V5L21 3V16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                    <path d="M6 21C7.65685 21 9 19.6569 9 18C9 16.3431 7.65685 15 6 15C4.34315 15 3 16.3431 3 18C3 19.6569 4.34315 21 6 21Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                    <path d="M18 19C19.6569 19 21 17.6569 21 16C21 14.3431 19.6569 13 18 13C16.3431 13 15 14.3431 15 16C15 17.6569 16.3431 19 18 19Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                `;
-            } else {
-                window.ytPlayer.playVideo();
-                isPlaying = true;
-                musicBtn.classList.add('active-music');
-                document.body.classList.add('music-active');
-                // Change icon to Stop/Pause shape to indicate it can be clicked to stop
-                musicIcon.innerHTML = `
-                    <rect x="6" y="4" width="4" height="16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <rect x="14" y="4" width="4" height="16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                `;
             }
         });
     }
