@@ -1665,12 +1665,13 @@ body.music-active .core {
 
 .music-player-body {
     width: 100%;
-    aspect-ratio: 16 / 9;
+    aspect-ratio: var(--player-aspect, 16 / 9);
     background: #000;
     border-radius: 8px;
     overflow: hidden;
     position: relative;
     box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+    transition: aspect-ratio 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .music-player-body iframe {

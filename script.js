@@ -327,6 +327,33 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     };
+    
+    // Array of vertical video IDs (Shorts)
+    const verticalVideoIDs = ['cggalVmXlZA'];
+    
+    function updatePlayerOrientation() {
+        if (!window.ytPlayer || !window.ytPlayer.getVideoData) return;
+        
+        try {
+            const videoData = window.ytPlayer.getVideoData();
+            const currentVidId = videoData.video_id;
+            const playerBody = document.querySelector('.music-player-body');
+            const modal = document.getElementById('music-player-modal');
+            
+            if (playerBody && currentVidId) {
+                if (verticalVideoIDs.includes(currentVidId)) {
+                    playerBody.style.setProperty('--player-aspect', '9 / 16');
+                    if(modal && window.innerWidth > 600) modal.style.width = '240px'; 
+                } else {
+                    playerBody.style.setProperty('--player-aspect', '16 / 9');
+                    // Reset to default standard width for landscape
+                    if(modal) modal.style.width = window.innerWidth > 600 ? '320px' : 'auto'; 
+                }
+            }
+        } catch (e) {
+            console.error('Error fetching video data', e);
+        }
+    }
 
     // Start player automatically after 5 seconds
     setTimeout(() => {
@@ -368,6 +395,7 @@ document.addEventListener('DOMContentLoaded', () => {
             document.body.classList.add('music-active');
             if (musicBtn) musicBtn.classList.add('active-music');
             if (playPauseBtn) playPauseBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"></path></svg>';
+            updatePlayerOrientation();
         } else if (event.data == YT.PlayerState.PAUSED || event.data == YT.PlayerState.ENDED) {
             isPlaying = false;
             document.body.classList.remove('music-active');
