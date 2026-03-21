@@ -527,22 +527,56 @@
                 </button>
             </div>
             <div class="changelog-version-tab">
-                <span class="cl-tab-label">v1.3</span>
+                <span class="cl-tab-label">v1.4</span>
                 <span class="cl-tab-separator">|</span>
                 <span class="cl-tab-status">Latest Stable Release</span>
             </div>
             <div class="changelog-entries" id="changelog-entries">
-
+                
                 <div class="cl-entry">
                     <button class="cl-header" onclick="toggleChangelog(this)">
-                        <span class="cl-version">v1.3</span>
-                        <span class="cl-date">2026-03-16</span>
+                        <span class="cl-version">v1.4</span>
+                        <span class="cl-date">2026-03-20</span>
                         <span class="cl-badge latest">LATEST</span>
                         <svg class="cl-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <polyline points="6 9 12 15 18 9"></polyline>
                         </svg>
                     </button>
                     <div class="cl-body open">
+                        <div class="cl-group">
+                            <span class="cl-tag changed">Changed</span>
+                            <ul>
+                                <li>Configured YouTube background player to use a custom vertical AI-generated Short as the primary Lead Video, flowing seamlessly into a secondary ambient playlist.</li>
+                                <li>Adjusted the player initialization timer to 7 seconds, ensuring a cleaner visual sequence for the hero section before playback.</li>
+                                <li>Overhauled the background music modal to dynamically detect the playing video's aspect ratio and shape-shift seamlessly between vertical (9:16) and standard landscape (16:9).</li>
+                                <li>Heavily updated mobile UX logic to enforce strict widths (e.g. 180px for vertical orientation, 260px for landscape orientation) to ensure the floating modal never intrudes heavily upon mobile viewports.</li>
+                            </ul>
+                        </div>
+                        <div class="cl-group">
+                            <span class="cl-tag added">Added</span>
+                            <ul>
+                                <li>Added a dynamic 5-second Neon Cyan blinking pulse animation to the play/pause button when the player autostarts, drawing user focus to bypass browser audio limitations.</li>
+                                <li>Added a contextual kill-switch listener that instantly halts the blinking pulse the moment a user clicks on the play button.</li>
+                            </ul>
+                        </div>
+                        <div class="cl-group">
+                            <span class="cl-tag fixed">Fixed</span>
+                            <ul>
+                                <li>Re-engineered the underlying autoplay start mechanism away from simulated clicks to direct YouTube API calls, vastly improving the reliability of the player pop-up execution regardless of browser audio policies.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cl-entry">
+                    <button class="cl-header" onclick="toggleChangelog(this)">
+                        <span class="cl-version">v1.3</span>
+                        <span class="cl-date">2026-03-16</span>
+                        <svg class="cl-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </button>
+                    <div class="cl-body">
                         <div class="cl-group">
                             <span class="cl-tag changed">Changed</span>
                             <ul>

@@ -136,17 +136,6 @@ All notable changes to this project will be documented in this file.
 ### Fixed
 - Corrected the portfolio's contact form triggering keywords inside the chat widgets to prevent misfiring of the "About" command.
 
-## [v1.3] - 2026-03-16
-### Changed
-- Comprehensively overhauled the PlanFlow, ArtVault, and BookNest applications with premium UI/UX enhancements.
-- Re-engineered PlanFlow to feature a new frosted glassmorphism dashboard, dynamic task interactions, streak tracking, and interactive modals.
-- Transformed ArtVault into an elegant digital museum experience with real high-resolution artwork, detailed history views, and a curated masonry gallery.
-- Upgraded BookNest into a modern digital library showcasing accurate book cover images, downloadable PDFs, rich typography, and reading progress indicators.
-- Ensured consistent premium styling across all apps using custom CSS variables, refined dark mode palettes, and dynamic hover effects.
-
-### Fixed
-- Fixed URL encoding routing issue preventing the Chronos Elegance watch app from loading correctly on cloud deployments.
-
 ## [v1.2] - 2026-03-14
 ### Changed
 - Overhauled the Applications Gallery, Games Gallery, and AI Apps Gallery modal UI with a premium card design system.
@@ -170,5 +159,30 @@ All notable changes to this project will be documented in this file.
   - Repositioned the date window from overlapping the "3" numeral to the 4–5 o'clock region with a solid bordered frame.
   - Pulled hour numerals inward to sit cleanly between the tick ring and clock center.
 - Fixed the Chronos Elegance layout being clipped: removed `overflow-hidden` from the app shell, removed `flex-1` from the main clock container, and reduced clock size to `w-80/h-80` on medium screens so controls are always fully visible without scrolling.
+
+## [v1.3] - 2026-03-16
+### Changed
+- Comprehensively overhauled the PlanFlow, ArtVault, and BookNest applications with premium UI/UX enhancements.
+- Re-engineered PlanFlow to feature a new frosted glassmorphism dashboard, dynamic task interactions, streak tracking, and interactive modals.
+- Transformed ArtVault into an elegant digital museum experience with real high-resolution artwork, detailed history views, and a curated masonry gallery.
+- Upgraded BookNest into a modern digital library showcasing accurate book cover images, downloadable PDFs, rich typography, and reading progress indicators.
+- Ensured consistent premium styling across all apps using custom CSS variables, refined dark mode palettes, and dynamic hover effects.
+
+### Fixed
+- Fixed URL encoding routing issue preventing the Chronos Elegance watch app from loading correctly on cloud deployments.
+
+## [v1.4] - 2026-03-20
+### Added
+- Added a dynamic 5-second Neon Cyan blinking pulse animation to the play/pause button when the player autostarts, drawing user focus to bypass browser audio limitations.
+- Added a contextual kill-switch listener that instantly halts the blinking pulse the moment a user clicks on the play button.
+
+### Changed
+- Configured YouTube background player to use a custom vertical AI-generated Short as the primary Lead Video, flowing seamlessly into a secondary ambient playlist.
+- Adjusted the player initialization timer to 7 seconds, ensuring a cleaner visual sequence for the hero section before playback.
+- Overhauled the background music modal to dynamically detect the playing video's aspect ratio and shape-shift seamlessly between vertical (9:16) and standard landscape (16:9).
+- Heavily updated mobile UX logic to enforce strict widths (180px for vertical, 260px for landscape) to ensure the floating modal never intrudes heavily upon mobile viewports.
+
+### Fixed
+- Re-engineered the underlying autoplay start mechanism away from simulated clicks to direct YouTube API calls, vastly improving the reliability of the player pop-up execution regardless of browser audio policies.
 
 *Initialized port... System ready for deployment.*
