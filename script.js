@@ -365,11 +365,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!isPlaying) {
             if (isPlayerReady && window.ytPlayer) {
                 const modal = document.getElementById('music-player-modal');
-                // Only click if it's currently hidden so we don't accidentally close an already open modal
-                if (modal && modal.classList.contains('hidden') && musicBtn) {
-                    musicBtn.click();
-                } else {
-                    window.ytPlayer.playVideo();
+                if (modal && modal.classList.contains('hidden')) {
+                    modal.classList.remove('hidden');
                 }
                 
                 // Make the modal's play button blink for 5 seconds when it autostarts
@@ -377,9 +374,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (playBtnInModal) {
                     playBtnInModal.classList.add('blink-action');
                     setTimeout(() => {
-                        playBtnInModal.classList.remove('blink-action');
+                        if (playBtnInModal) playBtnInModal.classList.remove('blink-action');
                     }, 5000);
                 }
+                
+                // Direct play call as originally tested
+                window.ytPlayer.playVideo();
             } else {
                 playPending = true;
             }
