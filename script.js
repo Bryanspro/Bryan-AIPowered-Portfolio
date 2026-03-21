@@ -343,11 +343,16 @@ document.addEventListener('DOMContentLoaded', () => {
             if (playerBody && currentVidId) {
                 if (verticalVideoIDs.includes(currentVidId)) {
                     playerBody.style.setProperty('--player-aspect', '9 / 16');
-                    if(modal && window.innerWidth > 600) modal.style.width = '240px'; 
+                    if (modal) {
+                        modal.classList.add('vertical-mode');
+                        modal.style.width = window.innerWidth > 600 ? '240px' : ''; 
+                    }
                 } else {
                     playerBody.style.setProperty('--player-aspect', '16 / 9');
-                    // Reset to default standard width for landscape
-                    if(modal) modal.style.width = window.innerWidth > 600 ? '320px' : 'auto'; 
+                    if (modal) {
+                        modal.classList.remove('vertical-mode');
+                        modal.style.width = window.innerWidth > 600 ? '320px' : ''; 
+                    }
                 }
             }
         } catch (e) {

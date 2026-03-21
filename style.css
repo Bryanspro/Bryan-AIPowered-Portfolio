@@ -1740,4 +1740,8 @@ body.music-active .core {
         left: 1rem;
         width: auto;
     }
+    .music-player-modal.vertical-mode {
+        left: auto; /* Don't stretch across the screen */
+        width: 180px; /* Constrain width so it doesn't get infinitely tall */
+    }
 }
