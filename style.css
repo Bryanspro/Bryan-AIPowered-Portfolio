@@ -1733,12 +1733,21 @@ body.music-active .core {
     border-color: var(--accent-cyan);
 }
 
+@keyframes flash-glow {
+    0%, 100% { box-shadow: 0 0 5px var(--glow-cyan); border-color: rgba(255, 255, 255, 0.05); }
+    50% { box-shadow: 0 0 25px var(--glow-cyan); border-color: var(--accent-cyan); }
+}
+
+.blink-action {
+    animation: flash-glow 1s ease-in-out 5; /* 5 seconds total (1s * 5) */
+}
+
 @media (max-width: 600px) {
     .music-player-modal {
         bottom: 80px; /* Above the mobile nav */
         right: 1rem;
-        left: 1rem;
-        width: auto;
+        left: auto;
+        width: 260px; /* Constrained floating width for 16:9 */
     }
     .music-player-modal.vertical-mode {
         left: auto; /* Don't stretch across the screen */

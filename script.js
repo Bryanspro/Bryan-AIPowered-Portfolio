@@ -360,7 +360,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Start player automatically after 5 seconds
+    // Start player automatically after 7 seconds
     setTimeout(() => {
         if (!isPlaying) {
             if (isPlayerReady && window.ytPlayer) {
@@ -371,11 +371,20 @@ document.addEventListener('DOMContentLoaded', () => {
                 } else {
                     window.ytPlayer.playVideo();
                 }
+                
+                // Make the modal's play button blink for 5 seconds when it autostarts
+                const playBtnInModal = document.getElementById('btn-play-pause-track');
+                if (playBtnInModal) {
+                    playBtnInModal.classList.add('blink-action');
+                    setTimeout(() => {
+                        playBtnInModal.classList.remove('blink-action');
+                    }, 5000);
+                }
             } else {
                 playPending = true;
             }
         }
-    }, 5000);
+    }, 7000);
 
     // Load the YouTube Iframe API asynchronously
     const tag = document.createElement('script');
