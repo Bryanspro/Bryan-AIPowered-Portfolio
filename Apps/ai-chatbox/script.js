@@ -4,9 +4,7 @@
    ============================================ */
 
 // ─── Configuration ─────────────────────────────────
-const GEMINI_API_KEY = 'AIzaSyDXjrvW4TtT6gpUYT5Ig5ovn0M2qOyK4Uw';
-const GEMINI_MODEL = 'gemini-2.0-flash';
-const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${GEMINI_API_KEY}`;
+const GEMINI_URL = '/api/chat';
 
 const SYSTEM_PROMPT = `Role: You are the official AI Resume Assistant for Bryan Marquez, a Software Engineer transitioning into AI and Python Development. Your goal is to enthusiastically and professionally answer questions from IT recruiters about Bryan's experience, skills, and background.
 
@@ -293,11 +291,11 @@ async function handleSend() {
 
         if (!response.ok) {
             const errData = await response.json().catch(() => ({}));
-            throw new Error(`Gemini API ${response.status}: ${errData.error?.message || 'Unknown error'}`);
+            throw new Error(`API ${response.status}: ${errData.error?.message || 'Unknown error'}`);
         }
 
         const data = await response.json();
-        const reply = data.candidates?.[0]?.content?.parts?.[0]?.text
+        const reply = data.reply
             || "I received your message but couldn't generate a response. Try again!";
 
         // Track assistant reply in conversation history

@@ -1,6 +1,5 @@
 // ─── AI Mood Journal — Script ───
-const GEMINI_KEY = 'AIzaSyDXjrvW4TtT6gpUYT5Ig5ovn0M2qOyK4Uw';
-const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_KEY}`;
+const GEMINI_URL = '/api/chat';
 
 const STORAGE_KEY = 'bryan-ai-mood-journal';
 
@@ -67,7 +66,7 @@ Journal entry: "${text}"`;
         if (!response.ok) throw new Error(`API ${response.status}`);
 
         const data = await response.json();
-        const reply = data.candidates?.[0]?.content?.parts?.[0]?.text || '';
+        const reply = data.reply || '';
 
         // Extract mood from AI response
         const moodMatch = reply.match(/mood:\s*(great|good|neutral|sad|stressed)/i);

@@ -2,8 +2,8 @@ import os
 import google.generativeai as genai
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel
-from pydantic import EmailStr
+from pydantic import BaseModel, EmailStr
+from typing import Optional, List, Any
 from fastapi_mail import FastMail, MessageSchema, ConnectionConfig, MessageType
 import sqlite3
 try:
@@ -39,7 +39,10 @@ app.add_middleware(
 
 # 4. Modelo de Datos
 class ChatRequest(BaseModel):
-    message: str
+    message: Optional[str] = None
+    contents: Optional[List[Any]] = None
+    system_instruction: Optional[Any] = None
+    generationConfig: Optional[Any] = None
 
 class ContactRequest(BaseModel):
     name: str
@@ -235,10 +238,30 @@ async def chat_with_bryan_bot(request: ChatRequest):
     if not GEMINI_API_KEY:
         raise HTTPException(status_code=500, detail="API key is not configured. Please add GEMINI_API_KEY to environment variables.")
     try:
-        # Combinamos tu cerebro de instrucciones con la pregunta del reclutador
-        prompt_completo = f"{SYSTEM_PROMPT}\n\nUser Question: {request.message}"
+        # Determine system instruction
+        sys_instr = request.system_instruction
+        if sys_instr:
+            if isinstance(sys_instr, dict) and 'parts' in sys_instr:
+                sys_instr = sys_instr['parts']
+        else:
+            sys_instr = SYSTEM_PROMPT
+
+        # Initialize model with system instruction if provided
+        # We create a new model instance to use the dynamic system instruction
+        local_model = genai.GenerativeModel('gemini-2.0-flash', system_instruction=sys_instr)
+
+        # Determine contents
+        contents = request.contents
+        if not contents:
+            if request.message:
+                contents = request.message
+            else:
+                raise HTTPException(status_code=400, detail="Either 'message' or 'contents' must be provided.")
+
+        # Determine generation config
+        gen_config = request.generationConfig
         
-        response = model.generate_content(prompt_completo)
+        response = local_model.generate_content(contents, generation_config=gen_config)
         
         return {"reply": response.text}
         
