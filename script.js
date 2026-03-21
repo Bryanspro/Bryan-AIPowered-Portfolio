@@ -429,6 +429,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (playPauseBtn) {
         playPauseBtn.addEventListener('click', () => {
+            playPauseBtn.classList.remove('blink-action');
             if (isPlaying) {
                 window.ytPlayer.pauseVideo();
             } else {
