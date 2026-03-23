@@ -20,7 +20,7 @@ POSTGRES_URL = os.getenv("POSTGRES_URL") or os.getenv("DATABASE_URL")
 def print_messages(rows, source_label):
     """Pretty-print a list of message rows."""
     if not rows:
-        print(f"  No messages found.\n")
+        print("  No messages found.\n")
         return
     print(f"  {len(rows)} message(s)\n")
     for row in rows:
