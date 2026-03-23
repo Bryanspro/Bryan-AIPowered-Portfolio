@@ -1,7 +1,6 @@
 import sqlite3
 import os
 import sys
-from datetime import datetime
 
 # Load .env for Postgres URL
 from dotenv import load_dotenv
