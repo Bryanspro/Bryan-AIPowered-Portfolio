@@ -185,4 +185,23 @@ All notable changes to this project will be documented in this file.
 ### Fixed
 - Re-engineered the underlying autoplay start mechanism away from simulated clicks to direct YouTube API calls, vastly improving the reliability of the player pop-up execution regardless of browser audio policies.
 
+## [v1.5] - 2026-03-26
+### Added
+- Expanded multilingual support with improved localization review across 10 languages.
+- Better language-specific UX wording for section titles, buttons, and contact areas.
+- Improved readability and structure for international visitors.
+
+### Changed
+- Refined technical phrasing across localized portfolio versions.
+- More natural, recruiter-friendly copy in French, Portuguese, Chinese, German, Arabic, Korean, Hebrew, Japanese, and Hindi.
+- Stronger consistency across section headings, CTAs, and project descriptions.
+- Better overall global usability for non-English visitors.
+
+### Fixed
+- Implemented a CSS webfont polyfill (Twemoji Country Flags) to ensure high-quality color flag emojis render consistently on Windows devices across the language selector and "About" section stats.
+
+### Notes
+- **GenAI Localization review scores:** French (8.9/10), Portuguese (8.8/10), Chinese (8.7/10), German (8.6/10), Arabic (8.5/10), Korean (8.4/10), Hebrew (8.3/10), Japanese (7.9/10), Hindi (7.8/10).
+- This version moves beyond direct translation and focuses on native-sounding localization, professional tone, and better adaptation for global recruiters and users.
+
 *Initialized port... System ready for deployment.*

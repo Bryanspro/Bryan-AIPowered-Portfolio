@@ -230,16 +230,16 @@ document.addEventListener('DOMContentLoaded', () => {
             // For non-English, use a custom pattern if available, else default
             // Convention: locales can define a base typewriter text; we append version
             const baseTypewriters = {
-                es: `Inicializando Portafolio de Desarrollador IA ${latestVersion}`,
+                es: `Inicializando Portafolio de Desarrollo IA ${latestVersion}`,
                 pt: `Inicializando Portfólio de Desenvolvedor IA ${latestVersion}`,
                 de: `Initialisierung des KI-Entwicklerportfolios ${latestVersion}`,
-                fr: `Initialisation du Portfolio Développeur IA ${latestVersion}`,
-                ja: `AI開発者ポートフォリオ初期化中 ${latestVersion}`,
+                fr: `Portfolio Développeur IA — Initialisation ${latestVersion}`,
+                ja: `AI エンジニアポートフォリオの初期化中 ${latestVersion}`,
                 ko: `AI 개발자 포트폴리오 초기화 중 ${latestVersion}`,
-                zh: `正在初始化AI开发者作品集 ${latestVersion}`,
-                ar: `جارٍ تهيئة محفظة مطوّر الذكاء الاصطناعي ${latestVersion}`,
+                zh: `正在初始化 AI 开发者作品集 ${latestVersion}`,
+                ar: `جاري تهيئة ملف مطور الذكاء الاصطناعي ${latestVersion}`,
                 hi: `AI डेवलपर पोर्टफोलियो प्रारंभ हो रहा है ${latestVersion}`,
-                he: `מאתחל תיק מפתח AI ${latestVersion}`
+                he: `מאתחל תיק עבודות של מפתח בינה מלאכותית ${latestVersion}`
             };
             typewriterText = baseTypewriters[lang] || typewriterKey;
         }

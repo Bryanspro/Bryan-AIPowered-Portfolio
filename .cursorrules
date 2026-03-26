@@ -1,0 +1,1 @@
+When instructed to update the portfolio changelog, ALWAYS update BOTH the `CHANGELOG.md` file AND the HTML Changelog Modal structure located within `index.html`. Do not update one without the other.
