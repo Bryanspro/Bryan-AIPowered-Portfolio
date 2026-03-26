@@ -658,6 +658,7 @@ body.music-active .core {
     font-weight: 700;
     color: var(--accent-cyan);
     text-shadow: 0 0 10px var(--glow-cyan);
+    font-family: 'Twemoji Country Flags', var(--font-main), 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji', emoji;
 }
 
 .stat-label {
