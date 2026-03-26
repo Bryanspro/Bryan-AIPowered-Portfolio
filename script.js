@@ -3,238 +3,273 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('year').textContent = new Date().getFullYear();
 
     // ========================================================
-    // BILINGUAL TRANSLATION SYSTEM
+    // MULTILINGUAL TRANSLATION SYSTEM
     // ========================================================
-    const portfolioDict = {
-        en: {
-            // Nav
-            navAbout: 'About',
-            navSkills: 'Skills',
-            navExperience: 'Experience',
-            navProjects: 'Projects',
-            navChangelog: 'Changelog',
-            navContact: 'Contact',
+    const SUPPORTED_LANGUAGES = [
+        { code: 'en', name: 'English', nativeName: 'English', flag: '🇺🇸', dir: 'ltr' },
+        { code: 'es', name: 'Spanish', nativeName: 'Español', flag: '🇪🇸', dir: 'ltr' },
+        { code: 'pt', name: 'Portuguese', nativeName: 'Português', flag: '🇧🇷', dir: 'ltr' },
+        { code: 'de', name: 'German', nativeName: 'Deutsch', flag: '🇩🇪', dir: 'ltr' },
+        { code: 'fr', name: 'French', nativeName: 'Français', flag: '🇫🇷', dir: 'ltr' },
+        { code: 'ja', name: 'Japanese', nativeName: '日本語', flag: '🇯🇵', dir: 'ltr' },
+        { code: 'ko', name: 'Korean', nativeName: '한국어', flag: '🇰🇷', dir: 'ltr' },
+        { code: 'zh', name: 'Chinese', nativeName: '中文', flag: '🇨🇳', dir: 'ltr' },
+        { code: 'ar', name: 'Arabic', nativeName: 'العربية', flag: '🇸🇦', dir: 'rtl' },
+        { code: 'hi', name: 'Hindi', nativeName: 'हिन्दी', flag: '🇮🇳', dir: 'ltr' },
+        { code: 'he', name: 'Hebrew', nativeName: 'עברית', flag: '🇮🇱', dir: 'rtl' }
+    ];
 
-            // Hero
-            heroSubtitle: 'System Online: Wait for input...',
-            typewriter: 'Initializing AI Developer Portfolio v1.3',
-            heroDesc: "Hello World! I'm Bryan, a Software Engineer building modern, aesthetically refined software solutions powered by AI. I focus on transforming complex ideas into scalable, intelligent products with real-world impact.",
-            ctaView: 'View Systems',
-            ctaContact: 'Initialize Contact',
-            ctaChangelog: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16" style="vertical-align: -2px; margin-right: 4px;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg> Changelog',
+    const translationCache = {};
+    let currentPortfolioLang = 'en';
+    let currentTranslations = null;
 
-            // About
-            aboutTitle: 'Core Directives <span class="accent">// About</span>',
-            aboutP1: "My career as a Software Engineer is built on over 12 years of experience managing complex databases and automating critical workflows. After leading technical teams and driving operational success as a Technical Lead, I relocated to the United States to leverage my expertise in a new, high-growth environment. I've actively validated my journey by securing my official US High School Diploma and certifications, ensuring a seamless integration into the domestic tech market.",
-            aboutP2: "Today, I specialize in Artificial Intelligence and <strong>intelligent systems development</strong>, leveraging a versatile stack that includes <strong>Python, PHP, SQL, JavaScript, HTML/CSS, and WordPress</strong> to build robust digital architectures. By integrating <strong>Generative AI and LLMs</strong> with my engineering foundation, I create smart, automated systems that are both efficient and accessible. My goal is to transform complex challenges into intelligent solutions with real-world impact.",
-            statYears: 'Years Experience',
-            statLanguages: 'Fluent Languages',
-            statProjects: 'Projects Implemented',
+    // Normalize browser locale to supported code (e.g. en-US -> en, pt-BR -> pt)
+    function normalizeLocale(locale) {
+        if (!locale) return null;
+        const base = locale.split('-')[0].toLowerCase();
+        return SUPPORTED_LANGUAGES.find(l => l.code === base) ? base : null;
+    }
 
-            // Skills
-            skillsTitle: 'Engineering Matrix <span class="accent">// Skills</span>',
-            skillCat1: 'Languages & Systems',
-            skillCat1Item3: 'SQL & Database Admin',
-            skillCat1Item4: 'System Administration',
-            skillCat2: 'AI & Automation',
-            skillCat2Item1: 'Generative AI (LLMs)',
-            skillCat2Item2: 'AI Engineering',
-            skillCat2Item3: 'Prompt Engineering',
-            skillCat2Item4: 'AI Agent Process Automation',
-            skillCat3: 'Leadership & Skills',
-            skillCat3Item1: 'Project Management',
-            skillCat3Item2: 'Team Leadership',
-            skillCat3Item3: 'Strategic Problem Solving',
-            skillCat3Item4: 'Cross-Cultural Comm (EN/ES)',
-
-            // Experience
-            expTitle: 'Execution Timeline <span class="accent">// Experience</span>',
-            expDate1: '2024 - 2025',
-            expRole1: 'Customer Service & POS Associate',
-            expDesc1: 'First professional experience in the US. Operated and troubleshot high-volume Point of Sale (POS) hardware and software. Ensured continuous, accurate daily transactions and delivered bilingual customer support in a fast-paced environment.',
-            expDate2: '2015 - 2022',
-            expRole2: 'Technical Lead & IT Manager',
-            expDesc2: 'Led the development and maintenance of core web applications and databases. Automated workflows via custom scripts and successfully achieved >90% of business goals while navigating a severe national and industry crisis.',
-            expDate3: '2018 - 2019',
-            expRole3: 'Web Developer',
-            expDesc3: 'Collaborated within an agile team to engineer a comprehensive website guiding visitors through the park\'s local flora and fauna. Programmed responsive and interactive interfaces utilizing WordPress, HTML, CSS, JavaScript, and MySQL.',
-
-            // Projects
-            projTitle: 'Compiled Outputs <span class="accent">// Projects</span>',
-            proj1Title: 'Designer Templates Showcase',
-            proj1Desc: 'A curated showcase of portfolio templates for product designers, included to highlight the design approaches, UX presentation styles, and visual structures I can customize and adapt.',
-            proj2Title: 'Interactive Games',
-            proj2Desc: 'A series of interactive game development projects exploring mechanics, system design, and real-time gameplay experiences.',
-            proj3Title: 'Apps Showcase',
-            proj3Desc: 'A collection of mobile-first modular web applications exploring complex UI patterns and logic.',
-            proj4Title: 'AI-Powered Applications',
-            proj4Desc: 'A collection of intelligent applications that integrate artificial intelligence to enhance user interaction, automate tasks, and deliver smarter digital experiences.',
-            viewSource: 'View Source ->',
-            viewGamesGallery: 'Open Games Gallery ->',
-            viewAppsGallery: 'Open Apps Gallery ->',
-            viewAIApp: 'Open AI Apps Gallery ->',
-            aiAppViewerTitle: 'AI-Powered Applications',
-
-            // Contact
-            contactTitle: 'Open Port <span class="accent">// Contact</span>',
-            contactDesc: "Interested in building intelligent systems<br>or solving complex tech challenges?<br><br>Send a signal my way and let's start the conversation &mdash; response time: within 24 hours.",
-            labelName: 'Your Name',
-            labelEmail: 'Your Email',
-            labelMessage: 'Message Payload',
-            contactSubmit: 'Transmit Data',
-
-            // Footer
-            footer: `&copy; <span id="year">${new Date().getFullYear()}</span> Bryan Marquez &mdash; Software Engineer &middot; All rights reserved.`,
-
-            // Viewer
-            viewerTitle: 'Template Gallery',
-            gameViewerTitle: 'Interactive Games Gallery',
-            appViewerTitle: 'Applications Gallery',
-            musicPlayerTitle: 'Bryan Neon Player',
-            viewerBackBtn: '&larr; Back to Selection'
-        },
-        es: {
-            // Nav
-            navAbout: 'Acerca',
-            navSkills: 'Habilidades',
-            navExperience: 'Experiencia',
-            navProjects: 'Proyectos',
-            navChangelog: 'Registro',
-            navContact: 'Contacto',
-
-            // Hero
-            heroSubtitle: 'Sistema en línea: Esperando entrada...',
-            typewriter: 'Inicializando Portafolio de Desarrollador IA v1.3',
-            heroDesc: '¡Hola Mundo! Soy Bryan, un Ingeniero de Software construyendo soluciones de software modernas y estéticamente refinadas impulsadas por IA. Me enfoco en transformar ideas complejas en productos escalables e inteligentes con impacto en el mundo real.',
-            ctaView: 'Ver Sistemas',
-            ctaContact: 'Iniciar Contacto',
-            ctaChangelog: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16" style="vertical-align: -2px; margin-right: 4px;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg> Registro',
-
-            // About
-            aboutTitle: 'Directivas Base <span class="accent">// Acerca</span>',
-            aboutP1: "Mi carrera como Ingeniero de Software se basa en más de 12 años de experiencia gestionando bases de datos complejas y automatizando flujos de trabajo críticos. Después de liderar equipos técnicos y lograr el éxito operativo como Líder Técnico, me mudé a los Estados Unidos para aprovechar mi experiencia en un nuevo entorno de alto crecimiento. He validado activamente mi trayectoria obteniendo mi diploma oficial de High School de EE. UU. y certificaciones, asegurando una integración perfecta en el mercado tecnológico nacional.",
-            aboutP2: "Hoy, me especializo en Inteligencia Artificial y <strong>desarrollo de sistemas inteligentes</strong>, aprovechando un stack versátil que incluye <strong>Python, PHP, SQL, JavaScript, HTML/CSS y WordPress</strong> para construir arquitecturas digitales robustas. Al integrar <strong>IA Generativa y LLMs</strong> con mi base de ingeniería, creo sistemas inteligentes y automatizados que son a la vez eficientes y accesibles. Mi objetivo es transformar desafíos complejos en soluciones inteligentes con impacto en el mundo real.",
-            statYears: 'Años de Experiencia',
-            statLanguages: 'Idiomas Fluidos',
-            statProjects: 'Proyectos Implementados',
-
-            // Skills
-            skillsTitle: 'Matriz de Ingeniería <span class="accent">// Habilidades</span>',
-            skillCat1: 'Lenguajes y Sistemas',
-            skillCat1Item3: 'SQL y Admin. de Base de Datos',
-            skillCat1Item4: 'Administración de Sistemas',
-            skillCat2: 'IA y Automatización',
-            skillCat2Item1: 'IA Generativa (LLMs)',
-            skillCat2Item2: 'Ingeniería de IA',
-            skillCat2Item3: 'Ingeniería de Prompts',
-            skillCat2Item4: 'Automatización con Agentes IA',
-            skillCat3: 'Liderazgo y Habilidades',
-            skillCat3Item1: 'Gestión de Proyectos',
-            skillCat3Item2: 'Liderazgo de Equipos',
-            skillCat3Item3: 'Resoluciones Estratégicas',
-            skillCat3Item4: 'Com. Intercultural (EN/ES)',
-
-            // Experience
-            expTitle: 'Línea de Tiempo de Ejecución <span class="accent">// Experiencia</span>',
-            expDate1: '2024 - 2025',
-            expRole1: 'Asociado de Servicio al Cliente y POS',
-            expDesc1: 'Primera experiencia profesional en EE. UU. Operé y resolví problemas de hardware y software de Punto de Venta (POS) de alto volumen. Me aseguré de realizar transacciones diarias continuas y precisas, y brindé atención al cliente bilingüe en un entorno de ritmo rápido.',
-            expDate2: '2015 - 2022',
-            expRole2: 'Líder Técnico y Gerente de TI',
-            expDesc2: 'Lideré el desarrollo y mantenimiento de aplicaciones web centrales y bases de datos. Automaticé flujos de trabajo a través de scripts personalizados y logré con éxito >90% de los objetivos comerciales mientras navegaba por una grave crisis nacional y de la industria.',
-            expDate3: '2018 - 2019',
-            expRole3: 'Desarrollador Web',
-            expDesc3: 'Colaboré dentro de un equipo ágil para diseñar un sitio web integral que guía a los visitantes a través de la flora y fauna local del parque. Programé interfaces responsivas e interactivas utilizando WordPress, HTML, CSS, JavaScript y MySQL.',
-
-            // Projects
-            projTitle: 'Resultados Compilados <span class="accent">// Proyectos</span>',
-            proj1Title: 'Exhibición de Plantillas de Diseño',
-            proj1Desc: 'Una muestra curada de plantillas de portafolio para diseñadores de producto, incluida para destacar los enfoques de diseño, estilos de presentación UX y estructuras visuales que puedo personalizar y adaptar.',
-            proj2Title: 'Juegos Interactivos',
-            proj2Desc: 'Una serie de proyectos de desarrollo de juegos interactivos explorando mecánicas, diseño de sistemas y experiencias de juego en tiempo real.',
-            proj3Title: 'Exhibición de Aplicaciones',
-            proj3Desc: 'Una colección de aplicaciones web modulares (mobile-first) que exploran patrones de UI y lógica complejos.',
-            proj4Title: 'Aplicaciones Impulsadas por IA',
-            proj4Desc: 'Una colección de aplicaciones inteligentes que integran inteligencia artificial para mejorar la interacción del usuario, automatizar tareas y ofrecer experiencias digitales más inteligentes.',
-            viewSource: 'Ver Código ->',
-            viewGamesGallery: 'Abrir Galería de Juegos ->',
-            viewAppsGallery: 'Abrir Galería de Apps ->',
-            viewAIApp: 'Abrir Galería de Apps IA ->',
-            aiAppViewerTitle: 'Aplicaciones Impulsadas por IA',
-
-            // Contact
-            contactTitle: 'Puerto Abierto <span class="accent">// Contacto</span>',
-            contactDesc: "¿Interesado en construir sistemas inteligentes<br>o resolver desafíos tecnológicos complejos?<br><br>Envíame una señal y comencemos la conversación &mdash; tiempo de respuesta: 24 horas.",
-            labelName: 'Tu Nombre',
-            labelEmail: 'Tu Correo',
-            labelMessage: 'Carga Útil del Mensaje',
-            contactSubmit: 'Transmitir Datos',
-
-            // Footer
-            footer: `&copy; <span id="year">${new Date().getFullYear()}</span> Bryan Marquez &mdash; Ingeniero de Software &middot; Todos los derechos reservados.`,
-
-            // Viewer
-            viewerTitle: 'Galería de Plantillas',
-            gameViewerTitle: 'Galería de Juegos Interactivos',
-            appViewerTitle: 'Galería de Aplicaciones',
-            musicPlayerTitle: 'Bryan Neon Player',
-            viewerBackBtn: '&larr; Volver a la Selección'
+    // Detect language: localStorage -> browser -> fallback to 'en'
+    function detectLanguage() {
+        // 1. Check localStorage
+        const saved = localStorage.getItem('portfolio-lang');
+        if (saved && SUPPORTED_LANGUAGES.find(l => l.code === saved)) {
+            return saved;
         }
-    };
+        // 2. Check browser languages
+        const browserLangs = navigator.languages || [navigator.language || navigator.userLanguage || 'en'];
+        for (const bl of browserLangs) {
+            const normalized = normalizeLocale(bl);
+            if (normalized) return normalized;
+        }
+        // 3. Default
+        return 'en';
+    }
 
-    // ========================================================
-    // DYNAMIC VERSION SYNC
-    // ========================================================
-    // Auto-update version number from changelog tab label
-    const versionLabel = document.querySelector('.cl-tab-label');
-    if (versionLabel) {
-        const latestVersion = versionLabel.textContent.trim();
-        // Update translation dictionaries
-        portfolioDict.en.typewriter = `Initializing AI Developer Portfolio ${latestVersion}`;
-        portfolioDict.es.typewriter = `Inicializando Portafolio de Desarrollador IA ${latestVersion}`;
-        
-        // Sync the static glitch effect data attribute
-        const glitchEl = document.querySelector('.glitch-text');
-        if (glitchEl) {
-            glitchEl.setAttribute('data-text', portfolioDict.en.typewriter);
+    // Load translations from JSON file (with cache)
+    async function loadTranslations(lang) {
+        if (translationCache[lang]) return translationCache[lang];
+        try {
+            const response = await fetch(`locales/${lang}.json?v=${Date.now()}`);
+            if (!response.ok) throw new Error(`HTTP ${response.status}`);
+            const data = await response.json();
+            translationCache[lang] = data;
+            return data;
+        } catch (err) {
+            console.error(`Failed to load translations for ${lang}:`, err);
+            // Fallback to English if not already English
+            if (lang !== 'en') return loadTranslations('en');
+            return null;
         }
     }
 
-    let currentPortfolioLang = 'en';
-
-    // Apply translations to all data-i18n elements
-    function setPortfolioLanguage(lang, fromSync = false) {
-        if (currentPortfolioLang === lang && fromSync) return;
-        currentPortfolioLang = lang;
-        const dict = portfolioDict[lang];
+    // Apply translations to all [data-i18n] elements
+    function applyTranslations(dict) {
         if (!dict) return;
-
         document.querySelectorAll('[data-i18n]').forEach(el => {
             const key = el.getAttribute('data-i18n');
             if (dict[key] !== undefined) {
                 el.innerHTML = dict[key];
             }
         });
+    }
+
+    // Apply the ctaChangelog button with its SVG icon prefix
+    function applyChangelogButton(dict) {
+        if (!dict || !dict.ctaChangelog) return;
+        const clBtn = document.querySelector('.changelog-cta-btn');
+        if (clBtn) {
+            clBtn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16" style="vertical-align: -2px; margin-right: 4px;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg> ${dict.ctaChangelog}`;
+        }
+    }
+
+    // Build or rebuild the dropdown list
+    function buildDropdown(activeLang) {
+        const dropdown = document.getElementById('lang-dropdown');
+        if (!dropdown) return;
+        dropdown.innerHTML = '';
+
+        // Sort: active language first, then the rest in original order
+        const sorted = [
+            SUPPORTED_LANGUAGES.find(l => l.code === activeLang),
+            ...SUPPORTED_LANGUAGES.filter(l => l.code !== activeLang)
+        ];
+
+        sorted.forEach((lang, index) => {
+            const li = document.createElement('li');
+            li.className = 'lang-option' + (lang.code === activeLang ? ' active' : '');
+            li.setAttribute('role', 'option');
+            li.setAttribute('aria-selected', lang.code === activeLang ? 'true' : 'false');
+            li.setAttribute('tabindex', '0');
+            li.setAttribute('data-lang', lang.code);
+            li.innerHTML = `
+                <span class="lang-flag">${lang.flag}</span>
+                <span class="lang-name">${lang.nativeName}</span>
+                <span class="lang-option-code">${lang.code.toUpperCase()}</span>
+            `;
+            li.addEventListener('click', () => setPortfolioLanguage(lang.code));
+            li.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    setPortfolioLanguage(lang.code);
+                }
+            });
+            dropdown.appendChild(li);
+
+            // Add separator after active language
+            if (index === 0) {
+                const sep = document.createElement('li');
+                sep.className = 'lang-separator';
+                sep.setAttribute('role', 'separator');
+                dropdown.appendChild(sep);
+            }
+        });
+    }
+
+    // Dropdown toggle behavior
+    function initDropdownBehavior() {
+        const btn = document.getElementById('lang-selector-btn');
+        const dropdown = document.getElementById('lang-dropdown');
+        if (!btn || !dropdown) return;
+
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const isOpen = dropdown.classList.contains('open');
+            if (isOpen) {
+                closeDropdown();
+            } else {
+                openDropdown();
+            }
+        });
+
+        // Close on outside click
+        document.addEventListener('click', (e) => {
+            const selector = document.getElementById('lang-selector');
+            if (selector && !selector.contains(e.target)) {
+                closeDropdown();
+            }
+        });
+
+        // Keyboard navigation
+        btn.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeDropdown();
+                btn.focus();
+            } else if (e.key === 'ArrowDown') {
+                e.preventDefault();
+                if (!dropdown.classList.contains('open')) openDropdown();
+                const firstOption = dropdown.querySelector('.lang-option');
+                if (firstOption) firstOption.focus();
+            }
+        });
+
+        dropdown.addEventListener('keydown', (e) => {
+            const options = [...dropdown.querySelectorAll('.lang-option')];
+            const focused = document.activeElement;
+            const idx = options.indexOf(focused);
+
+            if (e.key === 'Escape') {
+                closeDropdown();
+                btn.focus();
+            } else if (e.key === 'ArrowDown') {
+                e.preventDefault();
+                const next = options[idx + 1] || options[0];
+                next.focus();
+            } else if (e.key === 'ArrowUp') {
+                e.preventDefault();
+                const prev = options[idx - 1] || options[options.length - 1];
+                prev.focus();
+            }
+        });
+    }
+
+    function openDropdown() {
+        const btn = document.getElementById('lang-selector-btn');
+        const dropdown = document.getElementById('lang-dropdown');
+        if (!btn || !dropdown) return;
+        dropdown.classList.add('open');
+        btn.setAttribute('aria-expanded', 'true');
+    }
+
+    function closeDropdown() {
+        const btn = document.getElementById('lang-selector-btn');
+        const dropdown = document.getElementById('lang-dropdown');
+        if (!btn || !dropdown) return;
+        dropdown.classList.remove('open');
+        btn.setAttribute('aria-expanded', 'false');
+    }
+
+    // Main language switching function
+    async function setPortfolioLanguage(lang, fromSync = false) {
+        if (currentPortfolioLang === lang && fromSync) return;
+
+        const langDef = SUPPORTED_LANGUAGES.find(l => l.code === lang);
+        if (!langDef) return;
+
+        const dict = await loadTranslations(lang);
+        if (!dict) return;
+
+        currentPortfolioLang = lang;
+        currentTranslations = dict;
+
+        // Apply translations to DOM
+        applyTranslations(dict);
+        applyChangelogButton(dict);
 
         // Update typewriter text and re-trigger animation
+        const versionLabel = document.querySelector('.cl-tab-label');
+        const latestVersion = versionLabel ? versionLabel.textContent.trim() : 'v1.4';
+        const typewriterKey = lang === 'en'
+            ? `Initializing AI Developer Portfolio ${latestVersion}`
+            : (dict.typewriter || `Initializing AI Developer Portfolio ${latestVersion}`);
+
+        // Build typewriter text with version
+        let typewriterText = typewriterKey;
+        if (lang !== 'en' && dict.heroSubtitle) {
+            // For non-English, use a custom pattern if available, else default
+            // Convention: locales can define a base typewriter text; we append version
+            const baseTypewriters = {
+                es: `Inicializando Portafolio de Desarrollador IA ${latestVersion}`,
+                pt: `Inicializando Portfólio de Desenvolvedor IA ${latestVersion}`,
+                de: `Initialisierung des KI-Entwicklerportfolios ${latestVersion}`,
+                fr: `Initialisation du Portfolio Développeur IA ${latestVersion}`,
+                ja: `AI開発者ポートフォリオ初期化中 ${latestVersion}`,
+                ko: `AI 개발자 포트폴리오 초기화 중 ${latestVersion}`,
+                zh: `正在初始化AI开发者作品集 ${latestVersion}`,
+                ar: `جارٍ تهيئة محفظة مطوّر الذكاء الاصطناعي ${latestVersion}`,
+                hi: `AI डेवलपर पोर्टफोलियो प्रारंभ हो रहा है ${latestVersion}`,
+                he: `מאתחל תיק מפתח AI ${latestVersion}`
+            };
+            typewriterText = baseTypewriters[lang] || typewriterKey;
+        }
+
         const typeWriterEl = document.getElementById('typewriter');
         if (typeWriterEl) {
             typeWriterEl.textContent = '';
             charIndex = 0;
-            textToType = dict.typewriter;
-            // Update the glitch-text data attribute too
+            textToType = typewriterText;
             const glitchEl = document.querySelector('.glitch-text');
-            if (glitchEl) glitchEl.setAttribute('data-text', dict.typewriter);
+            if (glitchEl) glitchEl.setAttribute('data-text', typewriterText);
             type();
         }
 
-        // Update toggle button active states (portfolio)
-        const enBtn = document.getElementById('portfolio-lang-en');
-        const esBtn = document.getElementById('portfolio-lang-es');
-        if (enBtn && esBtn) {
-            enBtn.classList.toggle('active', lang === 'en');
-            esBtn.classList.toggle('active', lang === 'es');
-        }
+        // Update button label
+        const codeDisplay = document.getElementById('lang-code-display');
+        if (codeDisplay) codeDisplay.textContent = lang.toUpperCase();
+
+        // Update RTL/LTR
+        document.documentElement.dir = langDef.dir;
+        document.documentElement.lang = lang;
+
+        // Rebuild dropdown with active language on top
+        buildDropdown(lang);
+
+        // Close dropdown
+        closeDropdown();
+
+        // Save to localStorage
+        localStorage.setItem('portfolio-lang', lang);
 
         // Sync chatbox language if loaded
         if (!fromSync && typeof setLanguage === 'function') {
@@ -246,22 +281,21 @@ document.addEventListener('DOMContentLoaded', () => {
     window.setPortfolioLanguage = setPortfolioLanguage;
     window.currentPortfolioLang = () => currentPortfolioLang;
 
-    // Navbar language toggle listeners
-    const portfolioEnBtn = document.getElementById('portfolio-lang-en');
-    const portfolioEsBtn = document.getElementById('portfolio-lang-es');
+    // Initialize i18n system
+    async function initI18n() {
+        const detectedLang = detectLanguage();
+        buildDropdown(detectedLang);
+        initDropdownBehavior();
+        await setPortfolioLanguage(detectedLang);
+    }
 
-    if (portfolioEnBtn) {
-        portfolioEnBtn.addEventListener('click', () => setPortfolioLanguage('en'));
-    }
-    if (portfolioEsBtn) {
-        portfolioEsBtn.addEventListener('click', () => setPortfolioLanguage('es'));
-    }
+    // initI18n is called after type() is defined below
 
     // ========================================================
     // 2. Typing Effect for Hero Section
     // ========================================================
     const typeWriterElement = document.getElementById('typewriter');
-    let textToType = portfolioDict.en.typewriter;
+    let textToType = 'Initializing AI Developer Portfolio';
     let charIndex = 0;
 
     function type() {
@@ -272,8 +306,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Start typing after a short delay
-    setTimeout(type, 500);
+    // Kick off the i18n system now that type() is defined
+    initI18n();
 
     // ========================================================
     // 3. Scroll Reveal Animations (Intersection Observer)
@@ -886,7 +920,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Change button text while sending
             const originalBtnText = submitBtn.innerHTML;
-            submitBtn.innerHTML = currentPortfolioLang === 'es' ? 'Transmitiendo...' : 'Transmitting...';
+            submitBtn.innerHTML = (currentTranslations && currentTranslations.contactTransmitting) || 'Transmitting...';
             submitBtn.disabled = true;
             contactStatus.style.display = 'none';
 
@@ -901,16 +935,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 if (response.ok) {
                     contactForm.reset();
-                    contactStatus.textContent = currentPortfolioLang === 'es' ? '¡Transmisión Exitosa!' : 'Transmission Successful!';
+                    contactStatus.textContent = (currentTranslations && currentTranslations.contactSuccess) || 'Transmission Successful!';
                     contactStatus.style.color = 'var(--accent-cyan)';
                     contactStatus.style.display = 'block';
                 } else {
-                    contactStatus.textContent = currentPortfolioLang === 'es' ? 'Error en la transmisión.' : 'Transmission failed. Try again.';
+                    contactStatus.textContent = (currentTranslations && currentTranslations.contactError) || 'Transmission failed. Try again.';
                     contactStatus.style.color = '#ff4d4d'; // Red error color
                     contactStatus.style.display = 'block';
                 }
             } catch (error) {
-                contactStatus.textContent = currentPortfolioLang === 'es' ? 'Error de red. Servidor fuera de línea.' : 'Network error. Server offline.';
+                contactStatus.textContent = (currentTranslations && currentTranslations.contactNetworkError) || 'Network error. Server offline.';
                 contactStatus.style.color = '#ff4d4d';
                 contactStatus.style.display = 'block';
             } finally {

@@ -12,7 +12,7 @@
     <link rel="apple-touch-icon" href="assets/favicon.png">
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;600;700&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="style.css?v=18">
+    <link rel="stylesheet" href="style.css?v=19">
 </head>
 
 <body>
@@ -43,9 +43,21 @@
             <li><a href="#" id="nav-changelog-link" data-i18n="navChangelog">Changelog</a></li>
             <li><a href="#contact" data-i18n="navContact">Contact</a></li>
         </ul>
-        <div class="lang-toggle" id="portfolio-lang-toggle">
-            <button class="lang-btn active" id="portfolio-lang-en">English</button>
-            <button class="lang-btn" id="portfolio-lang-es">Español</button>
+        <div class="lang-selector" id="lang-selector">
+            <button class="lang-selector-btn" id="lang-selector-btn" aria-haspopup="listbox" aria-expanded="false" aria-label="Select language">
+                <svg class="globe-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="18" height="18">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <path d="M2 12h20"></path>
+                    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10A15.3 15.3 0 0 1 12 2z"></path>
+                </svg>
+                <span class="lang-code" id="lang-code-display">EN</span>
+                <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+            </button>
+            <ul class="lang-dropdown" id="lang-dropdown" role="listbox" aria-label="Select language">
+                <!-- Populated dynamically by JS -->
+            </ul>
         </div>
     </nav>
 
@@ -148,7 +160,7 @@
         <section id="hero" class="hero fade-in">
             <div class="hero-content">
                 <h2 class="subtitle" data-i18n="heroSubtitle">System Online: Wait for input...</h2>
-                <h1 class="glitch-text" data-text="Initializing AI Developer Portfolio v1.3">
+                <h1 class="glitch-text" data-text="Initializing AI Developer Portfolio v1.4">
                     <span id="typewriter"></span><span class="blink">_</span>
                 </h1>
                 <p class="hero-desc" data-i18n="heroDesc">Hello World! I'm Bryan, a Software Engineer building modern,
@@ -518,7 +530,7 @@
                 <span class="terminal-dot red"></span>
                 <span class="terminal-dot yellow"></span>
                 <span class="terminal-dot green"></span>
-                <span class="terminal-title">portfolio.changelog — Bryans.tech v1.3</span>
+                <span class="terminal-title">portfolio.changelog — Bryans.tech v1.4</span>
                 <button id="close-changelog-btn" class="icon-btn changelog-close-btn" aria-label="Close Changelog">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <line x1="18" y1="6" x2="6" y2="18"></line>
@@ -1026,7 +1038,7 @@
             });
     </script>
 
-    <script src="script.js?v=16"></script>
+    <script src="script.js?v=19"></script>
 </body>
 
 </html>
