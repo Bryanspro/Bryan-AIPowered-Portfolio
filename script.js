@@ -925,7 +925,8 @@ document.addEventListener('DOMContentLoaded', () => {
             contactStatus.style.display = 'none';
 
             try {
-                const response = await fetch('/api/contact', {
+                // Updated to match chat widget and standalone app for local development
+                const response = await fetch('http://localhost:8000/api/contact', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'

@@ -667,3 +667,71 @@ body {
     background: rgba(0, 240, 255, 0.2);
     color: var(--text-primary);
 }
+
+/* --- In-Chat Contact Form --- */
+.chat-form {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 10px;
+    width: 100%;
+    min-width: 240px;
+}
+
+.chat-form input,
+.chat-form textarea {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #fff;
+    padding: 10px 12px;
+    border-radius: var(--radius-sm);
+    font-family: var(--font);
+    font-size: 0.85rem;
+    outline: none;
+    transition: var(--transition);
+}
+
+.chat-form input:focus,
+.chat-form textarea:focus {
+    border-color: var(--accent-cyan);
+    background: rgba(0, 240, 255, 0.03);
+}
+
+.chat-form button {
+    background: var(--gradient-accent);
+    color: #000;
+    font-weight: 600;
+    border: none;
+    padding: 10px;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    font-family: var(--font);
+    font-size: 0.85rem;
+    transition: var(--transition);
+    margin-top: 4px;
+}
+
+.chat-form button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 240, 255, 0.2);
+}
+
+.chat-form button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.form-success {
+    color: var(--accent-cyan);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.form-error {
+    color: #ff4d4d;
+    font-size: 0.8rem;
+    margin-top: 4px;
+}

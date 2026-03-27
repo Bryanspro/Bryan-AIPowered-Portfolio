@@ -871,7 +871,8 @@ Conversation Rule: Always bring the conversation naturally back to how these tra
             submitBtn.disabled = true;
 
             try {
-                const response = await fetch('/api/contact', {
+                // Consistent with standalone app, we use absolute URL to ensure connectivity in local dev environments
+                const response = await fetch('http://localhost:8000/api/contact', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -950,20 +951,35 @@ Conversation Rule: Always bring the conversation naturally back to how these tra
                     if (!response.ok) throw new Error(`API ${response.status}`);
 
                     const data = await response.json();
-                    const reply = data.candidates?.[0]?.content?.parts?.[0]?.text || getWidgetPrefab(inputCommand);
-                    widgetConversationHistory.push({ role: 'model', parts: [{ text: reply }] });
-
+                    const replyText = data.candidates?.[0]?.content?.parts?.[0]?.text || WIDGET_GENERIC_FALLBACK[currentLang];
+                    
+                    widgetConversationHistory.push({ role: 'model', parts: [{ text: replyText }] });
+                    
                     hideTyping();
-                    addBotMessage(reply);
+
+                    // Automatically trigger contact form if bot suggests it
+                    const contactTriggers = ['contact form', 'formulario de contacto', 'reach bryan', 'contactar a bryan', 'leave a message', 'dejar un mensaje'];
+                    const shouldShowForm = contactTriggers.some(t => replyText.toLowerCase().includes(t));
+                    
+                    if (shouldShowForm) {
+                        renderContactForm();
+                    } else {
+                        addBotMessage(replyText);
+                    }
 
                 } catch (error) {
+                    console.error('Gemini Widget Error:', error);
                     hideTyping();
-                    console.error('Chat API Error:', error);
-                    const prefab = getWidgetPrefab(inputCommand);
-                    addBotMessage(prefab);
+                    const fallback = getWidgetPrefab(inputCommand);
+                    if (inputCommand.toLowerCase().includes('contact') || inputCommand.toLowerCase().includes('contacto')) {
+                        renderContactForm();
+                    } else {
+                        addBotMessage(fallback);
+                    }
                 }
             }
         }
+
 
         // Global exposing for quick reply buttons injected via innerHTML
         window.handleQuickReply = function (cmd) {
