@@ -930,7 +930,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({ name, email, message })
+                    body: JSON.stringify({ name, email, message, source: 'Main Portfolio' })
                 });
 
                 if (response.ok) {

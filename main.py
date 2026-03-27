@@ -45,6 +45,7 @@ class ContactRequest(BaseModel):
     name: str
     email: EmailStr
     message: str
+    source: str = "Unknown"
 
 # 4.5 Database Setup
 POSTGRES_URL = os.getenv("POSTGRES_URL") or os.getenv("DATABASE_URL")
@@ -66,10 +67,16 @@ def init_db():
                     name TEXT NOT NULL,
                     email TEXT NOT NULL,
                     message TEXT NOT NULL,
+                    source TEXT DEFAULT 'Unknown',
                     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
                 )
             ''')
             conn.commit()
+            try:
+                cursor.execute("ALTER TABLE messages ADD COLUMN IF NOT EXISTS source TEXT DEFAULT 'Unknown'")
+                conn.commit()
+            except Exception:
+                conn.rollback()
             conn.close()
             print("Successfully connected to Postgres database.")
         except Exception as e:
@@ -83,9 +90,14 @@ def init_db():
                 name TEXT NOT NULL,
                 email TEXT NOT NULL,
                 message TEXT NOT NULL,
+                source TEXT DEFAULT 'Unknown',
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
             )
         ''')
+        try:
+            cursor.execute("ALTER TABLE messages ADD COLUMN source TEXT DEFAULT 'Unknown'")
+        except sqlite3.OperationalError:
+            pass # column already exists
         conn.commit()
         conn.close()
 
@@ -172,8 +184,8 @@ async def submit_contact(request: ContactRequest):
             cursor = conn.cursor()
             # Postgres uses %s for placeholders
             cursor.execute(
-                "INSERT INTO messages (name, email, message) VALUES (%s, %s, %s)",
-                (request.name, request.email, request.message)
+                "INSERT INTO messages (name, email, message, source) VALUES (%s, %s, %s, %s)",
+                (request.name, request.email, request.message, request.source)
             )
             conn.commit()
             conn.close()
@@ -181,8 +193,8 @@ async def submit_contact(request: ContactRequest):
             conn = sqlite3.connect(DB_FILE)
             cursor = conn.cursor()
             cursor.execute(
-                "INSERT INTO messages (name, email, message) VALUES (?, ?, ?)",
-                (request.name, request.email, request.message)
+                "INSERT INTO messages (name, email, message, source) VALUES (?, ?, ?, ?)",
+                (request.name, request.email, request.message, request.source)
             )
             conn.commit()
             conn.close()
@@ -193,6 +205,7 @@ async def submit_contact(request: ContactRequest):
             <h3>New Portfolio Contact Form Submission</h3>
             <p><strong>Name:</strong> {request.name}</p>
             <p><strong>Email:</strong> {request.email}</p>
+            <p><strong>Source:</strong> {request.source}</p>
             <p><strong>Message:</strong></p>
             <p>{request.message}</p>
             """
@@ -219,6 +232,7 @@ async def submit_contact(request: ContactRequest):
         with open(txt_file_path, "a", encoding="utf-8") as f:
             f.write(f"[{timestamp}]\n")
             f.write(f"From: {request.name} <{request.email}>\n")
+            f.write(f"Source: {request.source}\n")
             f.write(f"Message: {request.message}\n")
             f.write("-" * 50 + "\n\n")
 
