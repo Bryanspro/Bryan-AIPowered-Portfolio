@@ -78,7 +78,7 @@ const PREFAB_ANSWERS = [
     },
     {
         keywords: ['contact', 'reach', 'email', 'message', 'connect', 'hire', 'linkedin', 'touch', 'talk'],
-        response: "TRIGGER_FORM"
+        response: "You can reach Bryan through:\n\n* 📬 The **contact form** on his main portfolio page\n* 💼 Connect on **LinkedIn** for professional inquiries\n* 💬 Or keep chatting with me here — I'll do my best to answer your questions!\n\nBryan is always open to new opportunities and tech challenges. He typically replies within 24–48 hours."
     },
     {
         keywords: ['education', 'certif', 'degree', 'school', 'study', 'learn'],
@@ -304,94 +304,18 @@ async function handleSend() {
         conversationHistory.push({ role: 'model', parts: [{ text: reply }] });
 
         hideTyping();
-        
-        // Check if bot wants to show form
-        if (reply.toUpperCase().includes("TRIGGER_FORM") || text.toLowerCase().includes("contact")) {
-             renderContactForm();
-        } else {
-             addMessage('bot', reply);
-             speakText(stripMarkdown(reply));
-        }
+        addMessage('bot', reply);
+        speakText(stripMarkdown(reply));
 
     } catch (err) {
         console.error('Gemini API Error:', err);
         hideTyping();
         const fallback = getPrefabAnswer(text);
-        if (fallback === "TRIGGER_FORM") {
-            renderContactForm();
-        } else {
-            addMessage('bot', fallback);
-            speakText(stripMarkdown(fallback));
-        }
+        addMessage('bot', fallback);
+        speakText(stripMarkdown(fallback));
     }
 
     isWaitingForResponse = false;
-}
-
-
-// --- Contact Form Integration ---
-function renderContactForm() {
-    const formId = 'chat-form-' + Date.now();
-    const formHtml = `
-        <div class="message-bubble">
-            <p>I'd love to help you get in touch with Bryan! Just fill out the details below and I'll transmit them directly to his database:</p>
-            <form class="chat-form" id="${formId}">
-                <input type="text" name="user_name" placeholder="Your Name" required />
-                <input type="email" name="user_email" placeholder="Your Email" required />
-                <textarea name="user_message" rows="3" placeholder="How can Bryan help you?" required></textarea>
-                <button type="submit" id="${formId}-submit">Send Message</button>
-            </form>
-            <div id="${formId}-status"></div>
-        </div>
-    `;
-
-    const msgDiv = document.createElement('div');
-    msgDiv.className = 'message bot';
-    msgDiv.innerHTML = formHtml + `<div class="msg-time">${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</div>`;
-    
-    chatMessages.insertBefore(msgDiv, typingIndicator);
-    scrollToBottom();
-
-    const form = document.getElementById(formId);
-    form.addEventListener('submit', (e) => submitChatForm(e, formId));
-}
-
-async function submitChatForm(e, formId) {
-    e.preventDefault();
-    const form = document.getElementById(formId);
-    const status = document.getElementById(formId + '-status');
-    const submitBtn = document.getElementById(formId + '-submit');
-
-    const formData = new FormData(form);
-    const payload = {
-        name: formData.get('user_name'),
-        email: formData.get('user_email'),
-        message: formData.get('user_message')
-    };
-
-    submitBtn.disabled = true;
-    submitBtn.innerText = 'Transmitting...';
-
-    try {
-        // We use the full URL to the backend to ensure connectivity from standalone app
-        const response = await fetch('http://localhost:8000/api/contact', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload)
-        });
-
-        if (response.ok) {
-            form.style.display = 'none';
-            status.innerHTML = '<div class="form-success">✨ Message Sent! Bryan will receive this in his database immediately.</div>';
-        } else {
-            throw new Error('Server error');
-        }
-    } catch (err) {
-        console.error('Contact Form Error:', err);
-        status.innerHTML = '<div class="form-error">Connection failed. Please check if the backend is running or reach out on LinkedIn.</div>';
-        submitBtn.disabled = false;
-        submitBtn.innerText = 'Retry Sending';
-    }
 }
 
 
