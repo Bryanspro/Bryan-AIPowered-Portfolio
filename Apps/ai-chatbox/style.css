@@ -667,3 +667,54 @@ body {
     background: rgba(0, 240, 255, 0.2);
     color: var(--text-primary);
 }
+
+/* --- Inline Contact Form --- */
+.chat-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 15px;
+    width: 100%;
+}
+
+.chat-form input,
+.chat-form textarea {
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid var(--glass-border);
+    padding: 10px 14px;
+    border-radius: var(--radius-sm);
+    color: var(--text-primary);
+    font-family: inherit;
+    outline: none;
+    font-size: 0.9rem;
+    transition: all var(--transition);
+}
+
+.chat-form input:focus,
+.chat-form textarea:focus {
+    border-color: var(--accent-cyan);
+    box-shadow: 0 0 10px rgba(0, 240, 255, 0.1);
+}
+
+.chat-form button {
+    background: rgba(0, 240, 255, 0.1);
+    border: 1px solid var(--accent-cyan);
+    color: var(--accent-cyan);
+    padding: 10px;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    font-weight: 600;
+    font-family: inherit;
+    transition: all var(--transition);
+}
+
+.chat-form button:hover:not(:disabled) {
+    background: var(--accent-cyan);
+    color: #000;
+    box-shadow: 0 0 15px var(--glow-cyan);
+}
+
+.chat-form button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}

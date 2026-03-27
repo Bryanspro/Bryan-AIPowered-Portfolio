@@ -219,7 +219,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Update typewriter text and re-trigger animation
         const versionLabel = document.querySelector('.cl-tab-label');
-        const latestVersion = versionLabel ? versionLabel.textContent.trim() : 'v1.4';
+        const latestVersion = versionLabel ? versionLabel.textContent.trim() : 'v1.5';
         const typewriterKey = lang === 'en'
             ? `Initializing AI Developer Portfolio ${latestVersion}`
             : (dict.typewriter || `Initializing AI Developer Portfolio ${latestVersion}`);

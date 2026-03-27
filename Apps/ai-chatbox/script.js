@@ -249,6 +249,28 @@ function bindEvents() {
                 // Fallback for any old chips
                 messageInput.value = chip.dataset.prompt;
             }
+            
+            // Intercept Contact chip to inject form directly
+            if (cat === 'contact') {
+                const text = messageInput.value || "How can I get in touch with Bryan?";
+                messageInput.value = '';
+                addMessage('user', text);
+                conversationHistory.push({ role: 'user', parts: [{ text: text }] });
+                
+                isWaitingForResponse = true;
+                showTyping();
+                
+                setTimeout(() => {
+                    hideTyping();
+                    const introMsg = "You can reach Bryan right here! Leave your name, email, and a short message below, and he'll be notified immediately.";
+                    conversationHistory.push({ role: 'model', parts: [{ text: introMsg }] });
+                    addMessage('bot', introMsg, true); // Inject contact form
+                    speakText(introMsg);
+                    isWaitingForResponse = false;
+                }, 800);
+                return;
+            }
+
             handleSend();
         }
     });
@@ -320,7 +342,7 @@ async function handleSend() {
 
 
 // ─── Message Rendering ─────────────────────────────
-function addMessage(sender, text) {
+function addMessage(sender, text, includeForm = false) {
     const now = new Date();
     const timeStr = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
@@ -334,6 +356,17 @@ function addMessage(sender, text) {
 
     if (sender === 'bot') {
         bubble.innerHTML = renderMarkdown(text);
+        
+        if (includeForm) {
+            bubble.innerHTML += `
+               <form class="chat-form" onsubmit="submitStandaloneForm(event, this)">
+                    <input type="text" name="name" placeholder="Your Name" required />
+                    <input type="email" name="email" placeholder="Your Email" required />
+                    <textarea name="message" rows="3" placeholder="Message Payload" required></textarea>
+                    <button type="submit" name="submitBtn">Transmit Data</button>
+               </form>
+            `;
+        }
     } else {
         bubble.textContent = text;
     }
@@ -471,6 +504,39 @@ function scrollToBottom() {
         chatMessages.scrollTop = chatMessages.scrollHeight;
     });
 }
+
+
+// ─── Contact Form Logic ─────────────────────────────
+window.submitStandaloneForm = async function(e, form) {
+    e.preventDefault();
+    const name = form.elements['name'].value;
+    const email = form.elements['email'].value;
+    const message = form.elements['message'].value;
+    const btn = form.elements['submitBtn'];
+
+    const originalBtnText = btn.textContent;
+    btn.textContent = 'Transmitting...';
+    btn.disabled = true;
+
+    try {
+        const response = await fetch('/api/contact', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name, email, message })
+        });
+
+        if (response.ok) {
+            form.innerHTML = '<div style="color:var(--accent-cyan); font-weight:bold; margin-top: 10px; border-top: 1px solid rgba(0,240,255,0.2); padding-top: 10px;">Transmission Successful! Bryan will review this shortly.</div>';
+        } else {
+            btn.textContent = 'Failed. Try again';
+            btn.disabled = false;
+        }
+    } catch (err) {
+        btn.textContent = 'Network error';
+        btn.disabled = false;
+    }
+}
+
 
 
 // ─── Ambient Canvas Background ──────────────────────
