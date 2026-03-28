@@ -530,7 +530,7 @@
                 <span class="terminal-dot red"></span>
                 <span class="terminal-dot yellow"></span>
                 <span class="terminal-dot green"></span>
-                <span class="terminal-title">portfolio.changelog — Bryans.tech v1.5</span>
+                <span class="terminal-title">portfolio.changelog — Bryans.tech v1.5.1</span>
                 <button id="close-changelog-btn" class="icon-btn changelog-close-btn" aria-label="Close Changelog">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <line x1="18" y1="6" x2="6" y2="18"></line>
@@ -539,7 +539,7 @@
                 </button>
             </div>
             <div class="changelog-version-tab">
-                <span class="cl-tab-label">v1.5</span>
+                <span class="cl-tab-label">v1.5.1</span>
                 <span class="cl-tab-separator">|</span>
                 <span class="cl-tab-status">Latest Stable Release</span>
             </div>
@@ -547,14 +547,47 @@
                 
                 <div class="cl-entry">
                     <button class="cl-header" onclick="toggleChangelog(this)">
-                        <span class="cl-version">v1.5</span>
-                        <span class="cl-date">2026-03-26</span>
+                        <span class="cl-version">v1.5.1</span>
+                        <span class="cl-date">2026-03-27</span>
                         <span class="cl-badge latest">LATEST</span>
                         <svg class="cl-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <polyline points="6 9 12 15 18 9"></polyline>
                         </svg>
                     </button>
                     <div class="cl-body open">
+                        <div class="cl-group">
+                            <span class="cl-tag added">Added</span>
+                            <ul>
+                                <li>Implemented an interactive, inline contact form within the **Bryan.AI** standalone chatbox conversational flow.</li>
+                                <li>Added a `source` tracking field to the unified contact backend to identify submission origins (Main Portfolio, Floating Chat Widget, or Standalone Chatbox).</li>
+                            </ul>
+                        </div>
+                        <div class="cl-group">
+                            <span class="cl-tag changed">Changed</span>
+                            <ul>
+                                <li>Unified the contact form backend logic across all entry points (Main, Floating, and Standalone).</li>
+                                <li>Updated the FastAPI backend (`main.py`) to support the automated SQL schema migration for the new lead tracking fields.</li>
+                                <li>Refined the Standalone Chatbox UI with custom frosted-glass input components.</li>
+                            </ul>
+                        </div>
+                        <div class="cl-group">
+                            <span class="cl-tag fixed">Fixed</span>
+                            <ul>
+                                <li>Standardized version labels across the Hero section, Changelog UI, and JavaScript constants to v1.5.1.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cl-entry">
+                    <button class="cl-header" onclick="toggleChangelog(this)">
+                        <span class="cl-version">v1.5</span>
+                        <span class="cl-date">2026-03-26</span>
+                        <svg class="cl-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </button>
+                    <div class="cl-body">
                         <div class="cl-group">
                             <span class="cl-tag added">Added</span>
                             <ul>

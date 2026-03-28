@@ -205,3 +205,19 @@ All notable changes to this project will be documented in this file.
 - This version moves beyond direct translation and focuses on native-sounding localization, professional tone, and better adaptation for global recruiters and users.
 
 *Initialized port... System ready for deployment.*
+
+## [v1.5.1] - 2026-03-27
+### Added
+- Implemented an interactive, inline contact form within the **Bryan.AI** standalone chatbox conversational flow.
+- Added a `source` tracking field to the unified contact backend to identify submission origins (Main Portfolio, Floating Chat Widget, or Standalone Chatbox).
+
+### Changed
+- Unified the contact form backend logic across all entry points (Main, Floating, and Standalone).
+- Updated the FastAPI backend (`main.py`) to support the automated SQL schema migration for the new lead tracking fields.
+- Refined the Standalone Chatbox UI with custom frosted-glass input components.
+
+### Fixed
+- Standardized version labels across the Hero section, Changelog UI, and JavaScript constants to v1.5.1.
+
+*Initialized port... System ready for deployment.*
+

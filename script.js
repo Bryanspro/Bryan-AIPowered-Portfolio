@@ -219,10 +219,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Update typewriter text and re-trigger animation
         const versionLabel = document.querySelector('.cl-tab-label');
-        const latestVersion = versionLabel ? versionLabel.textContent.trim() : 'v1.5';
+        const latestVersion = versionLabel ? versionLabel.textContent.trim() : 'v1.5.1';
+        // We always use v1.5 for the hero splash text as requested
+        const heroVersion = 'v1.5';
         const typewriterKey = lang === 'en'
-            ? `Initializing AI Developer Portfolio ${latestVersion}`
-            : (dict.typewriter || `Initializing AI Developer Portfolio ${latestVersion}`);
+            ? `Initializing AI Developer Portfolio ${heroVersion}`
+            : (dict.typewriter || `Initializing AI Developer Portfolio ${heroVersion}`);
 
         // Build typewriter text with version
         let typewriterText = typewriterKey;
@@ -230,16 +232,16 @@ document.addEventListener('DOMContentLoaded', () => {
             // For non-English, use a custom pattern if available, else default
             // Convention: locales can define a base typewriter text; we append version
             const baseTypewriters = {
-                es: `Inicializando Portafolio de Desarrollo IA ${latestVersion}`,
-                pt: `Inicializando Portfólio de Desenvolvedor IA ${latestVersion}`,
-                de: `Initialisierung des KI-Entwicklerportfolios ${latestVersion}`,
-                fr: `Portfolio Développeur IA — Initialisation ${latestVersion}`,
-                ja: `AI エンジニアポートフォリオの初期化中 ${latestVersion}`,
-                ko: `AI 개발자 포트폴리오 초기화 중 ${latestVersion}`,
-                zh: `正在初始化 AI 开发者作品集 ${latestVersion}`,
-                ar: `جاري تهيئة ملف مطور الذكاء الاصطناعي ${latestVersion}`,
-                hi: `AI डेवलपर पोर्टफोलियो प्रारंभ हो रहा है ${latestVersion}`,
-                he: `מאתחל תיק עבודות של מפתח בינה מלאכותית ${latestVersion}`
+                es: `Inicializando Portafolio de Desarrollo IA ${heroVersion}`,
+                pt: `Inicializando Portfólio de Desenvolvedor IA ${heroVersion}`,
+                de: `Initialisierung des KI-Entwicklerportfolios ${heroVersion}`,
+                fr: `Portfolio Développeur IA — Initialisation ${heroVersion}`,
+                ja: `AI エンジニアポートフォリオの初期化中 ${heroVersion}`,
+                ko: `AI 개발자 포트폴리오 초기화 중 ${heroVersion}`,
+                zh: `正在初始化 AI 开发者作品集 ${heroVersion}`,
+                ar: `جاري تهيئة ملف مطור الذكاء الاصطناعي ${heroVersion}`,
+                hi: `AI डेवलपर पोर्टफोलियो प्रारंभ हो रहा है ${heroVersion}`,
+                he: `מאתחל תיק עבודות של מפתח בינה מלאכותית ${heroVersion}`
             };
             typewriterText = baseTypewriters[lang] || typewriterKey;
         }
