@@ -1093,9 +1093,12 @@
 
     </footer>
 
+    <!-- Shared Chat Intent Engine (loaded before widget injection) -->
+    <script src="chat-intent-engine.js"></script>
+
     <!-- Chat Widget Integration (injected directly to avoid iframe click-blocking) -->
     <script>
-        fetch('chat-widget.html?v=2')
+        fetch('chat-widget.html?v=3')
             .then(r => r.text())
             .then(html => {
                 const parser = new DOMParser();

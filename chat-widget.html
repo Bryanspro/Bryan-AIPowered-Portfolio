@@ -528,9 +528,8 @@
                     </div>
                 </div>
             </div>
-            <div class="header-controls">
-                <button class="control-btn active-lang" id="lang-en">EN</button>
-                <button class="control-btn" id="lang-es">ES</button>
+                        <div class="header-controls">
+                <span class="widget-lang-display" id="widget-lang-display" style="font-weight: 600; font-size: 0.8rem; margin-right: 12px; color: var(--accent-light); opacity: 0.8;">EN</span>
                 <button class="control-btn" id="close-chat" style="display: none;">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -586,67 +585,121 @@
         </div>
     </div>
 
-    <!-- Application Logic -->
+    <!-- Application Logic (Intent engine loaded externally by index.html or standalone HTML) -->
     <script>
-        // --- Configuration & Data dictionary ---
+        // --- Simplified Dictionary (UI strings only — responses moved to intent engine) ---
         const Dictionary = {
-            en: {
-                greeting: "System Online. Hello, I am Bryan's AI Assistant. How can I help you today?",
-                placeholder: "Type a message...",
-                status: "Online",
-                quick: {
-                    exp: "💼 Professional experience",
-                    tech: "⚙️ Tech stack",
-                    projects: "🚀 Featured projects",
-                    contact: "✉️ Leave a message"
-                },
-                responses: {
-                    default: "Try clicking a quick reply below — I'm best with those!",
-                    exp: "I have 12+ years of experience in the tech industry, including leadership roles as a Technical Lead and IT Manager, specializing in database systems, workflow automation, and operational crisis management. After relocating to the United States, I shifted my focus to Artificial Intelligence and intelligent system development, designing scalable, automated solutions for complex real-world challenges.",
-                    tech: "My stack combines IT infrastructure and modern AI development: HTML/CSS/JS · Python · SQL · WordPress · Generative AI (LLMs) · AI Agent Automation · Prompt Engineering. Bilingual: EN/ES.",
-                    projects: "Bryan's portfolio showcases 4 featured projects: 🎨 Product Designer Showcase (curated portfolio layouts), 🎮 Interactive Games (JS game development), 📱 Apps Showcase (5 modular web apps), and 🤖 AI-Powered Applications (4 Gemini-powered AI apps including this chatbot). Each project demonstrates real-world skills in web development, UI/UX, and AI integration.",
-                    formIntro: "I'm always open to new opportunities and tech challenges. Leave your name, email, and a short message here, and I'll reply within 24/48 hours. You can also reach me on LinkedIn.",
-                    formSent: "Transmission received ✓ — Bryan will be notified.",
-                    uploadReady: "File analyzed. Looks good!",
-                    offlineError: "AI systems offline — reach me via LinkedIn!"
-                },
-                form: {
-                    namePlaceholder: "Your Name",
-                    emailPlaceholder: "Your Email",
-                    msgPlaceholder: "Message",
-                    submit: "Send Data"
-                },
-                voiceLang: 'en-US'
-            },
-            es: {
-                greeting: "Sistema en línea. Hola, soy el Asistente IA de Bryan. ¿En qué te puedo ayudar hoy?",
-                placeholder: "Escribe un mensaje...",
-                status: "En línea",
-                quick: {
-                    exp: "💼 Experiencia profesional",
-                    tech: "⚙️ Stack tecnológico",
-                    projects: "🚀 Proyectos destacados",
-                    contact: "✉️ Dejar un mensaje"
-                },
-                responses: {
-                    default: "Prueba los botones rápidos de abajo — ¡funcionan mejor!",
-                    exp: "12+ años en tech — Líder Técnico y Gerente de TI especializado en automatización y bases de datos. Ahora enfocado en Ingeniería de IA y soluciones inteligentes.",
-                    tech: "Python · HTML/CSS/JS · SQL · WordPress · IA Generativa (LLMs) · Automatización con Agentes IA · Prompt Engineering. Bilingüe: EN/ES.",
-                    projects: "El portafolio de Bryan incluye 4 proyectos destacados: 🎨 Exhibición para Diseñadores de Producto, 🎮 Juegos Interactivos, 📱 Galería de Aplicaciones (5 apps web), y 🤖 Aplicaciones de IA (4 apps con Gemini, incluido este chatbot). Cada proyecto demuestra habilidades reales en desarrollo web, UI/UX e integración de IA.",
-                    formIntro: "¡Deja tus datos abajo y te respondo en 24 horas!",
-                    formSent: "Transmisión recibida ✓ — Bryan será notificado.",
-                    uploadReady: "Archivo analizado. ¡Se ve bien!",
-                    offlineError: "Sistemas IA offline — ¡contáctame por LinkedIn!"
-                },
-                form: {
-                    namePlaceholder: "Tu Nombre",
-                    emailPlaceholder: "Tu Correo",
-                    msgPlaceholder: "Mensaje",
-                    submit: "Enviar Datos"
-                },
-                voiceLang: 'es-ES'
-            }
-        };
+    en: {
+        greeting: "System Online. Hello, I'm Bryan's AI Portfolio Assistant. How can I help you today?",
+        placeholder: "Type a message...",
+        status: "Online",
+        formIntro: "I'm always open to new opportunities and tech challenges. Leave your name, email, and a short message here, and I'll reply within 24/48 hours.",
+        formSent: "Transmission received ✓ — Bryan will be notified.",
+        uploadReady: "File analyzed. Looks good!",
+        form: { namePlaceholder: "Your Name", emailPlaceholder: "Your Email", msgPlaceholder: "Message", submit: "Send Data" },
+        voiceLang: 'en-US'
+    },
+    es: {
+        greeting: "Sistema en línea. Hola, soy el Asistente IA de Bryan. ¿En qué te puedo ayudar hoy?",
+        placeholder: "Escribe un mensaje...",
+        status: "En línea",
+        formIntro: "¡Deja tus datos abajo y te respondo en 24 horas!",
+        formSent: "Transmisión recibida ✓ — Bryan será notificado.",
+        uploadReady: "Archivo analizado. ¡Se ve bien!",
+        form: { namePlaceholder: "Tu Nombre", emailPlaceholder: "Tu Correo", msgPlaceholder: "Mensaje", submit: "Enviar Datos" },
+        voiceLang: 'es-ES'
+    },
+    pt: {
+        greeting: "Sistema Online. Olá, sou o Assistente de IA do Bryan. Como posso ajudar?",
+        placeholder: "Digite uma mensagem...",
+        status: "Online",
+        formIntro: "Deixe seus dados abaixo e responderei em 24 horas!",
+        formSent: "Transmissão recebida ✓ — Bryan será notificado.",
+        uploadReady: "Arquivo analisado!",
+        form: { namePlaceholder: "Seu Nome", emailPlaceholder: "Seu Email", msgPlaceholder: "Mensagem", submit: "Enviar Dados" },
+        voiceLang: 'pt-BR'
+    },
+    de: {
+        greeting: "System Online. Hallo, ich bin Bryans KI-Assistent. Wie kann ich heute helfen?",
+        placeholder: "Nachricht eingeben...",
+        status: "Online",
+        formIntro: "Hinterlassen Sie Ihre Daten und ich antworte innerhalb von 24 Stunden!",
+        formSent: "Übertragung empfangen ✓",
+        uploadReady: "Datei analysiert!",
+        form: { namePlaceholder: "Ihr Name", emailPlaceholder: "Ihre E-Mail", msgPlaceholder: "Nachricht", submit: "Senden" },
+        voiceLang: 'de-DE'
+    },
+    fr: {
+        greeting: "Système en ligne. Bonjour, je suis l'assistant IA de Bryan. Comment puis-je aider ?",
+        placeholder: "Tapez un message...",
+        status: "En ligne",
+        formIntro: "Laissez vos coordonnées et je répondrai sous 24 heures !",
+        formSent: "Transmission reçue ✓",
+        uploadReady: "Fichier analysé !",
+        form: { namePlaceholder: "Votre Nom", emailPlaceholder: "Votre Email", msgPlaceholder: "Message", submit: "Envoyer" },
+        voiceLang: 'fr-FR'
+    },
+    ja: {
+        greeting: "システム稼働中。こんにちは、BryanのAIアシスタントです。何かお手伝いしましょうか？",
+        placeholder: "メッセージを入力...",
+        status: "オンライン",
+        formIntro: "詳細を残してください。24時間以内に返信します！",
+        formSent: "送信完了 ✓",
+        uploadReady: "ファイルを分析しました！",
+        form: { namePlaceholder: "名前", emailPlaceholder: "メール", msgPlaceholder: "メッセージ", submit: "送信" },
+        voiceLang: 'ja-JP'
+    },
+    ko: {
+        greeting: "시스템 온라인. 안녕하세요, Bryan의 AI 어시스턴트입니다.",
+        placeholder: "메시지 입력...",
+        status: "온라인",
+        formIntro: "연락처를 남겨주시면 24시간 내에 답변해 드립니다!",
+        formSent: "전송 완료 ✓",
+        uploadReady: "파일 분석 완료!",
+        form: { namePlaceholder: "이름", emailPlaceholder: "이메일", msgPlaceholder: "메시지", submit: "보내기" },
+        voiceLang: 'ko-KR'
+    },
+    zh: {
+        greeting: "系统在线。你好，我是 Bryan 的 AI 助手。请问有什么需要帮忙的？",
+        placeholder: "输入消息...",
+        status: "在线",
+        formIntro: "留下您的信息，我会在24小时内回复！",
+        formSent: "传输成功 ✓",
+        uploadReady: "文件分析完毕！",
+        form: { namePlaceholder: "您的姓名", emailPlaceholder: "您的邮箱", msgPlaceholder: "消息", submit: "发送数据" },
+        voiceLang: 'zh-CN'
+    },
+    ar: {
+        greeting: "النظام متصل. مرحباً، أنا المساعد الذكي لبرايان.",
+        placeholder: "اكتب رسالة...",
+        status: "متصل",
+        formIntro: "اترك بياناتك وسأرد خلال 24 ساعة!",
+        formSent: "تم استلام البيانات ✓",
+        uploadReady: "تم تحليل الملف!",
+        form: { namePlaceholder: "الاسم", emailPlaceholder: "البريد", msgPlaceholder: "الرسالة", submit: "إرسال" },
+        voiceLang: 'ar-SA'
+    },
+    hi: {
+        greeting: "सिस्टम ऑनलाइन। नमस्ते, मैं ब्रायन का AI सहायक हूँ। मैं कैसे मदद कर सकता हूँ?",
+        placeholder: "संदेश टाइप करें...",
+        status: "ऑनलाइन",
+        formIntro: "अपना विवरण छोड़ें और मैं 24 घंटे में उत्तर दूंगा!",
+        formSent: "डेटा प्राप्त हुआ ✓",
+        uploadReady: "फ़ाइल का विश्लेषण किया गया!",
+        form: { namePlaceholder: "आपका नाम", emailPlaceholder: "आपका ईमेल", msgPlaceholder: "संदेश", submit: "डेटा भेजें" },
+        voiceLang: 'hi-IN'
+    },
+    he: {
+        greeting: "מערכת מחוברת. שלום, אני עוזר ה-AI של בריאן.",
+        placeholder: "הקלד הודעה...",
+        status: "מחובר",
+        formIntro: "השאירו פרטים ואענה תוך 24 שעות!",
+        formSent: "הנתונים התקבלו ✓",
+        uploadReady: "הקובץ נבדק!",
+        form: { namePlaceholder: "השם שלך", emailPlaceholder: "האימייל שלך", msgPlaceholder: "הודעה", submit: "שלח נתונים" },
+        voiceLang: 'he-IL'
+    }
+};
 
         // --- State Management ---
         let currentLang = 'en';
@@ -654,6 +707,7 @@
         let isChatOpen = false;
         let isTyping = false;
         let widgetConversationHistory = [];
+        const widgetSessionId = 'ws_' + Date.now() + '_' + Math.random().toString(36).substr(2, 6);
 
         // --- Gemini API Config (Direct Browser Calls) ---
         const WIDGET_GEMINI_KEY = 'AIzaSyDXjrvW4TtT6gpUYT5Ig5ovn0M2qOyK4Uw';
@@ -670,42 +724,6 @@ Strict Rules: NEVER invent information. Frame his transition as proactive and st
 Personality: Gaming enthusiast, outdoors lover (boating, fishing, basketball in Florida), huge dog lover (Weimaraners, husky), foodie and traveler.
 Conversation Rule: Always bring the conversation naturally back to how these traits make you a great team player.`;
 
-        // --- Smart Prefab Answers ---
-        const WIDGET_PREFABS = [
-            { keywords: ['experience', 'work', 'job', 'career', 'background', 'worked', 'experiencia', 'trabajo', 'carrera'], response: { en: "Bryan has 12+ years of experience: Walmart (2024-2025, FL) handling POS systems; Ingeniería de Bombas de Venezuela (2015-2022) as Technical Lead & IT Manager automating workflows and managing databases; Francisco de Miranda Park (2018) as Junior Web Developer. His transition to AI is proactive and driven by continuous learning.", es: "Bryan tiene más de 12 años de experiencia: Walmart (2024-2025, FL) operando sistemas POS; Ingeniería de Bombas de Venezuela (2015-2022) como Líder Técnico y Gerente de TI; Parque Francisco de Miranda (2018) como Desarrollador Web Junior. Su transición a la IA es proactiva." } },
-            { keywords: ['tech', 'stack', 'technologies', 'tools', 'programming', 'tecnologia', 'herramientas'], response: { en: "Bryan's stack: Python · HTML/CSS/JS · SQL · WordPress · Generative AI (LLMs) · AI Agent Automation · Prompt Engineering · FastAPI · REST APIs. Fully bilingual: EN/ES.", es: "El stack de Bryan: Python · HTML/CSS/JS · SQL · WordPress · IA Generativa (LLMs) · Automatización con Agentes IA · Prompt Engineering · FastAPI · REST APIs. Bilingüe: EN/ES." } },
-            { keywords: ['ai', 'artificial', 'intelligence', 'machine', 'learning', 'generative', 'inteligencia', 'artificial'], response: { en: "Bryan focuses on AI & Python Development: Generative AI, AI Agent Automation, Prompt Engineering. Certifications: Generative AI Mastermind & Gen AI Engineering Mastermind (Outskill), currently completing Google AI Leader certification. Fun fact: he built this AI bot to save recruiters time!", es: "Bryan se enfoca en el desarrollo de IA y Python: IA Generativa, Automatización de Agentes IA, Prompt Engineering. Certificaciones: Generative AI Mastermind y Gen AI Engineering Mastermind (Outskill)." } },
-            { keywords: ['hobby', 'hobbies', 'fun', 'like', 'enjoy', 'personal', 'interests', 'pasatiempos', 'gustos'], response: { en: "I'm a massive gamer (Resident Evil, Elden Ring), love Florida outdoors (boating, fishing, basketball, kayaking), huge dog lover (Weimaraners + husky), and a passionate cook & foodie who loves traveling. All of this fuels my creativity as an engineer!", es: "Soy un gran jugador de videojuegos (Resident Evil, Elden Ring), amo las actividades al aire libre en Florida, me encantan los perros y me apasiona cocinar y viajar. ¡Esto alimenta mi creatividad!" } },
-            { keywords: ['fact', 'facts', 'curious', 'interesting', 'surprise', 'curiosidad'], response: { en: "Fun facts: I built this AI bot you're talking to! I make homemade food as gifts for friends. I survived and managed operations through severe industry crises, making me extremely resilient under pressure.", es: "Datos curiosos: ¡Construí este bot con el que estás hablando! Preparo comida casera para regalar. Superé crisis industriales severas, lo que me hace extremadamente resiliente bajo presión." } },
-            { keywords: ['contact', 'reach', 'email', 'message', 'connect', 'hire', 'contacto', 'mensaje', 'touch', 'talk'], response: { en: "You can reach Bryan via the contact form on his portfolio, or connect on LinkedIn. He's always open to new opportunities and typically replies within 24-48 hours!", es: "Puedes contactar a Bryan a través de su formulario o en LinkedIn. ¡Siempre está abierto a nuevas oportunidades y suele responder en 24-48 horas!" } },
-            { keywords: ['education', 'certif', 'degree', 'school', 'study', 'educacion', 'estudio'], response: { en: "Bryan's credentials: US High School Diploma (Penn Foster), Generative AI Mastermind & Gen AI Engineering Mastermind (Outskill), currently completing Google AI Leader and Professional certifications.", es: "Credenciales: Diploma de High School de EE. UU. (Penn Foster), Mastermind en IA Generativa (Outskill), actualmente completando Google AI Leader." } },
-            { keywords: ['flaw', 'weakness', 'improve', 'debilidad', 'mejora'], response: { en: "I tend to want to build custom AI solutions from scratch — but I've learned to balance that instinct by evaluating simpler existing solutions first. Adapting to US corporate culture has been a learning curve I'm actively overcoming through networking and certifications.", es: "A veces quiero construir soluciones a la medida desde cero, pero he aprendido a evaluar primero opciones más simples. Adaptarme a la cultura corporativa de EE. UU. ha sido una curva de aprendizaje." } },
-            { keywords: ['hello', 'hi', 'hey', 'sup', 'good morning', 'good afternoon', 'good evening', 'hola', 'buenos', 'buenas'], response: { en: "Hey there! I'm Bryan's AI Assistant. Ask me about his experience, tech stack, AI skills, portfolio projects, apps, or fun facts — or use the quick reply buttons below!", es: "¡Hola! Soy el asistente IA de Bryan. Pregúntame sobre su experiencia, habilidades técnicas, proyectos o pasatiempos. ¡O usa los botones rápidos!" } },
-            { keywords: ['portfolio', 'porfolio', 'portfolo', 'portolio', 'website', 'site', 'page', 'web', 'this', 'pagina', 'sitio'], response: { en: "This portfolio is Bryan's professional AI showcase, built with HTML, CSS, and JavaScript. It features: a Hero section with typewriter animation, About section (12+ years experience), Skills matrix (Languages, AI & Automation, Leadership), Experience timeline (Walmart, Ingeniería de Bombas, Francisco de Miranda Park), 4 Projects in a carousel, 6 fully functional Apps (AI Chatbox, ArtVault, BookNest, Chronos Elegance, Clock, PlanFlow), Contact form, and this AI Chat Widget. It uses a dark theme with glassmorphism and cyan/purple accents.", es: "Este portafolio muestra el trabajo de Bryan con HTML, CSS, JS e Inteligencia Artificial, incluyendo proyectos completos, una línea de tiempo y este chatbot asistente." } },
-            { keywords: ['what can', 'help', 'what do you', 'can you', 'your purpose', 'what are you', 'options', 'menu', 'ayuda'], response: { en: "I'm Bryan's AI portfolio assistant! I can help with: Experience (12+ years across 3 companies), Tech Stack (Python, JS, AI tools), AI Skills (GenAI, Prompt Engineering), Portfolio Projects (4 showcase projects), Apps Gallery (6 live apps), Education & Certifications, Fun Facts & Hobbies, Contact Info, and Design details. Just ask or use the quick reply buttons!", es: "¡Soy el asistente del portafolio! Puedo ayudarte con: Experiencia de Bryan, Tecnologías, Proyectos de IA, y más. ¡Pregúntame o usa los botones rápidos!" } },
-            { keywords: ['project', 'projects', 'built', 'showcase', 'compiled', 'output', 'proyecto'], response: { en: "Bryan's portfolio showcases 4 projects: Product Designer Showcase (HTML/CSS, GenAI), Interactive Games (JavaScript, HTML5 Canvas), Apps Showcase (modular web apps), and AI-Powered Applications (4 AI apps: Chatbox, Text Summarizer, Quiz Generator, Mood Journal — all Gemini-powered).", es: "El portafolio incluye 4 proyectos principales: galería de diseño de producto, juegos interactivos, galería de apps integrales, y aplicaciones potenciadas por IA." } },
-            { keywords: ['app', 'apps', 'application', 'applications', 'gallery', 'aplicacion', 'aplicaciones'], response: { en: "Bryan's Apps Gallery includes 6 fully functional web apps: AI Chatbox (this Gemini-powered assistant), ArtVault (art gallery), BookNest (book discovery), Chronos Elegance (premium clock/timer), Clock App (minimal clock), and PlanFlow (task planning). All feature modern dark themes and responsive designs!", es: "La Galería de Apps de Bryan incluye grandes proyectos: este Asistente IA, ArtVault, BookNest, Chronos Elegance, PlanFlow y Clock App." } },
-            { keywords: ['skill', 'skills', 'abilities', 'capable', 'matrix', 'habilidad'], response: { en: "Bryan's skills: Languages & Systems (HTML/CSS/JS, Python, WordPress, SQL, System Admin), AI & Automation (Generative AI/LLMs, AI Engineering, Prompt Engineering, AI Agent Automation), Leadership (Project Management, Team Leadership, Strategic Problem Solving, Cross-Cultural Communication EN/ES). 12+ years experience, 20+ projects.", es: "Habilidades de Bryan: Python, HTML/CSS/JS, IA Generativa, liderazgo de equipos y automatización de procesos. Bilingüe y con más de 12 años de experiencia." } },
-            { keywords: ['about', 'who', 'introduce', 'bio', 'himself', 'summary', 'quien'], response: { en: "Bryan Marquez is a Software Engineer with 12+ years of experience. After leading teams as Technical Lead in Venezuela, he relocated to the US. Today he specializes in AI and Evolving System Development using Python, integrating Generative AI and LLMs with his engineering foundation. Fully bilingual (EN/ES) with 20+ projects.", es: "Bryan Marquez es un Ingeniero de Software con más de 12 años de experiencia. Se especializa en la integración de Inteligencia Artificial Generativa y desarrollo en Python." } },
-            { keywords: ['design', 'theme', 'color', 'look', 'aesthetic', 'style', 'dark', 'diseno'], response: { en: "The portfolio uses a premium dark theme: deep backgrounds (#0a0a0f) with cyan (#00f0ff) and purple (#bd00ff) accents, glassmorphism cards, animated particle canvas, typewriter hero text, holographic ring visual, Space Grotesk typography, and fully responsive design.", es: "El diseño utiliza un tema oscuro premium con acentos neón en cyan y púrpura, diseño glassmorphism, fondo de partículas animado y tipografía retro futurística." } },
-            { keywords: ['made', 'build', 'how', 'create', 'developed', 'framework', 'creado', 'hecho'], response: { en: "This portfolio was built with vanilla HTML5, CSS3, and JavaScript — no heavy frameworks. The AI uses Gemini 2.0 Flash API via direct REST calls. Custom CSS with glassmorphism, pure CSS animations, JavaScript canvas for particles, and a custom-built chat system with TTS. Bryan built everything from scratch!", es: "Este portafolio fue creado completamente desde cero, usando HTML5, CSS3, y JavaScript (sin frameworks). El bot utiliza la API Rest directa a Gemini 2.0 Flash." } }
-        ];
-        const WIDGET_GENERIC_FALLBACK = {
-            en: "Bryan is a Software Engineer with 12+ years of experience, specializing in Python, Generative AI, and Process Automation. Ask about his experience, skills, projects, apps, portfolio, or hobbies — I have answers ready!",
-            es: "Bryan es un Ingeniero de Software con más de 12 años de experiencia especializado en Python e IA. Pregúntame sobre sus proyectos o experiencia."
-        };
-
-        function getWidgetPrefab(input) {
-            const lower = input.toLowerCase();
-            let best = null, bestScore = 0;
-            for (const entry of WIDGET_PREFABS) {
-                let score = 0;
-                for (const kw of entry.keywords) { if (lower.includes(kw)) score++; }
-                if (score > bestScore) { bestScore = score; best = entry; }
-            }
-            return best ? best.response[currentLang] : WIDGET_GENERIC_FALLBACK[currentLang];
-        }
-
         // --- DOM Elements ---
         const toggleBtn = document.getElementById('chat-toggle');
         const closeBtn = document.getElementById('close-chat');
@@ -714,8 +732,6 @@ Conversation Rule: Always bring the conversation naturally back to how these tra
         const chatInput = document.getElementById('chat-input');
         const sendBtn = document.getElementById('send-btn');
         const typingIndicator = document.getElementById('typing-indicator');
-        const langEnBtn = document.getElementById('lang-en');
-        const langEsBtn = document.getElementById('lang-es');
         const voiceBtn = document.getElementById('voice-btn');
         const avatar = document.getElementById('avatar');
         const uploadBtn = document.getElementById('upload-btn');
@@ -725,24 +741,49 @@ Conversation Rule: Always bring the conversation naturally back to how these tra
 
         // --- Core Functions ---
 
-        // Initialize Chat
+        // --- Expose setLanguage for Portfolio Sync ---
+        window.setLanguage = function(lang) {
+            setWidgetLanguage(lang);
+        };
+        
+        function setWidgetLanguage(lang) {
+            currentLang = Dictionary[lang] ? lang : 'en';
+            const dict = Dictionary[currentLang];
+            placeholderInput.placeholder = dict.placeholder;
+            statusText.innerText = dict.status;
+            const display = document.getElementById('widget-lang-display');
+            if (display) display.textContent = currentLang.toUpperCase();
+            
+            // Adjust RTL if Arabic or Hebrew
+            if (chatBody) {
+                if (currentLang === 'ar' || currentLang === 'he') {
+                    chatBody.style.direction = 'rtl';
+                } else {
+                    chatBody.style.direction = 'ltr';
+                }
+            }
+        }
+
+        // Auto-detect current language if already defined
+        if (typeof currentPortfolioLang === 'function') {
+            setWidgetLanguage(currentPortfolioLang());
+        } else if (localStorage.getItem('portfolio-lang')) {
+            setWidgetLanguage(localStorage.getItem('portfolio-lang'));
+        }
+
         function initChat() {
-            // Delay greeting slightly for effect
             setTimeout(() => {
                 showTyping();
                 setTimeout(() => {
                     hideTyping();
-                    addBotMessage(Dictionary[currentLang].greeting, true);
+                    addBotMessage(Dictionary[currentLang].greeting, { showQuickReplies: true });
                 }, 1200);
             }, 500);
         }
 
-        // Toggle Chat Window
         function toggleChat() {
             isChatOpen = !isChatOpen;
             container.classList.toggle('active');
-
-            // Swap icon based on state
             if (isChatOpen) {
                 toggleBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>';
                 if (chatBody.children.length <= 1) initChat();
@@ -752,32 +793,32 @@ Conversation Rule: Always bring the conversation naturally back to how these tra
             }
         }
 
-        // Generate Time String
         function getTimeString() {
-            const now = new Date();
-            return now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            return new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
         }
 
-        // Avatar Expressions
         function setAvatarExpression(exp) {
             avatar.className = 'css-avatar ' + exp;
         }
 
-        // Speech Synthesis (TTS)
+        // TTS with improved voice selection
         function speakText(text) {
             if (!voiceEnabled || !window.speechSynthesis) return;
-
-            window.speechSynthesis.cancel(); // Stop talking currently
+            window.speechSynthesis.cancel();
             const utterance = new SpeechSynthesisUtterance(text);
             utterance.lang = Dictionary[currentLang].voiceLang;
+            utterance.rate = 0.95;
+            utterance.pitch = 1.0;
+
+            // Try to pick a softer, more natural voice
+            const bestVoice = pickBestVoice(currentLang);
+            if (bestVoice) utterance.voice = bestVoice;
 
             utterance.onstart = () => setAvatarExpression('speaking');
             utterance.onend = () => setAvatarExpression('');
-
             window.speechSynthesis.speak(utterance);
         }
 
-        // UI Updates
         function scrollBottom() {
             chatBody.scrollTop = chatBody.scrollHeight;
         }
@@ -796,75 +837,84 @@ Conversation Rule: Always bring the conversation naturally back to how these tra
             typingIndicator.style.display = 'none';
         }
 
-        // Construct HTML Message wrappers
         function buildMessageNode(senderStr, contentHtml) {
             const wrapper = document.createElement('div');
             wrapper.className = `message ${senderStr}`;
-
             const content = document.createElement('div');
             content.className = 'message-content';
             content.innerHTML = contentHtml;
-
             const time = document.createElement('div');
             time.className = 'timestamp';
             time.innerText = getTimeString();
-
             wrapper.appendChild(content);
             wrapper.appendChild(time);
             return wrapper;
         }
 
-        // Send Bot Message with optional Quick Replies
-        function addBotMessage(text, includeQuickReplies = false) {
-            let htmlStr = text;
-
-            if (includeQuickReplies) {
-                const dict = Dictionary[currentLang].quick;
-                htmlStr += `<div class="quick-replies">
-                    <button class="quick-btn" onclick="handleQuickReply('exp')">${dict.exp}</button>
-                    <button class="quick-btn" onclick="handleQuickReply('tech')">${dict.tech}</button>
-                    <button class="quick-btn" onclick="handleQuickReply('projects')">${dict.projects}</button>
-                    <button class="quick-btn" onclick="handleQuickReply('contact')">${dict.contact}</button>
-                </div>`;
+        // Build quick-reply buttons HTML
+        function buildQuickRepliesHtml() {
+            let html = '<div class="quick-replies">';
+            for (const [intentId, labels] of Object.entries(quickReplyIntents)) {
+                html += `<button class="quick-btn" onclick="handleQuickReply('${intentId}')">${labels[currentLang]}</button>`;
             }
+            html += '</div>';
+            return html;
+        }
 
+        // Build inline suggestion chips HTML
+        function buildSuggestionsHtml(intentSuggestions) {
+            if (!intentSuggestions || intentSuggestions.length === 0) return '';
+            let html = '<div class="quick-replies" style="margin-top:8px;">';
+            for (const sId of intentSuggestions) {
+                const label = suggestionLabels[sId];
+                if (label) {
+                    html += `<button class="quick-btn" onclick="handleQuickReply('${sId}')" style="font-size:0.72rem;padding:4px 10px;">${label[currentLang]}</button>`;
+                }
+            }
+            html += '</div>';
+            return html;
+        }
+
+        // Send Bot Message with options
+        function addBotMessage(text, opts = {}) {
+            let htmlStr = text;
+            if (opts.showQuickReplies) {
+                htmlStr += buildQuickRepliesHtml();
+            }
+            if (opts.suggestions && opts.suggestions.length > 0) {
+                htmlStr += buildSuggestionsHtml(opts.suggestions);
+            }
             const msgNode = buildMessageNode('bot', htmlStr);
             chatBody.appendChild(msgNode);
             scrollBottom();
-            speakText(text); // Speak if enabled
+            speakText(text);
         }
 
-        // Special render for contact form inside chat
-        function renderContactForm() {
+        // Contact form render
+        function renderContactForm(introText) {
             const dict = Dictionary[currentLang].form;
-            const formId = 'chat-form-' + Date.now();
             const formHtml = `
-                <form class="chat-form" id="${formId}" onsubmit="submitChatForm(event, this)">
+                <form class="chat-form" id="chat-form-${Date.now()}" onsubmit="submitChatForm(event, this)">
                     <input type="text" name="name" placeholder="${dict.namePlaceholder}" required />
                     <input type="email" name="email" placeholder="${dict.emailPlaceholder}" required />
                     <textarea name="message" rows="3" placeholder="${dict.msgPlaceholder}" required></textarea>
                     <button type="submit" name="submitBtn">${dict.submit}</button>
                 </form>
             `;
-            const msgNode = buildMessageNode('bot', Dictionary[currentLang].responses.formIntro + formHtml);
+            const fullText = introText || Dictionary[currentLang].formIntro;
+            const msgNode = buildMessageNode('bot', fullText + formHtml);
             chatBody.appendChild(msgNode);
             scrollBottom();
-            speakText(Dictionary[currentLang].responses.formIntro);
+            speakText(fullText);
         }
 
         window.submitChatForm = async function (e, formElement) {
             e.preventDefault();
-            
             const nameInput = formElement.elements['name'];
             const emailInput = formElement.elements['email'];
             const msgInput = formElement.elements['message'];
             const submitBtn = formElement.elements['submitBtn'];
-
             if (!nameInput || !emailInput || !msgInput) return;
-
-            const name = nameInput.value;
-            const email = emailInput.value;
-            const message = msgInput.value;
 
             const originalBtnText = submitBtn.innerHTML;
             submitBtn.innerHTML = currentLang === 'es' ? 'Transmitiendo...' : 'Transmitting...';
@@ -873,14 +923,16 @@ Conversation Rule: Always bring the conversation naturally back to how these tra
             try {
                 const response = await fetch('/api/contact', {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ name, email, message, source: 'Floating Chat Widget' })
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        name: nameInput.value,
+                        email: emailInput.value,
+                        message: msgInput.value,
+                        source: 'Floating Chat Widget'
+                    })
                 });
-
                 if (response.ok) {
-                    formElement.innerHTML = `<span style="color:var(--accent-cyan); font-weight:bold;">${Dictionary[currentLang].responses.formSent}</span>`;
+                    formElement.innerHTML = `<span style="color:var(--accent-cyan); font-weight:bold;">${Dictionary[currentLang].formSent}</span>`;
                 } else {
                     submitBtn.innerHTML = currentLang === 'es' ? 'Error. Reintentar' : 'Failed. Try again';
                     submitBtn.disabled = false;
@@ -891,49 +943,37 @@ Conversation Rule: Always bring the conversation naturally back to how these tra
             }
         };
 
-        // User Message handler
         function addUserMessage(htmlStr) {
             const msgNode = buildMessageNode('user', htmlStr);
             chatBody.appendChild(msgNode);
             scrollBottom();
         }
 
-        // Logic routing for bot responses
+        // --- Intent-aware response routing ---
         async function handleUserLogic(inputCommand) {
-            let isQuickReply = false;
-            let responseKey = '';
-            let showForm = false;
-
-            // Direct match for quick reply buttons
-            if (inputCommand === 'exp') {
-                isQuickReply = true;
-                responseKey = 'exp';
-            } else if (inputCommand === 'tech') {
-                isQuickReply = true;
-                responseKey = 'tech';
-            } else if (inputCommand === 'projects') {
-                isQuickReply = true;
-                responseKey = 'projects';
-            } else if (inputCommand === 'contact') {
-                isQuickReply = true;
-                showForm = true;
-            }
+            // Map old quick-reply keys to new intent IDs
+            const quickReplyMap = { exp: 'experience', tech: 'skills', projects: 'projects', contact: 'contact', ai: 'ai' };
+            const intentId = quickReplyMap[inputCommand];
+            const isQuickReply = !!intentId;
 
             showTyping();
 
             if (isQuickReply) {
-                // Static 1-second delay for quick replies
                 setTimeout(() => {
                     hideTyping();
-                    if (showForm) {
-                        renderContactForm();
+                    const resolvedIntent = intentId;
+
+                    if (shouldTriggerForm(resolvedIntent)) {
+                        const contactResponse = getRandomResponse('contact', currentLang);
+                        renderContactForm(contactResponse);
                     } else {
-                        // Send response and append quick links again
-                        addBotMessage(Dictionary[currentLang].responses[responseKey], true);
+                        const reply = getRandomResponse(resolvedIntent, currentLang);
+                        const suggestions = getSuggestions(resolvedIntent);
+                        addBotMessage(reply, { suggestions });
                     }
-                }, 1000);
+                }, 800 + Math.random() * 400);
             } else {
-                // Direct Gemini API Integration with Prefab Fallback
+                // Free-text: try Gemini first, intent engine fallback
                 try {
                     widgetConversationHistory.push({ role: 'user', parts: [{ text: inputCommand }] });
 
@@ -941,7 +981,7 @@ Conversation Rule: Always bring the conversation naturally back to how these tra
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({
-                            system_instruction: { parts: [{ text: WIDGET_SYSTEM_PROMPT + `\n\nCRITICAL INSTRUCTION: The user's interface is currently set to ${currentLang === 'es' ? 'SPANISH. You MUST reply in Spanish.' : 'ENGLISH. You MUST reply in English.'}` }] },
+                            system_instruction: { parts: [{ text: WIDGET_SYSTEM_PROMPT + `\\n\\nCRITICAL INSTRUCTION: You MUST answer strictly in the language corresponding to language code '${currentLang}'. Adapt any technical terms professionally.` }] },
                             contents: widgetConversationHistory,
                             generationConfig: { temperature: 0.7, topP: 0.9, maxOutputTokens: 512 }
                         })
@@ -950,95 +990,66 @@ Conversation Rule: Always bring the conversation naturally back to how these tra
                     if (!response.ok) throw new Error(`API ${response.status}`);
 
                     const data = await response.json();
-                    const reply = data.candidates?.[0]?.content?.parts?.[0]?.text || getWidgetPrefab(inputCommand);
-                    widgetConversationHistory.push({ role: 'model', parts: [{ text: reply }] });
+                    const reply = data.candidates?.[0]?.content?.parts?.[0]?.text;
 
-                    hideTyping();
-                    addBotMessage(reply);
-
+                    if (reply) {
+                        widgetConversationHistory.push({ role: 'model', parts: [{ text: reply }] });
+                        hideTyping();
+                        // Detect intent for suggestion chips even on Gemini responses
+                        const detected = detectIntent(inputCommand);
+                        const suggestions = detected ? getSuggestions(detected.id) : [];
+                        addBotMessage(reply, { suggestions });
+                    } else {
+                        throw new Error('Empty Gemini response');
+                    }
                 } catch (error) {
-                    hideTyping();
                     console.error('Chat API Error:', error);
-                    const prefab = getWidgetPrefab(inputCommand);
-                    addBotMessage(prefab);
+                    hideTyping();
+                    // Fallback to intent engine
+                    const detected = detectIntent(inputCommand);
+                    const reply = getRandomResponse(detected.id, currentLang);
+                    const suggestions = getSuggestions(detected.id);
+                    addBotMessage(reply, { suggestions });
                 }
             }
         }
 
-        // Global exposing for quick reply buttons injected via innerHTML
+        // Global handler for quick reply and suggestion chips
         window.handleQuickReply = function (cmd) {
-            const label = Dictionary[currentLang].quick[cmd];
+            const label = quickReplyIntents[cmd]
+                ? quickReplyIntents[cmd][currentLang]
+                : (suggestionLabels[cmd] ? suggestionLabels[cmd][currentLang] : cmd);
             addUserMessage(label);
             handleUserLogic(cmd);
         };
 
-        // Primary Event Handler for sending text
         function sendMessage() {
             const text = chatInput.value.trim();
             if (!text) return;
-
             addUserMessage(text);
             chatInput.value = '';
-
             handleUserLogic(text);
         }
 
-        // Handling File Upload Mock
         function handleFileUpload(e) {
             const file = e.target.files[0];
             if (!file) return;
-
             const iconSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="12" y1="18" x2="12" y2="12"></line><line x1="9" y1="15" x2="15" y2="15"></line></svg>`;
-
-            const html = `
-                <div>Uploading file:</div>
-                <div class="file-attachment">
-                    ${iconSvg} 
-                    <span style="font-size:0.8rem">${file.name}</span>
-                </div>
-            `;
-
-            addUserMessage(html);
-            fileInput.value = ''; // reset
-
+            addUserMessage(`<div>Uploading file:</div><div class="file-attachment">${iconSvg} <span style="font-size:0.8rem">${file.name}</span></div>`);
+            fileInput.value = '';
             showTyping();
             setTimeout(() => {
                 hideTyping();
-                addBotMessage(Dictionary[currentLang].responses.uploadReady);
+                addBotMessage(Dictionary[currentLang].uploadReady);
             }, 1500);
         }
 
-        // Switch Language
-        function setLanguage(lang, fromSync = false) {
-            if (currentLang === lang && fromSync) return;
-            currentLang = lang;
+        // Replaced by new window.setLanguage in core functions
 
-            // Update UI
-            langEnBtn.classList.toggle('active-lang', lang === 'en');
-            langEsBtn.classList.toggle('active-lang', lang === 'es');
-
-            placeholderInput.placeholder = Dictionary[lang].placeholder;
-            statusText.innerText = Dictionary[lang].status;
-
-            // Stop speaking previous lang
-            if (window.speechSynthesis) window.speechSynthesis.cancel();
-
-            // Sync portfolio language if available
-            if (!fromSync && typeof window.setPortfolioLanguage === 'function') {
-                window.setPortfolioLanguage(lang, true);
-            }
-        }
-
-        // Expose globally so portfolio can call it
-        window.setLanguage = setLanguage;
-
-        // Toggle Voice
         function toggleVoice() {
             voiceEnabled = !voiceEnabled;
             voiceBtn.classList.toggle('voice-active', voiceEnabled);
-
             if (voiceEnabled && window.speechSynthesis) {
-                // Test Speak
                 speakText(Dictionary[currentLang].status);
             } else if (window.speechSynthesis) {
                 window.speechSynthesis.cancel();
@@ -1052,17 +1063,15 @@ Conversation Rule: Always bring the conversation naturally back to how these tra
         chatInput.addEventListener('keypress', (e) => {
             if (e.key === 'Enter') sendMessage();
         });
-
-        // Language toggle listeners
-        langEnBtn.addEventListener('click', () => setLanguage('en'));
-        langEsBtn.addEventListener('click', () => setLanguage('es'));
-
-        // Voice toggle listener
+        // Removed old language buttons
         voiceBtn.addEventListener('click', toggleVoice);
-
-        // Upload listeners
         uploadBtn.addEventListener('click', () => fileInput.click());
         fileInput.addEventListener('change', handleFileUpload);
+
+        // Pre-load voices for better TTS
+        if (window.speechSynthesis) {
+            window.speechSynthesis.onvoiceschanged = () => { /* voices now available */ };
+        }
 
     </script>
 </body>

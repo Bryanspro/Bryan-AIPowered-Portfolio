@@ -2,3 +2,5 @@ config.js
 .env
 __pycache__/
 portfolio.db
+server.log
+messages.txt

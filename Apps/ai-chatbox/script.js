@@ -54,86 +54,12 @@ const GREETING = {
     subtitle: "Hi! I'm Bryan's AI assistant. Ask me anything about his experience, skills, or background — I'm here to help."
 };
 
-// Smart prefabricated answers when the API is unavailable
-const PREFAB_ANSWERS = [
-    {
-        keywords: ['experience', 'work', 'job', 'career', 'background', 'history', 'worked'],
-        response: "Bryan has **12+ years of experience** in the tech industry:\n\n* **Walmart (2024–2025, FL):** Handled high-volume POS systems and bilingual tech troubleshooting.\n* **Ingeniería de Bombas de Venezuela (2015–2022):** Technical Lead & IT Manager — automated workflows via custom scripts, managed database architecture, and achieved >90% of business goals during a severe industry crisis.\n* **Francisco de Miranda Park (2018):** Junior Web Developer (HTML/CSS/JS).\n\nHis transition to the US and into AI was **proactive, strategic, and driven by continuous learning.**"
-    },
-    {
-        keywords: ['tech', 'stack', 'technologies', 'tools', 'programming', 'language'],
-        response: "Bryan's tech stack combines IT infrastructure with modern AI development:\n\n* **Languages:** Python, HTML/CSS, JavaScript, SQL\n* **AI & ML:** Generative AI (LLMs), Prompt Engineering, AI Agent Automation\n* **Web:** WordPress, FastAPI, REST APIs\n* **Other:** Database Architecture, Workflow Automation, Process Optimization\n* **Languages:** Fully bilingual — English & Spanish"
-    },
-    {
-        keywords: ['ai', 'artificial', 'intelligence', 'machine', 'learning', 'genai', 'generative'],
-        response: "Bryan is deeply focused on **AI and Python Development**. His current focus areas include:\n\n* **Generative AI** — Working with LLMs and building intelligent solutions\n* **AI Agent Automation** — Creating automated workflows powered by AI\n* **Prompt Engineering** — Expert-level prompt design for optimal model outputs\n* **Certifications:** Generative AI Mastermind & Gen AI Engineering Mastermind from Outskill, currently completing Google AI Leader and Professional certifications.\n\nFun fact: He built this very AI bot you're talking to right now! 🤖"
-    },
-    {
-        keywords: ['hobby', 'hobbies', 'fun', 'like', 'enjoy', 'free time', 'personal', 'interests'],
-        response: "Great question! Here are some things I love:\n\n* 🎮 **Gaming & Tech:** I'm a massive gamer — PC titles like Resident Evil and Elden Ring fuel my engineering curiosity and passion for UI/UX design.\n* 🎣 **Outdoors:** Living in Florida, I love boating, fishing, basketball, and kayaking.\n* 🐕 **Animals:** Huge dog lover! I have Weimaraners and a husky.\n* 🍽️ **Travel & Food:** Road trips across the US East Coast, exploring Spain and Greece, and I'm a passionate home cook who loves carving meats and trying everything from hot pot to Thai sushi.\n\nAll of these fuel my creativity and make me a well-rounded team player! 💪"
-    },
-    {
-        keywords: ['fact', 'facts', 'curious', 'interesting', 'surprise', 'cool'],
-        response: "Here are some fun facts about Bryan:\n\n* 🤖 I built this very AI assistant you're chatting with right now — to save recruiters time!\n* 🍳 I sometimes make homemade food as gifts for my friends.\n* 💪 I survived and managed operations through severe industry crises, making me extremely resilient under pressure.\n* 🎮 Gaming actively fuels my engineering curiosity — it inspires my passion for UI/UX and physics-based mechanics."
-    },
-    {
-        keywords: ['contact', 'reach', 'email', 'message', 'connect', 'hire', 'linkedin', 'touch', 'talk'],
-        response: "You can reach Bryan through:\n\n* 📬 The **contact form** on his main portfolio page\n* 💼 Connect on **LinkedIn** for professional inquiries\n* 💬 Or keep chatting with me here — I'll do my best to answer your questions!\n\nBryan is always open to new opportunities and tech challenges. He typically replies within 24–48 hours."
-    },
-    {
-        keywords: ['education', 'certif', 'degree', 'school', 'study', 'learn'],
-        response: "Bryan's education & certifications include:\n\n* 🎓 **US High School Diploma** from Penn Foster — secured to seamlessly integrate into the US market\n* 🏅 **Generative AI Mastermind** — Outskill\n* 🏅 **Gen AI Engineering Mastermind** — Outskill\n* 📚 Currently completing **Google AI Leader** and **Professional** certifications\n\nBryan is a firm believer in continuous learning and strategic upskilling."
-    },
-    {
-        keywords: ['flaw', 'weakness', 'improve', 'challenge', 'struggle'],
-        response: "Honest self-reflection is something I value! Here's what I'd say:\n\n* 🔧 Because I'm deeply passionate about AI, my instinct is to build custom solutions from scratch. I've learned to balance this 'builder's instinct' by first evaluating simpler existing solutions, prioritizing deadlines over excitement.\n* 🌎 Adapting to US corporate culture from a management role abroad has been a learning curve, but I'm actively overcoming it through networking and US-based certifications.\n\nThese experiences have made me a stronger, more adaptable professional."
-    },
-    {
-        keywords: ['hello', 'hi', 'hey', 'sup', 'what\'s up', 'greet', 'good morning', 'good afternoon', 'good evening'],
-        response: "Hey there! 👋 I'm Bryan's AI Resume Assistant. I can tell you about his:\n\n* 💼 Professional experience (12+ years)\n* ⚙️ Tech stack & AI skills\n* 🚀 Portfolio projects & apps\n* 🎯 Fun facts & hobbies\n* 📬 How to get in touch\n\nJust ask away, or tap one of the quick-reply chips below!"
-    },
-    {
-        keywords: ['portfolio', 'porfolio', 'portfolo', 'portolio', 'website', 'site', 'page', 'web', 'this'],
-        response: "This portfolio is Bryan's **professional AI showcase**, built entirely with HTML, CSS, and JavaScript. It features:\n\n* 🏠 **Hero Section** — Animated typewriter intro with holographic ring visual\n* 👤 **About (Core Directives)** — 12+ years experience overview with key stats\n* ⚙️ **Skills (Engineering Matrix)** — Languages & Systems, AI & Automation, Leadership\n* 📅 **Experience (Execution Timeline)** — Interactive timeline with Walmart, Ingeniería de Bombas, and Francisco de Miranda Park\n* 🚀 **Projects (Compiled Outputs)** — Scrollable carousel of 4 projects including Interactive Games, AI Apps & more\n* 📱 **Apps Gallery** — 6 fully functional apps (AI Chatbox, ArtVault, BookNest, Chronos Elegance, Clock, PlanFlow)\n* 📬 **Contact (Open Port)** — Contact form for inquiries\n* 🤖 **AI Chat Widget** — This chatbot you're using right now!\n\nThe entire site uses a dark theme with glassmorphism, cyan/purple accents, and a particle canvas background."
-    },
-    {
-        keywords: ['what can', 'help', 'what do you', 'can you', 'your purpose', 'what are you', 'options', 'menu'],
-        response: "I'm Bryan's AI-powered portfolio assistant! Here's what I can help you with:\n\n* 💼 **Experience** — Bryan's 12+ year career history across 3 companies\n* ⚙️ **Tech Stack** — His programming languages, AI tools, and frameworks\n* 🧠 **AI Skills** — Generative AI, Prompt Engineering, AI Agent Automation\n* 🚀 **Portfolio Projects** — 4 showcase projects (Games, Apps, AI Assistant, Designer)\n* 📱 **Apps Gallery** — 6 live apps built from scratch\n* 🎓 **Education & Certifications** — Penn Foster, Outskill, Google\n* 🎯 **Fun Facts & Hobbies** — Gaming, outdoors, cooking, travel\n* 📬 **Contact Info** — How to reach Bryan\n* 🎨 **Design & Theme** — How this portfolio was built\n\nJust type any question or use the quick-reply chips!"
-    },
-    {
-        keywords: ['project', 'projects', 'built', 'showcase', 'compiled', 'output'],
-        response: "Bryan's portfolio showcases **4 projects**:\n\n* 🎨 **Product Designer Showcase** — Curated portfolio layouts for product designers with UX case studies (HTML/CSS, GenAI, Templates)\n* 🎮 **Interactive Games** — Game development projects exploring mechanics, system design, and real-time gameplay (JavaScript, HTML5 Canvas)\n* 📱 **Apps Showcase** — Collection of modular web applications exploring complex UI patterns (JavaScript, HTML/CSS, UX/UI)\n* 🤖 **AI-Powered Applications** — 4 intelligent apps: AI Chatbox (conversational assistant), AI Text Summarizer (summaries/key points/translation), AI Quiz Generator (topic-based quizzes), AI Mood Journal (sentiment tracking) — all powered by GenAI\n\nEach project demonstrates different aspects of Bryan's engineering capabilities!"
-    },
-    {
-        keywords: ['app', 'apps', 'application', 'applications', 'gallery'],
-        response: "Bryan's **Apps Gallery** includes 6 fully functional web applications:\n\n* 🤖 **AI Chatbox** — This conversational AI assistant powered by Gemini, with multi-turn context and smart fallbacks\n* 🎨 **ArtVault** — A curated art gallery application for visual browsing\n* 📚 **BookNest** — A book discovery and management application\n* ⏰ **Chronos Elegance** — A premium clock/stopwatch/timer app with multiple themes, alarms, and display modes\n* 🕐 **Clock App** — A clean, minimal clock application\n* 📋 **PlanFlow** — A task/project planning and workflow management application\n\nAll apps feature modern dark themes, smooth animations, and responsive designs!"
-    },
-    {
-        keywords: ['skill', 'skills', 'abilities', 'capable', 'matrix', 'engineering'],
-        response: "Bryan's skills are organized into three categories:\n\n* ⚙️ **Languages & Systems:** HTML/CSS/JS, Python, WordPress/CMS/SaaS, SQL & Database Admin, System Administration\n* 🧠 **AI & Automation:** Generative AI (LLMs), AI Engineering, Prompt Engineering, AI Agent Process Automation\n* 🌐 **Leadership & Skills:** Project Management, Team Leadership, Strategic Problem Solving, Cross-Cultural Communication (EN/ES)\n\nHe has 12+ years of experience, is fully bilingual (English/Spanish), and has completed 10+ projects."
-    },
-    {
-        keywords: ['about', 'who', 'introduce', 'bio', 'himself', 'background', 'summary'],
-        response: "Bryan Marquez is a **Software Engineer** with 12+ years of experience managing complex databases and automating critical workflows. After leading technical teams as a **Technical Lead** in Venezuela, he relocated to the **United States** to leverage his expertise in a high-growth environment.\n\nToday, he specializes in **Artificial Intelligence and Evolving System Development** using Python, leveraging a versatile stack including SQL, WordPress, and HTML/CSS/JS. By integrating **Generative AI and LLMs** with his engineering foundation — backed by Outskill's Gen AI Masterminds credentials — he creates smart, automated systems that are efficient and accessible.\n\nHe's fully bilingual (EN 🇺🇸 / ES 🇪🇸) and has completed 10+ professional projects."
-    },
-    {
-        keywords: ['design', 'theme', 'color', 'look', 'aesthetic', 'style', 'dark', 'glow'],
-        response: "The portfolio uses a premium **dark theme** with cutting-edge design:\n\n* 🌑 **Color palette:** Deep dark backgrounds (#0a0a0f) with cyan (#00f0ff) and purple (#bd00ff) accents\n* ✨ **Glassmorphism** — Frosted-glass cards with subtle transparency and blur effects\n* 🎆 **Particle canvas** — Animated neural-network-style connected dots in the background\n* 💫 **Animations** — Typewriter hero text, smooth fade-ins, holographic ring visual, glow effects\n* 🔤 **Typography** — Space Grotesk font for a modern, tech-forward feel\n* 📱 **Responsive** — Fully optimized for all screen sizes"
-    },
-    {
-        keywords: ['made', 'build', 'how', 'create', 'developed', 'technology', 'framework'],
-        response: "This portfolio was built with a clean, modern stack:\n\n* **Frontend:** Vanilla HTML5, CSS3, and JavaScript — no heavy frameworks\n* **AI Backend:** Gemini 2.0 Flash API via direct REST calls\n* **Design System:** Custom CSS with CSS variables, glassmorphism, and responsive grid\n* **Animations:** Pure CSS animations + JavaScript canvas for the particle background\n* **Chat System:** Custom-built chat widget and standalone chatbox app with TTS support\n* **Hosting:** Can be served by any static file server\n\nBryan built everything from scratch to demonstrate his full-stack engineering capabilities!"
-    }
-];
-
-const GENERIC_FALLBACK = "Thanks for your question! While I'm having a brief connection issue with my AI brain, here's what I can tell you: Bryan is a **Software Engineer with 12+ years of experience**, specializing in **Python, Generative AI, and Process Automation**. Feel free to ask about his experience, skills, projects, apps, portfolio, hobbies, or how to contact him — I have pre-loaded answers ready! 🚀";
-
 // ─── State ──────────────────────────────────────────
 let messages = [];
 let conversationHistory = [];
 let isWaitingForResponse = false;
 let voiceEnabled = false;
-let fallbackIndex = 0;
+let currentLang = localStorage.getItem('portfolio-lang') || 'en';
 
 // ─── DOM References ─────────────────────────────────
 const chatMessages = document.getElementById('chat-messages');
@@ -146,27 +72,15 @@ const avatarOrb = document.getElementById('avatar-orb');
 const statusText = document.getElementById('status-text');
 const quickRepliesBar = document.getElementById('quick-replies-bar');
 
-
-// ─── Prefab Answer Matcher ──────────────────────────
+// ─── Intent-based Fallback (replaces PREFAB_ANSWERS) ────
 function getPrefabAnswer(userInput) {
-    const input = userInput.toLowerCase();
-    let bestMatch = null;
-    let bestScore = 0;
+    const detected = detectIntent(userInput);
+    return getRandomResponse(detected.id, currentLang) || "I'm Bryan's AI assistant. Ask me about his experience, skills, AI work, or projects!";
+}
 
-    for (const entry of PREFAB_ANSWERS) {
-        let score = 0;
-        for (const keyword of entry.keywords) {
-            if (input.includes(keyword)) {
-                score++;
-            }
-        }
-        if (score > bestScore) {
-            bestScore = score;
-            bestMatch = entry;
-        }
-    }
-
-    return bestMatch ? bestMatch.response : GENERIC_FALLBACK;
+function getIntentSuggestions(userInput) {
+    const detected = detectIntent(userInput);
+    return getSuggestions(detected.id);
 }
 
 
@@ -180,6 +94,35 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // ─── Event Bindings ─────────────────────────────────
 function bindEvents() {
+    // Translate UI based on currentLang
+    const dictUI = {
+        en: { place: "Ask me anything about Bryan...", stat: "Online — Ready", dis: "Powered by GenAI · Responses may not always be accurate" },
+        es: { place: "Pregúntame sobre Bryan...", stat: "En línea", dis: "Impulsado por GenAI · Respuestas pueden no ser exactas" },
+        pt: { place: "Pergunte algo sobre Bryan...", stat: "Online", dis: "Desenvolvido por GenAI" },
+        de: { place: "Fragen Sie mich nach Bryan...", stat: "Online", dis: "Unterstützt durch GenAI" },
+        fr: { place: "Demandez-moi sur Bryan...", stat: "En ligne", dis: "Propulsé par GenAI" },
+        ja: { place: "Bryanについて何でも聞いてください...", stat: "オンライン", dis: "GenAI 搭載" },
+        ko: { place: "Bryan에 대해 무엇이든 물어보세요...", stat: "온라인", dis: "GenAI 기반" },
+        zh: { place: "问我关于 Bryan 的问题...", stat: "在线", dis: "由 GenAI 提供支持" },
+        ar: { place: "اسألني أي شيء عن برايان...", stat: "متصل", dis: "مشغل بواسطة GenAI" },
+        hi: { place: "ब्रायन के बारे में कुछ भी पूछें...", stat: "ऑनलाइन", dis: "GenAI द्वारा संचालित" },
+        he: { place: "שאל אותי משהו על בריאן...", stat: "מחובר", dis: "מופעל ע״י GenAI" }
+    };
+    const langDict = dictUI[currentLang] || dictUI['en'];
+    messageInput.placeholder = langDict.place;
+    statusText.textContent = langDict.stat;
+    const disclaimer = document.querySelector('.disclaimer');
+    if (disclaimer) disclaimer.textContent = langDict.dis;
+    
+    // Update Quick Reply Chips from intent engine
+    const qrMap = { 'exp': 'experience', 'tech': 'skills', 'ai': 'ai', 'fun': 'smalltalk', 'contact': 'contact' };
+    document.querySelectorAll('.chip').forEach(chip => {
+        const cat = chip.dataset.cat;
+        if (qrMap[cat] && quickReplyIntents[qrMap[cat]] && quickReplyIntents[qrMap[cat]][currentLang]) {
+            chip.textContent = quickReplyIntents[qrMap[cat]][currentLang];
+        }
+    });
+
     sendBtn.addEventListener('click', handleSend);
 
     messageInput.addEventListener('keydown', (e) => {
@@ -199,7 +142,16 @@ function bindEvents() {
         }
     });
 
-    // Dynamic prompts for quick replies to prevent repetition
+    // Intent-based quick-reply routing
+    const quickReplyIntentMap = {
+        'exp': 'experience',
+        'tech': 'skills',
+        'ai': 'ai',
+        'fun': 'smalltalk',
+        'contact': 'contact'
+    };
+
+    // Rotating prompts for Gemini (keeps variety when API is available)
     const rotatingPrompts = {
         'exp': [
             "Tell me about Bryan's work experience.",
@@ -208,16 +160,16 @@ function bindEvents() {
             "Summarize Bryan's 12+ years of professional experience."
         ],
         'tech': [
-            "What is Bryan's primary programming tech stack and software engineering experience? (Focus on programming, databases, UI/UX, and non-AI tools)",
-            "Which programming languages, frameworks, and database systems does Bryan master?",
-            "Tell me about Bryan's traditional software engineering skills and frontend/backend tech.",
-            "How does Bryan build software architecture without relying on AI tools?"
+            "What is Bryan's primary programming tech stack?",
+            "Which programming languages and frameworks does Bryan master?",
+            "Tell me about Bryan's software engineering skills.",
+            "How does Bryan build software architecture?"
         ],
         'ai': [
-            "What are Bryan's specific AI skills, and everything related to his AI experience? (Focus exclusively on Generative AI, LLMs, and AI automation)",
-            "Tell me about Bryan's experience with Generative AI, Prompt Engineering, and AI tools.",
-            "What AI-specific certifications does Bryan hold from Outskill and Google?",
-            "How does Bryan use Artificial Intelligence for workflow automation and evolving system design?"
+            "What are Bryan's specific AI skills?",
+            "Tell me about Bryan's experience with Generative AI and Prompt Engineering.",
+            "What AI certifications does Bryan hold?",
+            "How does Bryan use AI for workflow automation?"
         ],
         'fun': [
             "Tell me a fun fact about Bryan.",
@@ -232,8 +184,7 @@ function bindEvents() {
             "I'd like to hire Bryan. How do I contact him?"
         ]
     };
-    
-    // Keep track of which prompt we are on
+
     const promptIndices = { exp: 0, tech: 0, ai: 0, fun: 0, contact: 0 };
 
     quickRepliesBar.addEventListener('click', (e) => {
@@ -246,25 +197,24 @@ function bindEvents() {
                 promptIndices[cat] = (promptIndices[cat] + 1) % arr.length;
                 messageInput.value = prompt;
             } else if (chip.dataset.prompt) {
-                // Fallback for any old chips
                 messageInput.value = chip.dataset.prompt;
             }
-            
+
             // Intercept Contact chip to inject form directly
             if (cat === 'contact') {
                 const text = messageInput.value || "How can I get in touch with Bryan?";
                 messageInput.value = '';
                 addMessage('user', text);
                 conversationHistory.push({ role: 'user', parts: [{ text: text }] });
-                
+
                 isWaitingForResponse = true;
                 showTyping();
-                
+
                 setTimeout(() => {
                     hideTyping();
-                    const introMsg = "You can reach Bryan right here! Leave your name, email, and a short message below, and he'll be notified immediately.";
+                    const introMsg = getRandomResponse('contact', currentLang) || "You can reach Bryan right here! Leave your name, email, and a short message below.";
                     conversationHistory.push({ role: 'model', parts: [{ text: introMsg }] });
-                    addMessage('bot', introMsg, true); // Inject contact form
+                    addMessage('bot', introMsg, true);
                     speakText(introMsg);
                     isWaitingForResponse = false;
                 }, 800);
@@ -295,10 +245,11 @@ async function handleSend() {
     showTyping();
 
     try {
+        const dynamicPrompt = SYSTEM_PROMPT + "\\nCRITICAL RULE: You MUST answer strictly in the language corresponding to language code '" + currentLang + "'. Adapt any technical terms professionally.";
+        
         const requestBody = {
-            system_instruction: {
-                parts: [{ text: SYSTEM_PROMPT }]
-            },
+            system_instruction: { parts: [{ text: dynamicPrompt }] },
+
             contents: conversationHistory,
             generationConfig: {
                 temperature: 0.7,
@@ -326,14 +277,17 @@ async function handleSend() {
         conversationHistory.push({ role: 'model', parts: [{ text: reply }] });
 
         hideTyping();
-        addMessage('bot', reply);
+        // Add suggestion chips even on Gemini responses
+        const intentSuggestions = getIntentSuggestions(text);
+        addMessage('bot', reply, false, intentSuggestions);
         speakText(stripMarkdown(reply));
 
     } catch (err) {
         console.error('Gemini API Error:', err);
         hideTyping();
         const fallback = getPrefabAnswer(text);
-        addMessage('bot', fallback);
+        const intentSuggestions = getIntentSuggestions(text);
+        addMessage('bot', fallback, false, intentSuggestions);
         speakText(stripMarkdown(fallback));
     }
 
@@ -342,7 +296,7 @@ async function handleSend() {
 
 
 // ─── Message Rendering ─────────────────────────────
-function addMessage(sender, text, includeForm = false) {
+function addMessage(sender, text, includeForm = false, intentSuggestions = []) {
     const now = new Date();
     const timeStr = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
@@ -356,7 +310,7 @@ function addMessage(sender, text, includeForm = false) {
 
     if (sender === 'bot') {
         bubble.innerHTML = renderMarkdown(text);
-        
+
         if (includeForm) {
             bubble.innerHTML += `
                <form class="chat-form" onsubmit="submitStandaloneForm(event, this)">
@@ -366,6 +320,19 @@ function addMessage(sender, text, includeForm = false) {
                     <button type="submit" name="submitBtn">Transmit Data</button>
                </form>
             `;
+        }
+
+        // Add inline suggestion chips
+        if (intentSuggestions && intentSuggestions.length > 0) {
+            let chipsHtml = '<div class="suggestion-chips" style="display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;">';
+            for (const sId of intentSuggestions) {
+                const label = suggestionLabels[sId];
+                if (label) {
+                    chipsHtml += `<button class="chip suggestion-chip" onclick="handleSuggestionChip('${sId}')" style="font-size:0.72rem;padding:4px 10px;">${label.en}</button>`;
+                }
+            }
+            chipsHtml += '</div>';
+            bubble.innerHTML += chipsHtml;
         }
     } else {
         bubble.textContent = text;
@@ -382,6 +349,33 @@ function addMessage(sender, text, includeForm = false) {
     chatMessages.insertBefore(msgDiv, typingIndicator);
     scrollToBottom();
 }
+
+// Handle suggestion chip clicks
+window.handleSuggestionChip = function(intentId) {
+    const label = suggestionLabels[intentId] ? suggestionLabels[intentId].en : intentId;
+    addMessage('user', label);
+    conversationHistory.push({ role: 'user', parts: [{ text: label }] });
+
+    isWaitingForResponse = true;
+    showTyping();
+
+    setTimeout(() => {
+        hideTyping();
+        if (shouldTriggerForm(intentId)) {
+            const introMsg = getRandomResponse('contact', currentLang) || "Leave your details below!";
+            conversationHistory.push({ role: 'model', parts: [{ text: introMsg }] });
+            addMessage('bot', introMsg, true);
+            speakText(introMsg);
+        } else {
+            const reply = getRandomResponse(intentId, currentLang);
+            const suggestions = getSuggestions(intentId);
+            conversationHistory.push({ role: 'model', parts: [{ text: reply }] });
+            addMessage('bot', reply, false, suggestions);
+            speakText(stripMarkdown(reply));
+        }
+        isWaitingForResponse = false;
+    }, 600 + Math.random() * 400);
+};
 
 function showWelcome() {
     const welcomeDiv = document.createElement('div');
@@ -439,13 +433,22 @@ function speakText(text) {
     window.speechSynthesis.cancel();
     const utterance = new SpeechSynthesisUtterance(text);
     utterance.lang = 'en-US';
-    utterance.rate = 1;
-    utterance.pitch = 1;
+    utterance.rate = 0.95;
+    utterance.pitch = 1.0;
+
+    // Try softer, more natural voice
+    const bestVoice = pickBestVoice('en');
+    if (bestVoice) utterance.voice = bestVoice;
 
     utterance.onstart = () => setAvatarState('speaking');
     utterance.onend = () => setAvatarState('');
 
     window.speechSynthesis.speak(utterance);
+}
+
+// Pre-load voices
+if (window.speechSynthesis) {
+    window.speechSynthesis.onvoiceschanged = () => { /* voices now available */ };
 }
 
 function stripMarkdown(text) {
