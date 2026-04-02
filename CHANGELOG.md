@@ -221,3 +221,20 @@ All notable changes to this project will be documented in this file.
 
 *Initialized port... System ready for deployment.*
 
+## [v1.5.2] - 2026-04-01
+### Added
+- Created a dedicated `scripts/` directory to centralize all Python utility and generation tools, significantly decluttering the project root.
+- Integrated a reinforced System Prompt in the FastAPI backend strictly enforcing language matching (EN, ES, FR, PT, DE, JA, KO, ZH, AR, HI, HE) based on the user's active session.
+- Added support for Portuguese, German, Japanese, Korean, Chinese, Arabic, Hindi, and Hebrew to the Standalone Chatbox UI.
+
+### Changed
+- Synchronized the **Standalone AI Chatbox** with the centralized **Intent Engine** (`chat-intent-engine.js`), ensuring consistent responses across all chat interfaces.
+- Finalized a single source of truth for the AI's personality by embedding all logic within the backend, removing the redundant external "System Prompt" text file.
+- Updated the Standalone Chatbox UI to dynamically pull translated placeholders, status text, and disclaimer labels for all 11 supported languages.
+
+### Fixed
+- Fixed a bug in the Standalone Chatbox where it would ignore the portfolio's language setting and default to English.
+- Resolved a "Ghost Connection" server issue (ERR_EMPTY_RESPONSE) through a clean process reset and port 8000 re-initialization.
+
+*Initialized port... System ready for deployment.*
+

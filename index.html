@@ -160,7 +160,7 @@
         <section id="hero" class="hero fade-in">
             <div class="hero-content">
                 <h2 class="subtitle" data-i18n="heroSubtitle">System Online: Wait for input...</h2>
-                <h1 class="glitch-text" data-text="Initializing AI Developer Portfolio v1.5">
+                <h1 class="glitch-text" data-text="Initializing AI Developer Portfolio v1.5.2">
                     <span id="typewriter"></span><span class="blink">_</span>
                 </h1>
                 <p class="hero-desc" data-i18n="heroDesc">Hello World! I'm Bryan, a Software Engineer building modern,
@@ -530,7 +530,7 @@
                 <span class="terminal-dot red"></span>
                 <span class="terminal-dot yellow"></span>
                 <span class="terminal-dot green"></span>
-                <span class="terminal-title">portfolio.changelog — Bryans.tech v1.5.1</span>
+                <span class="terminal-title">portfolio.changelog — Bryans.tech v1.5.2</span>
                 <button id="close-changelog-btn" class="icon-btn changelog-close-btn" aria-label="Close Changelog">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <line x1="18" y1="6" x2="6" y2="18"></line>
@@ -539,7 +539,7 @@
                 </button>
             </div>
             <div class="changelog-version-tab">
-                <span class="cl-tab-label">v1.5.1</span>
+                <span class="cl-tab-label">v1.5.2</span>
                 <span class="cl-tab-separator">|</span>
                 <span class="cl-tab-status">Latest Stable Release</span>
             </div>
@@ -547,14 +547,49 @@
                 
                 <div class="cl-entry">
                     <button class="cl-header" onclick="toggleChangelog(this)">
-                        <span class="cl-version">v1.5.1</span>
-                        <span class="cl-date">2026-03-27</span>
+                        <span class="cl-version">v1.5.2</span>
+                        <span class="cl-date">2026-04-01</span>
                         <span class="cl-badge latest">LATEST</span>
                         <svg class="cl-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <polyline points="6 9 12 15 18 9"></polyline>
                         </svg>
                     </button>
                     <div class="cl-body open">
+                        <div class="cl-group">
+                            <span class="cl-tag added">Added</span>
+                            <ul>
+                                <li>Created a dedicated `scripts/` directory to centralize all Python utility and generation tools.</li>
+                                <li>Integrated a reinforced System Prompt in the FastAPI backend strictly enforcing language matching (EN, ES, FR, PT, DE, JA, KO, ZH, AR, HI, HE).</li>
+                                <li>Added support for Portuguese, German, Japanese, Korean, Chinese, Arabic, Hindi, and Hebrew to the Standalone Chatbox UI.</li>
+                            </ul>
+                        </div>
+                        <div class="cl-group">
+                            <span class="cl-tag changed">Changed</span>
+                            <ul>
+                                <li>Synchronized the **Standalone AI Chatbox** with the centralized **Intent Engine**.</li>
+                                <li>Finalized a single source of truth for the AI's personality by embedding all logic within the backend.</li>
+                                <li>Updated the Standalone Chatbox UI to dynamically pull translated labels and placeholders for all 11 supported languages.</li>
+                            </ul>
+                        </div>
+                        <div class="cl-group">
+                            <span class="cl-tag fixed">Fixed</span>
+                            <ul>
+                                <li>Fixed Standalone Chatbox language detection bug.</li>
+                                <li>Resolved "Ghost Connection" server issue (ERR_EMPTY_RESPONSE).</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cl-entry">
+                    <button class="cl-header" onclick="toggleChangelog(this)">
+                        <span class="cl-version">v1.5.1</span>
+                        <span class="cl-date">2026-03-27</span>
+                        <svg class="cl-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </button>
+                    <div class="cl-body">
                         <div class="cl-group">
                             <span class="cl-tag added">Added</span>
                             <ul>
