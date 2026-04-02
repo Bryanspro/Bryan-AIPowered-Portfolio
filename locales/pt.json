@@ -5,20 +5,17 @@
   "navProjects": "Projetos",
   "navChangelog": "Histórico",
   "navContact": "Contato",
-
   "heroSubtitle": "Sistema online: Aguardando comandos...",
   "heroDesc": "Olá, Mundo! Sou o Bryan, um Engenheiro de Software focado em criar soluções digitais modernas e esteticamente refinadas, impulsionadas pela Inteligência Artificial. Meu objetivo é transformar ideias complexas em produtos padronizados, inteligentes e com impacto real.",
   "ctaView": "Explorar Sistemas",
   "ctaContact": "Iniciar Conexão",
   "ctaChangelog": "Histórico",
-
   "aboutTitle": "Princípios Fundamentais <span class=\"accent\">// Sobre</span>",
   "aboutP1": "A minha carreira como Engenheiro de Software baseia-se em mais de 12 anos de experiência na gestão de bancos de dados complexos e na automatização de fluxos de trabalho críticos. Depois de liderar equipas técnicas e impulsionar o sucesso operacional como Tech Lead, mudei-me para os Estados Unidos para aplicar a minha experiência num novo ambiente de alto crescimento. Validei a minha trajetória obtendo de forma oficial o meu diploma de High School nos EUA e várias certificações, assegurando uma integração perfeita no mercado tecnológico nacional.",
   "aboutP2": "Atualmente, especializo-me em Inteligência Artificial e no <strong>desenvolvimento de sistemas inteligentes</strong>, utilizando um stack versátil que abrange <strong>Python, PHP, SQL, JavaScript, HTML/CSS e WordPress</strong> para construir arquiteturas digitais robustas. Ao combinar a <strong>IA Generativa e os LLMs</strong> com as minhas bases de engenharia, desenvolvo sistemas inteligentes e automatizados que se destacam pela sua eficiência e acessibilidade. A minha meta é converter desafios complexos em soluções inovadoras que geram um impacto tangível.",
   "statYears": "Anos de Experiência",
   "statLanguages": "Idiomas Fluentes",
   "statProjects": "Projetos Implementados",
-
   "skillsTitle": "Stack Técnico <span class=\"accent\">// Habilidades</span>",
   "skillCat1": "Linguagens e Sistemas",
   "skillCat1Item3": "SQL & Admin. de BD",
@@ -33,7 +30,6 @@
   "skillCat3Item2": "Liderança de Equipas",
   "skillCat3Item3": "Resolução Estratégica",
   "skillCat3Item4": "Com. Intercultural (EN/ES)",
-
   "expTitle": "Trajetória Profissional <span class=\"accent\">// Experiência</span>",
   "expDate1": "2024 - 2025",
   "expRole1": "Associado de Atendimento ao Cliente e POS",
@@ -44,7 +40,6 @@
   "expDate3": "2018 - 2019",
   "expRole3": "Desenvolvedor Web",
   "expDesc3": "Colaborei com uma equipa ágil para desenvolver um website integral que guia os visitantes através da flora e fauna locais do parque. Programei interfaces responsivas e interativas utilizando WordPress, HTML, CSS, JavaScript e MySQL.",
-
   "projTitle": "Projetos em Destaque <span class=\"accent\">// Portfólio</span>",
   "proj1Title": "Exibição de Modelos de Design",
   "proj1Desc": "Uma seleção cuidadosa de templates de portfólio para designers de produtos, incluída para destacar as abordagens de design, estilos de apresentação UX e estruturas visuais que posso personalizar e adaptar.",
@@ -59,7 +54,6 @@
   "viewAppsGallery": "Explorar Apps ->",
   "viewAIApp": "Explorar Apps de IA ->",
   "aiAppViewerTitle": "Aplicativos Baseados em IA",
-
   "contactTitle": "Vamos Conversar <span class=\"accent\">// Contato</span>",
   "contactDesc": "Interessado em construir sistemas inteligentes<br>ou resolver desafios tecnológicos complexos?<br><br>Me envie uma mensagem e vamos conversar &mdash; tempo de resposta estimado: 24 horas.",
   "labelName": "O Seu Nome",
@@ -70,10 +64,23 @@
   "contactSuccess": "Mensagem Enviada com Sucesso!",
   "contactError": "Erro ao enviar. Tente novamente.",
   "contactNetworkError": "Erro de rede. Servidor offline.",
-
   "viewerTitle": "Galeria de Modelos",
   "gameViewerTitle": "Galeria de Jogos Interativos",
   "appViewerTitle": "Galeria de Aplicativos",
   "musicPlayerTitle": "Reprodutor B Neon",
-  "viewerBackBtn": "&larr; Voltar"
+  "viewerBackBtn": "&larr; Voltar",
+  "a11yTitle": "Acessibilidade",
+  "a11yReset": "Redefinir tudo",
+  "a11yFontSize": "Aumentar texto",
+  "a11yLineHeight": "Aumentar altura da linha",
+  "a11yTextSpacing": "Espaçamento de texto",
+  "a11yHighContrast": "Alto contraste",
+  "a11yDyslexiaFont": "Fonte para dislexia",
+  "a11yReduceMotion": "Reduzir animações",
+  "a11yHighlightLinks": "Destacar links",
+  "a11yBiggerCursor": "Cursor maior",
+  "a11yTextAlign": "Alinhar texto à esquerda",
+  "a11yLowSaturation": "Baixa saturação",
+  "a11yOpenSettings": "Abrir opções de acessibilidade",
+  "a11yCloseSettings": "Fechar acessibilidade"
 }

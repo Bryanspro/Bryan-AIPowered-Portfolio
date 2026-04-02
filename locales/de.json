@@ -5,20 +5,17 @@
   "navProjects": "Projekte",
   "navChangelog": "Changelog",
   "navContact": "Kontakt",
-
   "heroSubtitle": "System Online: Warte auf Eingabe...",
   "heroDesc": "Hallo Welt! Ich bin Bryan, ein Software-Ingenieur, der moderne, ästhetisch anspruchsvolle und KI-gestützte digitale Lösungen entwickelt. Ich konzentriere mich darauf, komplexe Ideen in intelligente, skalierbare Produkte mit echtem Mehrwert zu verwandeln.",
   "ctaView": "Systeme ansehen",
   "ctaContact": "Kontakt aufnehmen",
   "ctaChangelog": "Changelog",
-
   "aboutTitle": "Über mich <span class=\"accent\">// Profil</span>",
   "aboutP1": "Meine Laufbahn als Software-Ingenieur basiert auf über 12 Jahren Erfahrung in der Verwaltung komplexer Datenbanken und der Automatisierung geschäftskritischer Workflows. Nachdem ich als Technical Lead operativen Erfolg erzielt hatte, zog ich in die USA, um meine Expertise in ein neues, wachstumsstarkes Umfeld einzubringen. Durch offizielle US-Abschlüsse und Zertifizierungen habe ich meine Laufbahn validiert und eine nahtlose Integration in den nationalen Technologie-Markt sichergestellt.",
   "aboutP2": "Heute bin ich auf künstliche Intelligenz und die <strong>Entwicklung intelligenter Systeme</strong> spezialisiert. Dabei greife ich auf einen vielseitigen Tech-Stack aus <strong>Python, PHP, SQL, JavaScript, HTML/CSS und WordPress</strong> zurück, um robuste digitale Architekturen aufzubauen. Durch die Kombination von <strong>Generativer KI und LLMs</strong> mit meinen Ingenieurkenntnissen entwickle ich automatisierte Systeme, die sich durch Effizienz und Zugänglichkeit auszeichnen.",
   "statYears": "Jahre Erfahrung",
   "statLanguages": "Fließende Sprachen",
   "statProjects": "Umgesetzte Projekte",
-
   "skillsTitle": "Technischer Stack <span class=\"accent\">// Fähigkeiten</span>",
   "skillCat1": "Sprachen & Systeme",
   "skillCat1Item3": "SQL & Datenbank-Admin",
@@ -33,7 +30,6 @@
   "skillCat3Item2": "Teamführung",
   "skillCat3Item3": "Strategische Problemlösung",
   "skillCat3Item4": "Interkulturelle Kom. (EN/ES)",
-
   "expTitle": "Berufserfahrung <span class=\"accent\">// Lebenslauf</span>",
   "expDate1": "2024 - 2025",
   "expRole1": "Kundenservice & POS Associate",
@@ -44,7 +40,6 @@
   "expDate3": "2018 - 2019",
   "expRole3": "Webentwickler",
   "expDesc3": "Zusammenarbeit in einem agilen Team zur Entwicklung einer umfassenden Website. Programmierung reaktionsschneller und interaktiver Benutzeroberflächen mit WordPress, HTML, CSS, JavaScript und MySQL.",
-
   "projTitle": "Ausgewählte Projekte <span class=\"accent\">// Portfolio</span>",
   "proj1Title": "Design-Vorlagen",
   "proj1Desc": "Eine kuratierte Präsentation von Portfolio-Vorlagen für Produktdesigner, die UX-Stile und visuelle Strukturen hervorhebt, welche ich anpassen und weiterentwickeln kann.",
@@ -59,7 +54,6 @@
   "viewAppsGallery": "App-Galerie öffnen ->",
   "viewAIApp": "KI-Apps ansehen ->",
   "aiAppViewerTitle": "KI-gestützte Anwendungen",
-
   "contactTitle": "Lass uns reden <span class=\"accent\">// Kontakt</span>",
   "contactDesc": "Interesse am Aufbau intelligenter Systeme<br>oder der Lösung vieler komplexer technischer Herausforderungen?<br><br>Senden Sie mir eine Nachricht und lassen Sie uns ins Gespräch kommen &mdash; Antwortzeit: innerhalb 24h.",
   "labelName": "Ihr Name",
@@ -70,10 +64,23 @@
   "contactSuccess": "Nachricht erfolgreich gesendet!",
   "contactError": "Fehler beim Senden. Bitte erneut versuchen.",
   "contactNetworkError": "Netzwerkfehler. Server offline.",
-
   "viewerTitle": "Vorlagen-Galerie",
   "gameViewerTitle": "Spiele-Galerie",
   "appViewerTitle": "App-Galerie",
   "musicPlayerTitle": "B Neon-Player",
-  "viewerBackBtn": "&larr; Zurück"
+  "viewerBackBtn": "&larr; Zurück",
+  "a11yTitle": "Barrierefreiheit",
+  "a11yReset": "Alles zurücksetzen",
+  "a11yFontSize": "Text vergrößern",
+  "a11yLineHeight": "Zeilenabstand",
+  "a11yTextSpacing": "Textabstand",
+  "a11yHighContrast": "Hoher Kontrast",
+  "a11yDyslexiaFont": "Legasthenie-Schrift",
+  "a11yReduceMotion": "Animationen reduzieren",
+  "a11yHighlightLinks": "Links hervorheben",
+  "a11yBiggerCursor": "Größerer Cursor",
+  "a11yTextAlign": "Text linksbündig",
+  "a11yLowSaturation": "Geringe Sättigung",
+  "a11yOpenSettings": "Barrierefreiheit öffnen",
+  "a11yCloseSettings": "Barrierefreiheit schließen"
 }

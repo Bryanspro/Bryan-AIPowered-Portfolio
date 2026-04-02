@@ -1,0 +1,553 @@
+/* ============================================================================
+   Accessibility Widget — Bryans.tech Portfolio
+   Contains:
+     1. Widget UI styling (trigger button, panel, toggles)
+     2. Accessibility mode rules (applied via data-attributes on <body>)
+   ============================================================================ */
+
+/* ── Google Font for Dyslexia Mode ───────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&display=swap');
+
+/* ============================================================================
+   1. WIDGET UI
+   ============================================================================ */
+
+/* ── Floating Trigger Button ────────────────────────────────────────────────── */
+.a11y-trigger-btn {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 10001;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 1px solid var(--accent-cyan, #00f0ff);
+    background: rgba(3, 5, 8, 0.9);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    color: var(--accent-cyan, #00f0ff);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    box-shadow: 0 0 15px var(--glow-cyan, rgba(0, 240, 255, 0.4));
+}
+
+.a11y-trigger-btn svg {
+    width: 26px;
+    height: 26px;
+    filter: drop-shadow(0 0 3px rgba(0, 240, 255, 0.4));
+    transition: filter 0.3s ease, transform 0.3s ease;
+}
+
+.a11y-trigger-btn:hover {
+    background: rgba(0, 240, 255, 0.1);
+    border-color: var(--accent-cyan, #00f0ff);
+    box-shadow: 0 0 25px var(--glow-cyan, rgba(0, 240, 255, 0.4));
+    transform: scale(1.1);
+}
+
+.a11y-trigger-btn:hover svg {
+    filter: drop-shadow(0 0 8px rgba(0, 240, 255, 0.7));
+    transform: scale(1.05);
+}
+
+.a11y-trigger-btn:focus-visible {
+    outline: 2px solid var(--accent-cyan, #00f0ff);
+    outline-offset: 3px;
+    box-shadow: 0 0 25px var(--glow-cyan, rgba(0, 240, 255, 0.4));
+}
+
+.a11y-trigger-btn[aria-expanded="true"] {
+    background: rgba(189, 0, 255, 0.15);
+    border-color: var(--accent-purple, #bd00ff);
+    color: var(--accent-purple, #bd00ff);
+    box-shadow: 0 0 20px var(--glow-purple, rgba(189, 0, 255, 0.4));
+}
+
+.a11y-trigger-btn[aria-expanded="true"] svg {
+    filter: drop-shadow(0 0 6px rgba(189, 0, 255, 0.5));
+}
+
+/* ── Panel ──────────────────────────────────────────────────────────────────── */
+/* ── 5-Second Intro Glow Animation ────────────────────────────────────────── */
+@keyframes a11y-intro-glow {
+    0%, 100% {
+        box-shadow: 0 0 15px var(--glow-cyan, rgba(0, 240, 255, 0.4));
+        border-color: rgba(0, 240, 255, 0.5);
+        transform: scale(1);
+    }
+    50% {
+        box-shadow: 
+            0 0 40px var(--glow-cyan, rgba(0, 240, 255, 0.6)), 
+            0 0 80px rgba(0, 240, 255, 0.3),
+            inset 0 0 15px var(--glow-cyan, rgba(0, 240, 255, 0.4));
+        border-color: var(--accent-cyan, #00f0ff);
+        transform: scale(1.05);
+    }
+}
+
+.a11y-trigger-btn.intro-glow {
+    animation: a11y-intro-glow 1s ease-in-out 7; /* 1s × 7 cycles = 7 seconds */
+}
+
+/* ── Panel ──────────────────────────────────────────────────────────────────── */
+.a11y-panel {
+    position: fixed;
+    bottom: 20px;
+    left: 88px;
+    z-index: 10002;
+    width: 320px;
+    max-height: calc(100vh - 60px);
+    background: rgba(8, 10, 20, 0.96);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(0, 240, 255, 0.12);
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow:
+        0 8px 40px rgba(0, 0, 0, 0.6),
+        0 0 30px rgba(0, 240, 255, 0.04),
+        inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    /* Transition */
+    opacity: 0;
+    transform: translateX(-12px) scale(0.96);
+    pointer-events: none;
+    transition: opacity 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+                transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.a11y-panel.open {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+    pointer-events: all;
+}
+
+.a11y-panel:focus-visible {
+    outline: 2px solid var(--accent-cyan, #00f0ff);
+    outline-offset: -2px;
+}
+
+/* ── Panel Header ───────────────────────────────────────────────────────────── */
+.a11y-panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 18px;
+    border-bottom: 1px solid rgba(0, 240, 255, 0.1);
+    background: linear-gradient(90deg, rgba(0, 240, 255, 0.04) 0%, rgba(189, 0, 255, 0.03) 100%);
+    position: relative;
+    flex-shrink: 0;
+}
+
+.a11y-panel-header::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 80px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent-cyan, #00f0ff), transparent);
+}
+
+.a11y-panel-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text-main, #e2e8f0);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-family: var(--font-main, 'Space Grotesk', sans-serif);
+}
+
+.a11y-panel-title svg {
+    color: var(--accent-cyan, #00f0ff);
+    filter: drop-shadow(0 0 4px rgba(0, 240, 255, 0.4));
+    flex-shrink: 0;
+}
+
+.a11y-close-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-muted, #94a3b8);
+    cursor: pointer;
+    padding: 6px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.a11y-close-btn:hover {
+    color: var(--accent-purple, #bd00ff);
+    background: rgba(189, 0, 255, 0.1);
+}
+
+.a11y-close-btn:focus-visible {
+    outline: 2px solid var(--accent-cyan, #00f0ff);
+    outline-offset: 2px;
+}
+
+/* ── Panel Body (toggles) ───────────────────────────────────────────────────── */
+.a11y-panel-body {
+    padding: 10px 12px;
+    overflow-y: auto;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 240, 255, 0.3) transparent;
+}
+
+.a11y-panel-body::-webkit-scrollbar {
+    width: 4px;
+}
+
+.a11y-panel-body::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.a11y-panel-body::-webkit-scrollbar-thumb {
+    background: rgba(0, 240, 255, 0.2);
+    border-radius: 4px;
+}
+
+/* ── Toggle Buttons ─────────────────────────────────────────────────────────── */
+.a11y-toggle-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: 1px solid transparent;
+    background: rgba(255, 255, 255, 0.02);
+    color: var(--text-muted, #94a3b8);
+    cursor: pointer;
+    font-family: var(--font-main, 'Space Grotesk', sans-serif);
+    font-size: 0.85rem;
+    text-align: left;
+    transition: all 0.2s ease;
+}
+
+.a11y-toggle-btn:hover {
+    background: rgba(0, 240, 255, 0.05);
+    border-color: rgba(0, 240, 255, 0.1);
+    color: var(--text-main, #e2e8f0);
+}
+
+.a11y-toggle-btn:focus-visible {
+    outline: 2px solid var(--accent-cyan, #00f0ff);
+    outline-offset: -1px;
+    background: rgba(0, 240, 255, 0.06);
+}
+
+.a11y-toggle-btn.active {
+    background: rgba(0, 240, 255, 0.08);
+    border-color: rgba(0, 240, 255, 0.2);
+    color: var(--accent-cyan, #00f0ff);
+}
+
+.a11y-toggle-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    font-weight: 700;
+    flex-shrink: 0;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    transition: all 0.2s ease;
+    line-height: 1;
+}
+
+.a11y-toggle-btn.active .a11y-toggle-icon {
+    background: rgba(0, 240, 255, 0.12);
+    border-color: rgba(0, 240, 255, 0.25);
+    color: var(--accent-cyan, #00f0ff);
+    box-shadow: 0 0 8px rgba(0, 240, 255, 0.15);
+}
+
+.a11y-toggle-label {
+    flex: 1;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+}
+
+.a11y-toggle-indicator {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    padding: 2px 8px;
+    border-radius: 20px;
+    text-transform: uppercase;
+    transition: all 0.2s ease;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: var(--text-muted, #94a3b8);
+    flex-shrink: 0;
+}
+
+.a11y-toggle-btn.active .a11y-toggle-indicator {
+    background: rgba(0, 240, 255, 0.12);
+    border-color: rgba(0, 240, 255, 0.3);
+    color: var(--accent-cyan, #00f0ff);
+    box-shadow: 0 0 6px rgba(0, 240, 255, 0.1);
+}
+
+/* ── Panel Footer (Reset) ───────────────────────────────────────────────────── */
+.a11y-panel-footer {
+    padding: 10px 14px;
+    border-top: 1px solid rgba(255, 255, 255, 0.04);
+    background: rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.a11y-reset-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 18px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.03);
+    color: var(--text-muted, #94a3b8);
+    font-family: var(--font-main, 'Space Grotesk', sans-serif);
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.a11y-reset-btn:hover {
+    background: rgba(189, 0, 255, 0.08);
+    border-color: rgba(189, 0, 255, 0.25);
+    color: var(--accent-purple, #bd00ff);
+}
+
+.a11y-reset-btn:focus-visible {
+    outline: 2px solid var(--accent-cyan, #00f0ff);
+    outline-offset: 2px;
+}
+
+/* ============================================================================
+   2. ACCESSIBILITY MODES (applied via body[data-a11y-*] attributes)
+   ============================================================================ */
+
+/* ── Font Size Large ────────────────────────────────────────────────────────── */
+body[data-a11y-font-size-large] {
+    font-size: 120% !important;
+}
+
+body[data-a11y-font-size-large] .hero-content h1 {
+    font-size: clamp(2.5rem, 5vw, 4.5rem) !important;
+}
+
+body[data-a11y-font-size-large] .section-title {
+    font-size: clamp(2rem, 4vw, 3rem) !important;
+}
+
+body[data-a11y-font-size-large] .hero-desc,
+body[data-a11y-font-size-large] .about-text p,
+body[data-a11y-font-size-large] .timeline-content p,
+body[data-a11y-font-size-large] .project-info p {
+    font-size: 1.15rem !important;
+}
+
+/* ── Line Height Large ──────────────────────────────────────────────────────── */
+body[data-a11y-line-height-large] {
+    line-height: 2 !important;
+}
+
+body[data-a11y-line-height-large] p,
+body[data-a11y-line-height-large] li,
+body[data-a11y-line-height-large] span,
+body[data-a11y-line-height-large] div {
+    line-height: 2 !important;
+}
+
+/* ── Text Spacing Wide ──────────────────────────────────────────────────────── */
+body[data-a11y-text-spacing-wide] {
+    letter-spacing: 0.08em !important;
+    word-spacing: 0.16em !important;
+}
+
+body[data-a11y-text-spacing-wide] p,
+body[data-a11y-text-spacing-wide] li,
+body[data-a11y-text-spacing-wide] span,
+body[data-a11y-text-spacing-wide] h1,
+body[data-a11y-text-spacing-wide] h2,
+body[data-a11y-text-spacing-wide] h3,
+body[data-a11y-text-spacing-wide] h4,
+body[data-a11y-text-spacing-wide] a,
+body[data-a11y-text-spacing-wide] button {
+    letter-spacing: 0.08em !important;
+    word-spacing: 0.16em !important;
+}
+
+/* ── High Contrast ──────────────────────────────────────────────────────────── */
+body[data-a11y-high-contrast] {
+    --bg-dark: #000000 !important;
+    --text-main: #ffffff !important;
+    --text-muted: #e0e0e0 !important;
+    --glass-bg: rgba(255, 255, 255, 0.08) !important;
+    --glass-border: rgba(255, 255, 255, 0.3) !important;
+}
+
+body[data-a11y-high-contrast] .glass {
+    background: rgba(0, 0, 0, 0.85) !important;
+    border-color: rgba(255, 255, 255, 0.35) !important;
+}
+
+body[data-a11y-high-contrast] .nav-links a,
+body[data-a11y-high-contrast] p,
+body[data-a11y-high-contrast] li,
+body[data-a11y-high-contrast] span {
+    color: #ffffff !important;
+}
+
+body[data-a11y-high-contrast] .tag {
+    border-color: rgba(255, 255, 255, 0.5) !important;
+    color: #ffffff !important;
+}
+
+body[data-a11y-high-contrast] .btn {
+    border-width: 2px !important;
+}
+
+body[data-a11y-high-contrast] a {
+    text-decoration: underline !important;
+}
+
+/* ── Dyslexia Font ──────────────────────────────────────────────────────────── */
+body[data-a11y-dyslexia-font],
+body[data-a11y-dyslexia-font] * {
+    font-family: 'Lexend', 'Arial', sans-serif !important;
+}
+
+/* ── Reduce Motion ──────────────────────────────────────────────────────────── */
+body[data-a11y-reduce-motion],
+body[data-a11y-reduce-motion] *,
+body[data-a11y-reduce-motion] *::before,
+body[data-a11y-reduce-motion] *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+}
+
+body[data-a11y-reduce-motion] .outer,
+body[data-a11y-reduce-motion] .inner,
+body[data-a11y-reduce-motion] .core {
+    animation: none !important;
+}
+
+body[data-a11y-reduce-motion] .fade-in {
+    opacity: 1 !important;
+    transform: none !important;
+}
+
+/* Keep the widget itself functional even in reduce motion */
+body[data-a11y-reduce-motion] .a11y-trigger-btn,
+body[data-a11y-reduce-motion] .a11y-panel,
+body[data-a11y-reduce-motion] .a11y-toggle-btn,
+body[data-a11y-reduce-motion] .a11y-close-btn,
+body[data-a11y-reduce-motion] .a11y-reset-btn {
+    transition-duration: 0.15s !important;
+}
+
+/* ── Highlight Links ────────────────────────────────────────────────────────── */
+body[data-a11y-highlight-links] a {
+    outline: 2px solid var(--accent-cyan, #00f0ff) !important;
+    outline-offset: 2px !important;
+    text-decoration: underline !important;
+    background: rgba(0, 240, 255, 0.06) !important;
+    border-radius: 2px !important;
+}
+
+/* Don't highlight the widget internals excessively */
+body[data-a11y-highlight-links] .a11y-panel a,
+body[data-a11y-highlight-links] .a11y-trigger-btn {
+    outline: none !important;
+    background: unset !important;
+}
+
+/* ── Bigger Cursor ──────────────────────────────────────────────────────────── */
+body[data-a11y-bigger-cursor],
+body[data-a11y-bigger-cursor] * {
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Cpath d='M4 4 L4 28 L11 21 L18 28 L22 24 L15 17 L24 17 Z' fill='%2300f0ff' stroke='%23000' stroke-width='1.5'/%3E%3C/svg%3E") 4 4, auto !important;
+}
+
+body[data-a11y-bigger-cursor] button,
+body[data-a11y-bigger-cursor] a,
+body[data-a11y-bigger-cursor] [role="button"],
+body[data-a11y-bigger-cursor] input[type="submit"],
+body[data-a11y-bigger-cursor] .btn {
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='36' viewBox='0 0 36 36'%3E%3Ccircle cx='18' cy='18' r='14' fill='none' stroke='%2300f0ff' stroke-width='3'/%3E%3Ccircle cx='18' cy='18' r='4' fill='%2300f0ff'/%3E%3C/svg%3E") 18 18, pointer !important;
+}
+
+/* ── Text Align Left ────────────────────────────────────────────────────────── */
+body[data-a11y-text-align-left] * {
+    text-align: left !important;
+}
+
+/* ── Low Saturation ─────────────────────────────────────────────────────────── */
+body[data-a11y-low-saturation]::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 9990; /* Sits over page content but under widgets (z-index 9999+) */
+    backdrop-filter: saturate(0.4);
+    -webkit-backdrop-filter: saturate(0.4);
+    pointer-events: none;
+}
+
+/* ============================================================================
+   3. RESPONSIVE ADJUSTMENTS
+   ============================================================================ */
+@media (max-width: 900px) {
+    .a11y-trigger-btn {
+        bottom: 85px; /* Above mobile nav, matching chat button */
+        left: 15px;
+    }
+
+    .a11y-panel {
+        bottom: 85px;
+        left: 10px;
+        right: 10px;
+        width: auto;
+        max-width: 340px;
+        max-height: calc(100vh - 160px);
+    }
+}
+
+@media (max-width: 420px) {
+    .a11y-panel {
+        left: 8px;
+        right: 8px;
+        max-width: none;
+        width: calc(100% - 16px);
+        bottom: 85px;
+    }
+
+    .a11y-trigger-btn {
+        bottom: 85px;
+        left: 10px;
+    }
+}

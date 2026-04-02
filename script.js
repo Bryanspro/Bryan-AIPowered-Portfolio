@@ -67,10 +67,28 @@ document.addEventListener('DOMContentLoaded', () => {
     // Apply translations to all [data-i18n] elements
     function applyTranslations(dict) {
         if (!dict) return;
+        
+        // Translate inner HTML
         document.querySelectorAll('[data-i18n]').forEach(el => {
             const key = el.getAttribute('data-i18n');
             if (dict[key] !== undefined) {
                 el.innerHTML = dict[key];
+            }
+        });
+        
+        // Translate titles (tooltips)
+        document.querySelectorAll('[data-i18n-title]').forEach(el => {
+            const key = el.getAttribute('data-i18n-title');
+            if (dict[key] !== undefined) {
+                el.setAttribute('title', dict[key]);
+            }
+        });
+        
+        // Translate aria-labels
+        document.querySelectorAll('[data-i18n-aria]').forEach(el => {
+            const key = el.getAttribute('data-i18n-aria');
+            if (dict[key] !== undefined) {
+                el.setAttribute('aria-label', dict[key]);
             }
         });
     }
@@ -221,7 +239,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const versionLabel = document.querySelector('.cl-tab-label');
         const latestVersion = versionLabel ? versionLabel.textContent.trim() : 'v1.5.1';
         // We always use v1.5 for the hero splash text as requested
-        const heroVersion = 'v1.5';
+        const heroVersion = 'v1.6';
         const typewriterKey = lang === 'en'
             ? `Initializing AI Developer Portfolio ${heroVersion}`
             : (dict.typewriter || `Initializing AI Developer Portfolio ${heroVersion}`);

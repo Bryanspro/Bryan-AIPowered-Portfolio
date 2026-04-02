@@ -5,20 +5,17 @@
   "navProjects": "Projets",
   "navChangelog": "Historique",
   "navContact": "Contact",
-
   "heroSubtitle": "Système en ligne : En attente d'instructions...",
   "heroDesc": "Bonjour le monde ! Je suis Bryan, un ingénieur logiciel concevant des solutions numériques modernes, raffinées et propulsées par l'Intelligence Artificielle. Mon objectif est de transformer les idées complexes en produits numériques innovants et impactants.",
   "ctaView": "Voir les projets",
   "ctaContact": "Prendre contact",
   "ctaChangelog": "Historique",
-
   "aboutTitle": "À propos <span class=\"accent\">// Profil</span>",
   "aboutP1": "Ma carrière en ingénierie logicielle s'appuie sur plus de 12 ans d'expérience dans la gestion de bases de données et l'automatisation de processus. Après avoir dirigé des équipes techniques et fait mes preuves en tant que Tech Lead, je me suis installé aux États-Unis pour mettre mon expertise au service d'un environnement de travail en forte croissance. J'ai certifié mon parcours en obtenant de manière officielle mon diplôme de High School ainsi que d'autres distinctions, garantissant une intégration sans faille sur le marché.",
   "aboutP2": "Aujourd'hui, je me spécialise en Intelligence Artificielle et en <strong>développement de systèmes complexes</strong>. J'utilise un ensemble de technologies (<strong>Python, PHP, SQL, JavaScript, HTML/CSS, WordPress</strong>) pour bâtir des architectures durables. En intégrant l'<strong>IA Générative (LLMs)</strong> à mes solides bases en programmation, je conçois des plateformes optimisées, rapides et accessibles.",
   "statYears": "Années d'Expérience",
   "statLanguages": "Langues Courantes",
   "statProjects": "Projets Lancés",
-
   "skillsTitle": "Stack Technique <span class=\"accent\">// Compétences</span>",
   "skillCat1": "Langages & Systèmes",
   "skillCat1Item3": "SQL & Gestion de BdD",
@@ -33,7 +30,6 @@
   "skillCat3Item2": "Management d'Équipe",
   "skillCat3Item3": "Résolution de problèmes",
   "skillCat3Item4": "Com. Interculturelle (EN/ES)",
-
   "expTitle": "Expérience Professionnelle <span class=\"accent\">// Parcours</span>",
   "expDate1": "2024 - 2025",
   "expRole1": "Associé Service Client & POS",
@@ -44,7 +40,6 @@
   "expDate3": "2018 - 2019",
   "expRole3": "Développeur Web",
   "expDesc3": "Développement d’une interface d’un site web complexe avec une équipe agile pour sensibiliser le public à la flore locale d'un grand parc naturel. Programmation avec WordPress, HTML, CSS, JavaScript et MySQL.",
-
   "projTitle": "Projets Récents <span class=\"accent\">// Portfolio</span>",
   "proj1Title": "Templates pour Designers",
   "proj1Desc": "Présentation élaborée de modèles pour les concepteurs de produits, réunissant différentes approches de conception UX et structures visuelles que je peux entièrement adapter.",
@@ -59,7 +54,6 @@
   "viewAppsGallery": "Ouvrir les Apps ->",
   "viewAIApp": "Ouvrir les Apps IA ->",
   "aiAppViewerTitle": "Applications propulsées par IA",
-
   "contactTitle": "Allons discuter <span class=\"accent\">// Contact</span>",
   "contactDesc": "Vous souhaitez construire des interfaces intelligentes<br>ou résoudre des challenges complexes ?<br><br>Laissez-moi un message et débutons notre conversation &mdash; réponse assurée : sous 24h.",
   "labelName": "Votre Nom",
@@ -70,10 +64,23 @@
   "contactSuccess": "Transmission réussie !",
   "contactError": "Échec de l'envoi. Veuillez réessayer.",
   "contactNetworkError": "Erreur réseau. Serveur hors ligne.",
-
   "viewerTitle": "Galerie de Templates",
   "gameViewerTitle": "Collection de Jeux",
   "appViewerTitle": "Galerie d'Applications",
   "musicPlayerTitle": "Lecteur B Neon",
-  "viewerBackBtn": "&larr; Retour"
+  "viewerBackBtn": "&larr; Retour",
+  "a11yTitle": "Accessibilité",
+  "a11yReset": "Tout réinitialiser",
+  "a11yFontSize": "Agrandir le texte",
+  "a11yLineHeight": "Hauteur de ligne",
+  "a11yTextSpacing": "Espacement du texte",
+  "a11yHighContrast": "Contraste élevé",
+  "a11yDyslexiaFont": "Police pour dyslexie",
+  "a11yReduceMotion": "Réduire les animations",
+  "a11yHighlightLinks": "Surligner les liens",
+  "a11yBiggerCursor": "Curseur plus grand",
+  "a11yTextAlign": "Aligner le texte à gauche",
+  "a11yLowSaturation": "Faible saturation",
+  "a11yOpenSettings": "Ouvrir l'accessibilité",
+  "a11yCloseSettings": "Fermer l'accessibilité"
 }

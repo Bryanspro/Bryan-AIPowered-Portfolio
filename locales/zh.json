@@ -5,20 +5,17 @@
   "navProjects": "精选项目",
   "navChangelog": "更新日志",
   "navContact": "联系我",
-
   "heroSubtitle": "系统在线：等待输入...",
   "heroDesc": "你好，世界！我是 Bryan，一名前端和全栈软件工程师。我专注于利用人工智能开发美观、现代且具有扩展性的数字产品解决方案。我致力于将复杂的想法转变为具有现实影响力的智能产品。",
   "ctaView": "查看系统",
   "ctaContact": "取得联系",
   "ctaChangelog": "更新日志",
-
   "aboutTitle": "关于我 <span class=\"accent\">// 核心概览</span>",
   "aboutP1": "作为一名软件工程师，我拥有超过 12 年的专业工作经验，擅长管理复杂的数据库及业务工作流的自动化操作。在担任技术主管并带领团队取得成功后，我移居美国，在全新的高增长环境中发挥我的优势。我已正式取得美国高中文凭及各项专业认证，确保能够无缝衔接至当地科技市场。",
   "aboutP2": "目前，我主要专注于人工智能与<strong>智能系统开发</strong>。我熟练运用 <strong>Python、PHP、SQL、JavaScript、HTML/CSS 以及 WordPress</strong> 等全栈技术，构建安全可靠的数字架构。通过将<strong>生成式 AI 与 LLM（大语言模型）</strong>与我在工程领域的深厚积累相融合，我创造出兼具极高效率与无障碍化体验的自动化智能系统。",
   "statYears": "年行业经验",
   "statLanguages": "精通语言",
   "statProjects": "已上线项目",
-
   "skillsTitle": "技术能力 <span class=\"accent\">// 技能矩阵</span>",
   "skillCat1": "编程语言与系统运维",
   "skillCat1Item3": "SQL 与 数据库管理",
@@ -33,7 +30,6 @@
   "skillCat3Item2": "跨部门技术团队领导",
   "skillCat3Item3": "复杂系统战略规划与问题解决",
   "skillCat3Item4": "跨文化双语协作 (英/西)",
-
   "expTitle": "工作经历 <span class=\"accent\">// 履历</span>",
   "expDate1": "2024 - 2025",
   "expRole1": "客户服务与 POS 系统专员",
@@ -44,7 +40,6 @@
   "expDate3": "2018 - 2019",
   "expRole3": "全栈 Web 工程师",
   "expDesc3": "在敏捷开发团队中担任核心开发，从零搭建一款功能全面的在线平台。运用 WordPress、HTML、CSS、JavaScript 与 MySQL 数据库，独立完成响应式和高互动性的前端界面编程，为游客提供出色的交互体验。",
-
   "projTitle": "精选项目 <span class=\"accent\">// 作品集</span>",
   "proj1Title": "设计师专属模板展示库",
   "proj1Desc": "为产品设计师量身打造的一系列精选作品集模板系统，着重突出了我在 UX 交互设计呈现风格和前端视觉结构构建方面的强大定制化及适配能力。",
@@ -59,7 +54,6 @@
   "viewAppsGallery": "浏览 App 项目 ->",
   "viewAIApp": "浏览 AI 应用程序 ->",
   "aiAppViewerTitle": "AI 赋能智能应用",
-
   "contactTitle": "联系我 <span class=\"accent\">// 开始对话</span>",
   "contactDesc": "对构建现代化智能系统有浓厚兴趣，<br>还是遇到了棘手的底层技术痛点亟待解决？<br><br>发送您的讯息，让我们开启对话 &mdash; 我保证在 24 小时内迅速回信解决您的顾虑。",
   "labelName": "您的姓名",
@@ -70,10 +64,23 @@
   "contactSuccess": "消息发送成功！",
   "contactError": "发送失败，请稍后重试。",
   "contactNetworkError": "网络错误：无法连接至服务器，请检查您的连接状态。",
-
   "viewerTitle": "模板展厅门户",
   "gameViewerTitle": "交互游戏合集一览",
   "appViewerTitle": "Web App 精选案例门户",
   "musicPlayerTitle": "B 霓虹播放器",
-  "viewerBackBtn": "&larr; 返回选择大厅"
+  "viewerBackBtn": "&larr; 返回选择大厅",
+  "a11yTitle": "无障碍",
+  "a11yReset": "重置全部",
+  "a11yFontSize": "增大字体",
+  "a11yLineHeight": "增加行高",
+  "a11yTextSpacing": "加宽字距",
+  "a11yHighContrast": "高对比度",
+  "a11yDyslexiaFont": "阅读障碍友好字体",
+  "a11yReduceMotion": "减少动画",
+  "a11yHighlightLinks": "高亮链接",
+  "a11yBiggerCursor": "更大的光标",
+  "a11yTextAlign": "左对齐文本",
+  "a11yLowSaturation": "低饱和度",
+  "a11yOpenSettings": "打开无障碍设置",
+  "a11yCloseSettings": "关闭无障碍设置"
 }

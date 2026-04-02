@@ -5,20 +5,17 @@
   "navProjects": "Projects",
   "navChangelog": "Changelog",
   "navContact": "Contact",
-
   "heroSubtitle": "System Online: Wait for input...",
   "heroDesc": "Hello World! I'm Bryan, a Software Engineer building modern, aesthetically refined software solutions powered by AI. I focus on transforming complex ideas into scalable, intelligent products with real-world impact.",
   "ctaView": "View Systems",
   "ctaContact": "Initialize Contact",
   "ctaChangelog": "Changelog",
-
   "aboutTitle": "Core Directives <span class=\"accent\">// About</span>",
   "aboutP1": "My career as a Software Engineer is built on over 12 years of experience managing complex databases and automating critical workflows. After leading technical teams and driving operational success as a Technical Lead, I relocated to the United States to leverage my expertise in a new, high-growth environment. I've actively validated my journey by securing my official US High School Diploma and certifications, ensuring a seamless integration into the domestic tech market.",
   "aboutP2": "Today, I specialize in Artificial Intelligence and <strong>intelligent systems development</strong>, leveraging a versatile stack that includes <strong>Python, PHP, SQL, JavaScript, HTML/CSS, and WordPress</strong> to build robust digital architectures. By integrating <strong>Generative AI and LLMs</strong> with my engineering foundation, I create smart, automated systems that are both efficient and accessible. My goal is to transform complex challenges into intelligent solutions with real-world impact.",
   "statYears": "Years Experience",
   "statLanguages": "Fluent Languages",
   "statProjects": "Projects Implemented",
-
   "skillsTitle": "Engineering Matrix <span class=\"accent\">// Skills</span>",
   "skillCat1": "Languages & Systems",
   "skillCat1Item3": "SQL & Database Admin",
@@ -33,7 +30,6 @@
   "skillCat3Item2": "Team Leadership",
   "skillCat3Item3": "Strategic Problem Solving",
   "skillCat3Item4": "Cross-Cultural Comm (EN/ES)",
-
   "expTitle": "Execution Timeline <span class=\"accent\">// Experience</span>",
   "expDate1": "2024 - 2025",
   "expRole1": "Customer Service & POS Associate",
@@ -44,7 +40,6 @@
   "expDate3": "2018 - 2019",
   "expRole3": "Web Developer",
   "expDesc3": "Collaborated within an agile team to engineer a comprehensive website guiding visitors through the park's local flora and fauna. Programmed responsive and interactive interfaces utilizing WordPress, HTML, CSS, JavaScript, and MySQL.",
-
   "projTitle": "Compiled Outputs <span class=\"accent\">// Projects</span>",
   "proj1Title": "Designer Templates Showcase",
   "proj1Desc": "A curated showcase of portfolio templates for product designers, included to highlight the design approaches, UX presentation styles, and visual structures I can customize and adapt.",
@@ -59,7 +54,6 @@
   "viewAppsGallery": "Open Apps Gallery ->",
   "viewAIApp": "Open AI Apps Gallery ->",
   "aiAppViewerTitle": "AI-Powered Applications",
-
   "contactTitle": "Open Port <span class=\"accent\">// Contact</span>",
   "contactDesc": "Interested in building intelligent systems<br>or solving complex tech challenges?<br><br>Send a signal my way and let's start the conversation &mdash; response time: within 24 hours.",
   "labelName": "Your Name",
@@ -70,10 +64,23 @@
   "contactSuccess": "Transmission Successful!",
   "contactError": "Transmission failed. Try again.",
   "contactNetworkError": "Network error. Server offline.",
-
   "viewerTitle": "Template Gallery",
   "gameViewerTitle": "Interactive Games Gallery",
   "appViewerTitle": "Applications Gallery",
   "musicPlayerTitle": "B Neon Player",
-  "viewerBackBtn": "&larr; Back to Selection"
+  "viewerBackBtn": "&larr; Back to Selection",
+  "a11yTitle": "Accessibility",
+  "a11yReset": "Reset All",
+  "a11yFontSize": "Increase Text Size",
+  "a11yLineHeight": "Increase Line Height",
+  "a11yTextSpacing": "Wider Text Spacing",
+  "a11yHighContrast": "High Contrast",
+  "a11yDyslexiaFont": "Dyslexia-Friendly Font",
+  "a11yReduceMotion": "Reduce Animations",
+  "a11yHighlightLinks": "Highlight Links",
+  "a11yBiggerCursor": "Bigger Cursor",
+  "a11yTextAlign": "Align Text Left",
+  "a11yLowSaturation": "Low Saturation",
+  "a11yOpenSettings": "Open accessibility settings",
+  "a11yCloseSettings": "Close accessibility settings"
 }

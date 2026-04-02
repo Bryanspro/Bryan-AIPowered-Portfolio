@@ -5,20 +5,17 @@
   "navProjects": "主なプロジェクト",
   "navChangelog": "変更履歴",
   "navContact": "お問い合わせ",
-
   "heroSubtitle": "システムオンライン：入力を待機中...",
   "heroDesc": "こんにちは！私はソフトウェアエンジニアのBryanです。AIを活用した、モダンで美しく洗練されたデジタル体験を設計・構築しています。複雑なアイディアをスケーラブルかつ現実の世界に影響を与える賢明なプロダクトへと変えることに注力しています。",
   "ctaView": "実績を見る",
   "ctaContact": "連絡を取る",
   "ctaChangelog": "変更履歴",
-
   "aboutTitle": "概要 <span class=\"accent\">// プロフィール</span>",
   "aboutP1": "私のソフトウェアエンジニアとしてのキャリアは、複雑なデータベース管理と重要なワークフローの自動化における12年以上の経験に基づいて築かれています。Tech Leadとして技術チームを率い事業を成功に導いた後、新たな高成長環境で専門知識を活かすためにアメリカへ移住しました。正式な米国の高校卒業資格や認定を取得することで自身のキャリアを証明し、現地のテクノロジー市場へのスムーズな適応を実現しています。",
   "aboutP2": "現在、私は人工知能と<strong>インテリジェントシステムの開発</strong>を専門としており、<strong>Python、PHP、SQL、JavaScript、HTML/CSS、WordPress</strong>などの多彩な技術スタックを活用して、堅牢なデジタルアーキテクチャを構築しています。<strong>生成AIやLLM</strong>と私のエンジニアリングの基盤を統合することで、効率的でアクセシビリティの高い自律型システムを作り出します。",
   "statYears": "年間の実務経験",
   "statLanguages": "流暢な言語",
   "statProjects": "実装したプロジェクト",
-
   "skillsTitle": "技術スキル <span class=\"accent\">// スキルマトリックス</span>",
   "skillCat1": "言語とシステム",
   "skillCat1Item3": "SQL & データベース管理",
@@ -33,7 +30,6 @@
   "skillCat3Item2": "技術チームのリーダーシップ",
   "skillCat3Item3": "戦略的問題解決",
   "skillCat3Item4": "異文化コミュニケーション(英語/スペイン語)",
-
   "expTitle": "職務経歴 <span class=\"accent\">// タイムライン</span>",
   "expDate1": "2024 - 2025",
   "expRole1": "カスタマーサービス 兼 POSアソシエイト",
@@ -44,7 +40,6 @@
   "expDate3": "2018 - 2019",
   "expRole3": "Web開発エンジニア",
   "expDesc3": "アジャイルチームにて、現地の動植物を訪問者に案内する包括的なウェブサイトの開発に取り組みました。WordPress、HTML、CSS、JavaScript、MySQLを利用し、インタラクティブでレスポンシブなインターフェースをプログラミングしました。",
-
   "projTitle": "主な開発実績 <span class=\"accent\">// ポートフォリオ</span>",
   "proj1Title": "プロダクトデザイナー向けテンプレート",
   "proj1Desc": "デザインのアプローチ、UXプレゼンテーション、私がカスタマイズ可能な視覚構造の例として紹介する、プロダクトデザイナー向けのポートフォリオテンプレート集。",
@@ -59,7 +54,6 @@
   "viewAppsGallery": "アプリを開く ->",
   "viewAIApp": "AIアプリを開く ->",
   "aiAppViewerTitle": "AI駆動アプリケーション",
-
   "contactTitle": "お問い合わせ <span class=\"accent\">// 連絡先</span>",
   "contactDesc": "インテリジェントシステムの構築や、<br>複雑な技術的課題の解決にご興味がありますか？<br><br>ぜひお気軽に以下のフォームからご連絡ください。24時間以内にご返答いたします。",
   "labelName": "お名前",
@@ -70,10 +64,23 @@
   "contactSuccess": "メッセージを送信しました！",
   "contactError": "送信に失敗しました。もう一度お試しください。",
   "contactNetworkError": "ネットワークエラー。オフラインです。",
-
   "viewerTitle": "デザインテンプレートギャラリー",
   "gameViewerTitle": "インタラクティブゲームギャラリー",
   "appViewerTitle": "Webアプリケーションギャラリー",
   "musicPlayerTitle": "B ネオンプレイヤー",
-  "viewerBackBtn": "&larr; 選択画面に戻る"
+  "viewerBackBtn": "&larr; 選択画面に戻る",
+  "a11yTitle": "アクセシビリティ",
+  "a11yReset": "すべてリセット",
+  "a11yFontSize": "テキストを拡大",
+  "a11yLineHeight": "行間を広げる",
+  "a11yTextSpacing": "文字間隔を広げる",
+  "a11yHighContrast": "ハイコントラスト",
+  "a11yDyslexiaFont": "ディスレクシア対応フォント",
+  "a11yReduceMotion": "アニメーションを減らす",
+  "a11yHighlightLinks": "リンクを強調表示",
+  "a11yBiggerCursor": "カーソルを大きくする",
+  "a11yTextAlign": "テキストを左揃え",
+  "a11yLowSaturation": "低彩度",
+  "a11yOpenSettings": "アクセシビリティを開く",
+  "a11yCloseSettings": "アクセシビリティを閉じる"
 }

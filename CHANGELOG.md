@@ -238,3 +238,19 @@ All notable changes to this project will be documented in this file.
 
 *Initialized port... System ready for deployment.*
 
+## [v1.6] - 2026-04-02
+### Added
+- Integrated a comprehensive Accessibility Widget floating symmetrically opposite the AI Assistant chatbox.
+- Implemented 10 active accessibility toggles: Increase Text Size, Increase Line Height, Wider Text Spacing, High Contrast, Dyslexia-Friendly Font (Lexend), Reduce Animations, Highlight Links, Bigger Cursor, Align Text Left, and Low Saturation.
+- Added an automatic 7-second neon cyan pulse animation (`intro-glow`) to the accessibility button upon initial page load to guide user discovery.
+- Fully synchronized the accessibility widget's text, toggles, and ARIA labels with the portfolio's 11-language localization framework.
+
+### Changed
+- Symmetrically aligned the accessibility trigger button and the chat widget button across both desktop (`bottom: 20px`) and mobile responsive breakpoints (`bottom: 85px`), unifying their dimensions to exactly `60px`.
+- Finetuned the navbar Language Selector button styling by slightly increasing padding, font-size, and icon dimensions for improved legibility without breaking the slim aesthetic.
+
+### Fixed
+- Fixed an invisible click-interception bug by correctly applying `pointer-events: none` to the accessibility panel when closed.
+- Restructured the CSS logic for the "Low Saturation" feature, moving from a `filter` on the `<body>` element (which catastrophically broke the containing blocks for `position: fixed` elements) to an invisible pseudo-element overlay utilizing `backdrop-filter: saturate(0.4)`.
+
+*Initialized port... System ready for deployment.*
