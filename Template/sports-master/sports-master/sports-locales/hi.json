@@ -1,0 +1,5 @@
+{
+    "navHome": "होम", "navAbout": "हमारे बारे में", "navTeam": "टीम", "navNews": "समाचार", "navMatch": "मैच", "navBlog": "ब्लॉग", "navContact": "संपर्क", "navLogin": "लॉग इन", "navRegister": "रजिस्टर",
+    "themeToggleLight": "लाइट", "themeToggleDark": "डार्क",
+    "a11yTitle": "पहुँच क्षमता", "a11yFontSize": "फ़ॉन्ट आकार बढ़ाएं", "a11yLineHeight": "पंक्ति ऊंचाई", "a11yTextSpacing": "टेक्स्ट रिक्ति", "a11yHighContrast": "उच्च कंट्रास्ट", "a11yDyslexiaFont": "डिस्लेक्सिया फ़ॉन्ट", "a11yReduceMotion": "एनिमेशन कम करें", "a11yHighlightLinks": "लिंक हाइलाइट", "a11yBiggerCursor": "बड़ा कर्सर", "a11yTextAlign": "बाईं ओर संरेखित", "a11yLowSaturation": "कम संतृप्ति", "a11yReset": "सभी रीसेट करें", "a11yOpenSettings": "पहुँच सेटिंग खोलें", "a11yCloseSettings": "पहुँच सेटिंग बंद करें"
+}

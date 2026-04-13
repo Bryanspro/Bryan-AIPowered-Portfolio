@@ -1,0 +1,473 @@
+/* 
+  AI Enterprise Integration Overrides
+  Primary Color: #1363C6 (Nexus.AI Blue)
+*/
+
+/* 
+  AI Enterprise Integration Overrides
+  Primary Color: #1363C6 (Nexus.AI Blue)
+  Glow Color: rgba(19, 99, 198, 0.4)
+*/
+
+/* --- Accessibility Widget Overrides (Banish Portfolio Cyan/Purple) --- */
+.a11y-trigger-btn {
+    border-color: #1363C6 !important;
+    color: #1363C6 !important;
+    box-shadow: 0 0 15px rgba(19, 99, 198, 0.4) !important;
+}
+
+.a11y-trigger-btn svg {
+    filter: drop-shadow(0 0 3px rgba(19, 99, 198, 0.4)) !important;
+}
+
+.a11y-trigger-btn:hover {
+    background: rgba(19, 99, 198, 0.1) !important;
+    border-color: #1363C6 !important;
+    box-shadow: 0 0 25px rgba(19, 99, 198, 0.4) !important;
+}
+
+.a11y-trigger-btn[aria-expanded="true"] {
+    background: rgba(19, 99, 198, 0.15) !important;
+    border-color: #1363C6 !important;
+    color: #1363C6 !important;
+    box-shadow: 0 0 20px rgba(19, 99, 198, 0.4) !important;
+}
+
+.a11y-panel {
+    border-color: rgba(19, 99, 198, 0.2) !important;
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.6), 0 0 30px rgba(19, 99, 198, 0.05) !important;
+}
+
+.a11y-panel-header {
+    border-bottom-color: rgba(19, 99, 198, 0.1) !important;
+    background: linear-gradient(90deg, rgba(19, 99, 198, 0.05) 0%, rgba(19, 99, 198, 0.02) 100%) !important;
+}
+
+.a11y-panel-header::after {
+    background: linear-gradient(90deg, #1363C6, transparent) !important;
+}
+
+.a11y-panel-title svg {
+    color: #1363C6 !important;
+    filter: drop-shadow(0 0 4px rgba(19, 99, 198, 0.4)) !important;
+}
+
+.a11y-close-btn:hover {
+    color: #1363C6 !important;
+    background: rgba(19, 99, 198, 0.1) !important;
+}
+
+.a11y-panel-body::-webkit-scrollbar-thumb {
+    background: rgba(19, 99, 198, 0.3) !important;
+}
+
+.a11y-toggle-btn:hover {
+    background: rgba(19, 99, 198, 0.05) !important;
+    border-color: rgba(19, 99, 198, 0.1) !important;
+}
+
+.a11y-toggle-btn.active {
+    background: rgba(19, 99, 198, 0.08) !important;
+    border-color: rgba(19, 99, 198, 0.2) !important;
+    color: #1363C6 !important;
+}
+
+.a11y-toggle-btn.active .a11y-toggle-icon {
+    background: rgba(19, 99, 198, 0.12) !important;
+    border-color: rgba(19, 99, 198, 0.25) !important;
+    color: #1363C6 !important;
+    box-shadow: 0 0 8px rgba(19, 99, 198, 0.15) !important;
+}
+
+.a11y-toggle-btn.active .a11y-toggle-indicator {
+    background: rgba(19, 99, 198, 0.12) !important;
+    border-color: rgba(19, 99, 198, 0.3) !important;
+    color: #1363C6 !important;
+}
+
+.a11y-reset-btn:hover {
+    background: rgba(19, 99, 198, 0.08) !important;
+    border-color: rgba(19, 99, 198, 0.25) !important;
+    color: #1363C6 !important;
+}
+
+/* --- Chat Widget Overrides (Banish Portfolio Cyan/Purple) --- */
+#chat-toggle {
+    border-color: #1363C6 !important;
+    color: #1363C6 !important;
+    box-shadow: 0 0 15px rgba(19, 99, 198, 0.4) !important;
+}
+
+#chat-toggle:hover {
+    box-shadow: 0 0 25px rgba(19, 99, 198, 0.4) !important;
+    background: rgba(19, 99, 198, 0.1) !important;
+}
+
+.css-avatar {
+    border-color: #1363C6 !important;
+    box-shadow: 0 0 10px rgba(19, 99, 198, 0.4) !important;
+}
+
+.avatar-eye {
+    background: #1363C6 !important;
+    box-shadow: 0 0 5px rgba(19, 99, 198, 0.4) !important;
+}
+
+.css-avatar.speaking .avatar-eye {
+    background: #15ACE1 !important; /* Secondary teal-blue */
+    box-shadow: 0 0 8px rgba(21, 172, 225, 0.4) !important;
+}
+
+.status-dot {
+    background: #1363C6 !important;
+    box-shadow: 0 0 5px rgba(19, 99, 198, 0.4) !important;
+}
+
+.control-btn:hover {
+    color: #1363C6 !important;
+}
+
+.control-btn.active-lang {
+    color: #15ACE1 !important;
+    text-shadow: 0 0 5px rgba(21, 172, 225, 0.4) !important;
+}
+
+.user .message-content {
+    background: rgba(19, 99, 198, 0.1) !important;
+    border-color: rgba(19, 99, 198, 0.2) !important;
+    color: #15ACE1 !important;
+}
+
+.quick-btn {
+    background: rgba(19, 99, 198, 0.1) !important;
+    border-color: #1363C6 !important;
+}
+
+.quick-btn:hover {
+    background: #1363C6 !important;
+    box-shadow: 0 0 10px rgba(19, 99, 198, 0.4) !important;
+}
+
+.typing-dot {
+    background: #1363C6 !important;
+}
+
+.input-wrapper:focus-within {
+    border-color: #1363C6 !important;
+    box-shadow: 0 0 10px rgba(19, 99, 198, 0.1) !important;
+}
+
+.action-btn:hover {
+    color: #1363C6 !important;
+}
+
+.action-btn.voice-active {
+    color: #15ACE1 !important;
+}
+
+.chat-form button {
+    background: rgba(19, 99, 198, 0.1) !important;
+    border-color: #1363C6 !important;
+    color: #1363C6 !important;
+}
+
+.chat-form button:hover {
+    background: #1363C6 !important;
+    color: #fff !important;
+}
+
+
+/* --- Windows Emoji Flag Polyfill --- */
+@font-face {
+    font-family: 'Twemoji Country Flags';
+    unicode-range: U+1F1E6-1F1FF, U+1F3F4, U+E0062-E0063, U+E0065, U+E0067, U+E006C, U+E006E, U+E0073, U+E0074, U+E0077, U+E007F;
+    src: url('https://cdn.jsdelivr.net/npm/country-flag-emoji-polyfill@0.1/dist/TwemojiCountryFlags.woff2') format('woff2');
+}
+
+/* Force Emojis to render as flags instead of text */
+.lang-flag, #lang-flag-display {
+    font-family: "Twemoji Country Flags", "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", "Segoe UI Symbol", "Android Emoji", EmojiSymbols, sans-serif !important;
+}
+
+
+/* --- Nav Bar Adjustments --- */
+.top-option {
+    white-space: nowrap;
+}
+.to-social {
+    display: inline-flex;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+.nav-features {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-left: 20px;
+}
+.nav-features button {
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.3);
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+.nav-features button:hover {
+    border-color: #1363C6;
+    color: #1363C6;
+}
+
+/* --- Lang Dropdown Formatting --- */
+.lang-dropdown {
+    position: absolute;
+    top: 40px;
+    right: 0;
+    background: #fff;
+    border-radius: 4px;
+    padding: 10px 0;
+    min-width: 150px;
+    display: none;
+    z-index: 1000;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+}
+.lang-dropdown.open {
+    display: block;
+}
+.lang-option {
+    padding: 8px 15px;
+    color: #333;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.lang-option:hover {
+    background: #1363C6;
+    color: #fff;
+}
+.lang-separator {
+    height: 1px;
+    background: rgba(0,0,0,0.1);
+    margin: 5px 0;
+}
+
+/* =============================================
+   Dark Theme Overrides
+   Uses body[data-theme="dark"] since the attr
+   is placed directly on <body>.
+   ============================================= */
+
+/* --- Core Body --- */
+body[data-theme="dark"] {
+    background-color: #14183E !important;
+    color: #d1d5db !important;
+}
+
+/* --- Bootstrap Utility Overrides --- */
+body[data-theme="dark"] .bg-white {
+    background-color: #212555 !important;
+}
+
+body[data-theme="dark"] .bg-light {
+    background-color: #1a1f4c !important;
+}
+
+body[data-theme="dark"] .text-dark {
+    color: #f0f0f0 !important;
+}
+
+body[data-theme="dark"] .text-body {
+    color: #d1d5db !important;
+}
+
+/* --- Headings --- */
+body[data-theme="dark"] h1,
+body[data-theme="dark"] h2,
+body[data-theme="dark"] h3,
+body[data-theme="dark"] h4,
+body[data-theme="dark"] h5,
+body[data-theme="dark"] h6 {
+    color: #ffffff !important;
+}
+
+/* --- Paragraphs, Spans, Labels --- */
+body[data-theme="dark"] p,
+body[data-theme="dark"] span:not(.lang-flag):not(#lang-flag-display):not(.lang-code-display),
+body[data-theme="dark"] label,
+body[data-theme="dark"] li {
+    color: #d1d5db !important;
+}
+
+/* --- Container Sections (the white gaps between sections) --- */
+body[data-theme="dark"] .container-fluid:not(.bg-primary):not(.bg-dark):not(.footer):not(.sticky-top) {
+    background-color: #14183E !important;
+}
+
+/* --- Navbar --- */
+body[data-theme="dark"] .sticky-top {
+    background-color: #14183E !important;
+}
+
+body[data-theme="dark"] .navbar {
+    background-color: #14183E !important;
+}
+
+body[data-theme="dark"] .dropdown-menu {
+    background-color: #212555 !important;
+    border-color: #2d3470 !important;
+}
+
+body[data-theme="dark"] .dropdown-item {
+    color: #d1d5db !important;
+}
+
+body[data-theme="dark"] .dropdown-item:hover,
+body[data-theme="dark"] .dropdown-item:focus {
+    background-color: #1363C6 !important;
+    color: #fff !important;
+}
+
+/* --- Service Items --- */
+body[data-theme="dark"] .service-item {
+    background-color: #212555 !important;
+}
+
+body[data-theme="dark"] .service-item .service-icon {
+    background-color: #1a1f4c !important;
+}
+
+body[data-theme="dark"] .service-item a.btn::before {
+    background: #1a1f4c !important;
+}
+
+/* --- Team Items --- */
+body[data-theme="dark"] .team-item {
+    background-color: #212555 !important;
+    border-color: #2d3470 !important;
+}
+
+/* --- Case Study Items --- */
+body[data-theme="dark"] .case-item {
+    background-color: #212555 !important;
+}
+
+/* --- Accordion (FAQs) --- */
+body[data-theme="dark"] .accordion-item {
+    background-color: #212555 !important;
+    border-color: #2d3470 !important;
+}
+
+body[data-theme="dark"] .accordion-button {
+    background-color: #1a1f4c !important;
+    color: #f0f0f0 !important;
+}
+
+body[data-theme="dark"] .accordion-body {
+    color: #d1d5db !important;
+}
+
+/* --- Testimonial Carousel --- */
+body[data-theme="dark"] .testimonial-carousel .owl-nav .owl-prev,
+body[data-theme="dark"] .testimonial-carousel .owl-nav .owl-next {
+    background: #212555 !important;
+    color: #15ACE1 !important;
+}
+
+body[data-theme="dark"] .testimonial-carousel .owl-dot {
+    background: #212555 !important;
+}
+
+/* --- Forms & Inputs --- */
+body[data-theme="dark"] .form-control,
+body[data-theme="dark"] .form-select {
+    background-color: #1a1f4c !important;
+    color: #f0f0f0 !important;
+    border-color: #2d3470 !important;
+}
+
+body[data-theme="dark"] .form-control::placeholder {
+    color: #8b8fa8 !important;
+}
+
+/* --- Misc Rounded Pill Buttons (e.g. "About Us" label) --- */
+body[data-theme="dark"] .btn-sm.border.rounded-pill {
+    border-color: #1363C6 !important;
+}
+
+/* Feature check icons text */
+body[data-theme="dark"] .fa-check + span,
+body[data-theme="dark"] h6:not(.text-white) {
+    color: #d1d5db !important;
+}
+
+/* --- Breadcrumb --- */
+body[data-theme="dark"] .breadcrumb-item,
+body[data-theme="dark"] .breadcrumb-item a {
+    color: #d1d5db !important;
+}
+
+/* --- Back-to-Top Button --- */
+body[data-theme="dark"] .back-to-top .btn {
+    background-color: #212555 !important;
+}
+
+/* --- Lang Dropdown in Dark --- */
+body[data-theme="dark"] .lang-dropdown {
+    background: #212555 !important;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5) !important;
+}
+
+body[data-theme="dark"] .lang-option {
+    color: #d1d5db !important;
+}
+
+body[data-theme="dark"] .lang-option:hover {
+    background: #1363C6 !important;
+    color: #fff !important;
+}
+
+body[data-theme="dark"] .lang-separator {
+    background: rgba(255,255,255,0.1) !important;
+}
+
+/* --- Footer & Misc Positioning Overrides --- */
+.back-to-top.btn-primary {
+    bottom: 120px !important;
+    right: 20px !important; /* Matches chat toggle */
+    z-index: 10002 !important;
+    width: 60px !important;
+    height: 60px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border: 1px solid #fff !important; /* Thinner outline */
+    border-radius: 50% !important;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.4) !important;
+    padding: 0 !important; /* Centering fix */
+}
+
+.back-to-top i {
+    color: #fff !important;
+    font-size: 24px !important; /* Slightly larger for better centering visual */
+    line-height: 0 !important;
+    margin: 0 !important;
+}
+
+.theme-toggle-btn, .lang-selector-btn {
+    border: none !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    outline: none !important;
+    min-width: unset !important;
+    width: auto !important;
+    height: auto !important;
+    padding: 0 !important;
+}
+
+

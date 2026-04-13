@@ -1,0 +1,257 @@
+/* Kelly Features Override
+ * Forces the generic shared features (chatbox, accessibility widget)
+ * to adopt the native Kelly turquoise accent theme #34b7a7.
+ */
+
+/* ============================================
+   Windows Emoji Flag Polyfill (Twemoji)
+   Fixes flag emojis showing as "US", "ES" etc. on Windows
+   ============================================ */
+@font-face {
+    font-family: 'Twemoji Country Flags';
+    unicode-range: U+1F1E6-1F1FF, U+1F3F4, U+E0062-E0063, U+E0065, U+E0067, U+E006C, U+E006E, U+E0073, U+E0074, U+E0077, U+E007F;
+    src: url('https://cdn.jsdelivr.net/npm/country-flag-emoji-polyfill@0.1/dist/TwemojiCountryFlags.woff2') format('woff2');
+}
+
+.lang-flag, #lang-flag-display {
+    font-family: "Twemoji Country Flags", "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", "Segoe UI Symbol", "Android Emoji", EmojiSymbols, sans-serif !important;
+}
+
+/* ============================================
+   HEADER / NAV ALIGNMENT
+   ============================================ */
+.header-controls {
+    display: flex;
+    align-items: center;
+}
+
+.nav-features {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    position: relative;
+    z-index: 1000;
+}
+
+/* Lang selector button */
+#lang-selector-btn {
+    background: transparent !important;
+    border: none !important;
+    color: var(--nav-color) !important;
+    cursor: pointer !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 4px !important;
+    padding: 0 !important;
+    font-size: 0.88rem !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.4px !important;
+    transition: color 0.2s ease !important;
+    white-space: nowrap !important;
+}
+
+/* Theme toggle button */
+#theme-toggle-btn {
+    background: transparent !important;
+    border: none !important;
+    color: var(--nav-color) !important;
+    cursor: pointer !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 4px !important;
+    padding: 0 !important;
+    white-space: nowrap !important;
+    transition: color 0.2s ease !important;
+}
+
+#lang-selector-btn:hover,
+#theme-toggle-btn:hover {
+    color: #34b7a7 !important;
+}
+
+/* Language Dropdown Core Styles */
+.lang-dropdown {
+    position: absolute !important;
+    top: calc(100% + 8px) !important;
+    right: 0 !important;
+    min-width: 220px !important;
+    background: var(--surface-color) !important;
+    border: 1px solid rgba(0,0,0, 0.1) !important;
+    border-radius: 6px !important;
+    padding: 6px !important;
+    list-style: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    transform: translateY(-8px) scale(0.98) !important;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1) !important;
+    max-height: 0 !important;
+    overflow: hidden !important;
+    z-index: 1000 !important;
+}
+
+.lang-dropdown.open {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: translateY(0) scale(1) !important;
+    max-height: 450px !important;
+    overflow-y: auto !important;
+}
+
+.lang-dropdown::-webkit-scrollbar {
+    width: 4px;
+}
+.lang-dropdown::-webkit-scrollbar-track {
+    background: transparent;
+}
+.lang-dropdown::-webkit-scrollbar-thumb {
+    background: rgba(52, 183, 167, 0.4);
+    border-radius: 4px;
+}
+
+.lang-option {
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    padding: 0.55rem 0.75rem !important;
+    border-radius: 4px !important;
+    cursor: pointer !important;
+    transition: all 0.2s ease !important;
+    color: var(--default-color) !important;
+    font-size: 0.85rem !important;
+    border: 1px solid transparent !important;
+    text-transform: none !important;
+	font-weight: 400 !important;
+}
+
+.lang-option:hover,
+.lang-option:focus-visible {
+    background: rgba(52, 183, 167, 0.05) !important;
+    color: #34b7a7 !important;
+}
+
+.lang-option.active {
+    color: #34b7a7 !important;
+    background: rgba(52, 183, 167, 0.1) !important;
+}
+
+.lang-option .lang-flag {
+    font-size: 1.1rem;
+    width: 24px;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+.lang-option .lang-name {
+    flex: 1;
+    font-weight: 500;
+}
+
+.lang-option .lang-option-code {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: rgba(0, 0, 0, 0.3);
+    text-transform: uppercase;
+}
+
+.lang-option.active .lang-option-code {
+    color: #34b7a7;
+}
+
+.lang-dropdown .lang-separator {
+    height: 1px;
+    background: rgba(0,0,0, 0.05);
+    margin: 4px 8px;
+}
+
+/* Dark Mode Overrides for Dropdown */
+body.dark-background .lang-dropdown {
+    border-color: rgba(255,255,255,0.1) !important;
+}
+body.dark-background .lang-option .lang-option-code {
+    color: rgba(255, 255, 255, 0.3);
+}
+body.dark-background .lang-dropdown .lang-separator {
+    background: rgba(255,255,255, 0.05);
+}
+
+/* ============================================
+   ACCESSIBILITY WIDGET & CHAT THEME OVERRIDES
+   ============================================ */
+:root {
+    --kelly-accent: #34b7a7;
+    --kelly-glow: rgba(52, 183, 167, 0.4);
+}
+
+.a11y-trigger-btn {
+    border-color: var(--kelly-accent) !important;
+    box-shadow: 0 0 15px var(--kelly-glow) !important;
+}
+
+.a11y-trigger-btn svg { color: var(--kelly-accent) !important; }
+
+.a11y-panel {
+    border-top: 3px solid var(--kelly-accent) !important;
+}
+
+.a11y-panel-header::after {
+    background: linear-gradient(90deg, var(--kelly-accent), transparent) !important;
+}
+
+.a11y-panel-title svg {
+    color: var(--kelly-accent) !important;
+}
+
+.a11y-toggle-btn.active {
+    background: rgba(52, 183, 167, 0.1) !important;
+    border-color: var(--kelly-accent) !important;
+    color: var(--kelly-accent) !important;
+}
+
+.a11y-toggle-btn.active .a11y-toggle-icon { color: var(--kelly-accent) !important; }
+.a11y-toggle-btn.active .a11y-toggle-indicator { background: var(--kelly-accent) !important; }
+
+/* ============================================
+   LIGHT / DARK MODE TEMPLATE OVERRIDES
+   ============================================ */
+body[data-theme="dark"] {
+    --background-color: #0d0d0d;
+    --default-color: #d1d1d1;
+    --heading-color: #ffffff;
+    --surface-color: #1e1e1e;
+    --contrast-color: #ffffff;
+    
+    --nav-color: #d1d1d1;
+    --nav-dropdown-background-color: #1a1a1a;
+    --nav-dropdown-color: #d1d1d1;
+    --nav-mobile-background-color: #1a1a1a;
+}
+
+body[data-theme="dark"].light-background,
+body[data-theme="dark"] .light-background {
+    --background-color: #151515 !important;
+    --surface-color: #222222 !important;
+}
+
+/* Force specific structural elements */
+body[data-theme="dark"] .header {
+    background-color: #111111 !important;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+body[data-theme="dark"] .footer {
+    background-color: #111111 !important;
+    border-top: 1px solid rgba(255,255,255,0.05);
+}
+
+body[data-theme="dark"] .footer .copyright,
+body[data-theme="dark"] .footer .credits {
+    color: #a0a0a0;
+}
+
+/* Keep Hero text dark in dark mode due to the bright background image */
+body[data-theme="dark"] #hero h2,
+body[data-theme="dark"] #hero p {
+    color: #222222 !important;
+}

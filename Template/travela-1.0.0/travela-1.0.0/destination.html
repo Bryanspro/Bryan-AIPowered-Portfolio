@@ -27,7 +27,11 @@
 
         <!-- Template Stylesheet -->
         <link href="css/style.css" rel="stylesheet">
-    </head>
+    
+    <!-- Shared Features CSS -->
+    <link rel="stylesheet" href="../../../accessibility-widget.css?v=11" type="text/css">
+    <link rel="stylesheet" href="css/travela-features.css?v=1" type="text/css">
+</head>
 
     <body>
 
@@ -102,7 +106,22 @@
                         </div>
                         <a href="contact.html" class="nav-item nav-link">Contact</a>
                     </div>
-                    <a href="" class="btn btn-primary rounded-pill py-2 px-4 ms-lg-4">Book Now</a>
+                    
+                <!-- Portfolio Controls -->
+                <div class="nav-features d-flex align-items-center" style="gap: 15px; margin-left: 15px; padding-left: 15px; border-left: 1px solid rgba(0,0,0,0.1);">
+                    <div id="lang-selector" class="lang-selector position-relative">
+                        <button class="lang-selector-btn" id="lang-selector-btn" aria-expanded="false" type="button">
+                            <span id="lang-flag-display" class="lang-flag">🇺🇸</span>
+                            <span class="lang-code-display" id="lang-code-display" style="font-weight: 600;">EN</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>
+                        </button>
+                        <ul class="lang-dropdown" id="lang-dropdown" role="listbox"></ul>
+                    </div>
+                    <button id="theme-toggle-btn" class="theme-toggle-btn" aria-label="Toggle Theme" type="button" data-i18n-aria="themeToggleLight">
+                        <i class="bi bi-sun-fill" style="color: #f59e0b; font-size: 16px;"></i> <span data-i18n="themeToggleLight">Light</span>
+                    </button>
+                </div>
+                <a href="" class="btn btn-primary rounded-pill py-2 px-4 ms-lg-4">Book Now</a>
                 </div>
             </nav>
         </div>
@@ -546,7 +565,7 @@
                         <!--/*** This template is free as long as you keep the below author’s credit link/attribution link/backlink. ***/-->
                         <!--/*** If you'd like to use the template without the below author’s credit link/attribution link/backlink, ***/-->
                         <!--/*** you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". ***/-->
-                        Designed By <a class="text-white" href="https://htmlcodex.com">HTML Codex</a> Distributed By <a href="https://themewagon.com">ThemeWagon</a>
+                        Designed By <a class="text-white" href="https://htmlcodex.com">HTML Codex</a> | Adapted by <a class="text-white" href="https://bryans.tech" target="_blank" style="font-weight:500;">Bryans.tech</a> Distributed By <a href="https://themewagon.com">ThemeWagon</a>
                     </div>
                     </div>
                 </div>
@@ -567,7 +586,29 @@
         <script src="lib/lightbox/js/lightbox.min.js"></script>
         
 
-        <!-- Template Javascript -->
+        <!-- Portfolio Application Scripts -->
+    <script src="../../shared-i18n.js?v=6"></script>
+    <script src="js/travela-custom.js?v=1"></script>
+    <script src="../../../chat-intent-engine.js?v=11"></script>
+    <script>
+      fetch('../../../chat-widget.html?v=7')
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const doc = parser.parseFromString(html, 'text/html');
+          doc.querySelectorAll('style').forEach(s => document.head.appendChild(s.cloneNode(true)));
+          doc.body.querySelectorAll(':scope > *:not(script)').forEach(el => document.body.appendChild(el.cloneNode(true)));
+          doc.querySelectorAll('body > script').forEach(s => {
+            const ns = document.createElement('script');
+            ns.textContent = s.textContent;
+            document.body.appendChild(ns);
+          });
+        })
+        .catch(err => console.error('Chat widget load error:', err));
+    </script>
+    <script src="../../../accessibility-widget.js?v=3"></script>
+
+    <!-- Template Javascript -->
         <script src="js/main.js"></script>
     </body>
 

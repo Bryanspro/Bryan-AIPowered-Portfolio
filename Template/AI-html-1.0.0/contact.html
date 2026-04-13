@@ -30,7 +30,12 @@
 
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
+
+    <!-- Custom Integration Overrides -->
+    <link href="../../accessibility-widget.css?v=10" rel="stylesheet">
+    <link href="css/ai-features.css?v=10" rel="stylesheet">
 </head>
+
 
 <body>
     <!-- Spinner Start -->
@@ -74,7 +79,25 @@
                     </div>
                     <butaton type="button" class="btn text-white p-0 d-none d-lg-block" data-bs-toggle="modal"
                         data-bs-target="#searchModal"><i class="fa fa-search"></i></butaton>
-                </div>
+                    <!-- Custom Shared Features Nav -->
+                    <div class="nav-features d-flex align-items-center ms-auto">
+                        <div id="lang-selector" class="lang-selector ms-3" style="position: relative;">
+                            <button class="lang-selector-btn btn btn-sm border-0 text-white d-flex align-items-center" id="lang-selector-btn" aria-expanded="false" style="gap:5px; padding: 4px 0;">
+                                <span id="lang-flag-display">🇺🇸</span>
+                                <span class="lang-code-display" id="lang-code-display">EN</span>
+                                <i class="fa fa-chevron-down" style="font-size: 10px;"></i>
+                            </button>
+                            <ul class="lang-dropdown" id="lang-dropdown" role="listbox">
+                                <!-- Populated via JS -->
+                            </ul>
+                        </div>
+                        
+                        <button id="theme-toggle-btn" class="theme-toggle-btn btn text-white p-0 ms-3" aria-label="Toggle Theme" data-i18n-aria="themeToggleLight">
+                            <i class="fas fa-sun" style="color: #f4b400;"></i> <span data-i18n="themeToggleLight" data-theme-state="dark" style="display:none;">Light</span>
+                        </button>
+                    </div>
+<!-- End Custom Nav -->
+                
             </nav>
         </div>
     </div>
@@ -249,7 +272,8 @@
                         &copy; <a class="border-bottom" href="#">Your Site Name</a>, All Right Reserved.
 
                         <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
-                        Designed By <a class="border-bottom" href="https://htmlcodex.com">HTML Codex</a> Distributed By <a class="border-bottom" href="https://themewagon.com">ThemeWagon</a>
+                        Designed By <a class="border-bottom" href="https://htmlcodex.com">HTML Codex</a> Distributed By
+ <a class="border-bottom" href="https://themewagon.com">ThemeWagon</a> <br class="d-md-none">| Adapted for portfolio use by <a class="border-bottom" href="https://bryans.tech" target="_blank" style="color: var(--primary); font-weight: 500;">Bryans.tech</a>
                     </div>
                     <div class="col-md-6 text-center text-md-end">
                         <div class="footer-menu">
@@ -281,6 +305,31 @@
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
+
+    <!-- Shared I18n Engine & Custom JS (MUST run first) -->
+    <script src="../shared-i18n.js?v=10"></script>
+    <script src="js/ai-custom.js?v=10"></script>
+    
+    <!-- Chat Widget Core -->
+    <script src="../../chat-intent-engine.js?v=10"></script>
+    <script>
+        fetch('../../chat-widget.html?v=10')
+            .then(r => r.text())
+            .then(html => {
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(html, 'text/html');
+                doc.querySelectorAll('style').forEach(s => document.head.appendChild(s.cloneNode(true)));
+                doc.body.querySelectorAll(':scope > *:not(script)').forEach(el => document.body.appendChild(el.cloneNode(true)));
+                doc.querySelectorAll('body > script').forEach(s => {
+                    const ns = document.createElement('script');
+                    ns.textContent = s.textContent;
+                    document.body.appendChild(ns);
+                });
+            });
+    </script>
+    <!-- Accessibility Widget -->
+    <script src="../../accessibility-widget.js?v=10"></script>
+
 </body>
 
 </html>

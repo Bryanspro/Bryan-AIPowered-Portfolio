@@ -1,0 +1,314 @@
+/* MediLab Features Override
+ * Accent: #1977cc (MediLab Blue)
+ */
+
+/* ============================================
+   Windows Emoji Flag Polyfill (Twemoji)
+   ============================================ */
+@font-face {
+    font-family: 'Twemoji Country Flags';
+    unicode-range: U+1F1E6-1F1FF, U+1F3F4, U+E0062-E0063, U+E0065, U+E0067, U+E006C, U+E006E, U+E0073, U+E0074, U+E0077, U+E007F;
+    src: url('https://cdn.jsdelivr.net/npm/country-flag-emoji-polyfill@0.1/dist/TwemojiCountryFlags.woff2') format('woff2');
+}
+
+.lang-flag, #lang-flag-display {
+    font-family: "Twemoji Country Flags", "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", "Segoe UI Symbol", "Android Emoji", EmojiSymbols, sans-serif !important;
+}
+
+/* ============================================
+   HEADER / NAV ALIGNMENT
+   ============================================ */
+
+.nav-features {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    position: relative;
+    z-index: 1000;
+}
+
+/* Lang selector button */
+#lang-selector-btn {
+    background: transparent !important;
+    border: none !important;
+    cursor: pointer !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 4px !important;
+    padding: 0 !important;
+    font-size: 0.88rem !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.4px !important;
+    transition: color 0.2s ease !important;
+    white-space: nowrap !important;
+    color: #444444 !important;
+}
+
+/* Theme toggle button */
+#theme-toggle-btn {
+    background: transparent !important;
+    border: none !important;
+    cursor: pointer !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 4px !important;
+    padding: 0 !important;
+    white-space: nowrap !important;
+    transition: color 0.2s ease !important;
+    color: #444444 !important;
+    font-size: 0.88rem !important;
+    font-weight: 500 !important;
+}
+
+#lang-selector-btn:hover,
+#theme-toggle-btn:hover {
+    color: #1977cc !important;
+}
+
+/* Language Dropdown Core Styles */
+.lang-dropdown {
+    position: absolute !important;
+    top: calc(100% + 15px) !important;
+    right: 0 !important;
+    min-width: 220px !important;
+    background: #ffffff !important;
+    border: 1px solid rgba(0,0,0, 0.1) !important;
+    border-radius: 6px !important;
+    padding: 6px !important;
+    list-style: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    transform: translateY(-8px) scale(0.98) !important;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1) !important;
+    max-height: 0 !important;
+    overflow: hidden !important;
+    z-index: 1000 !important;
+    margin: 0 !important;
+}
+
+.lang-dropdown.open {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: translateY(0) scale(1) !important;
+    max-height: 450px !important;
+    overflow-y: auto !important;
+}
+
+.lang-dropdown::-webkit-scrollbar { width: 4px; }
+.lang-dropdown::-webkit-scrollbar-track { background: transparent; }
+.lang-dropdown::-webkit-scrollbar-thumb { background: rgba(25, 119, 204, 0.4); border-radius: 4px; }
+
+.lang-option {
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    padding: 0.55rem 0.75rem !important;
+    border-radius: 4px !important;
+    cursor: pointer !important;
+    transition: all 0.2s ease !important;
+    color: #333333 !important;
+    font-size: 0.85rem !important;
+    border: 1px solid transparent !important;
+    text-transform: none !important;
+    font-weight: 400 !important;
+}
+
+.lang-option:hover, .lang-option:focus-visible {
+    background: rgba(25, 119, 204, 0.05) !important;
+    color: #1977cc !important;
+}
+
+.lang-option.active {
+    color: #1977cc !important;
+    background: rgba(25, 119, 204, 0.1) !important;
+}
+
+.lang-option .lang-flag { font-size: 1.1rem; width: 24px; text-align: center; flex-shrink: 0; }
+.lang-option .lang-name { flex: 1; font-weight: 500; }
+.lang-option .lang-option-code { font-size: 0.7rem; font-weight: 700; letter-spacing: 1px; color: rgba(0, 0, 0, 0.3); text-transform: uppercase; }
+.lang-option.active .lang-option-code { color: #1977cc; }
+.lang-dropdown .lang-separator { height: 1px; background: rgba(0,0,0, 0.05); margin: 4px 8px; }
+
+
+/* ============================================
+   ACCESSIBILITY WIDGET - MediLab Blue
+   ============================================ */
+:root {
+    --medilab-accent: #1977cc;
+    --medilab-glow: rgba(25, 119, 204, 0.4);
+    --accent-cyan: #1977cc;
+    --glow-cyan: rgba(25, 119, 204, 0.4);
+    --accent-purple: #1977cc;
+    --glow-purple: rgba(25, 119, 204, 0.4);
+}
+
+@keyframes a11y-intro-glow {
+    0%, 100% {
+        box-shadow: 0 0 15px var(--medilab-glow);
+        border-color: rgba(25, 119, 204, 0.5);
+        transform: scale(1);
+    }
+    50% {
+        box-shadow: 0 0 40px rgba(25, 119, 204, 0.6), 0 0 80px rgba(25, 119, 204, 0.3), inset 0 0 15px var(--medilab-glow);
+        border-color: var(--medilab-accent);
+        transform: scale(1.05);
+    }
+}
+
+.a11y-trigger-btn {
+    border-color: var(--medilab-accent) !important;
+    box-shadow: 0 0 15px var(--medilab-glow) !important;
+}
+.a11y-trigger-btn svg { color: var(--medilab-accent) !important; }
+.a11y-trigger-btn:hover { background: rgba(25, 119, 204, 0.1) !important; }
+
+.a11y-panel { border-top: 3px solid var(--medilab-accent) !important; }
+.a11y-panel-header::after { background: linear-gradient(90deg, var(--medilab-accent), transparent) !important; }
+.a11y-panel-title svg { color: var(--medilab-accent) !important; }
+
+.a11y-toggle-btn.active {
+    background: rgba(25, 119, 204, 0.1) !important;
+    border-color: var(--medilab-accent) !important;
+    color: var(--medilab-accent) !important;
+}
+.a11y-toggle-btn.active .a11y-toggle-icon { color: var(--medilab-accent) !important; }
+.a11y-toggle-btn.active .a11y-toggle-indicator { background: var(--medilab-accent) !important; }
+
+/* Bigger cursor override */
+body[data-a11y-bigger-cursor], body[data-a11y-bigger-cursor] * {
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Cpath d='M4 4 L4 28 L11 21 L18 28 L22 24 L15 17 L24 17 Z' fill='%231977cc' stroke='%23000' stroke-width='1.5'/%3E%3C/svg%3E") 4 4, auto !important;
+}
+body[data-a11y-bigger-cursor] button, body[data-a11y-bigger-cursor] a, body[data-a11y-bigger-cursor] [role='button'], body[data-a11y-bigger-cursor] input[type='submit'], body[data-a11y-bigger-cursor] .btn {
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='36' viewBox='0 0 36 36'%3E%3Ccircle cx='18' cy='18' r='14' fill='none' stroke='%231977cc' stroke-width='3'/%3E%3Ccircle cx='18' cy='18' r='4' fill='%231977cc'/%3E%3C/svg%3E") 18 18, pointer !important;
+}
+
+/* Highlight links override */
+body[data-a11y-highlight-links] a {
+    outline: 2px solid var(--medilab-accent) !important;
+    background: rgba(25, 119, 204, 0.06) !important;
+}
+
+
+/* ============================================
+   DARK MODE OVERRIDES FOR MEDILAB
+   ============================================ */
+body[data-theme="dark"] {
+    background-color: #121212 !important;
+    color: #d1d1d1 !important;
+}
+
+body[data-theme="dark"] h1, body[data-theme="dark"] h2, body[data-theme="dark"] h3,
+body[data-theme="dark"] h4, body[data-theme="dark"] h5, body[data-theme="dark"] h6 {
+    color: #ffffff !important;
+}
+
+body[data-theme="dark"] .topbar {
+    background: #0a0a0a !important;
+}
+
+body[data-theme="dark"] .branding {
+    background: #111111 !important;
+}
+
+body[data-theme="dark"] .navmenu ul li a {
+    color: #d1d1d1 !important;
+}
+
+body[data-theme="dark"] .section {
+    background: #1a1a1a !important;
+}
+
+body[data-theme="dark"] .light-background {
+    background: #151515 !important;
+}
+
+body[data-theme="dark"] .footer {
+    background: #0a0a0a !important;
+    color: #b0b0b0 !important;
+}
+
+body[data-theme="dark"] .footer h4 {
+    color: #ffffff !important;
+}
+
+body[data-theme="dark"] .why-box {
+    background: #1565a7 !important;
+}
+
+body[data-theme="dark"] .icon-box {
+    background: #1e1e1e !important;
+}
+
+body[data-theme="dark"] .icon-box h4,
+body[data-theme="dark"] .icon-box p {
+    color: #d1d1d1 !important;
+}
+
+body[data-theme="dark"] .service-item {
+    background: #1e1e1e !important;
+}
+
+body[data-theme="dark"] .service-item h3 {
+    color: #ffffff !important;
+}
+
+body[data-theme="dark"] .service-item p {
+    color: #b0b0b0 !important;
+}
+
+body[data-theme="dark"] .faq-item {
+    background: #1e1e1e !important;
+}
+
+body[data-theme="dark"] .faq-item h3 {
+    color: #e0e0e0 !important;
+}
+
+body[data-theme="dark"] .form-control,
+body[data-theme="dark"] .form-select {
+    background: #2a2a2a !important;
+    color: #d1d1d1 !important;
+    border-color: #444 !important;
+}
+
+body[data-theme="dark"] .team-member {
+    background: #1e1e1e !important;
+}
+
+body[data-theme="dark"] .testimonial-item {
+    background: #1e1e1e !important;
+}
+
+body[data-theme="dark"] .testimonial-item p {
+    color: #b0b0b0 !important;
+}
+
+body[data-theme="dark"] .section-title p {
+    color: #aaa !important;
+}
+
+body[data-theme="dark"] .cta-btn {
+    background: #1977cc !important;
+    color: #fff !important;
+}
+
+body[data-theme="dark"] #lang-selector-btn,
+body[data-theme="dark"] #theme-toggle-btn {
+    color: #d1d1d1 !important;
+}
+
+/* Dark mode dropdown */
+body[data-theme="dark"] .lang-dropdown {
+    background: #1e1e1e !important;
+    border-color: rgba(255,255,255,0.1) !important;
+}
+body[data-theme="dark"] .lang-option {
+    color: #e0e0e0 !important;
+}
+body[data-theme="dark"] .lang-option .lang-option-code {
+    color: rgba(255, 255, 255, 0.3);
+}
+body[data-theme="dark"] .lang-dropdown .lang-separator {
+    background: rgba(255,255,255, 0.05);
+}

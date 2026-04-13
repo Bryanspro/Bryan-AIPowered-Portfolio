@@ -1,0 +1,583 @@
+/* Game Warrior Features Override
+ * Forces the generic shared features (chatbox, accessibility widget)
+ * to adopt the native #ffb320 golden accent theme.
+ */
+
+/* ============================================
+   Windows Emoji Flag Polyfill (Twemoji)
+   Fixes flag emojis showing as "US", "ES" etc. on Windows
+   ============================================ */
+@font-face {
+    font-family: 'Twemoji Country Flags';
+    unicode-range: U+1F1E6-1F1FF, U+1F3F4, U+E0062-E0063, U+E0065, U+E0067, U+E006C, U+E006E, U+E0073, U+E0074, U+E0077, U+E007F;
+    src: url('https://cdn.jsdelivr.net/npm/country-flag-emoji-polyfill@0.1/dist/TwemojiCountryFlags.woff2') format('woff2');
+}
+
+/* Apply to flag spans in both the nav button and dropdown options */
+.lang-flag, #lang-flag-display {
+    font-family: "Twemoji Country Flags", "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", "Segoe UI Symbol", "Android Emoji", EmojiSymbols, sans-serif !important;
+}
+
+/* ============================================
+   HEADER — Single-row Flexbox Layout
+   ============================================ */
+.header-section {
+    overflow: visible !important; /* allow dropdown to escape */
+}
+
+/* The container now has class header-flex */
+.header-flex {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    flex-wrap: nowrap !important;
+}
+
+/* Logo — far left */
+.header-flex .site-logo {
+    float: none !important;
+    flex-shrink: 0 !important;
+    padding-top: 0 !important;
+}
+
+/* Nav links — center, fills available space */
+.header-flex .main-menu {
+    float: none !important;
+    margin-right: 0 !important;
+    flex: 1 1 auto !important;
+    text-align: center !important;
+}
+
+.header-flex .main-menu ul {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* Right controls — far right */
+.header-flex .user-panel {
+    float: none !important;
+    flex-shrink: 0 !important;
+    background: transparent !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 0 !important;
+}
+
+/* Login / Register pill */
+.login-register-pill {
+    background: #ffb320 !important;
+    padding: 7px 18px !important;
+    border-radius: 30px !important;
+    font-weight: 500 !important;
+    white-space: nowrap !important;
+}
+
+.login-register-pill a {
+    font-size: 14px !important;
+    color: #131313 !important;
+}
+
+/* Nav-features (lang selector + theme toggle) */
+.header-flex .nav-features {
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    margin-left: 14px !important;
+    padding-left: 14px !important;
+    border-left: 1px solid rgba(255, 179, 32, 0.35) !important;
+    position: relative !important;
+}
+
+/* Responsive hamburger — hidden on desktop, same as original */
+.header-flex .nav-switch {
+    display: none !important;
+}
+
+/* Lang selector button */
+#lang-selector-btn {
+    background: transparent !important;
+    border: none !important;
+    color: rgba(255, 255, 255, 0.85) !important;
+    cursor: pointer !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 4px !important;
+    padding: 0 !important;
+    font-size: 0.88rem !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.4px !important;
+    transition: color 0.2s ease !important;
+    white-space: nowrap !important;
+}
+
+/* Theme toggle button */
+#theme-toggle-btn {
+    background: transparent !important;
+    border: none !important;
+    color: rgba(255, 255, 255, 0.85) !important;
+    cursor: pointer !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 4px !important;
+    padding: 0 !important;
+    white-space: nowrap !important;
+    transition: color 0.2s ease !important;
+}
+
+#lang-selector-btn:hover,
+#theme-toggle-btn:hover {
+    color: #ffb320 !important;
+}
+
+
+/* Language Dropdown Core Styles (matching style.css) */
+.lang-dropdown {
+    position: absolute !important;
+    top: calc(100% + 8px) !important;
+    right: 0 !important;
+    min-width: 220px !important;
+    background: #1a1a1a !important; /* Game Warrior distinct dark */
+    border: 1px solid rgba(255, 179, 32, 0.3) !important; /* Golden glass border */
+    border-radius: 6px !important;
+    padding: 6px !important;
+    list-style: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    transform: translateY(-8px) scale(0.98) !important;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), 0 0 20px rgba(255, 179, 32, 0.1) !important;
+    max-height: 0 !important;
+    overflow: hidden !important;
+    z-index: 1000 !important;
+}
+
+.lang-dropdown.open {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: translateY(0) scale(1) !important;
+    max-height: 450px !important;
+    overflow-y: auto !important;
+}
+
+.lang-dropdown::-webkit-scrollbar {
+    width: 4px;
+}
+.lang-dropdown::-webkit-scrollbar-track {
+    background: transparent;
+}
+.lang-dropdown::-webkit-scrollbar-thumb {
+    background: rgba(255, 179, 32, 0.2);
+    border-radius: 4px;
+}
+
+.lang-option {
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    padding: 0.55rem 0.75rem !important;
+    border-radius: 4px !important;
+    cursor: pointer !important;
+    transition: all 0.2s ease !important;
+    color: #9a9a9a !important; /* Muted text */
+    font-size: 0.85rem !important;
+    border: 1px solid transparent !important;
+    text-transform: none !important;
+	font-weight: 400 !important;
+}
+
+.lang-option:hover,
+.lang-option:focus-visible {
+    background: #222 !important;
+    color: #fff !important;
+    border-color: rgba(255, 179, 32, 0.3) !important;
+}
+
+.lang-option.active {
+    color: #ffb320 !important;
+    background: rgba(255, 179, 32, 0.1) !important;
+    border-color: rgba(255, 179, 32, 0.4) !important;
+}
+
+.lang-option .lang-flag {
+    font-size: 1.1rem;
+    width: 24px;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+.lang-option .lang-name {
+    flex: 1;
+    font-weight: 500;
+}
+
+.lang-option .lang-option-code {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: rgba(255, 255, 255, 0.3);
+    text-transform: uppercase;
+}
+
+.lang-option.active .lang-option-code {
+    color: #ffb320;
+}
+
+.lang-dropdown .lang-separator {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 179, 32, 0.3), transparent);
+    margin: 4px 8px;
+}
+
+/* ============================================
+   CHAT WIDGET — Golden Theme Override
+   ============================================ */
+
+/* Toggle button */
+#chat-toggle {
+    background: rgba(19, 19, 19, 0.95) !important;
+    border-color: #ffb320 !important;
+    color: #ffb320 !important;
+    box-shadow: 0 0 15px rgba(255, 179, 32, 0.35) !important;
+}
+
+#chat-toggle:hover {
+    background: rgba(255, 179, 32, 0.12) !important;
+    box-shadow: 0 0 25px rgba(255, 179, 32, 0.5) !important;
+}
+
+/* Chat container */
+#chat-container {
+    background: rgba(19, 19, 19, 0.97) !important;
+    border-color: rgba(255, 179, 32, 0.2) !important;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7), 0 0 20px rgba(255, 179, 32, 0.08) !important;
+}
+
+/* Chat header */
+.chat-header {
+    background: rgba(0, 0, 0, 0.4) !important;
+    border-bottom-color: rgba(255, 179, 32, 0.2) !important;
+}
+
+/* CSS Avatar */
+.css-avatar {
+    border-color: #ffb320 !important;
+    box-shadow: 0 0 10px rgba(255, 179, 32, 0.4) !important;
+}
+
+.avatar-eye {
+    background: #ffb320 !important;
+    box-shadow: 0 0 5px rgba(255, 179, 32, 0.5) !important;
+}
+
+.css-avatar.speaking .avatar-eye {
+    background: #d48a00 !important;
+    box-shadow: 0 0 8px rgba(212, 138, 0, 0.6) !important;
+}
+
+/* Status dot + text */
+.status-dot {
+    background: #ffb320 !important;
+    box-shadow: 0 0 5px rgba(255, 179, 32, 0.5) !important;
+}
+
+.bot-info .status {
+    color: #ffb320 !important;
+}
+
+/* Control buttons */
+.control-btn:hover {
+    color: #ffb320 !important;
+}
+
+.control-btn.active-lang {
+    color: #ffb320 !important;
+    text-shadow: 0 0 5px rgba(255, 179, 32, 0.4) !important;
+}
+
+/* Chat body scrollbar */
+.chat-body::-webkit-scrollbar-thumb {
+    background: rgba(255, 179, 32, 0.2) !important;
+}
+
+.chat-body::-webkit-scrollbar-thumb:hover {
+    background: #ffb320 !important;
+}
+
+/* Bot messages */
+.bot .message-content {
+    background: rgba(255, 255, 255, 0.04) !important;
+    border-color: rgba(255, 179, 32, 0.15) !important;
+}
+
+/* User messages */
+.user .message-content {
+    background: rgba(255, 179, 32, 0.1) !important;
+    border-color: rgba(255, 179, 32, 0.3) !important;
+    color: #ffb320 !important;
+}
+
+/* Typing indicator dots */
+.typing-dot {
+    background: #ffb320 !important;
+}
+
+/* Quick-reply buttons: replace purple with golden */
+.quick-btn {
+    background: rgba(255, 179, 32, 0.08) !important;
+    border-color: rgba(255, 179, 32, 0.5) !important;
+    color: #e0e0e0 !important;
+}
+
+.quick-btn:hover {
+    background: #ffb320 !important;
+    color: #131313 !important;
+    box-shadow: 0 0 10px rgba(255, 179, 32, 0.4) !important;
+    border-color: #ffb320 !important;
+}
+
+/* Input area */
+.chat-input-area {
+    background: rgba(0, 0, 0, 0.35) !important;
+    border-top-color: rgba(255, 179, 32, 0.15) !important;
+}
+
+.input-wrapper {
+    background: rgba(255, 255, 255, 0.04) !important;
+    border-color: rgba(255, 179, 32, 0.2) !important;
+}
+
+.input-wrapper:focus-within {
+    border-color: #ffb320 !important;
+    box-shadow: 0 0 10px rgba(255, 179, 32, 0.15) !important;
+}
+
+#send-btn {
+    color: #ffb320 !important;
+}
+
+.action-btn:hover {
+    color: #ffb320 !important;
+}
+
+.action-btn.voice-active {
+    color: #ffb320 !important;
+    text-shadow: 0 0 8px rgba(255, 179, 32, 0.6) !important;
+}
+
+/* Contact form inside chat */
+.chat-form input:focus,
+.chat-form textarea:focus {
+    border-color: #ffb320 !important;
+}
+
+.chat-form button {
+    background: rgba(255, 179, 32, 0.1) !important;
+    border-color: #ffb320 !important;
+    color: #ffb320 !important;
+}
+
+.chat-form button:hover {
+    background: #ffb320 !important;
+    color: #131313 !important;
+}
+
+/* File attachment border */
+.file-attachment {
+    border-color: rgba(255, 179, 32, 0.5) !important;
+}
+
+/* Widget text size upscaling */
+.message-content {
+    font-size: 1.05rem !important;
+}
+
+#chat-input {
+    font-size: 1.05rem !important;
+}
+
+/* ============================================
+   ACCESSIBILITY WIDGET — Golden Theme
+   ============================================ */
+.a11y-trigger-btn {
+    border-color: #ffb320 !important;
+    background-color: #131313 !important;
+    box-shadow: 0 0 15px rgba(255, 179, 32, 0.4) !important;
+}
+
+.a11y-trigger-btn svg { color: #ffb320 !important; }
+
+.a11y-trigger-btn[aria-expanded="true"] {
+    background: rgba(255, 179, 32, 0.15) !important;
+    border-color: #ffb320 !important;
+    color: #ffb320 !important;
+    box-shadow: 0 0 20px rgba(255, 179, 32, 0.4) !important;
+}
+
+.a11y-trigger-btn[aria-expanded="true"] svg {
+    filter: drop-shadow(0 0 6px rgba(255, 179, 32, 0.5)) !important;
+}
+
+.a11y-panel {
+    border-top: 3px solid #ffb320 !important;
+    box-shadow: 0 -4px 20px rgba(255, 179, 32, 0.15) !important;
+    font-family: "Roboto", sans-serif !important;
+    background: #131313 !important;
+}
+
+.a11y-panel-header {
+    border-bottom: 1px solid rgba(255, 179, 32, 0.2) !important;
+    background: linear-gradient(90deg, rgba(255, 179, 32, 0.08) 0%, rgba(255, 179, 32, 0.02) 100%) !important;
+}
+
+.a11y-panel-header::after {
+    background: linear-gradient(90deg, #ffb320, transparent) !important;
+}
+
+.a11y-panel-title svg {
+    color: #ffb320 !important;
+    filter: drop-shadow(0 0 4px rgba(255, 179, 32, 0.4)) !important;
+}
+
+.a11y-close-btn:hover {
+    color: #ffb320 !important;
+    background: rgba(255, 179, 32, 0.1) !important;
+}
+
+.a11y-close-btn:focus-visible { outline: 2px solid #ffb320 !important; }
+
+.a11y-toggle-btn {
+    background: rgba(255, 255, 255, 0.05) !important;
+    padding: 8px 12px !important;
+}
+
+.a11y-toggle-btn:hover {
+    background: rgba(255, 179, 32, 0.08) !important;
+    border-color: rgba(255, 179, 32, 0.15) !important;
+}
+
+.a11y-toggle-btn:focus-visible { outline: 2px solid #ffb320 !important; }
+
+.a11y-toggle-btn.active {
+    background: rgba(255, 179, 32, 0.1) !important;
+    border-color: #ffb320 !important;
+    color: #ffb320 !important;
+}
+
+.a11y-toggle-btn.active .a11y-toggle-icon { color: #ffb320 !important; }
+.a11y-toggle-btn.active .a11y-toggle-indicator { background: #ffb320 !important; }
+
+.a11y-panel-footer button {
+    border-color: #ffb320 !important;
+    color: #ffb320 !important;
+}
+
+.a11y-panel-footer button:hover {
+    background: #ffb320 !important;
+    color: #131313 !important;
+}
+
+.a11y-panel-body::-webkit-scrollbar-thumb {
+    background: rgba(255, 179, 32, 0.3) !important;
+}
+
+.a11y-panel-body { gap: 2px !important; }
+
+/* ============================================
+   LIGHT / DARK MODE SUPPORT
+   ============================================ */
+
+/* Dark Mode */
+body[data-theme="dark"] {
+    background-color: #0b0b0b;
+    color: #d3d3d3;
+}
+body[data-theme="dark"] p { color: #a0a0a0; }
+
+body[data-theme="dark"] .header-section,
+body[data-theme="dark"] .latest-news-section,
+body[data-theme="dark"] .footer-widget,
+body[data-theme="dark"] .tournament-item {
+    background: #111;
+}
+
+body[data-theme="dark"] .recent-game-section {
+    background-color: #181818;
+    border-color: #333;
+}
+
+body[data-theme="dark"] .recent-game-item .rgi-content {
+    background: #222;
+    border-color: #333;
+}
+
+body[data-theme="dark"] h1,
+body[data-theme="dark"] h2,
+body[data-theme="dark"] h3,
+body[data-theme="dark"] h4,
+body[data-theme="dark"] h5,
+body[data-theme="dark"] h6 {
+    color: #f1f1f1 !important;
+}
+
+body[data-theme="dark"] .site-btn {
+    background: #ffb320;
+    color: #131313 !important;
+}
+
+/* Light Mode */
+body[data-theme="light"] {
+    background-color: #f5f5f5;
+    color: #1a1a1a;
+}
+
+body[data-theme="light"] .header-section {
+    background: #1c1c1c !important;
+}
+
+body[data-theme="light"] .latest-news-section {
+    background: #222 !important;
+}
+
+body[data-theme="light"] .recent-game-section {
+    background-color: #e8e8e8;
+    border-color: #ccc;
+}
+
+body[data-theme="light"] .recent-game-item .rgi-content {
+    background: #fff;
+    border-color: #ddd;
+}
+
+body[data-theme="light"] .footer-widget {
+    background: #252525;
+}
+
+body[data-theme="light"] h1,
+body[data-theme="light"] h2,
+body[data-theme="light"] h3,
+body[data-theme="light"] h4,
+body[data-theme="light"] h5,
+body[data-theme="light"] h6 {
+    color: #1a1a1a;
+}
+
+body[data-theme="light"] p { color: #3a3a3a; }
+
+body[data-theme="light"] .site-btn {
+    background: #ffb320;
+    color: #131313 !important;
+}
+
+body[data-theme="light"] #chat-container {
+    background: rgba(240, 240, 240, 0.97) !important;
+}
+
+body[data-theme="light"] .message-content {
+    color: #1a1a1a !important;
+}
+
+body[data-theme="light"] .user .message-content {
+    color: #9a6a00 !important;
+}

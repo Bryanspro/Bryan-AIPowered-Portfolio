@@ -254,3 +254,20 @@ All notable changes to this project will be documented in this file.
 - Restructured the CSS logic for the "Low Saturation" feature, moving from a `filter` on the `<body>` element (which catastrophically broke the containing blocks for `position: fixed` elements) to an invisible pseudo-element overlay utilizing `backdrop-filter: saturate(0.4)`.
 
 *Initialized port... System ready for deployment.*
+
+## [v1.7] - 2026-04-13
+### Added
+- Replaced the static image on the "AI-Powered Applications" project card with a looping autoplay video (`Powered app video 2.mp4`), completing video integration across all four carousel cards.
+- Extended the "Reduce Animations" accessibility toggle to pause all project carousel videos when enabled and resume playback when disabled, including on initial page load if the setting is persisted.
+- Added a multi-layered neon cyan glow hover effect to the `Bryans.tech` navbar logo.
+- Embedded the floating AI Chatbox assistant widget into the portfolio's designer templates, extending the conversational AI experience across template pages.
+- Embedded the Accessibility Widget into the portfolio's designer templates, ensuring all 10 accessibility toggles are available across template pages.
+
+### Changed
+- Rebranded all project carousel tech-stack tags to recruiter-friendly labels: `HTML/CSS` → `Websites`, `GenAI` → `Frontend`, `JavaScript` → `Gaming`/`Mobile`/`RAG`, `HTML5 Canvas` → `Entertainment`, `REST API` → `AI-enhanced`.
+- Replaced all 8 template gallery card images with instant-loading themed emojis (✈️⚕️🍕💼🎮🏆🤖💪) and unique gradient backgrounds, matching the premium card design system used by the Games and Apps galleries.
+
+### Fixed
+- Fixed the favicon not displaying by updating HTML references from the old `favicon.png` path to the new `favicon.JPG` file and correcting the MIME type from `image/png` to `image/jpeg`.
+
+*Initialized port... System ready for deployment.*

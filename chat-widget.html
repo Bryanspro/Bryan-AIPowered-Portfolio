@@ -701,6 +701,28 @@
     }
 };
 
+        // Override greeting if set externally
+        if (window.WIDGET_GREETING) {
+            Object.keys(Dictionary).forEach(lang => {
+                if (window.WIDGET_GREETING[lang]) {
+                    Dictionary[lang].greeting = window.WIDGET_GREETING[lang];
+                }
+            });
+        }
+        
+        // Override Bot Name if set externally
+        document.addEventListener('DOMContentLoaded', () => {
+            if (window.WIDGET_BOT_NAME) {
+                const botNameEl = document.getElementById('bot-name');
+                if (botNameEl) botNameEl.textContent = window.WIDGET_BOT_NAME;
+            }
+        });
+        // Also check immediately since DOM might already be loaded
+        if (window.WIDGET_BOT_NAME) {
+            const botNameEl = document.getElementById('bot-name');
+            if (botNameEl) botNameEl.textContent = window.WIDGET_BOT_NAME;
+        }
+
         // --- State Management ---
         let currentLang = 'en';
         let voiceEnabled = false;
@@ -713,7 +735,7 @@
         const WIDGET_GEMINI_KEY = 'AIzaSyDXjrvW4TtT6gpUYT5Ig5ovn0M2qOyK4Uw';
         const WIDGET_GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${WIDGET_GEMINI_KEY}`;
 
-        const WIDGET_SYSTEM_PROMPT = `Role: You are the official AI Resume Assistant for Bryan Marquez, a Software Engineer transitioning into AI and Python Development. Your goal is to enthusiastically and professionally answer questions from IT recruiters about Bryan's experience, skills, and background.
+        const WIDGET_SYSTEM_PROMPT = window.WIDGET_SYSTEM_PROMPT || `Role: You are the official AI Resume Assistant for Bryan Marquez, a Software Engineer transitioning into AI and Python Development. Your goal is to enthusiastically and professionally answer questions from IT recruiters about Bryan's experience, skills, and background.
 Tone & Style: Professional, concise, helpful, and tech-savvy. Always keep responses under 3 paragraphs. If asked in Spanish, reply in Spanish. If asked in English, reply in English.
 Knowledge Base (Strict Facts Only):
 * Current Focus: Python, Generative AI, Process Automation, bridging robust web architecture with AI solutions.

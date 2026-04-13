@@ -1,0 +1,5 @@
+{
+    "navHome": "Akèy", "navAbout": "Sou Nou", "navTeam": "Ekip", "navNews": "Nouvèl", "navMatch": "Match", "navBlog": "Blog", "navContact": "Kontakte", "navLogin": "Konekte", "navRegister": "Enskri",
+    "themeToggleLight": "Klè", "themeToggleDark": "Nwa",
+    "a11yTitle": "Aksesibilite", "a11yFontSize": "Ogmante Tèks", "a11yLineHeight": "Wotè Liy", "a11yTextSpacing": "Espas Tèks", "a11yHighContrast": "Kontrast Wo", "a11yDyslexiaFont": "Fon Dysleksi", "a11yReduceMotion": "Redui Animasyon", "a11yHighlightLinks": "Souliye Lyen", "a11yBiggerCursor": "Gran Kursè", "a11yTextAlign": "Aliye Gòch", "a11yLowSaturation": "Ba Saturasyon", "a11yReset": "Reyinisyalize", "a11yOpenSettings": "Ouvri aksesibilite", "a11yCloseSettings": "Fèmen aksesibilite"
+}

@@ -1,0 +1,32 @@
+{
+  "navHome": "Home",
+  "navAbout": "About Us",
+  "navClasses": "Classes",
+  "navServices": "Services",
+  "navTeam": "Our Team",
+  "navPages": "Pages",
+  "navContact": "Contact",
+
+  "heroSubtitle": "Shape your body",
+  "heroTitle": "Be <strong>strong</strong> training hard",
+  "heroText": "Welcome to IronFitness, where we help you achieve your goals.",
+  "heroBtn": "Get info",
+
+  "themeToggleLight": "Light",
+  "themeToggleDark": "Dark",
+
+  "a11yTitle": "Accessibility",
+  "a11yFontSize": "Increase Text Size",
+  "a11yLineHeight": "Increase Line Height",
+  "a11yTextSpacing": "Wider Text Spacing",
+  "a11yHighContrast": "High Contrast",
+  "a11yDyslexiaFont": "Dyslexia-Friendly Font",
+  "a11yReduceMotion": "Reduce Animations",
+  "a11yHighlightLinks": "Highlight Links",
+  "a11yBiggerCursor": "Bigger Cursor",
+  "a11yTextAlign": "Align Text Left",
+  "a11yLowSaturation": "Low Saturation",
+  "a11yReset": "Reset All",
+  "a11yOpenSettings": "Open accessibility settings",
+  "a11yCloseSettings": "Close accessibility settings"
+}

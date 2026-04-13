@@ -1,0 +1,5 @@
+{
+    "navHome": "الرئيسية", "navAbout": "من نحن", "navTeam": "الفريق", "navNews": "الأخبار", "navMatch": "المباراة", "navBlog": "المدونة", "navContact": "اتصل بنا", "navLogin": "تسجيل الدخول", "navRegister": "تسجيل",
+    "themeToggleLight": "فاتح", "themeToggleDark": "داكن",
+    "a11yTitle": "إمكانية الوصول", "a11yFontSize": "تكبير النص", "a11yLineHeight": "ارتفاع السطر", "a11yTextSpacing": "تباعد النص", "a11yHighContrast": "تباين عالٍ", "a11yDyslexiaFont": "خط عسر القراءة", "a11yReduceMotion": "تقليل الحركة", "a11yHighlightLinks": "تمييز الروابط", "a11yBiggerCursor": "مؤشر أكبر", "a11yTextAlign": "محاذاة يسار", "a11yLowSaturation": "تشبع منخفض", "a11yReset": "إعادة تعيين الكل", "a11yOpenSettings": "فتح إعدادات إمكانية الوصول", "a11yCloseSettings": "إغلاق إعدادات إمكانية الوصول"
+}

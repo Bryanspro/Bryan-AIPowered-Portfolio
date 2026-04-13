@@ -37,6 +37,10 @@
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
+
+  <!-- Shared Features CSS -->
+  <link rel="stylesheet" href="../../../accessibility-widget.css?v=11" type="text/css">
+  <link rel="stylesheet" href="assets/css/medilab-features.css?v=1" type="text/css">
 </head>
 
 <body class="index-page">
@@ -98,6 +102,25 @@
           </ul>
           <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
         </nav>
+
+        
+        <!-- Portfolio Native Identity Switches -->
+        <div class="nav-features d-flex align-items-center" style="gap: 15px; margin-left: 20px; padding-left: 20px; border-left: 1px solid rgba(0,0,0,0.1);">
+            <div id="lang-selector" class="lang-selector position-relative">
+                <button class="lang-selector-btn" id="lang-selector-btn" aria-expanded="false" type="button">
+                    <span id="lang-flag-display" class="lang-flag">🇺🇸</span>
+                    <span class="lang-code-display" id="lang-code-display" style="font-weight: 600;">EN</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>
+                </button>
+                <ul class="lang-dropdown" id="lang-dropdown" role="listbox">
+                    <!-- Populated via JS -->
+                </ul>
+            </div>
+            
+            <button id="theme-toggle-btn" class="theme-toggle-btn" aria-label="Toggle Theme" type="button" data-i18n-aria="themeToggleLight">
+                <i class="bi bi-sun-fill" style="color: #1977cc; font-size: 16px;"></i> <span data-i18n="themeToggleLight">Light</span>
+            </button>
+        </div>
 
         <a class="cta-btn d-none d-sm-block" href="#appointment">Make an Appointment</a>
 
@@ -1135,7 +1158,7 @@
         <!-- You can delete the links only if you've purchased the pro version. -->
         <!-- Licensing information: https://bootstrapmade.com/license/ -->
         <!-- Purchase the pro version with working PHP/AJAX contact form: [buy-url] -->
-        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a> Distributed by <a
+        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a> | Adapted for portfolio use by <a href="https://bryans.tech" target="_blank" style="color: #1977cc; font-weight: 500;">Bryans.tech</a> Distributed by <a
           href=“https://themewagon.com>ThemeWagon
       </div>
     </div>
@@ -1156,6 +1179,32 @@
   <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
   <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
   <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+
+  <!-- Portfolio Application Scripts -->
+  <script src="../../shared-i18n.js?v=6"></script>
+  <script src="assets/js/medilab-custom.js?v=2"></script>
+  <script src="../../../chat-intent-engine.js?v=11"></script>
+  
+  <!-- Chat Widget Core -->
+  <script>
+    fetch('../../../chat-widget.html?v=7')
+      .then(res => res.text())
+      .then(html => {
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, 'text/html');
+        doc.querySelectorAll('style').forEach(s => document.head.appendChild(s.cloneNode(true)));
+        doc.body.querySelectorAll(':scope > *:not(script)').forEach(el => document.body.appendChild(el.cloneNode(true)));
+        doc.querySelectorAll('body > script').forEach(s => {
+          const ns = document.createElement('script');
+          ns.textContent = s.textContent;
+          document.body.appendChild(ns);
+        });
+      })
+      .catch(err => console.error('Failed to load chat widget:', err));
+  </script>
+  
+  <!-- Accessibility Widget -->
+  <script src="../../../accessibility-widget.js?v=3"></script>
 
   <!-- Main JS File -->
   <script src="assets/js/main.js"></script>

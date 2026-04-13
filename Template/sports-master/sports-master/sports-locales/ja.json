@@ -1,0 +1,5 @@
+{
+    "navHome": "ホーム", "navAbout": "概要", "navTeam": "チーム", "navNews": "ニュース", "navMatch": "試合", "navBlog": "ブログ", "navContact": "連絡先", "navLogin": "ログイン", "navRegister": "登録",
+    "themeToggleLight": "ライト", "themeToggleDark": "ダーク",
+    "a11yTitle": "アクセシビリティ", "a11yFontSize": "文字サイズ拡大", "a11yLineHeight": "行間拡大", "a11yTextSpacing": "文字間隔拡大", "a11yHighContrast": "高コントラスト", "a11yDyslexiaFont": "ディスレクシアフォント", "a11yReduceMotion": "アニメーション削減", "a11yHighlightLinks": "リンクをハイライト", "a11yBiggerCursor": "大きいカーソル", "a11yTextAlign": "左揃え", "a11yLowSaturation": "低彩度", "a11yReset": "すべてリセット", "a11yOpenSettings": "アクセシビリティ設定を開く", "a11yCloseSettings": "アクセシビリティ設定を閉じる"
+}

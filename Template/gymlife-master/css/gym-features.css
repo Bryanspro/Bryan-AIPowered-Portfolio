@@ -1,0 +1,379 @@
+/* 
+ * GymLife Custom Features 
+ * - Defines Light Mode overrides for the traditionally dark template
+ * - Re-styles the generic shared components (Chat, A11y, Lang) to match GymLife Orange (#f36100)
+ */
+
+/* =========================================
+   1. Shared Component Theme Overrides
+   ========================================= */
+:root {
+    --accent: #f36100; /* Force Chatbox and other shared UI to use Gym Orange */
+    --accent-cyan: #f36100; 
+    --accent-purple: #f36100;
+    --glow-cyan: rgba(243, 97, 0, 0.4);
+    --glow-purple: rgba(243, 97, 0, 0.4);
+    --message-user-bg: rgba(243, 97, 0, 0.1);
+
+    --bg-dark: #151515;
+    --bg-card: #252525;
+}
+
+/* Chatbox Extensive Overrides */
+#chat-toggle {
+    border-color: #f36100 !important;
+    color: #f36100 !important;
+    box-shadow: 0 0 15px rgba(243, 97, 0, 0.4) !important;
+}
+#chat-toggle:hover {
+    box-shadow: 0 0 25px rgba(243, 97, 0, 0.4) !important;
+    background: rgba(243, 97, 0, 0.1) !important;
+}
+#chat-container {
+    background: #0a0a0a !important;
+    border-color: rgba(243, 97, 0, 0.2) !important;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8), 0 0 20px rgba(243, 97, 0, 0.1) !important;
+}
+.chat-window, .chat-header, .chat-message, .chat-input textarea {
+    font-family: "Muli", sans-serif !important;
+}
+.chat-header h3 {
+    font-family: "Oswald", sans-serif !important;
+    color: #ffffff !important;
+}
+.css-avatar {
+    border-color: #f36100 !important;
+    box-shadow: 0 0 10px rgba(243, 97, 0, 0.4) !important;
+}
+.avatar-eye {
+    background: #f36100 !important;
+    box-shadow: 0 0 5px rgba(243, 97, 0, 0.4) !important;
+}
+.status-dot {
+    background: #f36100 !important;
+    box-shadow: 0 0 5px rgba(243, 97, 0, 0.4) !important;
+}
+.bot-info .status {
+    color: #f36100 !important;
+}
+.bot .message-content {
+    background: #151515 !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+}
+.user .message-content {
+    background: rgba(243, 97, 0, 0.1) !important;
+    border-color: rgba(243, 97, 0, 0.2) !important;
+    color: #f36100 !important;
+}
+.quick-btn {
+    border-color: #f36100 !important;
+    color: #ffffff !important;
+    background: rgba(243, 97, 0, 0.1) !important;
+}
+.quick-btn:hover {
+    background: #f36100 !important;
+    box-shadow: 0 0 10px rgba(243, 97, 0, 0.4) !important;
+}
+.action-btn:hover, #send-btn {
+    color: #f36100 !important;
+}
+.typing-dot {
+    background: #f36100 !important;
+}
+.input-wrapper:focus-within {
+    border-color: #f36100 !important;
+    box-shadow: 0 0 10px rgba(243, 97, 0, 0.1) !important;
+}
+
+/* Accessibility Widget Overrides */
+.a11y-trigger-btn {
+    background: #f36100 !important;
+    font-family: "Oswald", sans-serif !important;
+}
+.a11y-panel {
+    border-top: 3px solid #f36100 !important;
+    box-shadow: 0 -4px 20px rgba(243, 97, 0, 0.15) !important;
+    font-family: "Muli", sans-serif !important;
+    background: #0a0a0a !important; /* GymLife dark background */
+}
+.a11y-panel-title {
+    font-family: "Oswald", sans-serif !important;
+}
+.a11y-panel-title svg {
+    color: #f36100 !important;
+}
+.a11y-toggle-btn {
+    background: rgba(255, 255, 255, 0.05) !important;
+}
+.a11y-toggle-btn:hover {
+    background: rgba(243, 97, 0, 0.05) !important;
+}
+.a11y-toggle-btn.active {
+    background: rgba(243, 97, 0, 0.1) !important;
+    border-color: #f36100 !important;
+    color: #f36100 !important;
+}
+.a11y-toggle-btn.active .a11y-toggle-icon {
+    color: #f36100 !important;
+}
+.a11y-toggle-btn.active .a11y-toggle-indicator {
+    background: #f36100 !important;
+}
+.a11y-panel-footer button {
+    font-family: "Muli", sans-serif !important;
+    border-color: #f36100 !important;
+    color: #f36100 !important;
+}
+.a11y-panel-footer button:hover {
+    background: #f36100 !important;
+    color: #ffffff !important;
+}
+
+/* Deep Panel Color Purge for Gym */
+.a11y-trigger-btn {
+    border-color: #f36100 !important;
+    box-shadow: 0 0 15px rgba(243, 97, 0, 0.4) !important;
+}
+.a11y-trigger-btn[aria-expanded="true"] {
+    background: rgba(243, 97, 0, 0.15) !important;
+    border-color: #f36100 !important;
+    color: #f36100 !important;
+    box-shadow: 0 0 20px rgba(243, 97, 0, 0.4) !important;
+}
+.a11y-trigger-btn[aria-expanded="true"] svg {
+    filter: drop-shadow(0 0 6px rgba(243, 97, 0, 0.5)) !important;
+}
+.a11y-panel-header {
+    border-bottom: 1px solid rgba(243, 97, 0, 0.2) !important;
+    background: linear-gradient(90deg, rgba(243, 97, 0, 0.08) 0%, rgba(243, 97, 0, 0.02) 100%) !important;
+}
+.a11y-panel-header::after {
+    background: linear-gradient(90deg, #f36100, transparent) !important;
+}
+.a11y-panel-title svg {
+    filter: drop-shadow(0 0 4px rgba(243, 97, 0, 0.4)) !important;
+}
+.a11y-close-btn:hover {
+    color: #f36100 !important;
+    background: rgba(243, 97, 0, 0.1) !important;
+}
+.a11y-close-btn:focus-visible {
+    outline: 2px solid #f36100 !important;
+}
+.a11y-panel-body::-webkit-scrollbar-thumb {
+    background: rgba(243, 97, 0, 0.3) !important;
+}
+.a11y-toggle-btn:hover {
+    background: rgba(243, 97, 0, 0.08) !important;
+    border-color: rgba(243, 97, 0, 0.15) !important;
+}
+.a11y-toggle-btn:focus-visible {
+    outline: 2px solid #f36100 !important;
+}
+.action-btn.voice-active {
+    color: #f36100 !important;
+    text-shadow: 0 0 8px rgba(243, 97, 0, 0.6) !important;
+}
+
+/* Language Selector Overrides */
+#lang-selector-btn:hover {
+    color: #f36100 !important;
+    border-color: #f36100 !important;
+}
+
+/* =========================================
+   2. Dark / Light Mode (Light Mode Overrides)
+   ========================================= */
+
+[data-theme="light"] {
+    --bg-dark: #ffffff;
+    --bg-card: #f5f5f5;
+    background-color: #ffffff;
+    color: #333333;
+}
+
+/* Base structural overrides for Light Mode */
+[data-theme="light"] body {
+    background-color: #ffffff;
+    color: #333;
+}
+
+[data-theme="light"] h1, 
+[data-theme="light"] h2, 
+[data-theme="light"] h3, 
+[data-theme="light"] h4, 
+[data-theme="light"] h5, 
+[data-theme="light"] h6 {
+    color: #111;
+}
+
+/* Navbar / Header */
+[data-theme="light"] .header-section {
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+[data-theme="light"] .nav-menu ul li a {
+    color: #111;
+}
+[data-theme="light"] .nav-menu ul li.active a,
+[data-theme="light"] .nav-menu ul li:hover a {
+    color: #f36100;
+}
+[data-theme="light"] .top-option .to-search i,
+[data-theme="light"] .top-option .to-social a {
+    color: #111;
+}
+
+/* Sections */
+[data-theme="light"] .choseus-section,
+[data-theme="light"] .classes-section,
+[data-theme="light"] .pricing-section,
+[data-theme="light"] .gallery-section,
+[data-theme="light"] .team-section,
+[data-theme="light"] .footer-section {
+    background: #f7f7f7;
+}
+
+[data-theme="light"] .classes-section .ci-text {
+    background: #ffffff;
+}
+
+[data-theme="light"] .classes-section .ci-text:after {
+    border-top: 4px solid #e5e5e5;
+    background: #ffffff;
+}
+
+[data-theme="light"] .classes-section .ci-text h4,
+[data-theme="light"] .classes-section .ci-text h5 {
+    color: #111;
+}
+
+[data-theme="light"] .section-title h2 {
+    color: #111;
+}
+
+[data-theme="light"] .cs-item h4 {
+    color: #111;
+}
+
+[data-theme="light"] .ps-item {
+    background: #ffffff;
+    border-color: #ddd;
+}
+[data-theme="light"] .ps-item h3 {
+    color: #111;
+}
+
+[data-theme="light"] .footer-section .fs-about p,
+[data-theme="light"] .footer-section .fw-links ul li a,
+[data-theme="light"] .footer-section .fw-recent-post .vw-text a {
+    color: #666;
+}
+
+[data-theme="light"] .footer-section .copyright-text {
+    color: #444;
+}
+
+/* Adjustments for custom buttons in navbar */
+.top-option {
+    white-space: nowrap;
+}
+.to-social {
+    display: inline-flex;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+.nav-features {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+.nav-features button {
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.3);
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+.nav-features button:hover {
+    border-color: #f36100;
+    color: #f36100;
+}
+[data-theme="light"] .nav-features button {
+    color: #111;
+    border-color: rgba(0,0,0,0.3);
+}
+
+/* Colorful Theme Icons */
+.fa-sun-o {
+    color: #f4b400 !important;
+}
+.fa-moon-o {
+    color: #8ab4f8 !important;
+}
+
+
+.lang-dropdown {
+    position: absolute;
+    top: 40px;
+    right: 0;
+    background: #252525;
+    border-radius: 4px;
+    padding: 10px 0;
+    min-width: 150px;
+    display: none;
+    z-index: 1000;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+}
+.lang-dropdown.open {
+    display: block;
+}
+[data-theme="light"] .lang-dropdown {
+    background: #fff;
+    border: 1px solid #ddd;
+}
+.lang-option {
+    padding: 8px 15px;
+    color: #fff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+[data-theme="light"] .lang-option {
+    color: #111;
+}
+.lang-option:hover {
+    background: #f36100;
+    color: #fff;
+}
+[data-theme="light"] .lang-option:hover {
+    background: #f36100;
+    color: #fff;
+}
+.lang-separator {
+    height: 1px;
+    background: rgba(255,255,255,0.1);
+    margin: 5px 0;
+}
+[data-theme="light"] .lang-separator {
+    background: rgba(0,0,0,0.1);
+}
+
+/* Windows Emoji Flag Polyfill */
+@font-face {
+    font-family: 'Twemoji Country Flags';
+    unicode-range: U+1F1E6-1F1FF, U+1F3F4, U+E0062-E0063, U+E0065, U+E0067, U+E006C, U+E006E, U+E0073, U+E0074, U+E0077, U+E007F;
+    src: url('https://cdn.jsdelivr.net/npm/country-flag-emoji-polyfill@0.1/dist/TwemojiCountryFlags.woff2') format('woff2');
+}
+
+/* Force Emojis to render as flags instead of text */
+.lang-flag, #lang-flag-display {
+    font-family: "Twemoji Country Flags", "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", "Segoe UI Symbol", "Android Emoji", EmojiSymbols, sans-serif !important;
+}

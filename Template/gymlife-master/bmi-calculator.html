@@ -22,6 +22,10 @@
     <link rel="stylesheet" href="css/magnific-popup.css" type="text/css">
     <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="css/style.css" type="text/css">
+
+    <!-- Shared Features CSS -->
+    <link rel="stylesheet" href="../../accessibility-widget.css?v=11" type="text/css">
+    <link rel="stylesheet" href="css/gym-features.css?v=2" type="text/css">
 </head>
 
 <body>
@@ -41,12 +45,12 @@
         </div>
         <nav class="canvas-menu mobile-menu">
             <ul>
-                <li><a href="./index.html">Home</a></li>
-                <li><a href="./about-us.html">About Us</a></li>
-                <li><a href="./class-details.html">Classes</a></li>
-                <li><a href="./services.html">Services</a></li>
-                <li><a href="./team.html">Our Team</a></li>
-                <li><a href="#">Pages</a>
+                <li><a href="./index.html" data-i18n="navHome">Home</a></li>
+                <li><a href="./about-us.html" data-i18n="navAbout">About Us</a></li>
+                <li><a href="./class-details.html" data-i18n="navClasses">Classes</a></li>
+                <li><a href="./services.html" data-i18n="navServices">Services</a></li>
+                <li><a href="./team.html" data-i18n="navTeam">Our Team</a></li>
+                <li><a href="#" data-i18n="navPages">Pages</a>
                     <ul class="dropdown">
                         <li><a href="./about-us.html">About us</a></li>
                         <li><a href="./class-timetable.html">Classes timetable</a></li>
@@ -57,7 +61,7 @@
                         <li><a href="./404.html">404</a></li>
                     </ul>
                 </li>
-                <li><a href="./contact.html">Contact</a></li>
+                <li><a href="./contact.html" data-i18n="navContact">Contact</a></li>
             </ul>
         </nav>
         <div id="mobile-menu-wrap"></div>
@@ -84,12 +88,12 @@
                 <div class="col-lg-6">
                     <nav class="nav-menu">
                         <ul>
-                            <li><a href="./index.html">Home</a></li>
-                            <li><a href="./about-us.html">About Us</a></li>
-                            <li><a href="./class-details.html">Classes</a></li>
-                            <li><a href="./services.html">Services</a></li>
-                            <li><a href="./team.html">Our Team</a></li>
-                            <li class="active"><a href="#">Pages</a>
+                            <li><a href="./index.html" data-i18n="navHome">Home</a></li>
+                            <li><a href="./about-us.html" data-i18n="navAbout">About Us</a></li>
+                            <li><a href="./class-details.html" data-i18n="navClasses">Classes</a></li>
+                            <li><a href="./services.html" data-i18n="navServices">Services</a></li>
+                            <li><a href="./team.html" data-i18n="navTeam">Our Team</a></li>
+                            <li class="active"><a href="#" data-i18n="navPages">Pages</a>
                                 <ul class="dropdown">
                                     <li><a href="./about-us.html">About us</a></li>
                                     <li><a href="./class-timetable.html">Classes timetable</a></li>
@@ -100,22 +104,40 @@
                                     <li><a href="./404.html">404</a></li>
                                 </ul>
                             </li>
-                            <li><a href="./contact.html">Contact</a></li>
+                            <li><a href="./contact.html" data-i18n="navContact">Contact</a></li>
                         </ul>
                     </nav>
                 </div>
                 <div class="col-lg-3">
-                    <div class="top-option">
-                        <div class="to-search search-switch">
-                            <i class="fa fa-search"></i>
+                    <div class="top-option" style="display: flex; align-items: center; justify-content: flex-end; gap: 20px;">
+                            <div class="to-search search-switch">
+                                <i class="fa fa-search"></i>
+                            </div>
+                            <div class="to-social">
+                                <a href="#"><i class="fa fa-facebook"></i></a>
+                                <a href="#"><i class="fa fa-twitter"></i></a>
+                                <a href="#"><i class="fa fa-youtube-play"></i></a>
+                                <a href="#"><i class="fa fa-instagram"></i></a>
+                            </div>
+                            
+                            <!-- Custom Shared Features Nav -->
+                            <div class="nav-features">
+                                <button id="theme-toggle-btn" class="theme-toggle-btn" aria-label="Toggle Theme" data-i18n-aria="themeToggleDark">
+                                    <i class="fa fa-sun-o"></i> <span data-i18n="themeToggleLight">Light Mode</span>
+                                </button>
+                                
+                                <div id="lang-selector" class="lang-selector" style="position: relative;">
+                                    <button class="lang-selector-btn" id="lang-selector-btn" aria-expanded="false" style="background: transparent; border: 1px solid rgba(255,255,255,0.3); color: #fff; padding: 5px 10px; border-radius: 4px; cursor: pointer; display:flex; align-items:center; gap:5px;">
+                                        <i class="fa fa-globe"></i>
+                                        <span class="lang-code-display" id="lang-code-display">EN</span>
+                                        <i class="fa fa-chevron-down" style="font-size: 10px;"></i>
+                                    </button>
+                                    <ul class="lang-dropdown" id="lang-dropdown" role="listbox">
+                                        <!-- Populated via JS -->
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
-                        <div class="to-social">
-                            <a href="#"><i class="fa fa-facebook"></i></a>
-                            <a href="#"><i class="fa fa-twitter"></i></a>
-                            <a href="#"><i class="fa fa-youtube-play"></i></a>
-                            <a href="#"><i class="fa fa-instagram"></i></a>
-                        </div>
-                    </div>
                 </div>
             </div>
             <div class="canvas-open">
@@ -133,8 +155,8 @@
                     <div class="breadcrumb-text">
                         <h2>BMI calculator</h2>
                         <div class="bt-option">
-                            <a href="./index.html">Home</a>
-                            <a href="#">Pages</a>
+                            <a href="./index.html" data-i18n="navHome">Home</a>
+                            <a href="#" data-i18n="navPages">Pages</a>
                             <span>BMI calculator</span>
                         </div>
                     </div>
@@ -273,8 +295,8 @@
                         <ul>
                             <li><a href="#">About</a></li>
                             <li><a href="#">Blog</a></li>
-                            <li><a href="#">Classes</a></li>
-                            <li><a href="#">Contact</a></li>
+                            <li><a href="#" data-i18n="navClasses">Classes</a></li>
+                            <li><a href="#" data-i18n="navContact">Contact</a></li>
                         </ul>
                     </div>
                 </div>
@@ -285,7 +307,7 @@
                             <li><a href="#">Login</a></li>
                             <li><a href="#">My account</a></li>
                             <li><a href="#">Subscribe</a></li>
-                            <li><a href="#">Contact</a></li>
+                            <li><a href="#" data-i18n="navContact">Contact</a></li>
                         </ul>
                     </div>
                 </div>
@@ -345,6 +367,32 @@
 
 
 
+
+    <!-- Portfolio Application Scripts -->
+    <script src="../shared-i18n.js?v=4"></script>
+    <script src="js/gym-custom.js?v=7"></script>
+    <script src="../../chat-intent-engine.js"></script>
+    
+    <!-- Chat Widget Core -->
+    <script>
+        fetch('../../chat-widget.html?v=5')
+            .then(res => res.text())
+            .then(html => {
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(html, 'text/html');
+                doc.querySelectorAll('style').forEach(s => document.head.appendChild(s.cloneNode(true)));
+                doc.body.querySelectorAll(':scope > *:not(script)').forEach(el => document.body.appendChild(el.cloneNode(true)));
+                doc.querySelectorAll('body > script').forEach(s => {
+                    const ns = document.createElement('script');
+                    ns.textContent = s.textContent;
+                    document.body.appendChild(ns);
+                });
+            })
+            .catch(err => console.error('Failed to load chat widget:', err));
+    </script>
+    
+    <!-- Accessibility Widget -->
+    <script src="../../accessibility-widget.js"></script>
 </body>
 
 </html>

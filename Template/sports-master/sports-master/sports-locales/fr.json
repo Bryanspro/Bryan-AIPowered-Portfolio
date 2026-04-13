@@ -1,0 +1,5 @@
+{
+    "navHome": "Accueil", "navAbout": "À propos", "navTeam": "Équipe", "navNews": "Actualités", "navMatch": "Match", "navBlog": "Blog", "navContact": "Contact", "navLogin": "Connexion", "navRegister": "S'inscrire",
+    "themeToggleLight": "Clair", "themeToggleDark": "Sombre",
+    "a11yTitle": "Accessibilité", "a11yFontSize": "Agrandir le texte", "a11yLineHeight": "Hauteur de ligne", "a11yTextSpacing": "Espacement du texte", "a11yHighContrast": "Contraste élevé", "a11yDyslexiaFont": "Police dyslexie", "a11yReduceMotion": "Réduire les animations", "a11yHighlightLinks": "Surligner les liens", "a11yBiggerCursor": "Grand curseur", "a11yTextAlign": "Aligner à gauche", "a11yLowSaturation": "Faible saturation", "a11yReset": "Réinitialiser", "a11yOpenSettings": "Ouvrir l'accessibilité", "a11yCloseSettings": "Fermer l'accessibilité"
+}

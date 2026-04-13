@@ -29,7 +29,12 @@
    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
    <link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
    <script src="js/3dslider.js"></script>
-   </head>
+   
+<!-- Custom Integration Overrides -->
+<link href="../../../accessibility-widget.css?v=11" rel="stylesheet">
+<link href="css/sports-features.css?v=20" rel="stylesheet">
+
+</head>
    <body class="game_info" data-spy="scroll" data-target=".header">
       <!-- LOADER -->
       <div id="preloader">
@@ -53,7 +58,7 @@
                            <!-- social icon -->
                            <ul class="social-icons pull-left">
                               <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
-                              <li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
+                              <li><a class="twitter" href="#"><i class="fa fa-twitter d-flex align-items-center justify-content-center" style="display: flex !important; align-items: center; justify-content: center; width: 100%; height: 100%;"><svg viewBox="0 0 24 24" aria-hidden="true" width="18" height="18" style="fill: currentColor; margin-bottom: 2px;"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 22.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg></i></a></li>
                               <li><a class="youtube" href="#"><i class="fa fa-youtube-play"></i></a></li>
                               <li><a class="pinterest" href="#"><i class="fa fa-pinterest-p"></i></a></li>
                            </ul>
@@ -68,7 +73,29 @@
                                     <a href="#"><i class="fa fa-shopping-cart"></i>Register</a>
                                  </div>
                               </li>
-                           </ul>
+                           
+            <!-- Custom Shared Features Nav (as li items inside ul.login) -->
+            <li class="nav-features-li" style="display: flex; align-items: center; gap: 12px; margin-left: 10px;">
+                <!-- Language Selector Custom Dropdown -->
+                <div id="lang-selector" class="lang-selector" style="position: relative;">
+                    <button class="lang-selector-btn" id="lang-selector-btn" aria-expanded="false" style="background: transparent; border: none; color: white; cursor: pointer; font-weight: 500; font-size: 14px; display: flex; align-items: center; gap: 5px; outline: none; white-space: nowrap;">
+                        <span id="lang-flag-display" style="font-size: 16px;">🇺🇸</span>
+                        <span class="lang-code-display" id="lang-code-display">EN</span>
+                        <i class="fa fa-chevron-down" style="font-size: 10px; margin-left: 2px;"></i>
+                    </button>
+                    <ul class="lang-dropdown" id="lang-dropdown" role="listbox" style="display: none; position: absolute; right: 0; top: 100%; background: white; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); list-style: none; margin: 5px 0 0; padding: 5px 0; min-width: 130px; z-index: 9999;">
+                        <!-- Populated via JS -->
+                    </ul>
+                </div>
+
+                <!-- Theme Toggle -->
+                <button id="theme-toggle-btn" style="color: white; padding: 4px 10px; outline: 1px solid rgba(255,255,255,0.4); border-radius: 20px; display: flex; align-items: center; gap: 6px; border: none; background: transparent; cursor: pointer; white-space: nowrap; font-size: 14px; font-weight: bold;">
+                    <i class="fa fa-sun-o" style="color: #ffcb05; font-size: 1.1em;"></i>
+                    <span>Light</span>
+                </button>
+            </li>
+            <!-- End Custom Nav -->
+</ul>
                            <!-- end button section -->
                         </div>
                      </div>
@@ -486,7 +513,7 @@
                         <p>Most of our events have hard and easy route choices as we are always keen to encourage new riders.</p>
                         <ul class="social-icons style-4 pull-left">
                            <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
-                           <li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
+                           <li><a class="twitter" href="#"><i class="fa fa-twitter d-flex align-items-center justify-content-center" style="display: flex !important; align-items: center; justify-content: center; width: 100%; height: 100%;"><svg viewBox="0 0 24 24" aria-hidden="true" width="18" height="18" style="fill: currentColor; margin-bottom: 2px;"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 22.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg></i></a></li>
                            <li><a class="youtube" href="#"><i class="fa fa-youtube-play"></i></a></li>
                            <li><a class="pinterest" href="#"><i class="fa fa-pinterest-p"></i></a></li>
                         </ul>
@@ -531,7 +558,7 @@
          </div>
          <div class="footer-bottom">
             <div class="container">
-               <p>Copyright © 2018 Distributed by <a href="https://themewagon.com/" target="_blank">ThemeWagon</a></p>
+               <p>Copyright © 2018 Distributed by <a href="https://themewagon.com/" target="_blank">ThemeWagon</a> | Adapted for portfolio use by <a class="border-bottom" href="https://bryans.tech" target="_blank" style="color: var(--primary); font-weight: 500;">Bryans.tech</a></p>
             </div>
          </div>
       </footer>
@@ -540,5 +567,30 @@
       <script src="js/all.js"></script>
       <!-- ALL PLUGINS -->
       <script src="js/custom.js"></script>
-   </body>
+   
+<!-- Portfolio Application Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/dompurify@2.4.0/dist/purify.min.js"></script>
+<script src="../../shared-i18n.js?v=4"></script>
+<script src="js/sports-custom.js?v=14"></script>
+<script src="../../../chat-intent-engine.js?v=11"></script>
+<script>
+    fetch('../../../chat-widget.html?v=14')
+        .then(r => r.text())
+        .then(html => {
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(html, 'text/html');
+            doc.querySelectorAll('style').forEach(s => document.head.appendChild(s.cloneNode(true)));
+            doc.body.querySelectorAll(':scope > *:not(script)').forEach(el => document.body.appendChild(el.cloneNode(true)));
+            doc.querySelectorAll('body > script').forEach(s => {
+                const ns = document.createElement('script');
+                ns.textContent = s.textContent;
+                document.body.appendChild(ns);
+            });
+        })
+        .catch(err => console.error('Failed to load chat widget:', err));
+</script>
+<script src="../../../accessibility-widget.js?v=11"></script>
+</body>
+
 </html>

@@ -239,7 +239,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const versionLabel = document.querySelector('.cl-tab-label');
         const latestVersion = versionLabel ? versionLabel.textContent.trim() : 'v1.5.1';
         // We always use v1.5 for the hero splash text as requested
-        const heroVersion = 'v1.6';
+        const heroVersion = 'v1.7';
         const typewriterKey = lang === 'en'
             ? `Initializing AI Developer Portfolio ${heroVersion}`
             : (dict.typewriter || `Initializing AI Developer Portfolio ${heroVersion}`);
@@ -613,14 +613,14 @@ document.addEventListener('DOMContentLoaded', () => {
     // 7. Template Viewer Logic
     // ========================================================
     const templatesData = [
-        { id: 'travela', name: 'Wanderlust', type: 'Travel', src: 'Template/travela-1.0.0/travela-1.0.0/index.html', img: 'Template/travela-1.0.0/travela-1.0.0/tourism-website-template.jpg' },
-        { id: 'medilab', name: 'HealthCare+', type: 'Medical', src: 'Template/MediLab-1.0.0/MediLab-1.0.0/index.html', img: 'Template/MediLab-1.0.0/MediLab-1.0.0/assets/img/hero-bg.jpg' },
-        { id: 'pizza', name: 'Pizza Roma', type: 'Restaurant', src: 'Template/pizza-gh-pages/pizza-gh-pages/index.html', img: 'Template/pizza-gh-pages/pizza-gh-pages/images/bg_1.jpg' },
-        { id: 'kelly', name: 'Aurora Studio', type: 'Personal Profile', src: 'Template/Kelly-1.0.0/Kelly-1.0.0/index.html', img: 'Template/Kelly-1.0.0/Kelly-1.0.0/assets/img/hero-bg.jpg' },
-        { id: 'game', name: 'GameZone', type: 'Gaming', src: 'Template/game-warrior-gh-pages/index.html', img: 'Template/game-warrior-gh-pages/img/slider-1.jpg' },
-        { id: 'sport', name: 'SportsPro', type: 'Competition', src: 'Template/sports-master/sports-master/index.html', img: 'Template/sports-master/sports-master/preview_img/preview.jpg' },
-        { id: 'ai', name: 'Nexus.AI', type: 'Tech & AI', src: 'Template/AI-html-1.0.0/index.html', img: 'Template/AI-html-1.0.0/artificial-intelligence-html-template.jpg' },
-        { id: 'gym', name: 'IronFitness', type: 'Gym', src: 'Template/gymlife-master/index.html', img: 'Template/gymlife-master/img/banner-bg.jpg' }
+        { id: 'travela', name: 'Wanderlust', type: 'Travel', src: 'Template/travela-1.0.0/travela-1.0.0/index.html', emoji: '✈️' },
+        { id: 'medilab', name: 'HealthCare+', type: 'Medical', src: 'Template/MediLab-1.0.0/MediLab-1.0.0/index.html', emoji: '⚕️' },
+        { id: 'pizza', name: 'Pizza Roma', type: 'Restaurant', src: 'Template/pizza-gh-pages/pizza-gh-pages/index.html', emoji: '🍕' },
+        { id: 'kelly', name: 'Aurora Studio', type: 'Personal Profile', src: 'Template/Kelly-1.0.0/Kelly-1.0.0/index.html', emoji: '💼' },
+        { id: 'game', name: 'GameZone', type: 'Gaming', src: 'Template/game-warrior-gh-pages/index.html', emoji: '🎮' },
+        { id: 'sport', name: 'SportsPro', type: 'Competition', src: 'Template/sports-master/sports-master/index.html', emoji: '🏆' },
+        { id: 'ai', name: 'Nexus.AI', type: 'Tech & AI', src: 'Template/AI-html-1.0.0/index.html', emoji: '🤖' },
+        { id: 'gym', name: 'IronFitness', type: 'Gym', src: 'Template/gymlife-master/index.html', emoji: '💪' }
     ];
 
     const proj1Link = document.getElementById('proj1-link');
@@ -630,15 +630,36 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Populate gallery
     if (templateGallery) {
+        templateGallery.style.alignContent = 'start';
+
+        const templateGradients = {
+            'travela': 'linear-gradient(135deg, #0a1a2e 0%, #0d2a40 40%, #0a1828 100%)',
+            'medilab': 'linear-gradient(135deg, #0d1a20 0%, #0a2828 40%, #0d1a1a 100%)',
+            'pizza': 'linear-gradient(135deg, #1a0d00 0%, #2e1800 40%, #1a0a00 100%)',
+            'kelly': 'linear-gradient(135deg, #1a0a2e 0%, #2a1040 40%, #0d0a1a 100%)',
+            'game': 'linear-gradient(135deg, #1a0a2e 0%, #2d1b4e 40%, #0d1a2e 100%)',
+            'sport': 'linear-gradient(135deg, #0d1a10 0%, #102818 40%, #0a1a20 100%)',
+            'ai': 'linear-gradient(135deg, #0a1a2e 0%, rgba(0,240,255,0.12) 50%, #0d0a1a 100%)',
+            'gym': 'linear-gradient(135deg, #1a1000 0%, #2e1800 40%, #1a0808 100%)'
+        };
+
         templatesData.forEach(template => {
             const card = document.createElement('div');
             card.className = 'template-card-item glass';
-            // Use placeholder if image fails to load
+            const gradient = templateGradients[template.id] || 'linear-gradient(135deg, #0d1117 0%, #1a2332 100%)';
+
             card.innerHTML = `
-                <img src="${template.img}" onerror="this.src=''; this.style.backgroundColor='#0d1117';" alt="${template.name}">
-                <div class="item-info">
+                <div class="app-card-icon-area" style="background: ${gradient};">
+                    <span class="icon-emoji">${template.emoji}</span>
+                </div>
+                <div class="card-launch-arrow">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                </div>
+                <div class="app-card-body">
                     <h4>${template.name}</h4>
-                    <span class="tag">${template.type}</span>
+                    <div class="app-card-footer">
+                        <span class="tag" style="font-size: 0.68rem; padding: 0.2rem 0.5rem;">${template.type}</span>
+                    </div>
                 </div>
             `;
 
@@ -1024,8 +1045,12 @@ function initCanvas() {
     function animate() {
         ctx.clearRect(0, 0, width, height);
 
+        const isReduceMotion = document.body.hasAttribute('data-a11y-reduce-motion');
+
         for (let i = 0; i < particles.length; i++) {
-            particles[i].update();
+            if (!isReduceMotion) {
+                particles[i].update();
+            }
             particles[i].draw();
 
             for (let j = i + 1; j < particles.length; j++) {

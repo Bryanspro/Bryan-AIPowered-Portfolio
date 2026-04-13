@@ -5,7 +5,7 @@
  * ============================================
  */
 
-const chatbotIntents = [
+const chatbotIntents = window.chatbotIntents || [
     {
         id: 'greeting',
         phrases: ['hello', 'hi', 'hey', 'good morning', 'good afternoon', 'good evening', 'hola', 'buenos dias', 'buenas tardes', 'buenas noches', 'que tal'],keywords: ['sup', 'yo', 'greetings', 'howdy', 'saludos'],
@@ -569,7 +569,7 @@ function shouldTriggerForm(intentId) {
 // Quick-reply intent labels for UI
 // Quick-reply intent labels for UI
 // Quick-reply intent labels for UI
-const quickReplyIntents = {
+const quickReplyIntents = window.quickReplyIntents || {
     experience: { en: '💼 Experience', es: '💼 Experiencia', pt: '💼 Experiência', de: '💼 Erfahrung', fr: '💼 Expérience', ja: '💼 経歴', ko: '💼 경험', zh: '💼 经验', ar: '💼 الخبرة', hi: '💼 अनुभव', he: '💼 ניסיון' },
     skills: { en: '⚙️ Tech Stack', es: '⚙️ Stack Tecnológico', pt: '⚙️ Tecnologias', de: '⚙️ Tech Stack', fr: '⚙️ Compétences', ja: '⚙️ 技術スタック', ko: '⚙️ 기술 스택', zh: '⚙️ 技术栈', ar: '⚙️ المهارات', hi: '⚙️ टेक टूल', he: '⚙️ כישורים טכניים' },
     ai: { en: '🤖 AI & ML', es: '🤖 IA y ML', pt: '🤖 IA e ML', de: '🤖 KI & ML', fr: '🤖 IA & ML', ja: '🤖 AI & ML', ko: '🤖 AI 및 ML', zh: '🤖 AI 与 ML', ar: '🤖 الذكاء الاصطناعي', hi: '🤖 AI और ML', he: '🤖 AI ו-ML' },
@@ -580,7 +580,7 @@ const quickReplyIntents = {
 // Suggestion chip labels
 // Suggestion chip labels
 // Suggestion chip labels
-const suggestionLabels = {
+const suggestionLabels = window.suggestionLabels || {
     greeting: { en: '👋 Say Hello', es: '👋 Saludar', pt: '👋 Dizer Oi', de: '👋 Hallo', fr: '👋 Bonjour', ja: '👋 挨拶', ko: '👋 인사', zh: '👋 你好', ar: '👋 مرحباً', hi: '👋 नमस्ते', he: '👋 שלום' },
     about: { en: '👤 About Bryan', es: '👤 Sobre Bryan', pt: '👤 Sobre Bryan', de: '👤 Über Bryan', fr: '👤 Sur Bryan', ja: '👤 Bryanについて', ko: '👤 Bryan 정보', zh: '👤 关于 Bryan', ar: '👤 عن برايان', hi: '👤 ब्रायन के बारे में', he: '👤 על בריאן' },
     skills: { en: '⚙️ Tech Stack', es: '⚙️ Stack Técnico', pt: '⚙️ Perfil Técnico', de: '⚙️ Tech Stack', fr: '⚙️ Compétences', ja: '⚙️ 技術集', ko: '⚙️ 기술 스택', zh: '⚙️ 技能树', ar: '⚙️ المهارات', hi: '⚙️ टेक', he: '⚙️ טכנולוגיות' },

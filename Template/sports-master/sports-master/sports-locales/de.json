@@ -1,0 +1,5 @@
+{
+    "navHome": "Startseite", "navAbout": "Über uns", "navTeam": "Team", "navNews": "Nachrichten", "navMatch": "Spiel", "navBlog": "Blog", "navContact": "Kontakt", "navLogin": "Anmelden", "navRegister": "Registrieren",
+    "themeToggleLight": "Hell", "themeToggleDark": "Dunkel",
+    "a11yTitle": "Barrierefreiheit", "a11yFontSize": "Text vergrößern", "a11yLineHeight": "Zeilenhöhe", "a11yTextSpacing": "Textabstand", "a11yHighContrast": "Hoher Kontrast", "a11yDyslexiaFont": "Legasthenie-Schrift", "a11yReduceMotion": "Animationen reduzieren", "a11yHighlightLinks": "Links hervorheben", "a11yBiggerCursor": "Größerer Cursor", "a11yTextAlign": "Linksbündig", "a11yLowSaturation": "Niedrige Sättigung", "a11yReset": "Alles zurücksetzen", "a11yOpenSettings": "Barrierefreiheit öffnen", "a11yCloseSettings": "Barrierefreiheit schließen"
+}

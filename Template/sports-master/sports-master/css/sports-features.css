@@ -1,0 +1,488 @@
+/* Custom Themes and Nav Styling tailored for Sport's Master */
+
+/* ============================================
+   Windows Emoji Flag Polyfill (Twemoji)
+   Fixes flag emoji displaying as text (e.g. "us") on Windows
+   ============================================ */
+@font-face {
+    font-family: 'Twemoji Country Flags';
+    unicode-range: U+1F1E6-1F1FF, U+1F3F4, U+E0062-E0063, U+E0065, U+E0067, U+E006C, U+E006E, U+E0073, U+E0074, U+E0077, U+E007F;
+    src: url('https://cdn.jsdelivr.net/npm/country-flag-emoji-polyfill@0.1/dist/TwemojiCountryFlags.woff2') format('woff2');
+}
+
+/* Force flag emoji to render as colorful flag images, not text */
+.lang-flag, #lang-flag-display {
+    font-family: "Twemoji Country Flags", "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", "Segoe UI Symbol", "Android Emoji", EmojiSymbols, sans-serif !important;
+}
+
+/* =========================================
+   Shared Component Theme Overrides
+   Force all widgets to use Sport's Master Red
+   ========================================= */
+:root {
+    --accent: #d8302f;
+    
+    /* Widget Global Overrides */
+    --accent-cyan: #d8302f;
+    --accent-purple: #d8302f;
+    --glow-cyan: rgba(216, 48, 47, 0.4);
+    --glow-purple: rgba(216, 48, 47, 0.4);
+    --message-user-bg: rgba(216, 48, 47, 0.1);
+    
+    --bg-dark: #111;
+    --bg-card: #1a1a1a;
+}
+
+/* ---------- Chatbox Color Overrides ---------- */
+#chat-toggle {
+    border-color: #d8302f !important;
+    color: #d8302f !important;
+    box-shadow: 0 0 15px rgba(216, 48, 47, 0.4) !important;
+}
+#chat-toggle:hover {
+    box-shadow: 0 0 25px rgba(216, 48, 47, 0.4) !important;
+    background: rgba(216, 48, 47, 0.1) !important;
+}
+#chat-container {
+    background: #0a0a0a !important;
+    border-color: rgba(216, 48, 47, 0.2) !important;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8), 0 0 20px rgba(216, 48, 47, 0.1) !important;
+}
+.chat-header h3 {
+    color: #ffffff !important;
+}
+.css-avatar {
+    border-color: #d8302f !important;
+    box-shadow: 0 0 10px rgba(216, 48, 47, 0.4) !important;
+}
+.avatar-eye {
+    background: #d8302f !important;
+    box-shadow: 0 0 5px rgba(216, 48, 47, 0.4) !important;
+}
+.status-dot {
+    background: #d8302f !important;
+    box-shadow: 0 0 5px rgba(216, 48, 47, 0.4) !important;
+}
+.bot-info .status {
+    color: #d8302f !important;
+}
+.bot .message-content {
+    background: #151515 !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+}
+.user .message-content {
+    background: rgba(216, 48, 47, 0.1) !important;
+    border-color: rgba(216, 48, 47, 0.2) !important;
+    color: #d8302f !important;
+}
+.quick-btn {
+    border-color: #d8302f !important;
+    color: #ffffff !important;
+    background: rgba(216, 48, 47, 0.1) !important;
+}
+.quick-btn:hover {
+    background: #d8302f !important;
+    box-shadow: 0 0 10px rgba(216, 48, 47, 0.4) !important;
+}
+.action-btn:hover, #send-btn {
+    color: #d8302f !important;
+}
+.typing-dot {
+    background: #d8302f !important;
+}
+.input-wrapper:focus-within {
+    border-color: #d8302f !important;
+    box-shadow: 0 0 10px rgba(216, 48, 47, 0.1) !important;
+}
+
+/* ---------- Accessibility Widget Overrides ---------- */
+.a11y-trigger-btn {
+    background: #d8302f !important;
+    border-color: #d8302f !important;
+    box-shadow: 0 0 15px rgba(216, 48, 47, 0.4) !important;
+}
+.a11y-panel {
+    border-top: 3px solid #d8302f !important;
+    box-shadow: 0 -4px 20px rgba(216, 48, 47, 0.15) !important;
+    background: #0a0a0a !important;
+}
+.a11y-panel-title svg {
+    color: #d8302f !important;
+}
+.a11y-toggle-btn:hover {
+    background: rgba(216, 48, 47, 0.05) !important;
+}
+.a11y-toggle-btn.active {
+    background: rgba(216, 48, 47, 0.1) !important;
+    border-color: #d8302f !important;
+    color: #d8302f !important;
+}
+.a11y-toggle-btn.active .a11y-toggle-icon {
+    color: #d8302f !important;
+}
+.a11y-toggle-btn.active .a11y-toggle-indicator {
+    background: #d8302f !important;
+}
+.a11y-panel-footer button {
+    border-color: #d8302f !important;
+    color: #d8302f !important;
+}
+.a11y-panel-footer button:hover {
+    background: #d8302f !important;
+    color: #ffffff !important;
+}
+
+/* Deep Panel Color Purge */
+.a11y-trigger-btn[aria-expanded="true"] {
+    background: rgba(216, 48, 47, 0.15) !important;
+    border-color: #d8302f !important;
+    color: #d8302f !important;
+    box-shadow: 0 0 20px rgba(216, 48, 47, 0.4) !important;
+}
+.a11y-trigger-btn[aria-expanded="true"] svg {
+    filter: drop-shadow(0 0 6px rgba(216, 48, 47, 0.5)) !important;
+}
+.a11y-panel-header {
+    border-bottom: 1px solid rgba(216, 48, 47, 0.2) !important;
+    background: linear-gradient(90deg, rgba(216, 48, 47, 0.08) 0%, rgba(216, 48, 47, 0.02) 100%) !important;
+}
+.a11y-panel-header::after {
+    background: linear-gradient(90deg, #d8302f, transparent) !important;
+}
+.a11y-panel-title svg {
+    color: #d8302f !important;
+    filter: drop-shadow(0 0 4px rgba(216, 48, 47, 0.4)) !important;
+}
+.a11y-close-btn:hover {
+    color: #d8302f !important;
+    background: rgba(216, 48, 47, 0.1) !important;
+}
+.a11y-close-btn:focus-visible {
+    outline: 2px solid #d8302f !important;
+}
+.a11y-panel-body::-webkit-scrollbar-thumb {
+    background: rgba(216, 48, 47, 0.3) !important;
+}
+.a11y-toggle-btn:hover {
+    background: rgba(216, 48, 47, 0.08) !important;
+    border-color: rgba(216, 48, 47, 0.15) !important;
+}
+.a11y-toggle-btn:focus-visible {
+    outline: 2px solid #d8302f !important;
+}
+.action-btn.voice-active {
+    color: #d8302f !important;
+    text-shadow: 0 0 8px rgba(216, 48, 47, 0.6) !important;
+}
+
+/* ---------- Widget Text Upscaling ---------- */
+.bot-info h3 { font-size: 1.35rem !important; }
+.bot-info .status { font-size: 0.95rem !important; }
+.message-content { font-size: 1.1rem !important; line-height: 1.5 !important; padding: 10px 14px !important; }
+#chat-input { font-size: 1.1rem !important; padding: 10px 0 !important; }
+.quick-btn { font-size: 1.05rem !important; padding: 8px 14px !important; }
+.timestamp { font-size: 0.9rem !important; }
+.widget-lang-display { font-size: 1.05rem !important; }
+
+.a11y-panel { max-height: calc(100vh - 30px) !important; }
+.a11y-panel-title { font-size: 1.2rem !important; margin: 0 !important; }
+.a11y-panel-header { padding: 10px 18px !important; }
+.a11y-toggle-btn { font-size: 1rem !important; padding: 8px 12px !important; }
+.a11y-panel-body { gap: 2px !important; padding: 8px 10px !important; }
+
+/* ---------- Language Selector Hover ---------- */
+#lang-selector-btn:hover {
+    color: #d8302f !important;
+    border-color: #d8302f !important;
+}
+
+/* ---------- Feature Container Overrides ---------- */
+.nav-features {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-left: auto;
+    padding-left: 15px;
+}
+
+/* Language Dropdown open state */
+.lang-dropdown.open {
+    display: block !important;
+}
+
+.lang-dropdown .lang-option {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 14px;
+    cursor: pointer;
+    font-size: 13px;
+    color: #333;
+    white-space: nowrap;
+    transition: background 0.15s;
+}
+
+.lang-dropdown .lang-option:hover,
+.lang-dropdown .lang-option.active {
+    background: #fef2f2;
+    color: #d8302f;
+}
+
+.lang-dropdown .lang-separator {
+    height: 1px;
+    background: #eee;
+    margin: 4px 0;
+}
+
+.lang-flag { font-size: 16px; }
+.lang-name { flex: 1; }
+.lang-option-code { font-size: 11px; color: #999; font-weight: 600; }
+
+/* Dark Mode: Language Selector Dropdown */
+body[data-theme="dark"] .lang-dropdown {
+    background-color: #1a1a1a !important;
+    border-color: #333 !important;
+}
+body[data-theme="dark"] .lang-dropdown .lang-option {
+    color: #eee !important;
+}
+body[data-theme="dark"] .lang-dropdown .lang-option:hover,
+body[data-theme="dark"] .lang-dropdown .lang-option.active {
+    background-color: #2a2a2a !important;
+    color: #d8302f !important;
+}
+body[data-theme="dark"] .lang-dropdown .lang-separator {
+    background-color: #333 !important;
+}
+
+
+/* Ensure the utility bar allows us to place elements vertically aligned */
+.right_top_section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.right_top_section ul.social-icons {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+
+.right_top_section ul.login {
+    margin: 0 0 0 auto; /* Pushes login and features to the right */
+    padding: 0;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 15px;
+}
+
+.right_top_section ul.login li {
+    display: flex;
+    align-items: center;
+}
+
+.right_top_section ul.login li a {
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    float: none !important;
+}
+
+
+/* Suppress FontAwesome glyph so only our SVG X shows */
+.right_top_section ul.social-icons li a.twitter .fa-twitter:before {
+    content: '' !important;
+    display: none !important;
+}
+
+/* Facebook hover color */
+.right_top_section ul.social-icons li a.facebook:hover,
+.right_top_section ul.social-icons li a.facebook:focus {
+    background-color: #1877f2 !important;
+    border-color: #1877f2 !important;
+    color: #fff !important;
+}
+
+/* X (Twitter) hover color */
+.right_top_section ul.social-icons li a.twitter:hover,
+.right_top_section ul.social-icons li a.twitter:focus {
+    background-color: #000 !important;
+    border-color: #fff !important;
+    color: #fff !important;
+}
+
+/* Sport's Master Red overrides for Accessibility and Nav Elements */
+body[data-theme="dark"] .nav-features select {
+    background-color: #222;
+    color: white;
+    border-color: #444;
+}
+
+/* Base Accessibility / Chat Styles Override */
+:root {
+    /* Main Theme Primary */
+    --primary: #d8302f !important;
+
+    /* A11y Panel Base (Light mode) */
+    --bg-color: #ffffff;
+    --text-color: #333333;
+    --border-color: #e5e7eb;
+    --hover-bg: #f3f4f6;
+    --active-bg: #fef2f2; /* Light Red */
+    --active-border: #d8302f;
+
+    /* A11y Elements */
+    --toggle-bg: #e5e7eb;
+    --toggle-knob: #ffffff;
+    --toggle-checked: #d8302f;
+}
+
+/* Dark Mode Overrides for the template context */
+[data-theme="dark"] {
+    --bg-color: #111111;
+    --text-color: #fce7e7;
+    --border-color: #222222;
+    --hover-bg: #1a1a1a;
+    --active-bg: #2d1010; /* Darker red */
+    --active-border: #d8302f;
+
+    --toggle-bg: #444444;
+    --toggle-knob: #222222;
+    --toggle-checked: #d8302f;
+}
+
+/* ---------- Global Template Dark Mode Hooks ---------- */
+body[data-theme="dark"] {
+    background-color: #111;
+    color: #eee;
+}
+
+body[data-theme="dark"] .menu,
+body[data-theme="dark"] section#contant,
+body[data-theme="dark"] #sidebar {
+    background-color: #111;
+}
+
+body[data-theme="dark"] .navbar.navbar-inverse .navbar-collapse ul.nav.navbar-nav li a {
+    color: #eee;
+}
+
+body[data-theme="dark"] .navbar.navbar-inverse .navbar-collapse ul.nav.navbar-nav li:hover, 
+body[data-theme="dark"] .navbar.navbar-inverse .navbar-collapse ul.nav.navbar-nav li:focus {
+    background-color: #222;
+}
+
+body[data-theme="dark"] div.menu div.search-bar .form-control {
+    background-color: #222;
+    color: #eee;
+}
+
+body[data-theme="dark"] .content-widget,
+body[data-theme="dark"] .news-post-widget {
+    background-color: #222;
+    border-color: #333;
+}
+
+body[data-theme="dark"] aside#sidebar h3,
+body[data-theme="dark"] .top-story h2,
+body[data-theme="dark"] .main-heading.sytle-2 h2 {
+    color: #fff;
+}
+
+body[data-theme="dark"] .other-stroies li a,
+body[data-theme="dark"] .news-post-detail p {
+    color: #ccc;
+}
+
+/* ---------- Dark Mode: Match Fixture & Points Table ---------- */
+
+/* Container backgrounds */
+body[data-theme="dark"] .feature-matchs,
+body[data-theme="dark"] .left-bar,
+body[data-theme="dark"] .banner-sidebar {
+    background-color: #1a1a1a;
+    border-color: #333;
+}
+
+/* Team fixture rows */
+body[data-theme="dark"] .team-btw-match ul {
+    background-color: #1a1a1a;
+    border-bottom-color: #333 !important;
+}
+
+body[data-theme="dark"] .team-btw-match ul:nth-child(even) {
+    background-color: #242424;
+}
+
+body[data-theme="dark"] .team-btw-match ul li span,
+body[data-theme="dark"] .team-btw-match ul li.vs span {
+    color: #eee !important;
+}
+
+/* Points Table — Bootstrap table overrides */
+body[data-theme="dark"] .table,
+body[data-theme="dark"] .table-bordered {
+    color: #eee !important;
+    background-color: #1a1a1a !important;
+    border-color: #333 !important;
+}
+
+body[data-theme="dark"] .table thead th,
+body[data-theme="dark"] .table thead td {
+    background-color: #222 !important;
+    color: #eee !important;
+    border-color: #333 !important;
+}
+
+body[data-theme="dark"] .table tbody tr {
+    background-color: #1a1a1a !important;
+    color: #eee !important;
+}
+
+body[data-theme="dark"] .table tbody tr:nth-child(even) {
+    background-color: #242424 !important;
+}
+
+body[data-theme="dark"] .table tbody td,
+body[data-theme="dark"] .table tbody th {
+    color: #eee !important;
+    border-color: #333 !important;
+}
+
+body[data-theme="dark"] .table-hover > tbody > tr:hover {
+    background-color: #2e1111 !important;
+    color: #fff !important;
+}
+
+/* General sidebar text */
+body[data-theme="dark"] .left-bar h4,
+body[data-theme="dark"] .left-bar h3,
+body[data-theme="dark"] .left-bar p,
+body[data-theme="dark"] .left-bar span,
+body[data-theme="dark"] .left-bar a {
+    color: #eee !important;
+}
+
+/* Main content area text */
+body[data-theme="dark"] .main-post h2,
+body[data-theme="dark"] .main-post h3,
+body[data-theme="dark"] .main-post h4,
+body[data-theme="dark"] .main-post p,
+body[data-theme="dark"] .main-post span,
+body[data-theme="dark"] .main-post a,
+body[data-theme="dark"] section p,
+body[data-theme="dark"] section span,
+body[data-theme="dark"] section h2,
+body[data-theme="dark"] section h3,
+body[data-theme="dark"] section h4 {
+    color: #eee !important;
+}
+
+/* Headings that appear between sections */
+body[data-theme="dark"] h4 {
+    color: #eee;
+}

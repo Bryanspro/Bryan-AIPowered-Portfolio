@@ -58,6 +58,18 @@
                 body.removeAttribute(attr);
             }
         });
+
+        // ── Reduce Motion: Pause/Play Videos ──
+        if ('reduceMotion' in settings) {
+            const videos = document.querySelectorAll('.project-video-custom');
+            videos.forEach(video => {
+                if (settings.reduceMotion) {
+                    video.pause();
+                } else {
+                    video.play().catch(() => {});
+                }
+            });
+        }
         // Sync toggle buttons inside the panel (if already rendered)
         document.querySelectorAll('.a11y-toggle-btn').forEach(btn => {
             const key = btn.dataset.settingKey;

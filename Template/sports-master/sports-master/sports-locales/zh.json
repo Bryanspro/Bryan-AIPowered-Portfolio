@@ -1,0 +1,5 @@
+{
+    "navHome": "首页", "navAbout": "关于我们", "navTeam": "团队", "navNews": "新闻", "navMatch": "赛事", "navBlog": "博客", "navContact": "联系我们", "navLogin": "登录", "navRegister": "注册",
+    "themeToggleLight": "浅色", "themeToggleDark": "深色",
+    "a11yTitle": "无障碍", "a11yFontSize": "增大字体", "a11yLineHeight": "增加行高", "a11yTextSpacing": "文字间距", "a11yHighContrast": "高对比度", "a11yDyslexiaFont": "阅读障碍字体", "a11yReduceMotion": "减少动画", "a11yHighlightLinks": "高亮链接", "a11yBiggerCursor": "大光标", "a11yTextAlign": "左对齐文本", "a11yLowSaturation": "低饱和度", "a11yReset": "重置全部", "a11yOpenSettings": "打开无障碍设置", "a11yCloseSettings": "关闭无障碍设置"
+}

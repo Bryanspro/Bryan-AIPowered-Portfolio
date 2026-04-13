@@ -27,7 +27,11 @@
     <link rel="stylesheet" href="css/flaticon.css">
     <link rel="stylesheet" href="css/icomoon.css">
     <link rel="stylesheet" href="css/style.css">
-  </head>
+  
+  <!-- Shared Features CSS -->
+  <link rel="stylesheet" href="../../../accessibility-widget.css?v=11" type="text/css">
+  <link rel="stylesheet" href="css/pizza-features.css?v=1" type="text/css">
+</head>
   <body>
   	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
 	    <div class="container">
@@ -37,14 +41,32 @@
 	      </button>
 	      <div class="collapse navbar-collapse" id="ftco-nav">
 	        <ul class="navbar-nav ml-auto">
-	          <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
-	          <li class="nav-item active"><a href="menu.html" class="nav-link">Menu</a></li>
-	          <li class="nav-item"><a href="services.html" class="nav-link">Services</a></li>
-	          <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
-	          <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
-	          <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+	          <li class="nav-item"><a href="index.html" class="nav-link" data-i18n="navHome">Home</a></li>
+	          <li class="nav-item active"><a href="menu.html" class="nav-link" data-i18n="navGames">Menu</a></li>
+	          <li class="nav-item"><a href="services.html" class="nav-link" data-i18n="navServices">Services</a></li>
+	          <li class="nav-item"><a href="blog.html" class="nav-link" data-i18n="navBlog">Blog</a></li>
+	          <li class="nav-item"><a href="about.html" class="nav-link" data-i18n="navAbout">About</a></li>
+	          <li class="nav-item"><a href="contact.html" class="nav-link" data-i18n="navContact">Contact</a></li>
 	        </ul>
-	      </div>
+	      
+                <!-- Portfolio Native Identity Switches -->
+                <div class="nav-features ml-3 d-flex align-items-center" style="gap: 15px;">
+                    <div id="lang-selector" class="lang-selector position-relative">
+                        <button class="lang-selector-btn" id="lang-selector-btn" aria-expanded="false" style="background:transparent; border:none; cursor:pointer; display:flex; align-items:center; gap:5px; padding: 0; color: rgba(255,255,255,0.8);">
+                            <span id="lang-flag-display" class="lang-flag">🇺🇸</span>
+                            <span class="lang-code-display" id="lang-code-display" style="font-weight: 600;">EN</span>
+                            <span class="ion-ios-arrow-down" style="font-size: 12px;"></span>
+                        </button>
+                        <ul class="lang-dropdown" id="lang-dropdown" role="listbox">
+                            <!-- Populated via JS -->
+                        </ul>
+                    </div>
+                    
+                    <button id="theme-toggle-btn" class="theme-toggle-btn" aria-label="Toggle Theme" style="background:transparent; border:none; cursor:pointer; display:flex; align-items:center; gap:5px; padding: 0; color: rgba(255,255,255,0.8);" data-i18n-aria="themeToggleLight">
+                        <span class="ion-ios-sunny" style="color: #fac564; font-size: 16px;"></span> <span data-i18n="themeToggleLight" data-theme-state="dark" style="display:none;">Light</span>
+                    </button>
+                </div>
+            </div>
 		  </div>
 	  </nav>
     <!-- END nav -->
@@ -58,7 +80,7 @@
 
             <div class="col-md-7 col-sm-12 text-center ftco-animate">
             	<h1 class="mb-3 mt-5 bread">Our Menu</h1>
-	            <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home</a></span> <span>Menu</span></p>
+	            <p class="breadcrumbs"><span class="mr-2"><a href="index.html" data-i18n="navHome">Home</a></span> <span>Menu</span></p>
             </div>
 
           </div>
@@ -506,7 +528,7 @@
           <div class="col-md-12 text-center">
 
             <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | Template by <a href="https://colorlib.com" target="_blank">Colorlib</a> | Adapted for portfolio use by <a class="border-bottom" href="https://bryans.tech" target="_blank" style="color: #fac564; font-weight: 500;">Bryans.tech</a>
   <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
           </div>
         </div>
@@ -535,6 +557,32 @@
   <script src="js/scrollax.min.js"></script>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
   <script src="js/google-map.js"></script>
+  <!-- Portfolio Application Scripts -->
+  <script src="../../shared-i18n.js?v=6"></script>
+  <script src="js/pizza-custom.js?v=3"></script>
+  <script src="../../../chat-intent-engine.js?v=11"></script>
+  
+  <!-- Chat Widget Core -->
+  <script>
+    fetch('../../../chat-widget.html?v=7')
+      .then(res => res.text())
+      .then(html => {
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, 'text/html');
+        doc.querySelectorAll('style').forEach(s => document.head.appendChild(s.cloneNode(true)));
+        doc.body.querySelectorAll(':scope > *:not(script)').forEach(el => document.body.appendChild(el.cloneNode(true)));
+        doc.querySelectorAll('body > script').forEach(s => {
+          const ns = document.createElement('script');
+          ns.textContent = s.textContent;
+          document.body.appendChild(ns);
+        });
+      })
+      .catch(err => console.error('Failed to load chat widget:', err));
+  </script>
+  
+  <!-- Accessibility Widget -->
+  <script src="../../../accessibility-widget.js?v=3"></script>
+
   <script src="js/main.js"></script>
     
   </body>

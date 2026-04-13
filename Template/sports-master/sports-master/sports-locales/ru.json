@@ -1,0 +1,5 @@
+{
+    "navHome": "Главная", "navAbout": "О нас", "navTeam": "Команда", "navNews": "Новости", "navMatch": "Матч", "navBlog": "Блог", "navContact": "Контакты", "navLogin": "Войти", "navRegister": "Регистрация",
+    "themeToggleLight": "Светлый", "themeToggleDark": "Тёмный",
+    "a11yTitle": "Доступность", "a11yFontSize": "Увеличить текст", "a11yLineHeight": "Высота строки", "a11yTextSpacing": "Интервал текста", "a11yHighContrast": "Высокий контраст", "a11yDyslexiaFont": "Шрифт для дислексии", "a11yReduceMotion": "Уменьшить анимацию", "a11yHighlightLinks": "Выделить ссылки", "a11yBiggerCursor": "Большой курсор", "a11yTextAlign": "Выравнивание влево", "a11yLowSaturation": "Низкая насыщенность", "a11yReset": "Сбросить всё", "a11yOpenSettings": "Открыть настройки", "a11yCloseSettings": "Закрыть настройки"
+}
