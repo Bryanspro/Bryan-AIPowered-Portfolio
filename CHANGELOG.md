@@ -271,3 +271,11 @@ All notable changes to this project will be documented in this file.
 - Fixed the favicon not displaying by updating HTML references from the old `favicon.png` path to the new `favicon.JPG` file and correcting the MIME type from `image/png` to `image/jpeg`.
 
 *Initialized port... System ready for deployment.*
+
+## [v1.7.1] - 2026-04-15
+### Fixed
+- Applied technical corrections to the background YouTube player for improved compatibility and playback stability.
+- Refined UI formatting and layout consistency across multiple portfolio sections.
+
+*Initialized port... System ready for deployment.*
+
