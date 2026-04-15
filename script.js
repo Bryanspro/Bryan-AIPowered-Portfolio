@@ -359,7 +359,6 @@ document.addEventListener('DOMContentLoaded', () => {
     let isPlaying = false;
     let isPlayerReady = false;
     let playPending = false;
-    let isFallbackMode = false;
 
     // The YouTube API will call this when it's ready. We define it globally.
     window.onYouTubeIframeAPIReady = function () {
@@ -378,8 +377,7 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             events: {
                 'onReady': onPlayerReady,
-                'onStateChange': onPlayerStateChange,
-                'onError': onPlayerError
+                'onStateChange': onPlayerStateChange
             }
         });
     };
@@ -419,9 +417,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // Start player automatically after 7 seconds
     setTimeout(() => {
         if (!isPlaying) {
-            // If already in fallback mode, switchToFallback() handles it
-            if (isFallbackMode) return;
-
             if (isPlayerReady && window.ytPlayer) {
                 const modal = document.getElementById('music-player-modal');
                 if (modal && modal.classList.contains('hidden')) {
@@ -454,8 +449,9 @@ document.addEventListener('DOMContentLoaded', () => {
     function onPlayerReady(event) {
         isPlayerReady = true;
         // If the user clicked play before the frame loaded, fulfill their request!
-        if (playPending && !isFallbackMode) {
+        if (playPending) {
             playPending = false;
+            // trigger the click naturally
             musicBtn.click();
         }
     }
@@ -479,68 +475,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // ---- YouTube error handler → triggers local MP4 fallback ----
-    function onPlayerError(event) {
-        // Error codes: 2=invalid ID, 5=HTML5 error, 100=not found/private, 101/150=embedding blocked
-        console.warn('[MusicPlayer] YouTube error code:', event.data, '— switching to local fallback.');
-        switchToFallback();
-    }
-
-    function switchToFallback() {
-        if (isFallbackMode) return; // prevent double-trigger
-        isFallbackMode = true;
-
-        // Hide the YT iframe container
-        const ytContainer = document.getElementById('youtube-player-container');
-        if (ytContainer) ytContainer.style.display = 'none';
-
-        // Show the fallback video
-        const fallback = document.getElementById('fallback-video-player');
-        if (!fallback) return;
-        fallback.style.display = 'block';
-
-        // Force 9:16 vertical mode since it's the same short-style video
-        const playerBody = document.querySelector('.music-player-body');
-        const modal = document.getElementById('music-player-modal');
-        if (playerBody) playerBody.style.setProperty('--player-aspect', '9 / 16');
-        if (modal) {
-            modal.classList.add('vertical-mode');
-            modal.style.width = window.innerWidth > 600 ? '240px' : '';
-        }
-
-        // Reveal the modal if hidden
-        if (musicPlayerModal && musicPlayerModal.classList.contains('hidden')) {
-            musicPlayerModal.classList.remove('hidden');
-        }
-
-        // Wire fallback video events to keep UI in sync
-        fallback.addEventListener('play', () => {
-            isPlaying = true;
-            document.body.classList.add('music-active');
-            if (musicBtn) musicBtn.classList.add('active-music');
-            const ppBtn = document.getElementById('btn-play-pause-track');
-            if (ppBtn) ppBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"></path></svg>';
-        });
-        fallback.addEventListener('pause', () => {
-            isPlaying = false;
-            document.body.classList.remove('music-active');
-            const ppBtn = document.getElementById('btn-play-pause-track');
-            if (ppBtn) ppBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg>';
-        });
-
-        // Attempt autoplay (browser may block without prior interaction)
-        fallback.play().then(() => {
-            const ppBtn = document.getElementById('btn-play-pause-track');
-            if (ppBtn) {
-                ppBtn.classList.add('blink-action');
-                setTimeout(() => ppBtn.classList.remove('blink-action'), 5000);
-            }
-        }).catch(() => {
-            // Autoplay blocked — user can click play manually
-            console.info('[MusicPlayer] Fallback autoplay blocked, awaiting user interaction.');
-        });
-    }
-
     const musicPlayerModal = document.getElementById('music-player-modal');
     const closeMusicPlayerBtn = document.getElementById('close-music-player-btn');
     const playPauseBtn = document.getElementById('btn-play-pause-track');
@@ -550,13 +484,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (playPauseBtn) {
         playPauseBtn.addEventListener('click', () => {
             playPauseBtn.classList.remove('blink-action');
-            if (isFallbackMode) {
-                const fallback = document.getElementById('fallback-video-player');
-                if (fallback) {
-                    if (isPlaying) { fallback.pause(); } else { fallback.play().catch(() => {}); }
-                }
-                return;
-            }
             if (isPlaying) {
                 window.ytPlayer.pauseVideo();
             } else {
@@ -567,45 +494,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (prevTrackBtn) {
         prevTrackBtn.addEventListener('click', () => {
-            if (isFallbackMode) {
-                const fallback = document.getElementById('fallback-video-player');
-                if (fallback) { fallback.currentTime = 0; fallback.play().catch(() => {}); }
-                return;
-            }
-            window.ytPlayer.previousVideo();
+             window.ytPlayer.previousVideo();
         });
     }
 
     if (nextTrackBtn) {
         nextTrackBtn.addEventListener('click', () => {
-            if (isFallbackMode) {
-                const fallback = document.getElementById('fallback-video-player');
-                if (fallback) { fallback.currentTime = 0; fallback.play().catch(() => {}); }
-                return;
-            }
-            window.ytPlayer.nextVideo();
+             window.ytPlayer.nextVideo();
         });
     }
 
     if (musicBtn) {
         musicBtn.addEventListener('click', () => {
-            // Fallback video mode
-            if (isFallbackMode) {
-                const fallback = document.getElementById('fallback-video-player');
-                if (musicPlayerModal) {
-                    const isHidden = musicPlayerModal.classList.contains('hidden');
-                    if (isHidden) {
-                        musicPlayerModal.classList.remove('hidden');
-                        if (fallback && fallback.paused) fallback.play().catch(() => {});
-                        musicBtn.classList.add('active-music');
-                    } else {
-                        musicPlayerModal.classList.add('hidden');
-                        if (!isPlaying) musicBtn.classList.remove('active-music');
-                    }
-                }
-                return;
-            }
-
             if (!isPlayerReady || !window.ytPlayer) {
                 // Silently queue the request instead of throwing an annoying alert
                 playPending = true;
