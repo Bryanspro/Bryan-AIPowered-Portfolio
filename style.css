@@ -1864,15 +1864,26 @@ body.music-active .core {
     transition: aspect-ratio 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
+/* Scale the iframe up slightly so YouTube's top title-bar and bottom
+   watermark are pushed outside the clipped parent container */
 .music-player-body iframe {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    top: 50%;
+    left: 50%;
+    width: 110%;
+    height: 110%;
+    transform: translate(-50%, -50%);
     border: none;
     pointer-events: none;
-    /* Prevent clicks on iframe now that we have custom controls */
+}
+
+/* Transparent overlay to block any remaining YouTube UI interactions */
+.music-player-body::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
 }
 
 .music-player-controls {

@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Apply translations to all [data-i18n] elements
     function applyTranslations(dict) {
         if (!dict) return;
-        
+
         // Translate inner HTML
         document.querySelectorAll('[data-i18n]').forEach(el => {
             const key = el.getAttribute('data-i18n');
@@ -75,7 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 el.innerHTML = dict[key];
             }
         });
-        
+
         // Translate titles (tooltips)
         document.querySelectorAll('[data-i18n-title]').forEach(el => {
             const key = el.getAttribute('data-i18n-title');
@@ -83,7 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 el.setAttribute('title', dict[key]);
             }
         });
-        
+
         // Translate aria-labels
         document.querySelectorAll('[data-i18n-aria]').forEach(el => {
             const key = el.getAttribute('data-i18n-aria');
@@ -352,60 +352,39 @@ document.addEventListener('DOMContentLoaded', () => {
     fadeElements.forEach(el => observer.observe(el));
 
     // ========================================================
-    // 4. Background Music (YouTube API)
+    // 4. Background Music (YouTube API) — Pre-loaded Player
     // ========================================================
     const musicBtn = document.getElementById('music-toggle-btn');
     const musicIcon = document.getElementById('music-icon');
     let isPlaying = false;
     let isPlayerReady = false;
-    let playPending = false;
+    let playerInitAttempts = 0;
+    const MAX_PLAYER_RETRIES = 3;
 
-    // The YouTube API will call this when it's ready. We define it globally.
-    window.onYouTubeIframeAPIReady = function () {
-        window.ytPlayer = new YT.Player('youtube-player-container', {
-            height: '100%',
-            width: '100%',
-            // Video ID defaults to the provided track
-            videoId: 'zpJk89JJdRk',
-            // Load a specific playlist
-            playerVars: {
-                'autoplay': 0,
-                'controls': 0,
-                'loop': 1,
-                // Commas separated list of video IDs
-                'playlist': 'zpJk89JJdRk,9o0WLOJCHvk,QOaScWimga8'
-            },
-            events: {
-                'onReady': onPlayerReady,
-                'onStateChange': onPlayerStateChange
-            }
-        });
-    };
-    
-    // Array of vertical video IDs (Shorts)
+    // Array of vertical video IDs (Shorts-format)
     const verticalVideoIDs = ['zpJk89JJdRk'];
-    
+
     function updatePlayerOrientation() {
         if (!window.ytPlayer || !window.ytPlayer.getVideoData) return;
-        
+
         try {
             const videoData = window.ytPlayer.getVideoData();
             const currentVidId = videoData.video_id;
             const playerBody = document.querySelector('.music-player-body');
             const modal = document.getElementById('music-player-modal');
-            
+
             if (playerBody && currentVidId) {
                 if (verticalVideoIDs.includes(currentVidId)) {
                     playerBody.style.setProperty('--player-aspect', '9 / 16');
                     if (modal) {
                         modal.classList.add('vertical-mode');
-                        modal.style.width = window.innerWidth > 600 ? '240px' : ''; 
+                        modal.style.width = window.innerWidth > 600 ? '240px' : '';
                     }
                 } else {
                     playerBody.style.setProperty('--player-aspect', '16 / 9');
                     if (modal) {
                         modal.classList.remove('vertical-mode');
-                        modal.style.width = window.innerWidth > 600 ? '320px' : ''; 
+                        modal.style.width = window.innerWidth > 600 ? '320px' : '';
                     }
                 }
             }
@@ -414,28 +393,91 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Start player automatically after 7 seconds
+    /**
+     * Creates (or recreates) the YouTube player.
+     * The modal uses opacity:0 when hidden, so the iframe still gets
+     * layout dimensions and loads properly in the background.
+     */
+    function createYTPlayer() {
+        if (window.ytPlayer) {
+            try { window.ytPlayer.destroy(); } catch (e) { /* ignore */ }
+            window.ytPlayer = null;
+        }
+        isPlayerReady = false;
+
+        // Ensure a fresh <div> target exists
+        let container = document.getElementById('youtube-player-container');
+        const parentEl = container
+            ? container.parentNode
+            : document.querySelector('.music-player-body');
+        if (container) parentEl.removeChild(container);
+        const fresh = document.createElement('div');
+        fresh.id = 'youtube-player-container';
+        parentEl.appendChild(fresh);
+
+        window.ytPlayer = new YT.Player('youtube-player-container', {
+            height: '100%',
+            width: '100%',
+            videoId: 'zpJk89JJdRk',
+            playerVars: {
+                'autoplay': 0,
+                'controls': 0,
+                'loop': 1,
+                'playsinline': 1,
+                'rel': 0,
+                'playlist': 'zpJk89JJdRk,QOaScWimga8',
+                'origin': window.location.origin
+            },
+            events: {
+                'onReady': onPlayerReady,
+                'onStateChange': onPlayerStateChange,
+                'onError': onPlayerError
+            }
+        });
+    }
+
+    /** Reveals the modal, unmutes, and starts playback */
+    function revealAndPlay() {
+        const modal = document.getElementById('music-player-modal');
+        if (!modal) return;
+
+        modal.classList.remove('hidden');
+        if (musicBtn) musicBtn.classList.add('active-music');
+
+        if (isPlayerReady && window.ytPlayer) {
+            try {
+                window.ytPlayer.unMute();
+                window.ytPlayer.playVideo();
+            } catch (e) { /* ignore */ }
+        }
+    }
+
+    // Create the player immediately when the API script loads.
+    // The modal is hidden (opacity:0) but the iframe still gets dimensions.
+    window.onYouTubeIframeAPIReady = function () {
+        createYTPlayer();
+    };
+
+    // After 7 seconds, reveal the modal and start playback
     setTimeout(() => {
         if (!isPlaying) {
-            if (isPlayerReady && window.ytPlayer) {
-                const modal = document.getElementById('music-player-modal');
-                if (modal && modal.classList.contains('hidden')) {
-                    modal.classList.remove('hidden');
-                }
-                
-                // Make the modal's play button blink for 5 seconds when it autostarts
-                const playBtnInModal = document.getElementById('btn-play-pause-track');
-                if (playBtnInModal) {
-                    playBtnInModal.classList.add('blink-action');
-                    setTimeout(() => {
-                        if (playBtnInModal) playBtnInModal.classList.remove('blink-action');
-                    }, 5000);
-                }
-                
-                // Direct play call as originally tested
-                window.ytPlayer.playVideo();
+            if (isPlayerReady) {
+                revealAndPlay();
             } else {
-                playPending = true;
+                // API/player hasn't finished loading yet — reveal anyway
+                // and play as soon as onPlayerReady fires
+                const modal = document.getElementById('music-player-modal');
+                if (modal) modal.classList.remove('hidden');
+                if (musicBtn) musicBtn.classList.add('active-music');
+            }
+
+            // Blink the play button for 5 seconds to draw attention
+            const playBtnInModal = document.getElementById('btn-play-pause-track');
+            if (playBtnInModal) {
+                playBtnInModal.classList.add('blink-action');
+                setTimeout(() => {
+                    if (playBtnInModal) playBtnInModal.classList.remove('blink-action');
+                }, 5000);
             }
         }
     }, 7000);
@@ -448,11 +490,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function onPlayerReady(event) {
         isPlayerReady = true;
-        // If the user clicked play before the frame loaded, fulfill their request!
-        if (playPending) {
-            playPending = false;
-            // trigger the click naturally
-            musicBtn.click();
+        playerInitAttempts = 0;
+        updatePlayerOrientation();
+
+        // Mute and briefly play to prime the video — this buffers
+        // the first frames and gets past YouTube's loading UI.
+        // Audio stays muted until revealAndPlay() unmutes it.
+        if (window.ytPlayer) {
+            window.ytPlayer.mute();
+            window.ytPlayer.playVideo();
+            setTimeout(() => {
+                const modal = document.getElementById('music-player-modal');
+                if (window.ytPlayer && modal && modal.classList.contains('hidden')) {
+                    window.ytPlayer.pauseVideo();
+                }
+            }, 250);
+        }
+    }
+
+    function onPlayerError(event) {
+        playerInitAttempts++;
+        if (playerInitAttempts < MAX_PLAYER_RETRIES) {
+            setTimeout(createYTPlayer, 1000 * playerInitAttempts);
         }
     }
 
@@ -484,6 +543,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (playPauseBtn) {
         playPauseBtn.addEventListener('click', () => {
             playPauseBtn.classList.remove('blink-action');
+            if (!isPlayerReady || !window.ytPlayer) return;
             if (isPlaying) {
                 window.ytPlayer.pauseVideo();
             } else {
@@ -494,33 +554,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (prevTrackBtn) {
         prevTrackBtn.addEventListener('click', () => {
-             window.ytPlayer.previousVideo();
+            if (window.ytPlayer && isPlayerReady) window.ytPlayer.previousVideo();
         });
     }
 
     if (nextTrackBtn) {
         nextTrackBtn.addEventListener('click', () => {
-             window.ytPlayer.nextVideo();
+            if (window.ytPlayer && isPlayerReady) window.ytPlayer.nextVideo();
         });
     }
 
     if (musicBtn) {
         musicBtn.addEventListener('click', () => {
-            if (!isPlayerReady || !window.ytPlayer) {
-                // Silently queue the request instead of throwing an annoying alert
-                playPending = true;
-                return;
-            }
-
             if (musicPlayerModal) {
                 const isHidden = musicPlayerModal.classList.contains('hidden');
                 if (isHidden) {
-                    musicPlayerModal.classList.remove('hidden');
-                    window.ytPlayer.playVideo();
-                    musicBtn.classList.add('active-music');
+                    revealAndPlay();
                 } else {
+                    // Just hide the modal — don't pause the video
                     musicPlayerModal.classList.add('hidden');
-                    // Do not pause the video when closing the modal, just hide UI
                     if (!isPlaying) {
                         musicBtn.classList.remove('active-music');
                     }
@@ -910,8 +962,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (app.id === 'ai-chatbox') {
                     const width = 550;
                     const height = 750;
-                    const left = (window.screen.width/2) - (width/2);
-                    const top = (window.screen.height/2) - (height/2);
+                    const left = (window.screen.width / 2) - (width / 2);
+                    const top = (window.screen.height / 2) - (height / 2);
                     window.open(app.src, 'AIChatbox', `width=${width},height=${height},top=${top},left=${left},resizable=yes,scrollbars=yes,toolbar=no,menubar=no,location=no,directories=no,status=no`);
                 } else {
                     window.open(app.src, '_blank');
