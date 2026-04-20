@@ -18,7 +18,9 @@ function Piece() {
  * Removes last active piece, and gets the next active piece from the grab bag.
  */
 Piece.prototype.new = function(index) {
-  // TODO if no arguments, get next grabbag piece
+  if (index === undefined) {
+    index = preview.next();
+  }
   this.pos = 0;
   this.tetro = [];
   this.held = false;
