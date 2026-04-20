@@ -6,6 +6,7 @@ from pydantic import BaseModel
 from pydantic import EmailStr
 from fastapi_mail import FastMail, MessageSchema, ConnectionConfig, MessageType
 import sqlite3
+import asyncio
 try:
     import psycopg2
 except ImportError:
@@ -174,30 +175,34 @@ conf = ConnectionConfig(
 
 fm = FastMail(conf)
 
+def _save_to_db_sync(request: ContactRequest):
+    if POSTGRES_URL and psycopg2:
+        conn = psycopg2.connect(POSTGRES_URL)
+        cursor = conn.cursor()
+        # Postgres uses %s for placeholders
+        cursor.execute(
+            "INSERT INTO messages (name, email, message, source) VALUES (%s, %s, %s, %s)",
+            (request.name, request.email, request.message, request.source)
+        )
+        conn.commit()
+        conn.close()
+    else:
+        conn = sqlite3.connect(DB_FILE)
+        cursor = conn.cursor()
+        cursor.execute(
+            "INSERT INTO messages (name, email, message, source) VALUES (?, ?, ?, ?)",
+            (request.name, request.email, request.message, request.source)
+        )
+        conn.commit()
+        conn.close()
+
+
 # 6. El Endpoint de Contacto
 @app.post("/api/contact")
 async def submit_contact(request: ContactRequest):
     try:
         # Save to DB
-        if POSTGRES_URL and psycopg2:
-            conn = psycopg2.connect(POSTGRES_URL)
-            cursor = conn.cursor()
-            # Postgres uses %s for placeholders
-            cursor.execute(
-                "INSERT INTO messages (name, email, message, source) VALUES (%s, %s, %s, %s)",
-                (request.name, request.email, request.message, request.source)
-            )
-            conn.commit()
-            conn.close()
-        else:
-            conn = sqlite3.connect(DB_FILE)
-            cursor = conn.cursor()
-            cursor.execute(
-                "INSERT INTO messages (name, email, message, source) VALUES (?, ?, ?, ?)",
-                (request.name, request.email, request.message, request.source)
-            )
-            conn.commit()
-            conn.close()
+        await asyncio.to_thread(_save_to_db_sync, request)
 
         # Send Email Notification
         if MAIL_USERNAME != "dummy@example.com":
