@@ -362,7 +362,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const MAX_PLAYER_RETRIES = 3;
 
     // Array of vertical video IDs (Shorts-format)
-    const verticalVideoIDs = ['zpJk89JJdRk'];
+    const verticalVideoIDs = ['zpJk89JJdRk', '8JPFJG5lwb0'];
 
     function updatePlayerOrientation() {
         if (!window.ytPlayer || !window.ytPlayer.getVideoData) return;
@@ -418,14 +418,14 @@ document.addEventListener('DOMContentLoaded', () => {
         window.ytPlayer = new YT.Player('youtube-player-container', {
             height: '100%',
             width: '100%',
-            videoId: 'zpJk89JJdRk',
+            videoId: '8JPFJG5lwb0',
             playerVars: {
                 'autoplay': 0,
                 'controls': 0,
                 'loop': 1,
                 'playsinline': 1,
                 'rel': 0,
-                'playlist': 'zpJk89JJdRk,QOaScWimga8',
+                'playlist': '8JPFJG5lwb0,zpJk89JJdRk,QOaScWimga8',
                 'origin': window.location.origin
             },
             events: {

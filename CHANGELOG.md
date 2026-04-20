@@ -277,5 +277,9 @@ All notable changes to this project will be documented in this file.
 - Applied technical corrections to the background YouTube player for improved compatibility and playback stability.
 - Refined UI formatting and layout consistency across multiple portfolio sections.
 
+## [v1.7.2] - 2026-04-20
+### Changed
+- Configured the new AI-generated ambient Short as the primary Lead Video for the background player, followed by the previous lead video in the secondary playlist.
+
 *Initialized port... System ready for deployment.*
 
