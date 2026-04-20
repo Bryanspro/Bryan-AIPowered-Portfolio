@@ -30,6 +30,11 @@ document.addEventListener('DOMContentLoaded', () => {
         return SUPPORTED_LANGUAGES.find(l => l.code === base) ? base : null;
     }
 
+    // Export for testing
+    if (typeof module !== 'undefined' && module.exports) {
+        module.exports = { normalizeLocale };
+    }
+
     // Detect language: localStorage -> browser -> fallback to 'en'
     function detectLanguage() {
         // 1. Check localStorage

@@ -4,3 +4,4 @@ __pycache__/
 portfolio.db
 server.log
 messages.txt
+node_modules/
