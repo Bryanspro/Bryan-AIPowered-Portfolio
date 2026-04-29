@@ -996,6 +996,15 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Creative Wolf Demo Link
+    const proj5Link = document.getElementById('proj5-link');
+    if (proj5Link) {
+        proj5Link.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.open('Apps/creativewolf/index.html', '_blank');
+        });
+    }
+
     // ========================================================
     // 11. Contact Form Logic
     // ========================================================

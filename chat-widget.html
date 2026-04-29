@@ -723,6 +723,18 @@
             if (botNameEl) botNameEl.textContent = window.WIDGET_BOT_NAME;
         }
 
+        // Override Avatar with custom image if set externally
+        function applyAvatarImage() {
+            if (window.WIDGET_AVATAR_IMAGE) {
+                const avatarEl = document.getElementById('avatar');
+                if (avatarEl) {
+                    avatarEl.innerHTML = '<img src="' + window.WIDGET_AVATAR_IMAGE + '" alt="Assistant" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">';
+                }
+            }
+        }
+        applyAvatarImage();
+        document.addEventListener('DOMContentLoaded', applyAvatarImage);
+
         // --- State Management ---
         let currentLang = 'en';
         let voiceEnabled = false;
@@ -975,7 +987,13 @@ Conversation Rule: Always bring the conversation naturally back to how these tra
         async function handleUserLogic(inputCommand) {
             // Map old quick-reply keys to new intent IDs
             const quickReplyMap = { exp: 'experience', tech: 'skills', projects: 'projects', contact: 'contact', ai: 'ai' };
-            const intentId = quickReplyMap[inputCommand];
+            let intentId = quickReplyMap[inputCommand];
+            
+            // Also check if the command is a direct intent ID (for custom template intents)
+            if (!intentId && chatbotIntents.find(i => i.id === inputCommand)) {
+                intentId = inputCommand;
+            }
+            
             const isQuickReply = !!intentId;
 
             showTyping();
@@ -986,7 +1004,7 @@ Conversation Rule: Always bring the conversation naturally back to how these tra
                     const resolvedIntent = intentId;
 
                     if (shouldTriggerForm(resolvedIntent)) {
-                        const contactResponse = getRandomResponse('contact', currentLang);
+                        const contactResponse = getRandomResponse(resolvedIntent, currentLang);
                         renderContactForm(contactResponse);
                     } else {
                         const reply = getRandomResponse(resolvedIntent, currentLang);
@@ -1020,7 +1038,13 @@ Conversation Rule: Always bring the conversation naturally back to how these tra
                         // Detect intent for suggestion chips even on Gemini responses
                         const detected = detectIntent(inputCommand);
                         const suggestions = detected ? getSuggestions(detected.id) : [];
-                        addBotMessage(reply, { suggestions });
+                        // Also trigger form if the detected intent has triggerForm
+                        if (detected && shouldTriggerForm(detected.id)) {
+                            addBotMessage(reply, { suggestions });
+                            renderContactForm();
+                        } else {
+                            addBotMessage(reply, { suggestions });
+                        }
                     } else {
                         throw new Error('Empty Gemini response');
                     }
@@ -1029,9 +1053,14 @@ Conversation Rule: Always bring the conversation naturally back to how these tra
                     hideTyping();
                     // Fallback to intent engine
                     const detected = detectIntent(inputCommand);
-                    const reply = getRandomResponse(detected.id, currentLang);
-                    const suggestions = getSuggestions(detected.id);
-                    addBotMessage(reply, { suggestions });
+                    if (shouldTriggerForm(detected.id)) {
+                        const reply = getRandomResponse(detected.id, currentLang);
+                        renderContactForm(reply);
+                    } else {
+                        const reply = getRandomResponse(detected.id, currentLang);
+                        const suggestions = getSuggestions(detected.id);
+                        addBotMessage(reply, { suggestions });
+                    }
                 }
             }
         }
