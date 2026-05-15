@@ -672,7 +672,8 @@ document.addEventListener('DOMContentLoaded', () => {
         { id: 'game', name: 'GameZone', type: 'Gaming', src: 'Template/game-warrior-gh-pages/index.html', emoji: '🎮' },
         { id: 'sport', name: 'SportsPro', type: 'Competition', src: 'Template/sports-master/sports-master/index.html', emoji: '🏆' },
         { id: 'ai', name: 'Nexus.AI', type: 'Tech & AI', src: 'Template/AI-html-1.0.0/index.html', emoji: '🤖' },
-        { id: 'gym', name: 'IronFitness', type: 'Gym', src: 'Template/gymlife-master/index.html', emoji: '💪' }
+        { id: 'gym', name: 'IronFitness', type: 'Gym', src: 'Template/gymlife-master/index.html', emoji: '💪' },
+        { id: 'creative-wolf', name: 'Creative Wolf', type: 'AI Business', src: 'Apps/creativewolf/index.html', emoji: '🐺' }
     ];
 
     const proj1Link = document.getElementById('proj1-link');
@@ -692,7 +693,8 @@ document.addEventListener('DOMContentLoaded', () => {
             'game': 'linear-gradient(135deg, #1a0a2e 0%, #2d1b4e 40%, #0d1a2e 100%)',
             'sport': 'linear-gradient(135deg, #0d1a10 0%, #102818 40%, #0a1a20 100%)',
             'ai': 'linear-gradient(135deg, #0a1a2e 0%, rgba(0,240,255,0.12) 50%, #0d0a1a 100%)',
-            'gym': 'linear-gradient(135deg, #1a1000 0%, #2e1800 40%, #1a0808 100%)'
+            'gym': 'linear-gradient(135deg, #1a1000 0%, #2e1800 40%, #1a0808 100%)',
+            'creative-wolf': 'linear-gradient(135deg, #1a0d00 0%, #3d1a00 40%, #1a0a00 100%)'
         };
 
         templatesData.forEach(template => {
@@ -996,14 +998,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Creative Wolf Demo Link
-    const proj5Link = document.getElementById('proj5-link');
-    if (proj5Link) {
-        proj5Link.addEventListener('click', (e) => {
-            e.preventDefault();
-            window.open('Apps/creativewolf/index.html', '_blank');
-        });
-    }
+
 
     // ========================================================
     // 11. Contact Form Logic
