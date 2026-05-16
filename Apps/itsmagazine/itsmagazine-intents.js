@@ -7,7 +7,7 @@
 
 // --- Bot Identity ---
 window.WIDGET_BOT_NAME = "Editorial Assistant – IT'S Magazine";
-window.WIDGET_AVATAR_IMAGE = "../../assets/CreartiveWolf/Wolf orange icon.png"; // Fallback to be updated later if needed
+window.WIDGET_AVATAR_IMAGE = "../../assets/itsmagazine/editorial-avatar.svg";
 
 // --- Custom Greeting ---
 window.WIDGET_GREETING = {
