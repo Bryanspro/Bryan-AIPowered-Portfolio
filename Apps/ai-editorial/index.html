@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Editorial Assistant — IT'S Magazine</title>
+    <meta name="description" content="AI-powered editorial and growth lead toolkit. Generates SEO, summaries, and social media kits from article drafts.">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <canvas id="particle-canvas"></canvas>
+    <!-- Ambient glow blobs -->
+    <div class="ambient-blob blob-1"></div>
+    <div class="ambient-blob blob-2"></div>
+
+    <!-- ── Header ── -->
+    <header class="app-header">
+        <a href="../../index.html" class="back-link">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+            Portfolio
+        </a>
+        <div class="header-brand">
+            <span class="brand-dot"></span>
+            <span class="brand-name">IT'S <span class="accent">Magazine</span></span>
+            <span class="brand-divider">|</span>
+            <span class="brand-sub">AI Editorial Suite</span>
+        </div>
+        <div class="header-badge">
+            <span class="badge-dot"></span>
+            Gemini 2.0 Flash
+        </div>
+    </header>
+
+    <!-- ── Magazine Banner / Hero ── -->
+    <section class="magazine-hero">
+        <div class="hero-inner">
+            <p class="hero-kicker">✦ POWERED BY GENERATIVE AI ✦</p>
+            <h1 class="hero-title">Editorial &amp; <em>Growth</em> Lead</h1>
+            <p class="hero-desc">Transform raw article drafts into a complete, luxury-grade digital publishing and distribution kit — SEO, social media, multilingual summaries, all in one click.</p>
+            <div class="hero-stats">
+                <div class="stat"><span class="stat-num">7</span><span class="stat-label">Output Fields</span></div>
+                <div class="stat-sep">·</div>
+                <div class="stat"><span class="stat-num">4</span><span class="stat-label">Channels</span></div>
+                <div class="stat-sep">·</div>
+                <div class="stat"><span class="stat-num">2</span><span class="stat-label">Languages</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── Main Editor ── -->
+    <main class="app-main">
+        <div class="editor-wrapper">
+
+            <!-- LEFT: Input Panel -->
+            <div class="input-panel glass-panel">
+                <div class="panel-header">
+                    <div class="panel-title">
+                        <div class="panel-icon">✍️</div>
+                        <div>
+                            <h3>Article Draft</h3>
+                            <p class="panel-subtitle">Fill in your content below</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="input-headline">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h7"/></svg>
+                        Headline
+                    </label>
+                    <input type="text" id="input-headline" placeholder="e.g. The Future of Smart Horology">
+                </div>
+
+                <div class="input-group">
+                    <label for="input-category">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+                        Category
+                    </label>
+                    <div class="select-wrapper">
+                        <select id="input-category">
+                            <option value="Arts">🎨 Arts</option>
+                            <option value="Luxury & Travel">✈️ Luxury &amp; Travel</option>
+                            <option value="Fashion">👗 Fashion</option>
+                            <option value="Tech">💻 Tech</option>
+                            <option value="Finance">📈 Finance</option>
+                        </select>
+                        <span class="select-arrow">▾</span>
+                    </div>
+                </div>
+
+                <div class="input-group flex-grow">
+                    <label for="input-body">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                        Body Text
+                    </label>
+                    <textarea id="input-body" placeholder="Paste the full article text here...&#10;&#10;The more context you provide, the richer your kit will be." rows="10"></textarea>
+                    <div class="char-counter"><span id="char-count">0</span> characters</div>
+                </div>
+
+                <div class="action-buttons">
+                    <button class="clear-btn" id="clear-btn">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6M14 11v6"/></svg>
+                        Clear
+                    </button>
+                    <button class="submit-btn" id="submit-btn">
+                        <span class="btn-text">✦ Generate Kit</span>
+                        <span class="btn-shine"></span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- RIGHT: Output Panel -->
+            <div class="output-panel glass-panel">
+                <div class="panel-header">
+                    <div class="panel-title">
+                        <div class="panel-icon">💎</div>
+                        <div>
+                            <h3>Publishing Kit</h3>
+                            <p class="panel-subtitle">Your AI-generated distribution assets</p>
+                        </div>
+                    </div>
+                    <button class="copy-btn" id="copy-json-btn">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                        Copy JSON
+                    </button>
+                </div>
+
+                <div class="output-content" id="output-content">
+                    <div class="placeholder-msg">
+                        <div class="placeholder-rings">
+                            <div class="ring ring-1"></div>
+                            <div class="ring ring-2"></div>
+                            <div class="ring ring-3"></div>
+                            <span class="placeholder-icon">✒️</span>
+                        </div>
+                        <p class="placeholder-title">Your kit awaits</p>
+                        <p class="placeholder-sub">Fill in the article draft and click<br><strong>Generate Kit</strong> to begin</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- ── Loading Overlay ── -->
+    <div class="loading-overlay hidden" id="loading">
+        <div class="loading-inner">
+            <div class="loading-logo">IT'S</div>
+            <div class="loading-rings">
+                <div class="l-ring l-ring-1"></div>
+                <div class="l-ring l-ring-2"></div>
+                <div class="l-ring l-ring-3"></div>
+            </div>
+            <p class="loading-title">Crafting your editorial kit</p>
+            <p class="loading-sub">Analyzing tone · Generating SEO · Building social kit</p>
+        </div>
+    </div>
+
+    <footer class="app-footer">
+        <span>IT'S Magazine AI Editorial Suite</span>
+        <span class="footer-sep">·</span>
+        <span>Powered by Gemini 2.0 Flash</span>
+        <span class="footer-sep">·</span>
+        <span>For IT'S Magazine Editorial Board</span>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

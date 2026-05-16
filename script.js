@@ -673,7 +673,8 @@ document.addEventListener('DOMContentLoaded', () => {
         { id: 'sport', name: 'SportsPro', type: 'Competition', src: 'Template/sports-master/sports-master/index.html', emoji: '🏆' },
         { id: 'ai', name: 'Nexus.AI', type: 'Tech & AI', src: 'Template/AI-html-1.0.0/index.html', emoji: '🤖' },
         { id: 'gym', name: 'IronFitness', type: 'Gym', src: 'Template/gymlife-master/index.html', emoji: '💪' },
-        { id: 'creative-wolf', name: 'Creative Wolf', type: 'AI Business', src: 'Apps/creativewolf/index.html', emoji: '🐺' }
+        { id: 'creative-wolf', name: 'Creative Wolf', type: 'AI Business', src: 'Apps/creativewolf/index.html', emoji: '🐺' },
+        { id: 'its-magazine', name: "IT'S Magazine", type: 'Digital Publishing', src: 'Apps/itsmagazine/index.html', emoji: '📖' }
     ];
 
     const proj1Link = document.getElementById('proj1-link');
@@ -694,7 +695,8 @@ document.addEventListener('DOMContentLoaded', () => {
             'sport': 'linear-gradient(135deg, #0d1a10 0%, #102818 40%, #0a1a20 100%)',
             'ai': 'linear-gradient(135deg, #0a1a2e 0%, rgba(0,240,255,0.12) 50%, #0d0a1a 100%)',
             'gym': 'linear-gradient(135deg, #1a1000 0%, #2e1800 40%, #1a0808 100%)',
-            'creative-wolf': 'linear-gradient(135deg, #1a0d00 0%, #3d1a00 40%, #1a0a00 100%)'
+            'creative-wolf': 'linear-gradient(135deg, #1a0d00 0%, #3d1a00 40%, #1a0a00 100%)',
+            'its-magazine': 'linear-gradient(135deg, #12100A 0%, rgba(212,175,55,0.15) 50%, #0A0A0A 100%)'
         };
 
         templatesData.forEach(template => {
@@ -920,7 +922,8 @@ document.addEventListener('DOMContentLoaded', () => {
         { id: 'ai-chatbox', name: 'AI Chatbox', desc: 'An intelligent conversational AI assistant powered by Gemini with multi-turn context, TTS, and smart fallback answers.', tags: ['GenAI', 'JavaScript', 'TTS'], icon: '', emoji: '🤖', src: 'Apps/ai-chatbox/index.html' },
         { id: 'ai-summarizer', name: 'AI Text Summarizer', desc: 'Paste text and get AI-generated summaries, key points extraction, and EN/ES translation.', tags: ['GenAI', 'NLP', 'JavaScript'], icon: '', emoji: '📝', src: 'Apps/ai-summarizer/index.html' },
         { id: 'ai-quiz', name: 'AI Quiz Generator', desc: 'Enter any topic and AI generates interactive multiple-choice quizzes with scoring and timed questions.', tags: ['GenAI', 'JSON', 'JavaScript'], icon: '', emoji: '🧠', src: 'Apps/ai-quiz/index.html' },
-        { id: 'ai-mood-journal', name: 'AI Mood Journal', desc: 'Write journal entries and AI analyzes your mood. Track emotional trends with charts and streaks.', tags: ['GenAI', 'Sentiment', 'Storage'], icon: '', emoji: '📓', src: 'Apps/ai-mood-journal/index.html' }
+        { id: 'ai-mood-journal', name: 'AI Mood Journal', desc: 'Write journal entries and AI analyzes your mood. Track emotional trends with charts and streaks.', tags: ['GenAI', 'Sentiment', 'Storage'], icon: '', emoji: '📓', src: 'Apps/ai-mood-journal/index.html' },
+        { id: 'ai-editorial', name: 'AI Editorial Assistant', desc: 'Transform article drafts into luxury digital publishing kits with SEO, JSON extraction, and multilingual summaries.', tags: ['GenAI', 'Editorial', 'Publishing'], icon: '', emoji: '📰', src: 'Apps/ai-editorial/index.html' }
     ];
 
     const proj4Link = document.getElementById('proj4-link');
@@ -940,7 +943,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 'ai-chatbox': 'linear-gradient(135deg, #0a1a2e 0%, rgba(0,240,255,0.12) 50%, #0d0a1a 100%)',
                 'ai-summarizer': 'linear-gradient(135deg, #0d0a1a 0%, rgba(189,0,255,0.12) 50%, #0a1a2e 100%)',
                 'ai-quiz': 'linear-gradient(135deg, #0a1a0d 0%, rgba(0,240,255,0.1) 40%, rgba(189,0,255,0.08) 100%)',
-                'ai-mood-journal': 'linear-gradient(135deg, #1a0a10 0%, rgba(189,0,255,0.1) 50%, #0a0a1a 100%)'
+                'ai-mood-journal': 'linear-gradient(135deg, #1a0a10 0%, rgba(189,0,255,0.1) 50%, #0a0a1a 100%)',
+                'ai-editorial': 'linear-gradient(135deg, #12100A 0%, rgba(212,175,55,0.15) 50%, #0A0A0A 100%)'
             };
             const gradient = aiGradients[app.id] || 'linear-gradient(135deg, rgba(0,240,255,0.1), rgba(189,0,255,0.1))';
 

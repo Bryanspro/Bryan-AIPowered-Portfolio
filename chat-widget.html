@@ -744,8 +744,8 @@
         const widgetSessionId = 'ws_' + Date.now() + '_' + Math.random().toString(36).substr(2, 6);
 
         // --- Gemini API Config (Direct Browser Calls) ---
-        const WIDGET_GEMINI_KEY = 'AIzaSyDXjrvW4TtT6gpUYT5Ig5ovn0M2qOyK4Uw';
-        const WIDGET_GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${WIDGET_GEMINI_KEY}`;
+        const WIDGET_GEMINI_KEY = 'AIzaSyCUak8HGP8F8aHWaAkE2CknF4bOHPBwYjE';
+        const WIDGET_GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${WIDGET_GEMINI_KEY}`;
 
         const WIDGET_SYSTEM_PROMPT = window.WIDGET_SYSTEM_PROMPT || `Role: You are the official AI Resume Assistant for Bryan Marquez, a Software Engineer transitioning into AI and Python Development. Your goal is to enthusiastically and professionally answer questions from IT recruiters about Bryan's experience, skills, and background.
 Tone & Style: Professional, concise, helpful, and tech-savvy. Always keep responses under 3 paragraphs. If asked in Spanish, reply in Spanish. If asked in English, reply in English.

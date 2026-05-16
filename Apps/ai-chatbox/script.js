@@ -4,8 +4,8 @@
    ============================================ */
 
 // ─── Configuration ─────────────────────────────────
-const GEMINI_API_KEY = 'AIzaSyDXjrvW4TtT6gpUYT5Ig5ovn0M2qOyK4Uw';
-const GEMINI_MODEL = 'gemini-2.0-flash';
+const GEMINI_API_KEY = 'AIzaSyCUak8HGP8F8aHWaAkE2CknF4bOHPBwYjE';
+const GEMINI_MODEL = 'gemini-2.5-flash';
 const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${GEMINI_API_KEY}`;
 
 const SYSTEM_PROMPT = `Role: You are the official AI Resume Assistant for Bryan Marquez, a Software Engineer transitioning into AI and Python Development. Your goal is to enthusiastically and professionally answer questions from IT recruiters about Bryan's experience, skills, and background.
