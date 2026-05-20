@@ -361,6 +361,65 @@ document.addEventListener('DOMContentLoaded', () => {
     let playerInitAttempts = 0;
     const MAX_PLAYER_RETRIES = 3;
 
+    // Advanced Player Upgrades State
+    let progressTimer = null;
+    let savedVolume = localStorage.getItem('b-neon-player-volume') !== null
+        ? parseInt(localStorage.getItem('b-neon-player-volume'), 10)
+        : 80; // default to 80% volume
+    let isMuted = false;
+
+    // Overlay Auto-hide state
+    let overlayTimeout = null;
+    let isHoveringModal = false;
+
+    function getPlayerOverlays() {
+        return [
+            document.getElementById('music-player-overlay'),
+            document.getElementById('music-player-overlay-top')
+        ].filter(Boolean);
+    }
+
+    function showPlayerOverlay() {
+        const overlays = getPlayerOverlays();
+        if (!overlays.length) return;
+        
+        overlays.forEach(o => o.classList.remove('overlay-hidden'));
+        
+        // Clear existing timer if any
+        if (overlayTimeout) {
+            clearTimeout(overlayTimeout);
+            overlayTimeout = null;
+        }
+        
+        // If the player is actively playing and we are not hovering, schedule a hide
+        if (isPlaying && !isHoveringModal) {
+            resetOverlayTimer();
+        }
+    }
+
+    function hidePlayerOverlay(force = false) {
+        const overlays = getPlayerOverlays();
+        if (!overlays.length) return;
+        
+        // Hide if forced, or if we are not hovering
+        if (force || !isHoveringModal) {
+            overlays.forEach(o => o.classList.add('overlay-hidden'));
+            if (overlayTimeout) {
+                clearTimeout(overlayTimeout);
+                overlayTimeout = null;
+            }
+        }
+    }
+
+    function resetOverlayTimer() {
+        if (overlayTimeout) {
+            clearTimeout(overlayTimeout);
+        }
+        overlayTimeout = setTimeout(() => {
+            hidePlayerOverlay();
+        }, 2000); // 2 seconds
+    }
+
     // Array of vertical video IDs (Shorts-format)
     const verticalVideoIDs = ['zpJk89JJdRk', '8JPFJG5lwb0'];
 
@@ -421,10 +480,15 @@ document.addEventListener('DOMContentLoaded', () => {
             videoId: '8JPFJG5lwb0',
             playerVars: {
                 'autoplay': 0,
-                'controls': 0,
+                'controls': 0,          // Hide native YouTube controls bar
                 'loop': 1,
                 'playsinline': 1,
-                'rel': 0,
+                'rel': 0,               // No related videos at end
+                'modestbranding': 1,    // Minimal YouTube branding
+                'iv_load_policy': 3,    // Disable video annotations/cards
+                'disablekb': 1,         // Disable YouTube keyboard shortcuts
+                'fs': 0,                // Disable fullscreen button
+                'cc_load_policy': 0,    // Disable closed captions
                 'playlist': '8JPFJG5lwb0,zpJk89JJdRk,QOaScWimga8',
                 'origin': window.location.origin
             },
@@ -446,7 +510,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (isPlayerReady && window.ytPlayer) {
             try {
-                window.ytPlayer.unMute();
+                if (isMuted) {
+                    window.ytPlayer.mute();
+                } else {
+                    window.ytPlayer.unMute();
+                    window.ytPlayer.setVolume(savedVolume);
+                }
                 window.ytPlayer.playVideo();
             } catch (e) { /* ignore */ }
         }
@@ -488,15 +557,206 @@ document.addEventListener('DOMContentLoaded', () => {
     const firstScriptTag = document.getElementsByTagName('script')[0];
     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
+    // ========================================================
+    // Advanced Music Player Helper Functions
+    // ========================================================
+    function formatTime(seconds) {
+        if (isNaN(seconds) || seconds === undefined) return "0:00";
+        const mins = Math.floor(seconds / 60);
+        const secs = Math.floor(seconds % 60);
+        return mins + ":" + (secs < 10 ? "0" : "") + secs;
+    }
+
+    function updateVolumeIcon(vol) {
+        const iconSvg = document.getElementById('volume-icon-svg');
+        if (!iconSvg) return;
+        
+        if (vol === 0 || isMuted) {
+            iconSvg.innerHTML = `
+                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                <line x1="22" y1="9" x2="16" y2="15" stroke="currentColor" stroke-width="2"></line>
+                <line x1="16" y1="9" x2="22" y2="15" stroke="currentColor" stroke-width="2"></line>
+            `;
+        } else if (vol < 50) {
+            iconSvg.innerHTML = `
+                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                <path d="M15.54 8.46a5 5 0 0 1 0 7.07" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+            `;
+        } else {
+            iconSvg.innerHTML = `
+                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+            `;
+        }
+    }
+
+    function updateProgressUI() {
+        if (!window.ytPlayer || !isPlayerReady) return;
+        
+        try {
+            // Update Title Marquee
+            if (window.ytPlayer.getVideoData) {
+                const videoData = window.ytPlayer.getVideoData();
+                const titleEl = document.getElementById('player-track-title');
+                if (titleEl && videoData && videoData.title) {
+                    const currentTitle = videoData.title;
+                    if (titleEl.textContent !== currentTitle) {
+                        titleEl.textContent = currentTitle;
+                        // Reset marquee animation to restart ticker nicely
+                        titleEl.style.animation = 'none';
+                        titleEl.offsetHeight; // trigger reflow
+                        titleEl.style.animation = '';
+                        
+                        // New song detected! Show the overlay.
+                        showPlayerOverlay();
+                    }
+                }
+            }
+            
+            const progressSlider = document.getElementById('player-progress-slider');
+            const isUserDragging = progressSlider && document.activeElement === progressSlider;
+            
+            const curTime = window.ytPlayer.getCurrentTime() || 0;
+            const duration = window.ytPlayer.getDuration() || 0;
+            
+            const currentTimeEl = document.getElementById('player-current-time');
+            const totalDurationEl = document.getElementById('player-total-duration');
+            const progressFill = document.getElementById('player-progress-fill');
+            
+            if (currentTimeEl && !isUserDragging) currentTimeEl.textContent = formatTime(curTime);
+            if (totalDurationEl) totalDurationEl.textContent = formatTime(duration);
+            
+            if (duration > 0) {
+                const pct = (curTime / duration) * 100;
+                if (progressFill && !isUserDragging) progressFill.style.width = pct + '%';
+                if (progressSlider && !isUserDragging) progressSlider.value = pct;
+            }
+        } catch (e) {
+            console.error("Error updating progress UI", e);
+        }
+    }
+
+    function startProgressLoop() {
+        if (progressTimer) clearInterval(progressTimer);
+        updateProgressUI();
+        progressTimer = setInterval(updateProgressUI, 250);
+    }
+    
+    function stopProgressLoop() {
+        if (progressTimer) {
+            clearInterval(progressTimer);
+            progressTimer = null;
+        }
+    }
+
+    function initPlayerUX() {
+        const volumeSlider = document.getElementById('player-volume-slider');
+        const muteBtn = document.getElementById('btn-volume-mute');
+        const progressSlider = document.getElementById('player-progress-slider');
+        
+        // Initialize volume UI
+        if (volumeSlider) {
+            volumeSlider.value = savedVolume;
+            updateVolumeIcon(savedVolume);
+            
+            volumeSlider.addEventListener('input', (e) => {
+                const vol = parseInt(e.target.value, 10);
+                savedVolume = vol;
+                localStorage.setItem('b-neon-player-volume', vol);
+                
+                if (window.ytPlayer && isPlayerReady) {
+                    window.ytPlayer.setVolume(vol);
+                    if (vol > 0 && isMuted) {
+                        window.ytPlayer.unMute();
+                        isMuted = false;
+                    }
+                    updateVolumeIcon(vol);
+                }
+            });
+        }
+        
+        // Mute toggle
+        if (muteBtn) {
+            muteBtn.addEventListener('click', () => {
+                const sliderWrapper = document.querySelector('.volume-slider-wrapper');
+                if (sliderWrapper) {
+                    sliderWrapper.classList.toggle('active');
+                }
+
+                if (!window.ytPlayer || !isPlayerReady) return;
+                
+                if (isMuted) {
+                    window.ytPlayer.unMute();
+                    window.ytPlayer.setVolume(savedVolume);
+                    isMuted = false;
+                    if (volumeSlider) volumeSlider.value = savedVolume;
+                    updateVolumeIcon(savedVolume);
+                } else {
+                    window.ytPlayer.mute();
+                    isMuted = true;
+                    if (volumeSlider) volumeSlider.value = 0;
+                    updateVolumeIcon(0);
+                }
+            });
+        }
+        
+        // Seek Bar logic
+        if (progressSlider) {
+            progressSlider.addEventListener('input', (e) => {
+                if (window.ytPlayer && isPlayerReady) {
+                    const pct = parseFloat(e.target.value);
+                    const duration = window.ytPlayer.getDuration() || 0;
+                    const targetSecs = (pct / 100) * duration;
+                    
+                    const currentTimeEl = document.getElementById('player-current-time');
+                    if (currentTimeEl) currentTimeEl.textContent = formatTime(targetSecs);
+                    
+                    const progressFill = document.getElementById('player-progress-fill');
+                    if (progressFill) progressFill.style.width = pct + '%';
+                }
+            });
+            
+            progressSlider.addEventListener('change', (e) => {
+                if (window.ytPlayer && isPlayerReady) {
+                    const pct = parseFloat(e.target.value);
+                    const duration = window.ytPlayer.getDuration() || 0;
+                    const targetSecs = (pct / 100) * duration;
+                    window.ytPlayer.seekTo(targetSecs, true);
+                }
+            });
+        }
+
+        // Prevent overlay hiding during focus/interaction on controls
+        const sliders = [volumeSlider, progressSlider];
+        sliders.forEach(slider => {
+            if (slider) {
+                slider.addEventListener('focus', showPlayerOverlay);
+                slider.addEventListener('input', showPlayerOverlay);
+                slider.addEventListener('change', showPlayerOverlay);
+                slider.addEventListener('blur', () => {
+                    if (isPlaying && !isHoveringModal) {
+                        resetOverlayTimer();
+                    }
+                });
+            }
+        });
+    }
+
     function onPlayerReady(event) {
         isPlayerReady = true;
         playerInitAttempts = 0;
         updatePlayerOrientation();
 
+        // Initialize advanced UI elements (volume slider, seek bar listeners)
+        initPlayerUX();
+
         // Mute and briefly play to prime the video — this buffers
         // the first frames and gets past YouTube's loading UI.
         // Audio stays muted until revealAndPlay() unmutes it.
         if (window.ytPlayer) {
+            try {
+                window.ytPlayer.setVolume(savedVolume);
+            } catch (e) { /* ignore */ }
             window.ytPlayer.mute();
             window.ytPlayer.playVideo();
             setTimeout(() => {
@@ -517,20 +777,50 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function onPlayerStateChange(event) {
         const playPauseBtn = document.getElementById('btn-play-pause-track');
+        const equalizer = document.getElementById('player-equalizer');
+        
         if (event.data == YT.PlayerState.PLAYING) {
             isPlaying = true;
             document.body.classList.add('music-active');
             if (musicBtn) musicBtn.classList.add('active-music');
             if (playPauseBtn) playPauseBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"></path></svg>';
+            
+            // Start Equalizer Bouncing animation
+            if (equalizer) equalizer.classList.add('animating');
+            
+            // Start Progress Ticker
+            startProgressLoop();
+            
+            // Sync volume and muting
+            if (window.ytPlayer && isPlayerReady) {
+                try {
+                    if (isMuted) {
+                        window.ytPlayer.mute();
+                    } else {
+                        window.ytPlayer.unMute();
+                        window.ytPlayer.setVolume(savedVolume);
+                    }
+                } catch (e) { /* ignore */ }
+            }
+            
             updatePlayerOrientation();
+            showPlayerOverlay();
         } else if (event.data == YT.PlayerState.PAUSED || event.data == YT.PlayerState.ENDED) {
             isPlaying = false;
             document.body.classList.remove('music-active');
+            
+            // Stop Equalizer Bouncing animation
+            if (equalizer) equalizer.classList.remove('animating');
+            
+            // Stop Progress Ticker
+            stopProgressLoop();
+            
             const modal = document.getElementById('music-player-modal');
             if (modal && modal.classList.contains('hidden') && musicBtn) {
                 musicBtn.classList.remove('active-music');
             }
             if (playPauseBtn) playPauseBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg>';
+            showPlayerOverlay();
         }
     }
 
@@ -554,13 +844,35 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (prevTrackBtn) {
         prevTrackBtn.addEventListener('click', () => {
+            showPlayerOverlay();
             if (window.ytPlayer && isPlayerReady) window.ytPlayer.previousVideo();
         });
     }
 
     if (nextTrackBtn) {
         nextTrackBtn.addEventListener('click', () => {
+            showPlayerOverlay();
             if (window.ytPlayer && isPlayerReady) window.ytPlayer.nextVideo();
+        });
+    }
+
+    // Modal Hover & Mouse Interaction Events
+    if (musicPlayerModal) {
+        musicPlayerModal.addEventListener('mouseenter', () => {
+            isHoveringModal = true;
+            showPlayerOverlay();
+        });
+        
+        musicPlayerModal.addEventListener('mousemove', () => {
+            if (!isHoveringModal) {
+                isHoveringModal = true;
+            }
+            showPlayerOverlay();
+        });
+        
+        musicPlayerModal.addEventListener('mouseleave', () => {
+            isHoveringModal = false;
+            hidePlayerOverlay(true); // Hide immediately on unhover
         });
     }
 

@@ -100,7 +100,7 @@ content = content.replace(video_section_target, youtube_live_section + '\n    ' 
 
 # 9. Footer
 content = content.replace('Ready to add a builder to the <span style="color: var(--cw-gold);">Wolfpack?</span>', """Interested in partnering with <span style="color: var(--cw-gold);">IT'S Magazine?</span>""")
-content = content.replace('As an exemplified experienced builder with a focus on AI infrastructure, I\'m ready to build the future of proprietary AI alongside your team.', 'As an established digital publication, we are always exploring new frontiers in luxury and technology.')
+content = content.replace('As an experienced builder with a focus on AI infrastructure, I\'m ready to build the future of proprietary AI alongside your team.', 'As an established digital publication, we are always exploring new frontiers in luxury and technology.')
 content = content.replace('7135 State Rd 52 STE 207, Hudson, FL 34667', '123 Luxury Avenue, New York, NY 10012')
 content = content.replace('awooo@creativewolf.com', 'partnerships@itsmagazine.com')
 
