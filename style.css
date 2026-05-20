@@ -1817,7 +1817,7 @@ body.music-active .core {
     position: fixed;
     bottom: 2rem;
     right: 2rem;
-    width: 320px;
+    width: 336px;
     z-index: 9999;
     padding: 0;
     overflow: hidden;
@@ -1826,7 +1826,7 @@ body.music-active .core {
     transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s ease, width 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     background: #000;
     height: auto;
-    min-height: 220px;
+    min-height: 231px;
 }
 
 .music-player-modal.hidden {
@@ -2230,17 +2230,17 @@ body.music-active .core {
         /* Above the mobile nav */
         right: 1rem;
         left: auto;
-        width: 260px;
+        width: 273px;
         height: auto;
-        min-height: 290px; /* fits vertical controls stack */
+        min-height: 305px; /* fits vertical controls stack */
     }
 
     .music-player-modal.vertical-mode {
         left: auto;
-        width: 180px;
+        width: 189px;
         aspect-ratio: 9 / 16;
         height: auto;
-        min-height: auto; /* scales dynamically to 320px height */
+        min-height: auto; /* scales dynamically to 336px height */
     }
 
     .music-player-controls-container {

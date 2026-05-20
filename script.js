@@ -437,13 +437,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     playerBody.style.setProperty('--player-aspect', '9 / 16');
                     if (modal) {
                         modal.classList.add('vertical-mode');
-                        modal.style.width = window.innerWidth > 600 ? '240px' : '';
+                        modal.style.width = window.innerWidth > 600 ? '252px' : '';
                     }
                 } else {
                     playerBody.style.setProperty('--player-aspect', '16 / 9');
                     if (modal) {
                         modal.classList.remove('vertical-mode');
-                        modal.style.width = window.innerWidth > 600 ? '320px' : '';
+                        modal.style.width = window.innerWidth > 600 ? '336px' : '';
                     }
                 }
             }
