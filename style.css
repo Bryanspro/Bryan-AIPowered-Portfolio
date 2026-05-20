@@ -1849,8 +1849,8 @@ body.music-active .core {
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
     transition: opacity 0.4s ease, visibility 0.4s ease;
     pointer-events: auto;
 }
@@ -1858,7 +1858,7 @@ body.music-active .core {
 .music-player-overlay-top {
     top: 0;
     padding: 0.75rem 1rem 1.5rem 1rem;
-    background: linear-gradient(to bottom, rgba(10, 10, 15, 0.5) 0%, rgba(10, 10, 15, 0.15) 70%, transparent 100%);
+    background: linear-gradient(to bottom, rgba(5, 5, 8, 0.75) 0%, rgba(5, 5, 8, 0.35) 75%, transparent 100%);
     -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
     mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
     border-top-left-radius: inherit;
@@ -1868,7 +1868,7 @@ body.music-active .core {
 .music-player-overlay-bottom {
     bottom: 0;
     padding: 1.5rem 1rem 0.75rem 1rem;
-    background: linear-gradient(to top, rgba(10, 10, 15, 0.5) 0%, rgba(10, 10, 15, 0.15) 70%, transparent 100%);
+    background: linear-gradient(to top, rgba(5, 5, 8, 0.75) 0%, rgba(5, 5, 8, 0.35) 75%, transparent 100%);
     -webkit-mask-image: linear-gradient(to top, black 60%, transparent 100%);
     mask-image: linear-gradient(to top, black 60%, transparent 100%);
     border-bottom-left-radius: inherit;
@@ -1984,18 +1984,19 @@ body.music-active .core {
     display: flex;
     align-items: center;
     gap: 8px;
-    font-size: 0.72rem;
-    font-weight: 500;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    font-size: 0.78rem;
+    font-weight: 700;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
     padding-bottom: 0.5rem;
     overflow: hidden;
 }
 
 .track-title-label {
     color: var(--accent-cyan);
-    font-weight: 700;
-    letter-spacing: 0.5px;
+    font-weight: 800;
+    letter-spacing: 0.8px;
     flex-shrink: 0;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.95), 0 0 4px rgba(0, 0, 0, 0.9);
 }
 
 .track-title-marquee-container {
@@ -2012,8 +2013,10 @@ body.music-active .core {
     display: inline-block;
     padding-left: 100%;
     animation: track-marquee 15s linear infinite;
-    color: var(--text-main);
-    text-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+    font-size: 0.82rem;
+    font-weight: 700;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.95), 0 0 4px rgba(0, 0, 0, 0.9);
 }
 
 @keyframes track-marquee {
@@ -2030,12 +2033,13 @@ body.music-active .core {
 }
 
 .time-display {
-    font-size: 0.68rem;
-    color: var(--text-muted);
-    min-width: 28px;
+    font-size: 0.72rem;
+    color: #ffffff;
+    min-width: 32px;
     text-align: center;
     font-family: 'Courier New', Courier, monospace;
-    font-weight: 600;
+    font-weight: 700;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.95), 0 0 4px rgba(0, 0, 0, 0.9);
 }
 
 .timeline-bar-wrapper {
