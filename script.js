@@ -239,7 +239,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const versionLabel = document.querySelector('.cl-tab-label');
         const latestVersion = versionLabel ? versionLabel.textContent.trim() : 'v1.5.1';
         // We always use v1.5 for the hero splash text as requested
-        const heroVersion = 'v1.7';
+        const heroVersion = 'v1.8';
         const typewriterKey = lang === 'en'
             ? `Initializing AI Developer Portfolio ${heroVersion}`
             : (dict.typewriter || `Initializing AI Developer Portfolio ${heroVersion}`);
@@ -352,7 +352,7 @@ document.addEventListener('DOMContentLoaded', () => {
     fadeElements.forEach(el => observer.observe(el));
 
     // ========================================================
-    // 4. Background Music (YouTube API) — Pre-loaded Player
+    // 4. Background Media (YouTube API) — Pre-loaded Player
     // ========================================================
     const musicBtn = document.getElementById('music-toggle-btn');
     const musicIcon = document.getElementById('music-icon');
@@ -420,8 +420,13 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 2000); // 2 seconds
     }
 
+    // Select the starting video randomly from the startup pool
+    const startupVideoIDs = ['8JPFJG5lwb0', 'EbldhJpztkI', '6L9LDmxw5PE'];
+    const firstVideoId = startupVideoIDs[Math.floor(Math.random() * startupVideoIDs.length)];
+    const otherStartupVideoIDs = startupVideoIDs.filter(id => id !== firstVideoId);
+
     // Array of vertical video IDs (Shorts-format)
-    const verticalVideoIDs = ['zpJk89JJdRk', '8JPFJG5lwb0'];
+    const verticalVideoIDs = ['zpJk89JJdRk', '8JPFJG5lwb0', 'EbldhJpztkI', '6L9LDmxw5PE'];
 
     function updatePlayerOrientation() {
         if (!window.ytPlayer || !window.ytPlayer.getVideoData) return;
@@ -477,7 +482,7 @@ document.addEventListener('DOMContentLoaded', () => {
         window.ytPlayer = new YT.Player('youtube-player-container', {
             height: '100%',
             width: '100%',
-            videoId: '8JPFJG5lwb0',
+            videoId: firstVideoId,
             playerVars: {
                 'autoplay': 0,
                 'controls': 0,          // Hide native YouTube controls bar
@@ -489,7 +494,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 'disablekb': 1,         // Disable YouTube keyboard shortcuts
                 'fs': 0,                // Disable fullscreen button
                 'cc_load_policy': 0,    // Disable closed captions
-                'playlist': '8JPFJG5lwb0,zpJk89JJdRk,QOaScWimga8',
+                'playlist': [firstVideoId, 'zpJk89JJdRk', 'QOaScWimga8', ...otherStartupVideoIDs].join(','),
                 'origin': window.location.origin
             },
             events: {
@@ -558,7 +563,7 @@ document.addEventListener('DOMContentLoaded', () => {
     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
     // ========================================================
-    // Advanced Music Player Helper Functions
+    // Advanced Media Player Helper Functions
     // ========================================================
     function formatTime(seconds) {
         if (isNaN(seconds) || seconds === undefined) return "0:00";
