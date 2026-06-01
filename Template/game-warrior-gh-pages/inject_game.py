@@ -74,6 +74,10 @@ i18n_replacements = {
     '>Contact</a>': ' data-i18n="navContact">Contact</a>'
 }
 
+nav_pattern = re.compile(nav_search)
+script_pattern = re.compile(script_search)
+footer_pattern = re.compile(footer_search)
+
 for filepath in html_files:
     with open(filepath, 'r', encoding='utf-8') as file:
         content = file.read()
@@ -91,13 +95,13 @@ for filepath in html_files:
     content = content.replace('</head>', head_injection)
 
     # 3. Inject Navigation Selectors
-    content = re.sub(nav_search, nav_replace, content, count=1)
+    content = nav_pattern.sub(nav_replace, content, count=1)
 
     # 4. Inject Bottom Application Scripts precisely before jquery block
-    content = re.sub(script_search, script_replace, content, count=1)
+    content = script_pattern.sub(script_replace, content, count=1)
 
     # 5. Inject Footer attribution
-    content = re.sub(footer_search, footer_replace, content, count=1)
+    content = footer_pattern.sub(footer_replace, content, count=1)
 
     with open(filepath, 'w', encoding='utf-8') as file:
         file.write(content)
