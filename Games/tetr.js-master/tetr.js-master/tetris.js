@@ -885,7 +885,7 @@ function gameLoop() {
       msg.innerHTML = '';
       gameState = 0;
       startTime = Date.now();
-      piece.new(preview.next());
+      piece.new();
     }
     // DAS Preload
     if (lastKeys !== keysDown && !watchingReplay) {
