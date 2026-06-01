@@ -183,13 +183,12 @@ translations = {
 for lang, data in translations.items():
     file_path = f"locales/{lang}.json"
     if os.path.exists(file_path):
-        with open(file_path, "r", encoding="utf-8") as f:
+        with open(file_path, "r+", encoding="utf-8") as f:
             locale_data = json.load(f)
-        
-        locale_data.update(data)
-        
-        with open(file_path, "w", encoding="utf-8") as f:
+            locale_data.update(data)
+            f.seek(0)
             json.dump(locale_data, f, indent=2, ensure_ascii=False)
+            f.truncate()
             print(f"Updated {lang}.json")
     else:
         print(f"File {file_path} not found")
