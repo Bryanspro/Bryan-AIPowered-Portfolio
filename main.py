@@ -29,9 +29,19 @@ model = genai.GenerativeModel('gemini-2.0-flash')
 app = FastAPI(title="Bryan's AI Resume Assistant")
 
 # 3. Configuración CORS
+allowed_origins_env = os.getenv("ALLOWED_ORIGINS")
+if allowed_origins_env:
+    origins = [origin.strip() for origin in allowed_origins_env.split(",")]
+else:
+    origins = [
+        "http://localhost:8000",
+        "http://www.bryans.tech",
+        "https://www.bryans.tech",
+    ]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
