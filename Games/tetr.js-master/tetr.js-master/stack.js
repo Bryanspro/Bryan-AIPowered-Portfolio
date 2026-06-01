@@ -76,8 +76,6 @@ Stack.prototype.addPiece = function(tetro) {
 
   statsFinesse += piece.finesse - finesse[piece.index][piece.pos][column];
   piecesSet++; // NOTE Stats
-  // TODO Might not need this (same for in init)
-  column = 0;
 
   statsPiece.innerHTML = piecesSet;
 
