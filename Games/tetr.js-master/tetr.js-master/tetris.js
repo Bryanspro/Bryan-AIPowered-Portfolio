@@ -292,17 +292,27 @@ function resize() {
   var c = document.getElementById('c');
   var content = document.getElementById('content');
 
-  // TODO Finalize this.
-  // Aspect ratio: 1.024
+  // Finalize sizing.
   var screenHeight = window.innerHeight - 34;
-  var screenWidth = ~~(screenHeight * 1.024);
-  if (screenWidth > window.innerWidth)
-    screenHeight = ~~(window.innerWidth / 1.024);
+  var autoCellSize = Math.max(~~(screenHeight / 20), 10);
 
-  if (settings.Size === 1 && screenHeight > 602) cellSize = 15;
-  else if (settings.Size === 2 && screenHeight > 602) cellSize = 30;
-  else if (settings.Size === 3 && screenHeight > 902) cellSize = 45;
-  else cellSize = Math.max(~~(screenHeight / 20), 10);
+  // Aspect ratio of the game content is typically 18 columns + paddings.
+  // The layout has:
+  // a: 4 columns + 0.5rem * 2
+  // b: 10 columns + 2px border
+  // c: 4 columns + 0.5rem * 2
+  // We use a safe maximum width based on `cellSize` instead of an arbitrary factor.
+  while (
+    autoCellSize > 10 &&
+    (18 * autoCellSize + 2 * ~~(autoCellSize * 10 / 16) + 2 > window.innerWidth - 34)
+  ) {
+    autoCellSize--;
+  }
+
+  if (settings.Size === 1 && autoCellSize >= 15) cellSize = 15;
+  else if (settings.Size === 2 && autoCellSize >= 30) cellSize = 30;
+  else if (settings.Size === 3 && autoCellSize >= 45) cellSize = 45;
+  else cellSize = autoCellSize;
 
   var pad = (window.innerHeight - (cellSize * 20 + 2)) / 2 + 'px';
   content.style.padding = pad + ' 0';
