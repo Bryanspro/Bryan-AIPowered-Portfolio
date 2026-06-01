@@ -64,29 +64,41 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // Cache for DOM elements to avoid repeated queries
+    let cachedI18nElements = null;
+
+    function cacheI18nElements() {
+        cachedI18nElements = {
+            html: Array.from(document.querySelectorAll('[data-i18n]')).map(el => ({ el, key: el.getAttribute('data-i18n') })),
+            title: Array.from(document.querySelectorAll('[data-i18n-title]')).map(el => ({ el, key: el.getAttribute('data-i18n-title') })),
+            aria: Array.from(document.querySelectorAll('[data-i18n-aria]')).map(el => ({ el, key: el.getAttribute('data-i18n-aria') }))
+        };
+    }
+
     // Apply translations to all [data-i18n] elements
     function applyTranslations(dict) {
         if (!dict) return;
 
+        if (!cachedI18nElements) {
+            cacheI18nElements();
+        }
+
         // Translate inner HTML
-        document.querySelectorAll('[data-i18n]').forEach(el => {
-            const key = el.getAttribute('data-i18n');
+        cachedI18nElements.html.forEach(({ el, key }) => {
             if (dict[key] !== undefined) {
                 el.innerHTML = dict[key];
             }
         });
 
         // Translate titles (tooltips)
-        document.querySelectorAll('[data-i18n-title]').forEach(el => {
-            const key = el.getAttribute('data-i18n-title');
+        cachedI18nElements.title.forEach(({ el, key }) => {
             if (dict[key] !== undefined) {
                 el.setAttribute('title', dict[key]);
             }
         });
 
         // Translate aria-labels
-        document.querySelectorAll('[data-i18n-aria]').forEach(el => {
-            const key = el.getAttribute('data-i18n-aria');
+        cachedI18nElements.aria.forEach(({ el, key }) => {
             if (dict[key] !== undefined) {
                 el.setAttribute('aria-label', dict[key]);
             }
