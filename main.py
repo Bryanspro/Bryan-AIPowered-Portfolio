@@ -252,7 +252,7 @@ async def chat_with_bryan_bot(request: ChatRequest):
         # Combinamos tu cerebro de instrucciones con la pregunta del reclutador
         prompt_completo = f"{SYSTEM_PROMPT}\n\nUser Question: {request.message}"
         
-        response = model.generate_content(prompt_completo)
+        response = await model.generate_content_async(prompt_completo)
         
         return {"reply": response.text}
         
