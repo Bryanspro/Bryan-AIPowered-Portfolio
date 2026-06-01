@@ -2,7 +2,7 @@ import os
 import glob
 import re
 
-target_dir = r'c:\Users\Bryan\.gemini\antigravity\scratch\ai-portfolio\Template\game-warrior-gh-pages'
+target_dir = 'Template/game-warrior-gh-pages'
 html_files = glob.glob(os.path.join(target_dir, '*.html'))
 
 head_injection = """
@@ -74,8 +74,12 @@ i18n_replacements = {
     '>Contact</a>': ' data-i18n="navContact">Contact</a>'
 }
 
+nav_regex = re.compile(nav_search)
+script_regex = re.compile(script_search)
+footer_regex = re.compile(footer_search)
+
 for filepath in html_files:
-    with open(filepath, 'r', encoding='utf-8') as file:
+    with open(filepath, 'r', encoding='utf-8', errors='ignore') as file:
         content = file.read()
         
     # Prevent duplicate injections securely
@@ -91,15 +95,15 @@ for filepath in html_files:
     content = content.replace('</head>', head_injection)
 
     # 3. Inject Navigation Selectors
-    content = re.sub(nav_search, nav_replace, content, count=1)
+    content = nav_regex.sub(nav_replace, content, count=1)
 
     # 4. Inject Bottom Application Scripts precisely before jquery block
-    content = re.sub(script_search, script_replace, content, count=1)
+    content = script_regex.sub(script_replace, content, count=1)
 
     # 5. Inject Footer attribution
-    content = re.sub(footer_search, footer_replace, content, count=1)
+    content = footer_regex.sub(footer_replace, content, count=1)
 
-    with open(filepath, 'w', encoding='utf-8') as file:
+    with open(filepath, 'w', encoding='utf-8', errors='ignore') as file:
         file.write(content)
     print(f"Processed {os.path.basename(filepath)}")
 
