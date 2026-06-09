@@ -1827,11 +1827,18 @@ body.music-active .core {
     background: #000;
     height: auto;
     min-height: 242px;
+    pointer-events: none;
 }
 
 .music-player-modal.hidden {
     transform: translateY(20px);
     opacity: 0;
+    pointer-events: none;
+}
+
+.music-player-modal.hidden .music-player-body,
+.music-player-modal.hidden .music-player-body::after,
+.music-player-modal.hidden .music-player-overlay {
     pointer-events: none;
 }
 
@@ -1924,6 +1931,7 @@ body.music-active .core {
     background: #000;
     border-radius: inherit;
     overflow: hidden;
+    pointer-events: auto;
 }
 
 .music-player-body iframe {

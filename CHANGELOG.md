@@ -285,13 +285,13 @@ All notable changes to this project will be documented in this file.
 
 ## [v1.8] - 2026-05-22
 ### Added
-- Added two new videos (YouTube Shorts `EbldhJpztkI` and `6L9LDmxw5PE`) to the **Neon Media Player**'s randomized startup pool, supporting dynamic scaling and choosing from the pool with equal probability on page load.
+- Added two new videos (YouTube Shorts `EbldhJpztkI` and `6L9LDmxw5PE`) to the **Neon Player**'s randomized startup pool, supporting dynamic scaling and choosing from the pool with equal probability on page load.
 - Integrated dynamic fallback playlist configuration to ensure all startup videos remain reachable in the playback loop.
 - Added the **IT'S Magazine** Interactive digital concierge to the demo gallery alongside **Creative Wolf**.
 - Added the new **AI Editorial** application under the AI apps gallery.
 
 ### Changed
-- Rebranded the background player to **Neon Media Player** to support any format of video/audio playback.
+- Rebranded the background player to **Neon Player** to support any format of video/audio playback.
 - Overhauled the player visual style: removed the glowing text effects and background pill wrappers for a much cleaner, premium layout.
 - Sized the player 10% larger across both desktop and mobile viewports for a more engaging and immersive layout.
 - Dramatically improved text legibility of titles and timestamps using a dual-layer crisp text shadow and increased background blur (`16px`).

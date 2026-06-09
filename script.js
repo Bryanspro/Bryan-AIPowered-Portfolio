@@ -929,30 +929,16 @@ document.addEventListener('DOMContentLoaded', () => {
             return card.offsetWidth + gap;
         };
 
-        prevBtn.addEventListener('click', () => {
-            const scrollAmount = getScrollAmount();
-            if (carousel.scrollLeft <= 5) {
-                // At the start — jump to the end
-                carousel.scrollTo({ left: carousel.scrollWidth, behavior: 'smooth' });
-            } else {
-                carousel.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
-            }
-        });
-
-        nextBtn.addEventListener('click', () => {
-            const scrollAmount = getScrollAmount();
-            const maxScroll = carousel.scrollWidth - carousel.clientWidth;
-            if (carousel.scrollLeft >= maxScroll - 5) {
-                // At the end — jump back to start
-                carousel.scrollTo({ left: 0, behavior: 'smooth' });
-            } else {
-                carousel.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-            }
-        });
-
-        // Auto-scroll: slowly advance every 4 seconds
+        // Auto-scroll helpers
         let autoScrollInterval = null;
         let isHovering = false;
+
+        function stopAutoScroll() {
+            if (autoScrollInterval) {
+                clearInterval(autoScrollInterval);
+                autoScrollInterval = null;
+            }
+        }
 
         function startAutoScroll() {
             if (autoScrollInterval) return;
@@ -960,13 +946,38 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (isHovering) return;
                 const maxScroll = carousel.scrollWidth - carousel.clientWidth;
                 if (carousel.scrollLeft >= maxScroll - 5) {
-                    // Loop back to the start
                     carousel.scrollTo({ left: 0, behavior: 'smooth' });
                 } else {
                     carousel.scrollBy({ left: getScrollAmount(), behavior: 'smooth' });
                 }
             }, 6000);
         }
+
+        function resetAutoScroll() {
+            stopAutoScroll();
+            startAutoScroll();
+        }
+
+        prevBtn.addEventListener('click', () => {
+            resetAutoScroll(); // reset timer so auto-scroll doesn't immediately override
+            const scrollAmount = getScrollAmount();
+            if (carousel.scrollLeft <= 5) {
+                carousel.scrollTo({ left: carousel.scrollWidth, behavior: 'smooth' });
+            } else {
+                carousel.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+            }
+        });
+
+        nextBtn.addEventListener('click', () => {
+            resetAutoScroll(); // reset timer so auto-scroll doesn't immediately override
+            const scrollAmount = getScrollAmount();
+            const maxScroll = carousel.scrollWidth - carousel.clientWidth;
+            if (carousel.scrollLeft >= maxScroll - 5) {
+                carousel.scrollTo({ left: 0, behavior: 'smooth' });
+            } else {
+                carousel.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+            }
+        });
 
         // Pause on hover, resume on leave
         const carouselContainer = carousel.closest('.carousel-container');
