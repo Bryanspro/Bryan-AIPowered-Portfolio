@@ -378,7 +378,6 @@ function init(gt) {
   lineLimit = 40;
 
   //Reset
-  column = 0;
   keysDown = 0;
   lastKeys = 0;
   released = 255;
