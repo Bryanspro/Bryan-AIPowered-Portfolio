@@ -2,11 +2,9 @@ function Preview() {
   grabBag = this.gen();
 }
 Preview.prototype.init = function() {
-  //XXX fix ugly code lolwut
-  while (1) {
+  do {
     this.grabBag = this.gen();
-    if ([3, 4, 6].indexOf(this.grabBag[0]) === -1) break;
-  }
+  } while ([3, 4, 6].indexOf(this.grabBag[0]) !== -1);
   this.grabBag.push.apply(this.grabBag, this.gen());
   this.draw();
 };
