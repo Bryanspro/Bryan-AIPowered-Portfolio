@@ -10,11 +10,14 @@ load_dotenv(env_path)
 
 try:
     import psycopg2
+    from psycopg2 import pool
 except ImportError:
     psycopg2 = None
 
 DB_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'portfolio.db')
 POSTGRES_URL = os.getenv("POSTGRES_URL") or os.getenv("DATABASE_URL")
+
+_pg_pool = None
 
 
 def print_messages(rows, source_label):
@@ -33,6 +36,8 @@ def print_messages(rows, source_label):
 
 def view_postgres():
     """View messages from the production Postgres database."""
+    global _pg_pool
+
     if not POSTGRES_URL:
         print("  Postgres URL not configured (no DATABASE_URL or POSTGRES_URL in .env)")
         print("  Skipping Postgres check.\n")
@@ -43,13 +48,18 @@ def view_postgres():
         return False
 
     try:
-        conn = psycopg2.connect(POSTGRES_URL)
-        cursor = conn.cursor()
-        cursor.execute("SELECT id, name, email, message, created_at FROM messages ORDER BY created_at DESC")
-        rows = cursor.fetchall()
-        print_messages(rows, "Postgres")
-        conn.close()
-        return True
+        if _pg_pool is None:
+            _pg_pool = psycopg2.pool.SimpleConnectionPool(1, 10, POSTGRES_URL)
+
+        conn = _pg_pool.getconn()
+        try:
+            cursor = conn.cursor()
+            cursor.execute("SELECT id, name, email, message, created_at FROM messages ORDER BY created_at DESC")
+            rows = cursor.fetchall()
+            print_messages(rows, "Postgres")
+            return True
+        finally:
+            _pg_pool.putconn(conn)
     except Exception as e:
         print(f"  Error connecting to Postgres: {e}\n")
         return False
