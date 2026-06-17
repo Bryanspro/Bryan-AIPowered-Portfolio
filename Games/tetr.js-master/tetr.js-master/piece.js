@@ -27,12 +27,7 @@ Piece.prototype.new = function(index) {
   //TODO change this
   landed = false;
 
-  // TODO Do this better. Make clone object func maybe.
-  //for property in pieces, this.prop = piece.prop
-  this.tetro = pieces[index].tetro;
-  this.kickData = pieces[index].kickData;
-  this.x = pieces[index].x;
-  this.y = pieces[index].y;
+  Object.assign(this, pieces[index]);
   this.index = index;
 
   // TODO ---------------- snip
