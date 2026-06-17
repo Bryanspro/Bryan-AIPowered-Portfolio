@@ -57,8 +57,6 @@ var kickDataI = [
   [[-1, -1], [1, -1], [-2, -1], [1, 0], [-2, 0]],
   [[0, -1], [0, -1], [0, -1], [0, 1], [0, -2]],
 ];
-// TODO get rid of this lol.
-var kickDataO = [[[0, 0]], [[0, 0]], [[0, 0]], [[0, 0]]];
 
 // Define shapes and spawns.
 var PieceI = {
@@ -92,7 +90,7 @@ var PieceO = {
   index: 3,
   x: 4,
   y: 0,
-  kickData: kickDataO,
+  kickData: kickData,
   tetro: [[4, 4], [4, 4]],
 };
 var PieceS = {
