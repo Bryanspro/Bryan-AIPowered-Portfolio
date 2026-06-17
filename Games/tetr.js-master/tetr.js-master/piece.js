@@ -35,13 +35,6 @@ Piece.prototype.new = function(index) {
   this.y = pieces[index].y;
   this.index = index;
 
-  // TODO ---------------- snip
-
-  //TODO Do this better. (make grabbag object)
-  // Preview.next(); == grabbag.next()
-  // Preview.draw();
-  //preview.next();
-
   // Check for blockout.
   if (!this.moveValid(0, 0, this.tetro)) {
     gameState = 9;
