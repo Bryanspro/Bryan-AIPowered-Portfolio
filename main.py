@@ -179,25 +179,32 @@ fm = FastMail(conf)
 async def submit_contact(request: ContactRequest):
     try:
         # Save to DB
-        if POSTGRES_URL and psycopg2:
-            conn = psycopg2.connect(POSTGRES_URL)
-            cursor = conn.cursor()
-            # Postgres uses %s for placeholders
-            cursor.execute(
-                "INSERT INTO messages (name, email, message, source) VALUES (%s, %s, %s, %s)",
-                (request.name, request.email, request.message, request.source)
-            )
-            conn.commit()
-            conn.close()
-        else:
-            conn = sqlite3.connect(DB_FILE)
-            cursor = conn.cursor()
-            cursor.execute(
-                "INSERT INTO messages (name, email, message, source) VALUES (?, ?, ?, ?)",
-                (request.name, request.email, request.message, request.source)
-            )
-            conn.commit()
-            conn.close()
+        def save_to_db(req_name, req_email, req_message, req_source):
+            if POSTGRES_URL and psycopg2:
+                conn = psycopg2.connect(POSTGRES_URL)
+                cursor = conn.cursor()
+                # Postgres uses %s for placeholders
+                cursor.execute(
+                    "INSERT INTO messages (name, email, message, source) VALUES (%s, %s, %s, %s)",
+                    (req_name, req_email, req_message, req_source)
+                )
+                conn.commit()
+                conn.close()
+            else:
+                conn = sqlite3.connect(DB_FILE)
+                cursor = conn.cursor()
+                cursor.execute(
+                    "INSERT INTO messages (name, email, message, source) VALUES (?, ?, ?, ?)",
+                    (req_name, req_email, req_message, req_source)
+                )
+                conn.commit()
+                conn.close()
+
+        import asyncio
+        await asyncio.to_thread(
+            save_to_db,
+            request.name, request.email, request.message, request.source
+        )
 
         # Send Email Notification
         if MAIL_USERNAME != "dummy@example.com":
@@ -223,18 +230,21 @@ async def submit_contact(request: ContactRequest):
             asyncio.create_task(fm.send_message(message))
 
         # Save to readable text file
-        if os.getenv("VERCEL"):
-            txt_file_path = '/tmp/messages.txt'
-        else:
-            txt_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'messages.txt')
-        import datetime
-        timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        with open(txt_file_path, "a", encoding="utf-8") as f:
-            f.write(f"[{timestamp}]\n")
-            f.write(f"From: {request.name} <{request.email}>\n")
-            f.write(f"Source: {request.source}\n")
-            f.write(f"Message: {request.message}\n")
-            f.write("-" * 50 + "\n\n")
+        def save_to_txt():
+            if os.getenv("VERCEL"):
+                txt_file_path = '/tmp/messages.txt'
+            else:
+                txt_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'messages.txt')
+            import datetime
+            timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            with open(txt_file_path, "a", encoding="utf-8") as f:
+                f.write(f"[{timestamp}]\n")
+                f.write(f"From: {request.name} <{request.email}>\n")
+                f.write(f"Source: {request.source}\n")
+                f.write(f"Message: {request.message}\n")
+                f.write("-" * 50 + "\n\n")
+
+        await asyncio.to_thread(save_to_txt)
 
         return {"status": "success", "message": "Message saved and email triggered successfully."}
     except Exception as e:
