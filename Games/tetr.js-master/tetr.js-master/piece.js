@@ -20,19 +20,13 @@ function Piece() {
 Piece.prototype.new = function(index) {
   // TODO if no arguments, get next grabbag piece
   this.pos = 0;
-  this.tetro = [];
   this.held = false;
   this.finesse = 0;
   this.dirty = true;
   //TODO change this
   landed = false;
 
-  // TODO Do this better. Make clone object func maybe.
-  //for property in pieces, this.prop = piece.prop
-  this.tetro = pieces[index].tetro;
-  this.kickData = pieces[index].kickData;
-  this.x = pieces[index].x;
-  this.y = pieces[index].y;
+  Object.assign(this, pieces[index]);
   this.index = index;
 
   // TODO ---------------- snip
