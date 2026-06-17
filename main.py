@@ -1,4 +1,5 @@
 import os
+import traceback
 import google.generativeai as genai
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
@@ -238,7 +239,6 @@ async def submit_contact(request: ContactRequest):
 
         return {"status": "success", "message": "Message saved and email triggered successfully."}
     except Exception as e:
-        import traceback
         print("=== DATABASE/EMAIL ERROR ===")
         traceback.print_exc()
         raise HTTPException(status_code=500, detail="Error saving message.")
@@ -257,7 +257,6 @@ async def chat_with_bryan_bot(request: ChatRequest):
         return {"reply": response.text}
         
     except Exception as e:
-        import traceback
         print("=== CHAT API ERROR ===")
         print(f"Error type: {type(e)}")
         print(f"Error string: {str(e)}")
