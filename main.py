@@ -237,7 +237,7 @@ async def submit_contact(request: ContactRequest):
             f.write("-" * 50 + "\n\n")
 
         return {"status": "success", "message": "Message saved and email triggered successfully."}
-    except Exception as e:
+    except Exception:
         import traceback
         print("=== DATABASE/EMAIL ERROR ===")
         traceback.print_exc()
