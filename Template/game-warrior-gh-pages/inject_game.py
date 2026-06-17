@@ -74,6 +74,9 @@ i18n_replacements = {
     '>Contact</a>': ' data-i18n="navContact">Contact</a>'
 }
 
+# Compile a unified regex pattern for I18N replacements outside the loop to avoid repeated scanning
+i18n_pattern = re.compile('|'.join(map(re.escape, i18n_replacements.keys())))
+
 for filepath in html_files:
     with open(filepath, 'r', encoding='utf-8') as file:
         content = file.read()
@@ -83,9 +86,8 @@ for filepath in html_files:
         print(f"Skipping {os.path.basename(filepath)} - already injected.")
         continue
 
-    # 1. Apply I18N replacements precisely
-    for original, localized in i18n_replacements.items():
-        content = content.replace(original, localized)
+    # 1. Apply I18N replacements precisely using the unified regex
+    content = i18n_pattern.sub(lambda match: i18n_replacements[match.group(0)], content)
 
     # 2. Inject CSS Head Features
     content = content.replace('</head>', head_injection)
