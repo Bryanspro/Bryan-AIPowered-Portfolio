@@ -18,7 +18,9 @@ function Piece() {
  * Removes last active piece, and gets the next active piece from the grab bag.
  */
 Piece.prototype.new = function(index) {
-  // TODO if no arguments, get next grabbag piece
+  if (index === undefined) {
+    index = preview.next();
+  }
   this.pos = 0;
   this.tetro = [];
   this.held = false;
@@ -34,13 +36,6 @@ Piece.prototype.new = function(index) {
   this.x = pieces[index].x;
   this.y = pieces[index].y;
   this.index = index;
-
-  // TODO ---------------- snip
-
-  //TODO Do this better. (make grabbag object)
-  // Preview.next(); == grabbag.next()
-  // Preview.draw();
-  //preview.next();
 
   // Check for blockout.
   if (!this.moveValid(0, 0, this.tetro)) {
@@ -209,7 +204,7 @@ Piece.prototype.hold = function() {
       this.new(temp);
     } else {
       hold.piece = this.index;
-      this.new(preview.next());
+      this.new();
     }
     this.held = true;
     hold.draw();
@@ -255,7 +250,7 @@ Piece.prototype.update = function() {
     this.y = Math.floor(this.y);
     if (this.lockDelay >= settings['Lock Delay']) {
       stack.addPiece(this.tetro);
-      this.new(preview.next());
+      this.new();
     } else {
       var a = 1 / setting['Lock Delay'][settings['Lock Delay']];
       activeCtx.globalCompositeOperation = 'source-atop';
