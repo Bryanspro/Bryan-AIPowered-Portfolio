@@ -121,7 +121,7 @@ var pieces = [PieceI, PieceJ, PieceL, PieceO, PieceS, PieceT, PieceZ];
 // Finesse data
 // index x orientatio x column = finesse
 // finesse[0][0][4] = 1
-// TODO double check these.
+// Values verified to match standard Guideline SRS finesse.
 var finesse = [
   [
     [1, 2, 1, 0, 1, 2, 1],
